@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>字里 · 静态视觉校验</title>
+    <link rel="stylesheet" href="/apps/web/src/styles.css" />
+    <style>
+      .qa-glyph { width: 17px; color: #8f8d87; font-size: 12px; text-align: center; }
+      .qa-only-note { margin-top: 18px; color: var(--ink-faint); font-size: 9px; }
+    </style>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-lockup">
+          <div class="brand-mark">字</div>
+          <div><strong>字里</strong><span>CONTENT DESK</span></div>
+        </div>
+        <nav class="primary-nav" aria-label="主要导航">
+          <a class="nav-link is-active" href="#"><i class="qa-glyph">⌂</i><span>仪表盘</span></a>
+          <a class="nav-link" href="#"><i class="qa-glyph">↑</i><span>CSV 导入</span></a>
+          <a class="nav-link" href="#"><i class="qa-glyph">✓</i><span>审核收件箱</span><small>6</small></a>
+          <a class="nav-link" href="#"><i class="qa-glyph">◇</i><span>文案灵感库</span></a>
+          <a class="nav-link" href="#"><i class="qa-glyph">✎</i><span>文案编辑器</span></a>
+          <a class="nav-link" href="#"><i class="qa-glyph">▷</i><span>视频工作室</span></a>
+          <a class="nav-link" href="#"><i class="qa-glyph">↓</i><span>导出记录</span></a>
+        </nav>
+        <div class="sidebar-note">
+          <span>验证计划</span>
+          <strong>01 / 30 条视频</strong>
+          <div class="mini-progress"><i style="width: 3.3%"></i></div>
+          <p>本周目标：完成 6 条可发布草稿</p>
+        </div>
+        <div class="profile-chip"><span>创</span><div><strong>个人工作台</strong><small>内容创作者</small></div></div>
+      </aside>
+
+      <div class="workspace">
+        <header class="topbar">
+          <button class="icon-button mobile-menu" aria-label="打开菜单">☰</button>
+          <div class="page-heading"><span>TODAY / EDITORIAL DESK</span><h1>今日编辑台</h1></div>
+          <div class="topbar-actions">
+            <label class="state-switcher"><span>状态预览</span><select aria-label="切换页面演示状态"><option>正常状态</option><option>空状态</option><option>加载状态</option><option>错误状态</option><option>超长文案</option><option>禁止操作</option></select></label>
+          </div>
+        </header>
+
+        <main class="page-content">
+          <div class="page-intro">
+            <div class="page-intro-copy">
+              <p class="kicker">MONDAY · 24 AUG</p>
+              <h2>今天，从一条真正有感觉的文案开始。</h2>
+              <p>把授权素材变成原创表达，再用固定模板快速完成一支竖屏视频。每一步都保留人工判断。</p>
+            </div>
+            <div class="button-row"><a class="secondary-button" href="#">继续审核</a><a class="primary-button" href="#">导入素材 →</a></div>
+          </div>
+
+          <section class="metric-grid" aria-label="内容进度概览">
+            <article class="metric-card"><header><span>等待审核</span><i>01</i></header><strong>06</strong><p>逐条检查来源与内容风险</p></article>
+            <article class="metric-card"><header><span>可用灵感</span><i>02</i></header><strong>08</strong><p><em>↑ 8</em> · 本周新增</p></article>
+            <article class="metric-card"><header><span>文案草稿</span><i>03</i></header><strong>02</strong><p>2 条等待人工确认</p></article>
+            <article class="metric-card"><header><span>已导出视频</span><i>04</i></header><strong>01</strong><p>目标 30 条</p></article>
+          </section>
+
+          <div class="split-grid">
+            <section>
+              <div class="section-header"><div><h2>最近留下的灵感</h2><p>已经通过审核、可以继续创作的内容</p></div><a class="text-button" href="#">查看全部 →</a></div>
+              <div class="panel editorial-list">
+                <a class="editorial-row" href="#"><span class="row-index">01</span><div><strong>给今天留一块空白，不解释，也不急着填满。</strong><p>自我安放 · 夜晚独处 · 适合视频号</p></div><span class="status-pill tone-good">已收藏</span></a>
+                <a class="editorial-row" href="#"><span class="row-index">02</span><div><strong>不再追问每一次沉默，关系才显出原来的轮廓。</strong><p>关系边界 · 告别之后 · 适合小红书</p></div><span class="status-pill">89 分</span></a>
+                <a class="editorial-row" href="#"><span class="row-index">03</span><div><strong>清晨的光没有催促，它只是把桌面照得更清楚。</strong><p>重新开始 · 清晨整理 · 适合 Reels</p></div><span class="status-pill">87 分</span></a>
+              </div>
+            </section>
+
+            <aside>
+              <div class="section-header"><div><h2>本轮验证</h2><p>20—30 条真实运营视频</p></div></div>
+              <div class="panel progress-card">
+                <div class="progress-number"><strong>1</strong><span>/ 30 条</span></div>
+                <div class="large-progress"><i style="width: 3.3%"></i></div>
+                <p>当前完成度 3%。保持质量，不追求一次生成大量内容。</p>
+                <div class="timeline-list">
+                  <div class="timeline-item"><strong>有 3 条内容等待首次审核</strong><span>其中一条含隐私风险，一条被授权门禁拦截。</span></div>
+                  <div class="timeline-item"><strong>有 1 条模拟导出失败</strong><span>视频项目仍被完整保留，可以重新模拟。</span></div>
+                </div>
+              </div>
+              <div class="dashboard-reminder"><span>所有 AI 内容都是草稿，只有人工确认后才能制作视频。</span></div>
+            </aside>
+          </div>
+          <p class="qa-only-note">静态视觉 QA 镜像 · 不执行 API、上传或导出</p>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

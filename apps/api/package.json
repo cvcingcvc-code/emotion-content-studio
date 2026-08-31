@@ -1,0 +1,29 @@
+{
+  "name": "@emotion-studio/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:contracts": "npm --prefix ../.. run build -w @emotion-studio/contracts",
+    "predev": "npm run build:contracts",
+    "dev": "tsx watch src/server.ts",
+    "prebuild": "npm run build:contracts",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "pretest": "npm run build:contracts",
+    "test": "vitest run",
+    "start": "node dist/server.js"
+  },
+  "dependencies": {
+    "@emotion-studio/contracts": "0.1.0",
+    "@emotion-studio/database": "0.1.0",
+    "@fastify/cors": "^11.1.0",
+    "fastify": "^5.6.0",
+    "zod": "^4.1.5"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "tsx": "^4.20.5",
+    "vitest": "^3.2.4"
+  }
+}
