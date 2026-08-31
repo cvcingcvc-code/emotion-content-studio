@@ -1,5 +1,11 @@
 import cors from "@fastify/cors";
 import Fastify, { type FastifyInstance } from "fastify";
+import { MockContentAnalyzer, type ContentAnalyzer } from "./content/analyzer.js";
+import { MockContentGenerator, type ContentGenerator } from "./content/generator.js";
+import {
+  createContentRepository,
+  type ContentRepository,
+} from "./content/repository.js";
 import { AppError } from "./errors.js";
 import { createMockStore, type MockStore } from "./mock/store.js";
 import { registerRoutes } from "./routes.js";
@@ -8,15 +14,21 @@ export interface BuildAppOptions {
   logger?: boolean;
   webOrigin?: string;
   store?: MockStore;
+  contentRepository?: ContentRepository;
+  contentAnalyzer?: ContentAnalyzer;
+  contentGenerator?: ContentGenerator;
 }
 
 export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyInstance> {
-  const app = Fastify({ logger: options.logger ?? false });
+  const app = Fastify({ logger: options.logger ?? false, bodyLimit: 2_100_000 });
   const store = options.store ?? createMockStore();
+  const contentRepository = options.contentRepository ?? createContentRepository();
+  const contentAnalyzer = options.contentAnalyzer ?? new MockContentAnalyzer();
+  const contentGenerator = options.contentGenerator ?? new MockContentGenerator();
 
   await app.register(cors, {
     origin: options.webOrigin ?? "http://localhost:5173",
-    methods: ["GET", "POST", "OPTIONS"],
+    methods: ["GET", "POST", "DELETE", "OPTIONS"],
   });
 
   app.addHook("onRequest", async (request, reply) => {
@@ -70,6 +82,6 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
     });
   });
 
-  await registerRoutes(app, store);
+  await registerRoutes(app, store, contentRepository, contentAnalyzer, contentGenerator);
   return app;
 }

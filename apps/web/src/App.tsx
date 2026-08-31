@@ -1,12 +1,11 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { AppShell } from './components/AppShell';
 import DashboardPage from './pages/DashboardPage';
-import EditorPage from './pages/EditorPage';
-import ExportsPage from './pages/ExportsPage';
+import GeneratedContentPage from './pages/GeneratedContentPage';
 import ImportPage from './pages/ImportPage';
+import InspirationsPage from './pages/InspirationsPage';
 import LibraryPage from './pages/LibraryPage';
-import ReviewPage from './pages/ReviewPage';
-import StudioPage from './pages/StudioPage';
+import MaterialDetailPage from './pages/MaterialDetailPage';
 
 export default function App() {
   return (
@@ -14,11 +13,10 @@ export default function App() {
       <Routes>
         <Route path="/" element={<DashboardPage />} />
         <Route path="/import" element={<ImportPage />} />
-        <Route path="/review" element={<ReviewPage />} />
         <Route path="/library" element={<LibraryPage />} />
-        <Route path="/editor/:id" element={<EditorPage />} />
-        <Route path="/studio/:id" element={<StudioPage />} />
-        <Route path="/exports" element={<ExportsPage />} />
+        <Route path="/materials/:id" element={<MaterialDetailPage />} />
+        <Route path="/inspirations" element={<InspirationsPage />} />
+        <Route path="/generated/:id" element={<GeneratedContentPage />} />
         <Route path="*" element={<Navigate replace to="/" />} />
       </Routes>
     </AppShell>

@@ -4,13 +4,13 @@ An independently authored, single-user prototype for turning authorized emotiona
 
 ## Prototype scope
 
-- Seven responsive product pages
+- Six focused DEMO flow pages, including material detail and generated-result routes
 - HTTP-only Web-to-API boundary
 - Safe shared DTO contracts
 - Mock API and original synthetic data
 - PostgreSQL/Drizzle schema foundation
 - Worker placeholder without a queue
-- No real CSV parsing, AI calls, rendering, scraping, or publishing
+- Real local CSV parsing with Mock analysis/generation; no external AI calls, rendering, scraping, or publishing
 
 ## Local development
 

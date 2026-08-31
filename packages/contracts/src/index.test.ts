@@ -1,8 +1,12 @@
 import { describe, expect, it } from "vitest";
 import {
   ApiErrorSchema,
+  ContentItemQuerySchema,
+  ContentItemSchema,
   ConfirmDraftInputSchema,
   CreateVideoProjectInputSchema,
+  GenerateContentInputSchema,
+  GeneratedContentSchema,
   MaterialSchema,
   ReviewMaterialInputSchema,
   SimulateExportInputSchema,
@@ -58,5 +62,43 @@ describe("public contracts", () => {
 
     expect(parsed).not.toHaveProperty("stack");
     expect(parsed.error).not.toHaveProperty("storageKey");
+  });
+
+  it("validates the public demo content DTO and explicit query booleans", () => {
+    expect(ContentItemSchema.safeParse({
+      id: "content-01",
+      originalContent: "  今天也值得被认真对待。  ",
+      content: "今天也值得被认真对待。",
+      author: null,
+      likes: 12,
+      source: "演示素材",
+      sourceUrl: null,
+      licenseStatus: "original",
+      emotion: "治愈",
+      emotionScore: 88,
+      resonanceScore: 82,
+      category: "生活",
+      tags: ["慢生活", "自我照顾"],
+      isFavorite: false,
+      importedAt: "2026-08-31T08:00:00.000Z",
+    }).success).toBe(true);
+
+    expect(ContentItemQuerySchema.parse({ highResonance: "false" }).highResonance).toBe(false);
+  });
+
+  it("limits generation to one through five unique source items", () => {
+    expect(GenerateContentInputSchema.safeParse({ contentIds: [] }).success).toBe(false);
+    expect(GenerateContentInputSchema.safeParse({ contentIds: ["1", "2", "3", "4", "5", "6"] }).success).toBe(false);
+    expect(GenerateContentInputSchema.safeParse({ contentIds: ["1", "1"] }).success).toBe(false);
+    expect(GeneratedContentSchema.safeParse({
+      id: "generated-01",
+      title: "把心里的天气慢慢说清楚",
+      body: "这是一段用于验证长度规则的短文本。",
+      hashtags: ["#情绪"],
+      status: "draft",
+      generatorLabel: "DEMO AI 生成结果",
+      contentIds: ["1"],
+      createdAt: "2026-08-31T08:00:00.000Z",
+    }).success).toBe(false);
   });
 });

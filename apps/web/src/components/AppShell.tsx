@@ -1,13 +1,10 @@
 import { createContext, useContext, useMemo, useState, type ReactNode } from 'react';
 import {
   BookOpenText,
-  CheckSquare2,
-  Clapperboard,
-  FileDown,
   FileUp,
+  Heart,
   LayoutDashboard,
   Menu,
-  PenLine,
   X,
 } from 'lucide-react';
 import { NavLink, useLocation } from 'react-router-dom';
@@ -29,21 +26,17 @@ export function usePreviewMode() {
 const navigation = [
   { to: '/', label: '仪表盘', icon: LayoutDashboard },
   { to: '/import', label: 'CSV 导入', icon: FileUp },
-  { to: '/review', label: '审核收件箱', icon: CheckSquare2, count: 6 },
-  { to: '/library', label: '文案灵感库', icon: BookOpenText },
-  { to: '/editor/draft-01', label: '文案编辑器', icon: PenLine },
-  { to: '/studio/video-01', label: '视频工作室', icon: Clapperboard },
-  { to: '/exports', label: '导出记录', icon: FileDown },
+  { to: '/library', label: '情绪素材库', icon: BookOpenText },
+  { to: '/inspirations', label: '灵感库', icon: Heart },
 ];
 
 const pageMeta = [
-  { match: /^\/$/, eyebrow: 'TODAY / EDITORIAL DESK', title: '今日编辑台' },
-  { match: /^\/import/, eyebrow: 'INGEST / SOURCE', title: '导入素材' },
-  { match: /^\/review/, eyebrow: 'REVIEW / INBOX', title: '审核收件箱' },
-  { match: /^\/library/, eyebrow: 'LIBRARY / IDEAS', title: '文案灵感库' },
-  { match: /^\/editor/, eyebrow: 'WRITING / DRAFT', title: '文案编辑器' },
-  { match: /^\/studio/, eyebrow: 'VIDEO / STUDIO', title: '视频工作室' },
-  { match: /^\/exports/, eyebrow: 'OUTPUT / RECORDS', title: '导出记录' },
+  { match: /^\/$/, eyebrow: 'DEMO / CONTENT DESK', title: '今日内容台' },
+  { match: /^\/import/, eyebrow: 'INGEST / CSV', title: '导入素材' },
+  { match: /^\/library/, eyebrow: 'MATERIALS / ANALYSIS', title: '情绪素材库' },
+  { match: /^\/materials/, eyebrow: 'MATERIAL / DETAIL', title: '素材详情' },
+  { match: /^\/inspirations/, eyebrow: 'CURATED / IDEAS', title: '灵感库' },
+  { match: /^\/generated/, eyebrow: 'DEMO AI / DRAFT', title: '文案生成结果' },
 ];
 
 const previewOptions: Array<{ value: PreviewMode; label: string }> = [
@@ -72,19 +65,18 @@ export function AppShell({ children }: { children: ReactNode }) {
             <button className="icon-button sidebar-close" aria-label="关闭菜单" onClick={() => setMenuOpen(false)}><X size={18} /></button>
           </div>
           <nav className="primary-nav" aria-label="主要导航">
-            {navigation.map(({ to, label, icon: Icon, count }) => (
+            {navigation.map(({ to, label, icon: Icon }) => (
               <NavLink key={to} to={to} end={to === '/'} onClick={() => setMenuOpen(false)} className={({ isActive }) => isActive ? 'nav-link is-active' : 'nav-link'}>
                 <Icon size={17} strokeWidth={1.7} />
                 <span>{label}</span>
-                {count ? <small>{count}</small> : null}
               </NavLink>
             ))}
           </nav>
           <div className="sidebar-note">
-            <span>验证计划</span>
-            <strong>01 / 30 条视频</strong>
-            <div className="mini-progress"><i style={{ width: '3.3%' }} /></div>
-            <p>本周目标：完成 6 条可发布草稿</p>
+            <span>DEMO 工作流</span>
+            <strong>导入 → 分析 → 生成</strong>
+            <div className="mini-progress"><i style={{ width: '72%' }} /></div>
+            <p>所有分析与文案均由 Mock 服务生成，便于快速验证。</p>
           </div>
           <div className="profile-chip"><span>创</span><div><strong>个人工作台</strong><small>内容创作者</small></div></div>
         </aside>

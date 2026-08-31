@@ -17,4 +17,4 @@ RUN npm run build -w @emotion-studio/contracts
 
 EXPOSE 5173
 
-CMD ["npm", "run", "dev", "-w", "@emotion-studio/web"]
+CMD ["npm", "run", "dev", "-w", "@emotion-studio/web", "--", "--host", "0.0.0.0"]

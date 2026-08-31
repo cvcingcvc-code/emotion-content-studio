@@ -14,6 +14,10 @@ import {
   type VideoProject,
 } from "@emotion-studio/contracts";
 import type { FastifyInstance, FastifyRequest } from "fastify";
+import type { ContentAnalyzer } from "./content/analyzer.js";
+import type { ContentGenerator } from "./content/generator.js";
+import type { ContentRepository } from "./content/repository.js";
+import { registerContentRoutes } from "./content/routes.js";
 import { AppError } from "./errors.js";
 import { mockDashboard } from "./mock/data.js";
 import type { MockStore } from "./mock/store.js";
@@ -45,7 +49,14 @@ const templateNames: Record<VideoProject["templateKey"], string> = {
   night_mood: "夜色情绪",
 };
 
-export async function registerRoutes(app: FastifyInstance, store: MockStore): Promise<void> {
+export async function registerRoutes(
+  app: FastifyInstance,
+  store: MockStore,
+  contentRepository: ContentRepository,
+  contentAnalyzer: ContentAnalyzer,
+  contentGenerator: ContentGenerator,
+): Promise<void> {
+  await registerContentRoutes(app, contentRepository, contentAnalyzer, contentGenerator);
   app.get("/api/v1/health", async (request) =>
     success(request, { status: "ok" as const, service: "emotion-studio-api", mode: "mock" as const }),
   );

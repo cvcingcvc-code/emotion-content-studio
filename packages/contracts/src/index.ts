@@ -170,6 +170,127 @@ export const MaterialQuerySchema = z.object({
   search: z.string().trim().max(100).optional(),
 });
 
+export const ContentEmotionSchema = z.enum([
+  "开心",
+  "难过",
+  "遗憾",
+  "孤独",
+  "爱情",
+  "治愈",
+  "愤怒",
+  "其他",
+]);
+
+export const ContentCategorySchema = z.enum([
+  "爱情",
+  "友情",
+  "家庭",
+  "成长",
+  "孤独",
+  "生活",
+  "其他",
+]);
+
+export const DemoLicenseStatusSchema = z.enum(["original", "licensed"]);
+
+export const ContentItemSchema = z.object({
+  id: z.string().min(1),
+  originalContent: z.string().max(4_000),
+  content: z.string().min(1).max(4_000),
+  author: z.string().min(1).max(100).nullable(),
+  likes: z.number().int().nonnegative().max(Number.MAX_SAFE_INTEGER),
+  source: z.string().min(1).max(200),
+  sourceUrl: z
+    .string()
+    .max(2_048)
+    .url()
+    .refine((value) => value.startsWith("http://") || value.startsWith("https://"), {
+      message: "来源链接必须使用 http 或 https",
+    })
+    .nullable(),
+  licenseStatus: LicenseStatusSchema,
+  emotion: ContentEmotionSchema,
+  emotionScore: z.number().int().min(0).max(100),
+  resonanceScore: z.number().int().min(0).max(100),
+  category: ContentCategorySchema,
+  tags: z.array(z.string().min(1).max(40)).max(8),
+  isFavorite: z.boolean(),
+  importedAt: z.string().datetime({ offset: true }),
+});
+
+export const ContentItemQuerySchema = z.object({
+  search: z.string().trim().max(100).optional(),
+  emotion: ContentEmotionSchema.optional(),
+  category: ContentCategorySchema.optional(),
+  sort: z.enum(["resonance_desc", "likes_desc", "newest"]).optional().default("newest"),
+  highResonance: z
+    .enum(["true", "false"])
+    .transform((value) => value === "true")
+    .optional()
+    .default(false),
+});
+
+export const SetFavoriteInputSchema = z.object({
+  favorite: z.boolean(),
+});
+
+export const CsvImportInputSchema = z.object({
+  csvText: z.string().min(1).max(2_000_000),
+  licenseStatus: DemoLicenseStatusSchema,
+  sourceName: z.string().trim().min(1).max(100).optional(),
+});
+
+export const CsvImportErrorSchema = z.object({
+  row: z.number().int().min(2),
+  message: z.string().min(1).max(200),
+});
+
+export const CsvImportSummarySchema = z.object({
+  totalRows: z.number().int().nonnegative(),
+  importedCount: z.number().int().nonnegative(),
+  failedCount: z.number().int().nonnegative(),
+  duplicateCount: z.number().int().nonnegative(),
+  errors: z.array(CsvImportErrorSchema),
+});
+
+export const DemoDataLoadResultSchema = z.object({
+  loadedCount: z.number().int().nonnegative(),
+  totalCount: z.number().int().nonnegative(),
+});
+
+export const ContentDistributionSchema = z.object({
+  label: z.string().min(1),
+  count: z.number().int().nonnegative(),
+});
+
+export const ContentDashboardSchema = z.object({
+  todayCount: z.number().int().nonnegative(),
+  totalCount: z.number().int().nonnegative(),
+  highResonanceCount: z.number().int().nonnegative(),
+  favoriteCount: z.number().int().nonnegative(),
+  emotionDistribution: z.array(ContentDistributionSchema),
+  categoryDistribution: z.array(ContentDistributionSchema),
+});
+
+export const GenerateContentInputSchema = z.object({
+  contentIds: z
+    .array(z.string().min(1))
+    .min(1)
+    .max(5)
+    .refine((ids) => new Set(ids).size === ids.length, "素材不能重复选择"),
+});
+
+export const GeneratedContentSchema = z.object({
+  id: z.string().min(1),
+  title: z.string().min(1).max(80),
+  body: z.string().min(200).max(400),
+  hashtags: z.array(z.string().startsWith("#")).min(1).max(8),
+  status: z.literal("draft"),
+  generatorLabel: z.literal("DEMO AI 生成结果"),
+  contentIds: z.array(z.string().min(1)).min(1).max(5),
+  createdAt: z.string().datetime({ offset: true }),
+});
+
 export const ReviewMaterialInputSchema = z
   .object({
     decision: z.enum(["approved", "rejected", "needs_edit", "reference_only"]),
@@ -245,6 +366,20 @@ export type ExportRecord = z.infer<typeof ExportRecordSchema>;
 export type Dashboard = z.infer<typeof DashboardSchema>;
 export type ReviewInbox = z.infer<typeof ReviewInboxSchema>;
 export type MaterialQuery = z.infer<typeof MaterialQuerySchema>;
+export type ContentEmotion = z.infer<typeof ContentEmotionSchema>;
+export type ContentCategory = z.infer<typeof ContentCategorySchema>;
+export type DemoLicenseStatus = z.infer<typeof DemoLicenseStatusSchema>;
+export type ContentItem = z.infer<typeof ContentItemSchema>;
+export type ContentItemQuery = z.infer<typeof ContentItemQuerySchema>;
+export type SetFavoriteInput = z.infer<typeof SetFavoriteInputSchema>;
+export type CsvImportInput = z.infer<typeof CsvImportInputSchema>;
+export type CsvImportError = z.infer<typeof CsvImportErrorSchema>;
+export type CsvImportSummary = z.infer<typeof CsvImportSummarySchema>;
+export type DemoDataLoadResult = z.infer<typeof DemoDataLoadResultSchema>;
+export type ContentDistribution = z.infer<typeof ContentDistributionSchema>;
+export type ContentDashboard = z.infer<typeof ContentDashboardSchema>;
+export type GenerateContentInput = z.infer<typeof GenerateContentInputSchema>;
+export type GeneratedContent = z.infer<typeof GeneratedContentSchema>;
 export type ReviewMaterialInput = z.infer<typeof ReviewMaterialInputSchema>;
 export type ConfirmDraftInput = z.infer<typeof ConfirmDraftInputSchema>;
 export type CreateVideoProjectInput = z.infer<typeof CreateVideoProjectInputSchema>;
