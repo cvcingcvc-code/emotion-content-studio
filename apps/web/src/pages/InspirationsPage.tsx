@@ -115,7 +115,7 @@ export default function InspirationsPage() {
                   <Link className="favorite-copy" to={`/materials/${item.id}`}>{item.originalContent}</Link>
                   <div className="favorite-meta"><span>{item.emotion}</span><span>{item.category}</span><span>{item.likes.toLocaleString('zh-CN')} 赞</span></div>
                   <footer>
-                    <div>{item.tags.slice(0, 2).map((tag) => <i key={tag}>#{tag}</i>)}</div>
+                    <div>{item.tags.slice(0, 2).map((tag, tagIndex) => <i key={`${tag}-${tagIndex}`}>#{tag}</i>)}</div>
                     <button className="icon-button" aria-label={`删除收藏：${item.content}`} disabled={blocked || busy} onClick={() => void removeFavorite(item.id)}><Trash2 size={15} /></button>
                   </footer>
                 </article>

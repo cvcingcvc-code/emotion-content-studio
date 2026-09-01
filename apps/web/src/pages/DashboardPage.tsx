@@ -29,7 +29,7 @@ export default function DashboardPage() {
   }
 
   if (state.status === 'loading') return <LoadingState rows={4} />;
-  if (state.status === 'error') return <ErrorState message={state.error} onRetry={() => setMode('normal')} />;
+  if (state.status === 'error') return <ErrorState message={state.error} onRetry={() => { setMode('normal'); setRefreshKey((value) => value + 1); }} />;
 
   const dashboard = state.data;
   const metrics = [

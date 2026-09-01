@@ -15,6 +15,7 @@ export interface ParsedCsvImport {
 }
 
 const MAX_CSV_DATA_ROWS = 10_000;
+const MAX_CSV_COLUMNS = 20;
 const MAX_CONTENT_LENGTH = 4_000;
 const MAX_AUTHOR_LENGTH = 100;
 const MAX_SOURCE_LENGTH = 200;
@@ -26,6 +27,17 @@ function parseCsvRows(csvText: string): string[][] {
   let field = "";
   let inQuotes = false;
   let justClosedQuote = false;
+
+  const pushField = () => {
+    if (row.length >= MAX_CSV_COLUMNS) {
+      throw new AppError(
+        400,
+        "CSV_COLUMN_LIMIT",
+        `CSV 单行最多支持 ${MAX_CSV_COLUMNS} 列`,
+      );
+    }
+    row.push(field);
+  };
 
   const pushRow = () => {
     if (rows.length >= MAX_CSV_DATA_ROWS + 1) {
@@ -57,14 +69,14 @@ function parseCsvRows(csvText: string): string[][] {
     }
 
     if (!inQuotes && character === ",") {
-      row.push(field);
+      pushField();
       field = "";
       justClosedQuote = false;
       continue;
     }
 
     if (!inQuotes && (character === "\n" || character === "\r")) {
-      row.push(field);
+      pushField();
       pushRow();
       row = [];
       field = "";
@@ -85,7 +97,7 @@ function parseCsvRows(csvText: string): string[][] {
   }
 
   if (field.length > 0 || row.length > 0 || justClosedQuote) {
-    row.push(field);
+    pushField();
     pushRow();
   }
 

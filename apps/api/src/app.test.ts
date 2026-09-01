@@ -243,6 +243,17 @@ describe("mock API", () => {
     expect(malformed.statusCode).toBe(400);
     expect(ApiErrorSchema.parse(malformed.json()).error.code).toBe("CSV_INVALID");
 
+    const tooManyColumns = await app.inject({
+      method: "POST",
+      url: "/api/v1/imports/csv",
+      payload: {
+        csvText: `content,${Array.from({ length: 20 }, (_, index) => `extra${index}`).join(",")}\n正文`,
+        licenseStatus: "original",
+      },
+    });
+    expect(tooManyColumns.statusCode).toBe(400);
+    expect(ApiErrorSchema.parse(tooManyColumns.json()).error.code).toBe("CSV_COLUMN_LIMIT");
+
     const excessive = await app.inject({
       method: "POST",
       url: "/api/v1/imports/csv",

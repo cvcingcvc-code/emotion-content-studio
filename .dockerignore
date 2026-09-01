@@ -1,6 +1,8 @@
 .git
 .github
 .codex-tmp
+.npm-cache
+**/.npm-cache
 node_modules
 **/node_modules
 dist
@@ -15,5 +17,15 @@ npm-debug.log*
 .DS_Store
 tmp
 **/tmp
+data
+**/data
+imports
+**/imports
 uploads
 **/uploads
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*

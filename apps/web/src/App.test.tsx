@@ -21,6 +21,11 @@ const contentItems: ContentItem[] = [
     author: null, likes: 430, source: 'CSV 导入', sourceUrl: 'https://example.com/source', licenseStatus: 'licensed', emotion: '遗憾', emotionScore: 82,
     resonanceScore: 76, category: '爱情', tags: ['爱情', '遗憾'], isFavorite: false, importedAt: '2026-09-01T01:02:00.000Z',
   },
+  {
+    id: 'content-0004', originalContent: '这条素材只用于研究授权状态。', content: '这条素材只用于研究授权状态。',
+    author: null, likes: 12, source: '研究素材', sourceUrl: null, licenseStatus: 'reference_only', emotion: '其他', emotionScore: 60,
+    resonanceScore: 60, category: '其他', tags: ['研究'], isFavorite: false, importedAt: '2026-09-01T01:03:00.000Z',
+  },
 ];
 
 const generatedBody = [
@@ -134,6 +139,17 @@ describe('emotion content studio demo', () => {
     for (const label of ['仪表盘', 'CSV 导入', '情绪素材库', '灵感库']) expect(screen.getByRole('link', { name: label })).toBeInTheDocument();
   });
 
+  it('retries a real dashboard request failure even when preview mode is already normal', async () => {
+    const { mock } = installDemoApi();
+    mock.mockImplementationOnce(async () => failure('临时网络错误', 503));
+    const user = userEvent.setup();
+    render(<MemoryRouter initialEntries={['/']}><App /></MemoryRouter>);
+    expect(await screen.findByText('这部分暂时没有加载出来')).toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: '重新加载' }));
+    expect(await screen.findByText('把情绪素材，变成可继续创作的内容。')).toBeInTheDocument();
+    expect(mock).toHaveBeenCalledTimes(2);
+  });
+
   it.each([
     ['/', '把情绪素材，变成可继续创作的内容。'],
     ['/import', '导入一份 CSV，自动完成清洗与模拟分析。'],
@@ -204,6 +220,25 @@ describe('emotion content studio demo', () => {
     await user.click(screen.getByRole('button', { name: /生成文案/ }));
     expect(await screen.findByText('DEMO AI 生成结果')).toBeInTheDocument();
     expect(screen.getByText('草稿 · 待人工确认')).toBeInTheDocument();
+  });
+
+  it('shows restricted licenses explicitly and disables generation', async () => {
+    installDemoApi();
+    render(<MemoryRouter initialEntries={['/materials/content-0004']}><App /></MemoryRouter>);
+    expect(await screen.findByText('这条素材只用于研究授权状态。')).toBeInTheDocument();
+    expect(screen.getByText('仅供研究')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: '授权状态不可生成' })).toBeDisabled();
+  });
+
+  it('retries a generated-content request failure on the same deep route', async () => {
+    const { mock } = installDemoApi();
+    mock.mockImplementationOnce(async () => failure('临时网络错误', 503));
+    const user = userEvent.setup();
+    render(<MemoryRouter initialEntries={['/generated/generated-01']}><App /></MemoryRouter>);
+    expect(await screen.findByText('这部分暂时没有加载出来')).toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: '重新加载' }));
+    expect(await screen.findByRole('heading', { name: generatedFixture.title })).toBeInTheDocument();
+    expect(mock).toHaveBeenCalledTimes(2);
   });
 
   it('selects a favorite material and generates from the inspiration library', async () => {

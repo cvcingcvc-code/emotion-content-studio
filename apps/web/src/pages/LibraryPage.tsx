@@ -105,7 +105,7 @@ function ContentTable({ items, mode, onFavorite }: { items: ContentItem[]; mode:
           <strong className="likes-cell" role="cell">{item.likes.toLocaleString('zh-CN')}</strong>
           <div className="emotion-cell" role="cell"><StatusPill tone={item.emotionScore >= 80 ? 'good' : 'neutral'}>{item.emotion}</StatusPill><small>情绪 {item.emotionScore}</small></div>
           <div className="score-cell" role="cell"><strong>{item.resonanceScore}</strong><span>共鸣</span><div><i style={{ width: `${item.resonanceScore}%` }} /></div></div>
-          <div className="tag-cell" role="cell"><strong>{item.category}</strong><div>{item.tags.slice(0, 3).map((tag) => <span key={tag}>#{tag}</span>)}</div></div>
+          <div className="tag-cell" role="cell"><strong>{item.category}</strong><div>{item.tags.slice(0, 3).map((tag, tagIndex) => <span key={`${tag}-${tagIndex}`}>#{tag}</span>)}</div></div>
           <div className="material-actions" role="cell"><button className="icon-button" aria-label={item.isFavorite ? '取消收藏' : '收藏'} disabled={mode === 'blocked'} onClick={() => onFavorite(item)}><Heart size={16} fill={item.isFavorite ? 'currentColor' : 'none'} /></button><Link className="text-button" to={`/materials/${item.id}`}>查看 <ArrowRight size={14} /></Link></div>
         </article>
       ))}

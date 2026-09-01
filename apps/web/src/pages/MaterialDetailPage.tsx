@@ -6,6 +6,13 @@ import { usePreviewMode } from '../components/AppShell';
 import { BlockedNotice, EmptyState, ErrorState, LoadingState, StatusPill } from '../components/States';
 import { apiRequest, useRemote } from '../lib/api';
 
+const licenseLabels: Record<ContentItem['licenseStatus'], string> = {
+  original: '本人原创',
+  licensed: '明确许可',
+  reference_only: '仅供研究',
+  prohibited: '禁止使用',
+};
+
 export default function MaterialDetailPage() {
   const { id = '' } = useParams();
   const navigate = useNavigate();
@@ -47,6 +54,7 @@ export default function MaterialDetailPage() {
 
   const item = state.data;
   const blocked = mode === 'blocked';
+  const licenseRestricted = item.licenseStatus === 'reference_only' || item.licenseStatus === 'prohibited';
   const displayContent = mode === 'long' ? `${item.originalContent}。有些情绪不用立刻得到解释，先让它在一个安静的地方停留，再等自己有力气时慢慢读完。` : item.originalContent;
 
   return (
@@ -61,7 +69,7 @@ export default function MaterialDetailPage() {
           <blockquote>{displayContent}</blockquote>
           {item.content !== item.originalContent ? <div className="cleaned-copy"><span>清洗后内容</span><p>{item.content}</p></div> : null}
           <footer>
-            <dl><div><dt>作者</dt><dd>{item.author ?? '未提供'}</dd></div><div><dt>来源</dt><dd>{item.source}</dd></div><div><dt>点赞</dt><dd>{item.likes.toLocaleString('zh-CN')}</dd></div><div><dt>授权</dt><dd>{item.licenseStatus === 'original' ? '本人原创' : '明确许可'}</dd></div></dl>
+            <dl><div><dt>作者</dt><dd>{item.author ?? '未提供'}</dd></div><div><dt>来源</dt><dd>{item.source}</dd></div><div><dt>点赞</dt><dd>{item.likes.toLocaleString('zh-CN')}</dd></div><div><dt>授权</dt><dd>{licenseLabels[item.licenseStatus]}</dd></div></dl>
             {item.sourceUrl ? <a className="text-button" href={item.sourceUrl} target="_blank" rel="noreferrer">查看来源 <ExternalLink size={14} /></a> : null}
           </footer>
         </article>
@@ -69,9 +77,9 @@ export default function MaterialDetailPage() {
         <aside className="panel analysis-card">
           <header><div><span>MOCK ANALYSIS</span><h2>情绪分析</h2></div><StatusPill tone="warning">DEMO</StatusPill></header>
           <div className="analysis-primary"><div><span>主情绪</span><strong>{item.emotion}</strong></div><ScoreRing label="情绪分" score={item.emotionScore} /><ScoreRing label="共鸣分" score={item.resonanceScore} /></div>
-          <div className="analysis-meta"><div><span>内容分类</span><strong>{item.category}</strong></div><div><span>标签</span><div className="detail-tags">{item.tags.map((tag) => <i key={tag}>#{tag}</i>)}</div></div></div>
+          <div className="analysis-meta"><div><span>内容分类</span><strong>{item.category}</strong></div><div><span>标签</span><div className="detail-tags">{item.tags.map((tag, tagIndex) => <i key={`${tag}-${tagIndex}`}>#{tag}</i>)}</div></div></div>
           <p className="mock-disclaimer">评分来自关键词规则，不代表真实 AI 模型判断。</p>
-          <div className="detail-actions"><button className="secondary-button" disabled={blocked || action !== 'idle'} onClick={() => void setFavorite(item)}><Heart size={15} fill={item.isFavorite ? 'currentColor' : 'none'} />{item.isFavorite ? '移出灵感库' : '加入灵感库'}</button><button className="primary-button" disabled={blocked || action !== 'idle'} onClick={() => void generate(item)}><Sparkles size={15} />{action === 'generate' ? '正在生成…' : '生成文案'}</button></div>
+          <div className="detail-actions"><button className="secondary-button" disabled={blocked || action !== 'idle'} onClick={() => void setFavorite(item)}><Heart size={15} fill={item.isFavorite ? 'currentColor' : 'none'} />{item.isFavorite ? '移出灵感库' : '加入灵感库'}</button><button className="primary-button" disabled={blocked || licenseRestricted || action !== 'idle'} onClick={() => void generate(item)}><Sparkles size={15} />{licenseRestricted ? '授权状态不可生成' : action === 'generate' ? '正在生成…' : '生成文案'}</button></div>
         </aside>
       </div>
     </>

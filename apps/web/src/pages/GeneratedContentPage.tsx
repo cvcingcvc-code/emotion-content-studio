@@ -1,4 +1,5 @@
 import { ArrowLeft, FileText, Sparkles } from 'lucide-react';
+import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import type { GeneratedContent } from '@emotion-studio/contracts';
 import { usePreviewMode } from '../components/AppShell';
@@ -8,10 +9,11 @@ import { useRemote } from '../lib/api';
 export default function GeneratedContentPage() {
   const { id = '' } = useParams();
   const { mode, setMode } = usePreviewMode();
-  const state = useRemote<GeneratedContent>(`/api/v1/generated-contents/${encodeURIComponent(id)}`, mode);
+  const [refreshKey, setRefreshKey] = useState(0);
+  const state = useRemote<GeneratedContent>(`/api/v1/generated-contents/${encodeURIComponent(id)}`, mode, refreshKey);
 
   if (state.status === 'loading') return <LoadingState rows={4} />;
-  if (state.status === 'error') return <ErrorState message={state.error} onRetry={() => setMode('normal')} />;
+  if (state.status === 'error') return <ErrorState message={state.error} onRetry={() => { setMode('normal'); setRefreshKey((value) => value + 1); }} />;
   if (mode === 'empty') return <EmptyState title="没有找到生成结果" description="回到灵感库选择 1–5 条素材，再生成一份新的 DEMO 草稿。" action="返回灵感库" actionTo="/inspirations" />;
 
   const generated = state.data;
@@ -33,11 +35,11 @@ export default function GeneratedContentPage() {
           </section>
           <section className="generated-section generated-body">
             <span>正文</span>
-            {generated.body.split(/\n{2,}/).map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+            {generated.body.split(/\n{2,}/).map((paragraph, index) => <p key={`${index}-${paragraph.slice(0, 24)}`}>{paragraph}</p>)}
           </section>
           <section className="generated-section">
             <span>标签</span>
-            <div className="generated-tags">{generated.hashtags.map((tag) => <i key={tag}>{tag}</i>)}</div>
+            <div className="generated-tags">{generated.hashtags.map((tag, index) => <i key={`${tag}-${index}`}>{tag}</i>)}</div>
           </section>
         </article>
 

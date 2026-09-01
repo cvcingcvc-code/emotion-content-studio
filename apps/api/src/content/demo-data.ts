@@ -68,5 +68,3 @@ export function createDemoContentItems(
     importedAt,
   }));
 }
-
-export const demoContentCount = demoSeeds.length;
