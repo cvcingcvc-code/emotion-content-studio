@@ -55,10 +55,16 @@ export async function registerRoutes(
   contentRepository: ContentRepository,
   contentAnalyzer: ContentAnalyzer,
   contentGenerator: ContentGenerator,
+  contentRepositoryMode: "database" | "memory" | "custom",
 ): Promise<void> {
   await registerContentRoutes(app, contentRepository, contentAnalyzer, contentGenerator);
   app.get("/api/v1/health", async (request) =>
-    success(request, { status: "ok" as const, service: "emotion-studio-api", mode: "mock" as const }),
+    success(request, {
+      status: "ok" as const,
+      service: "emotion-studio-api",
+      mode: "mock" as const,
+      repository: contentRepositoryMode,
+    }),
   );
 
   app.get("/api/v1/dashboard", async (request): Promise<ApiSuccess<Dashboard>> => {

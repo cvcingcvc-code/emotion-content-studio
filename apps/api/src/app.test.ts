@@ -16,7 +16,10 @@ import { buildApp, type BuildAppOptions } from "./app.js";
 import { readServerConfig } from "./config.js";
 import { MockContentAnalyzer } from "./content/analyzer.js";
 import { createDemoContentItems } from "./content/demo-data.js";
-import { InMemoryContentRepository } from "./content/repository.js";
+import {
+  createContentRepository,
+  InMemoryContentRepository,
+} from "./content/repository.js";
 
 const apps: Awaited<ReturnType<typeof buildApp>>[] = [];
 
@@ -32,7 +35,17 @@ afterEach(async () => {
 
 describe("mock API", () => {
   it("binds local development to loopback unless explicitly configured", () => {
-    expect(readServerConfig({})).toMatchObject({ HOST: "127.0.0.1", PORT: 8787 });
+    expect(readServerConfig({})).toMatchObject({
+      HOST: "127.0.0.1",
+      PORT: 8787,
+      CONTENT_REPOSITORY: "memory",
+    });
+    expect(() => createContentRepository({ nodeEnv: "production" })).toThrow(
+      "InMemoryContentRepository is not allowed in production",
+    );
+    expect(() => readServerConfig({ CONTENT_REPOSITORY: "database" })).toThrow();
+    expect(() => readServerConfig({ NODE_ENV: "production", CONTENT_REPOSITORY: "memory" }))
+      .toThrow();
   });
 
   it("returns a request id and mock health state", async () => {
@@ -42,7 +55,12 @@ describe("mock API", () => {
 
     expect(response.statusCode).toBe(200);
     expect(response.headers["x-request-id"]).toBe(body.requestId);
-    expect(body.data).toEqual({ status: "ok", service: "emotion-studio-api", mode: "mock" });
+    expect(body.data).toEqual({
+      status: "ok",
+      service: "emotion-studio-api",
+      mode: "mock",
+      repository: "memory",
+    });
   });
 
   it("serves exactly twenty newly authored material fixtures", async () => {
@@ -139,6 +157,26 @@ describe("mock API", () => {
 
     expect(response.statusCode).toBe(404);
     expect(error.error.code).toBe("NOT_FOUND");
+  });
+
+  it("maps database interruption to a retryable 503 without falling back to memory", async () => {
+    class UnavailableRepository extends InMemoryContentRepository {
+      override async list(): Promise<never> {
+        throw Object.assign(new Error("connection details stay server-side"), {
+          code: "ECONNREFUSED",
+        });
+      }
+    }
+
+    const app = await createApp({ contentRepository: new UnavailableRepository() });
+    const response = await app.inject({ method: "GET", url: "/api/v1/content-items" });
+    const error = ApiErrorSchema.parse(response.json());
+    expect(response.statusCode).toBe(503);
+    expect(error.error).toEqual({
+      code: "DATABASE_UNAVAILABLE",
+      message: "内容数据库暂时不可用，请稍后重试",
+    });
+    expect(response.body).not.toContain("connection details");
   });
 
   it("loads forty synthetic content items idempotently and supports filtering and sorting", async () => {

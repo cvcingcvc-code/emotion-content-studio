@@ -29,12 +29,13 @@ services:
       PORT: 8787
       WEB_ORIGIN: http://localhost:5173
       DATABASE_URL: postgresql://emotion_studio:local-prototype-only@db:5432/emotion_studio
+      CONTENT_REPOSITORY: database
       LOG_LEVEL: info
     ports:
       - "127.0.0.1:8787:8787"
     depends_on:
-      db:
-        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
     healthcheck:
       test:
         - CMD
@@ -45,6 +46,18 @@ services:
       timeout: 5s
       retries: 12
       start_period: 10s
+
+  migrate:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    environment:
+      DATABASE_URL: postgresql://emotion_studio:local-prototype-only@db:5432/emotion_studio
+    command: ["npm", "run", "migrate", "-w", "@emotion-studio/database"]
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
 
   web:
     build:

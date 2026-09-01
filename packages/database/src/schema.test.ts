@@ -2,11 +2,13 @@ import { getTableName } from "drizzle-orm";
 import { describe, expect, it } from "vitest";
 import {
   activityEvents,
+  contentItems,
   drafts,
   exportRecords,
   imports,
   inspirations,
   materials,
+  generatedContents,
   reviews,
   videoProjects,
 } from "./schema.js";
@@ -22,6 +24,8 @@ describe("database schema boundary", () => {
       videoProjects,
       exportRecords,
       activityEvents,
+      contentItems,
+      generatedContents,
     ].map(getTableName)).toEqual([
       "imports",
       "materials",
@@ -31,6 +35,8 @@ describe("database schema boundary", () => {
       "video_projects",
       "export_records",
       "activity_events",
+      "content_items",
+      "generated_contents",
     ]);
   });
 });

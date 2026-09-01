@@ -21,13 +21,31 @@ export interface ContentRepository {
   findGeneratedById(id: string): Promise<GeneratedContent | undefined>;
 }
 
+export interface InMemoryContentRepositoryOptions {
+  maxItems?: number;
+  maxGeneratedContents?: number;
+}
+
 export class InMemoryContentRepository implements ContentRepository {
   readonly #items: ContentItem[] = [];
   readonly #generatedContents = new Map<string, GeneratedContent>();
+  readonly #maxItems: number;
+  readonly #maxGeneratedContents: number;
   #nextContentId = 1;
+
+  constructor(options: InMemoryContentRepositoryOptions = {}) {
+    this.#maxItems = options.maxItems ?? 10_000;
+    this.#maxGeneratedContents = options.maxGeneratedContents ?? 1_000;
+  }
 
   async addMany(items: NewContentItem[]): Promise<AddContentItemsResult> {
     const existing = new Set(this.#items.map((item) => item.content));
+    const incomingUnique = new Set(
+      items.map((item) => item.content).filter((content) => !existing.has(content)),
+    );
+    if (this.#items.length + incomingUnique.size > this.#maxItems) {
+      throw new Error(`In-memory content capacity exceeded (${this.#maxItems})`);
+    }
     const inserted: ContentItem[] = [];
     const duplicateIndexes: number[] = [];
 
@@ -105,6 +123,14 @@ export class InMemoryContentRepository implements ContentRepository {
   }
 
   async saveGenerated(content: GeneratedContent): Promise<void> {
+    if (
+      !this.#generatedContents.has(content.id) &&
+      this.#generatedContents.size >= this.#maxGeneratedContents
+    ) {
+      throw new Error(
+        `In-memory generated-content capacity exceeded (${this.#maxGeneratedContents})`,
+      );
+    }
     this.#generatedContents.set(content.id, structuredClone(content));
   }
 
@@ -114,6 +140,16 @@ export class InMemoryContentRepository implements ContentRepository {
   }
 }
 
-export function createContentRepository(): ContentRepository {
-  return new InMemoryContentRepository();
+export interface CreateContentRepositoryOptions extends InMemoryContentRepositoryOptions {
+  nodeEnv?: string;
+}
+
+export function createContentRepository(
+  options: CreateContentRepositoryOptions = {},
+): ContentRepository {
+  const nodeEnv = options.nodeEnv ?? process.env.NODE_ENV ?? "development";
+  if (nodeEnv === "production") {
+    throw new Error("InMemoryContentRepository is not allowed in production");
+  }
+  return new InMemoryContentRepository(options);
 }

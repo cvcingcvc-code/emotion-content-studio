@@ -10,11 +10,30 @@ import { AppError } from "./errors.js";
 import { createMockStore, type MockStore } from "./mock/store.js";
 import { registerRoutes } from "./routes.js";
 
+const DATABASE_UNAVAILABLE_CODES = new Set([
+  "ECONNREFUSED",
+  "ECONNRESET",
+  "ETIMEDOUT",
+  "08000",
+  "08003",
+  "08006",
+  "53300",
+  "57P01",
+  "57P02",
+  "57P03",
+]);
+
+function getErrorCode(error: unknown): string | undefined {
+  if (typeof error !== "object" || error === null || !("code" in error)) return undefined;
+  return typeof error.code === "string" ? error.code : undefined;
+}
+
 export interface BuildAppOptions {
   logger?: boolean;
   webOrigin?: string;
   store?: MockStore;
   contentRepository?: ContentRepository;
+  contentRepositoryMode?: "database" | "memory" | "custom";
   contentAnalyzer?: ContentAnalyzer;
   contentGenerator?: ContentGenerator;
 }
@@ -22,7 +41,9 @@ export interface BuildAppOptions {
 export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyInstance> {
   const app = Fastify({ logger: options.logger ?? false, bodyLimit: 2_100_000 });
   const store = options.store ?? createMockStore();
-  const contentRepository = options.contentRepository ?? createContentRepository();
+  const contentRepository = options.contentRepository ?? createContentRepository({
+    nodeEnv: process.env.NODE_ENV ?? "development",
+  });
   const contentAnalyzer = options.contentAnalyzer ?? new MockContentAnalyzer();
   const contentGenerator = options.contentGenerator ?? new MockContentGenerator();
 
@@ -49,6 +70,20 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
       await reply.status(error.statusCode).send({
         ok: false,
         error: { code: error.code, message: error.message, ...details },
+        requestId: request.id,
+      });
+      return;
+    }
+
+    const errorCode = getErrorCode(error);
+    if (errorCode && DATABASE_UNAVAILABLE_CODES.has(errorCode)) {
+      request.log.error(
+        { errorCode, requestId: request.id },
+        "Content database unavailable",
+      );
+      await reply.status(503).send({
+        ok: false,
+        error: { code: "DATABASE_UNAVAILABLE", message: "内容数据库暂时不可用，请稍后重试" },
         requestId: request.id,
       });
       return;
@@ -82,6 +117,13 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
     });
   });
 
-  await registerRoutes(app, store, contentRepository, contentAnalyzer, contentGenerator);
+  await registerRoutes(
+    app,
+    store,
+    contentRepository,
+    contentAnalyzer,
+    contentGenerator,
+    options.contentRepositoryMode ?? (options.contentRepository ? "custom" : "memory"),
+  );
   return app;
 }

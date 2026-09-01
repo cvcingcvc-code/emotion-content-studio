@@ -11,6 +11,7 @@ export interface DatabaseContext {
 export interface DatabaseOptions {
   maxConnections?: number;
   connectionTimeoutMs?: number;
+  searchPath?: string;
 }
 
 export function createDatabase(
@@ -20,11 +21,15 @@ export function createDatabase(
   if (!databaseUrl.trim()) {
     throw new Error("DATABASE_URL is required to create a database connection");
   }
+  if (options.searchPath && !/^[a-z][a-z0-9_]{0,62}$/.test(options.searchPath)) {
+    throw new Error("Database searchPath must be a safe PostgreSQL identifier");
+  }
 
   const pool = new Pool({
     connectionString: databaseUrl,
     max: options.maxConnections ?? 10,
     connectionTimeoutMillis: options.connectionTimeoutMs ?? 5_000,
+    ...(options.searchPath ? { options: `-c search_path=${options.searchPath}` } : {}),
   });
 
   return {

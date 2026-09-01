@@ -4,13 +4,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build:contracts": "npm --prefix ../.. run build -w @emotion-studio/contracts",
-    "predev": "npm run build:contracts",
+    "build:dependencies": "npm --prefix ../.. run build -w @emotion-studio/contracts && npm --prefix ../.. run build -w @emotion-studio/database",
+    "predev": "npm run build:dependencies",
     "dev": "tsx watch src/server.ts",
-    "prebuild": "npm run build:contracts",
+    "prebuild": "npm run build:dependencies",
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "pretest": "npm run build:contracts",
+    "pretest": "npm run build:dependencies",
     "test": "vitest run",
     "start": "node dist/server.js"
   },
@@ -18,11 +18,14 @@
     "@emotion-studio/contracts": "0.1.0",
     "@emotion-studio/database": "0.1.0",
     "@fastify/cors": "^11.1.0",
+    "drizzle-orm": "^0.45.2",
     "fastify": "^5.6.0",
     "zod": "^4.1.5"
   },
   "devDependencies": {
     "@types/node": "^24.3.0",
+    "@types/pg": "^8.15.5",
+    "pg": "^8.16.3",
     "tsx": "^4.20.5",
     "vitest": "^3.2.4"
   }

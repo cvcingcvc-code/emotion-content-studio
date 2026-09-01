@@ -1,8 +1,30 @@
+import { createDatabase, type DatabaseContext } from "@emotion-studio/database";
 import { buildApp } from "./app.js";
 import { readServerConfig } from "./config.js";
+import { DatabaseContentRepository } from "./content/database-repository.js";
+import { createContentRepository } from "./content/repository.js";
 
 const config = readServerConfig();
-const app = await buildApp({ logger: true, webOrigin: config.WEB_ORIGIN });
+let database: DatabaseContext | undefined;
+const contentRepository = config.CONTENT_REPOSITORY === "database"
+  ? (() => {
+      if (!config.DATABASE_URL) {
+        throw new Error("DATABASE_URL is required for the database repository");
+      }
+      const databaseContext = createDatabase(config.DATABASE_URL);
+      database = databaseContext;
+      return new DatabaseContentRepository(databaseContext.db);
+    })()
+  : createContentRepository({ nodeEnv: config.NODE_ENV });
+const app = await buildApp({
+  logger: true,
+  webOrigin: config.WEB_ORIGIN,
+  contentRepository,
+  contentRepositoryMode: config.CONTENT_REPOSITORY,
+});
+if (database) {
+  app.addHook("onClose", async () => database?.close());
+}
 
 const shutdown = async (): Promise<void> => {
   await app.close();

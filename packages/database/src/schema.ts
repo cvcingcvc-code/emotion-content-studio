@@ -1,6 +1,9 @@
 import { sql } from "drizzle-orm";
 import {
+  bigint,
+  bigserial,
   boolean,
+  check,
   index,
   integer,
   jsonb,
@@ -197,4 +200,59 @@ export const activityEvents = pgTable(
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [index("activity_events_entity_idx").on(table.entityType, table.entityId)],
+);
+
+export const contentItems = pgTable(
+  "content_items",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    sequence: bigserial("sequence", { mode: "number" }).notNull(),
+    originalContent: text("original_content").notNull(),
+    cleanedContent: text("cleaned_content").notNull(),
+    contentHash: text("content_hash").notNull(),
+    author: text("author"),
+    source: text("source").notNull(),
+    sourceUrl: text("source_url"),
+    licenseStatus: licenseStatusEnum("license_status").notNull(),
+    likes: bigint("likes", { mode: "number" }).notNull().default(0),
+    emotion: text("emotion").notNull(),
+    emotionScore: integer("emotion_score").notNull(),
+    resonanceScore: integer("resonance_score").notNull(),
+    category: text("category").notNull(),
+    tags: jsonb("tags").$type<string[]>().notNull().default(sql`'[]'::jsonb`),
+    isFavorite: boolean("is_favorite").notNull().default(false),
+    ...createTimestamps(),
+  },
+  (table) => [
+    uniqueIndex("content_items_content_hash_unique").on(table.contentHash),
+    index("content_items_emotion_idx").on(table.emotion),
+    index("content_items_category_idx").on(table.category),
+    index("content_items_favorite_idx").on(table.isFavorite),
+    check("content_items_likes_nonnegative", sql`${table.likes} >= 0`),
+    check(
+      "content_items_emotion_score_range",
+      sql`${table.emotionScore} BETWEEN 0 AND 100`,
+    ),
+    check(
+      "content_items_resonance_score_range",
+      sql`${table.resonanceScore} BETWEEN 0 AND 100`,
+    ),
+  ],
+);
+
+export const generatedContents = pgTable(
+  "generated_contents",
+  {
+    id: text("id").primaryKey(),
+    selectedContentIds: jsonb("selected_content_ids").$type<string[]>().notNull(),
+    title: text("title").notNull(),
+    body: text("body").notNull(),
+    tags: jsonb("tags").$type<string[]>().notNull(),
+    generator: text("generator").notNull(),
+    model: text("model").notNull(),
+    generatorLabel: text("generator_label").notNull(),
+    status: draftStatusEnum("status").notNull().default("draft"),
+    ...createTimestamps(),
+  },
+  (table) => [index("generated_contents_created_at_idx").on(table.createdAt)],
 );
