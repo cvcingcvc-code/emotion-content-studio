@@ -51,20 +51,23 @@ const demoSeeds: DemoSeed[] = [
   { content: "快乐有时很小，只是一杯刚好温热的茶。", likes: 1250 },
 ];
 
-export function createDemoContentItems(
+export async function createDemoContentItems(
   analyzer: ContentAnalyzer,
   importedAt = new Date().toISOString(),
-): NewContentItem[] {
-  return demoSeeds.map((seed) => ({
-    originalContent: seed.content,
-    content: seed.content,
-    author: null,
-    likes: seed.likes,
-    source: "内置演示数据",
-    sourceUrl: null,
-    licenseStatus: seed.licenseStatus ?? "original",
-    ...analyzer.analyze(seed.content, seed.likes),
-    isFavorite: false,
-    importedAt,
+): Promise<NewContentItem[]> {
+  return Promise.all(demoSeeds.map(async (seed) => {
+    const analysis = await analyzer.analyze({ content: seed.content, likes: seed.likes });
+    return {
+      originalContent: seed.content,
+      content: seed.content,
+      author: null,
+      likes: seed.likes,
+      source: "内置演示数据",
+      sourceUrl: null,
+      licenseStatus: seed.licenseStatus ?? "original",
+      ...analysis.data,
+      isFavorite: false,
+      importedAt,
+    };
   }));
 }

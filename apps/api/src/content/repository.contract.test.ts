@@ -45,6 +45,8 @@ function generatedContent(contentIds: string[]): GeneratedContent {
     hashtags: ["#情绪", "#成长"],
     status: "draft",
     generatorLabel: "DEMO AI 生成结果",
+    provider: "mock",
+    model: "mock-rules-v1",
     contentIds,
     createdAt: "2026-09-01T02:00:00.000Z",
   };

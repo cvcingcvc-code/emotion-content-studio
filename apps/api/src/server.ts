@@ -1,6 +1,8 @@
 import { createDatabase, type DatabaseContext } from "@emotion-studio/database";
+import { createConfiguredContentGenerator } from "./ai/provider-factory.js";
 import { buildApp } from "./app.js";
 import { readServerConfig } from "./config.js";
+import { MockContentAnalyzer } from "./content/analyzer.js";
 import { DatabaseContentRepository } from "./content/database-repository.js";
 import { createContentRepository } from "./content/repository.js";
 
@@ -16,11 +18,16 @@ const contentRepository = config.CONTENT_REPOSITORY === "database"
       return new DatabaseContentRepository(databaseContext.db);
     })()
   : createContentRepository({ nodeEnv: config.NODE_ENV });
+const contentGenerator = createConfiguredContentGenerator(config);
+const ingestionAnalyzer = new MockContentAnalyzer();
 const app = await buildApp({
   logger: true,
   webOrigin: config.WEB_ORIGIN,
   contentRepository,
   contentRepositoryMode: config.CONTENT_REPOSITORY,
+  contentGenerator,
+  contentAnalyzer: ingestionAnalyzer,
+  aiProvider: config.AI_PROVIDER,
 });
 if (database) {
   app.addHook("onClose", async () => database?.close());

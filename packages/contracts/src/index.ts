@@ -191,6 +191,18 @@ export const ContentCategorySchema = z.enum([
   "其他",
 ]);
 
+export const AiProviderSchema = z.enum(["mock", "deepseek"]);
+
+export const ContentAnalysisSchema = z
+  .object({
+    emotion: ContentEmotionSchema,
+    emotionScore: z.number().int().min(0).max(100),
+    resonanceScore: z.number().int().min(0).max(100),
+    category: ContentCategorySchema,
+    tags: z.array(z.string().trim().min(1).max(40)).max(8),
+  })
+  .strict();
+
 export const DemoLicenseStatusSchema = z.enum(["original", "licensed"]);
 
 export const ContentItemSchema = z.object({
@@ -217,6 +229,8 @@ export const ContentItemSchema = z.object({
   isFavorite: z.boolean(),
   importedAt: z.string().datetime({ offset: true }),
 });
+
+export const ContentItemListSchema = z.array(ContentItemSchema);
 
 export const ContentItemQuerySchema = z.object({
   search: z.string().trim().max(100).optional(),
@@ -280,13 +294,31 @@ export const GenerateContentInputSchema = z.object({
     .refine((ids) => new Set(ids).size === ids.length, "素材不能重复选择"),
 });
 
+export const GeneratedDraftSchema = z
+  .object({
+    title: z.string().trim().min(1).max(80),
+    body: z.string().trim().min(200).max(400),
+    hashtags: z
+      .array(z.string().trim().startsWith("#").max(40))
+      .min(1)
+      .max(8),
+  })
+  .strict();
+
+export const GeneratorLabelSchema = z.enum([
+  "DEMO AI 生成结果",
+  "AI 生成草稿",
+]);
+
 export const GeneratedContentSchema = z.object({
   id: z.string().min(1),
   title: z.string().min(1).max(80),
   body: z.string().min(200).max(400),
-  hashtags: z.array(z.string().startsWith("#")).min(1).max(8),
+  hashtags: z.array(z.string().trim().startsWith("#").max(40)).min(1).max(8),
   status: z.literal("draft"),
-  generatorLabel: z.literal("DEMO AI 生成结果"),
+  generatorLabel: GeneratorLabelSchema,
+  provider: AiProviderSchema,
+  model: z.string().trim().min(1).max(100),
   contentIds: z.array(z.string().min(1)).min(1).max(5),
   createdAt: z.string().datetime({ offset: true }),
 });
@@ -368,6 +400,8 @@ export type ReviewInbox = z.infer<typeof ReviewInboxSchema>;
 export type MaterialQuery = z.infer<typeof MaterialQuerySchema>;
 export type ContentEmotion = z.infer<typeof ContentEmotionSchema>;
 export type ContentCategory = z.infer<typeof ContentCategorySchema>;
+export type AiProvider = z.infer<typeof AiProviderSchema>;
+export type ContentAnalysis = z.infer<typeof ContentAnalysisSchema>;
 export type DemoLicenseStatus = z.infer<typeof DemoLicenseStatusSchema>;
 export type ContentItem = z.infer<typeof ContentItemSchema>;
 export type ContentItemQuery = z.infer<typeof ContentItemQuerySchema>;
@@ -379,12 +413,15 @@ export type DemoDataLoadResult = z.infer<typeof DemoDataLoadResultSchema>;
 export type ContentDistribution = z.infer<typeof ContentDistributionSchema>;
 export type ContentDashboard = z.infer<typeof ContentDashboardSchema>;
 export type GenerateContentInput = z.infer<typeof GenerateContentInputSchema>;
+export type GeneratedDraft = z.infer<typeof GeneratedDraftSchema>;
+export type GeneratorLabel = z.infer<typeof GeneratorLabelSchema>;
 export type GeneratedContent = z.infer<typeof GeneratedContentSchema>;
 export type ReviewMaterialInput = z.infer<typeof ReviewMaterialInputSchema>;
 export type ConfirmDraftInput = z.infer<typeof ConfirmDraftInputSchema>;
 export type CreateVideoProjectInput = z.infer<typeof CreateVideoProjectInputSchema>;
 export type SimulateExportInput = z.infer<typeof SimulateExportInputSchema>;
 export type ApiError = z.infer<typeof ApiErrorSchema>;
+export type ContractSchema<T> = z.ZodType<T>;
 
 export type ApiSuccess<T> = {
   ok: true;

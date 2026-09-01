@@ -11,11 +11,13 @@ import {
   VideoProjectSchema,
   createSuccessResponseSchema,
 } from "@emotion-studio/contracts";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import { AiProviderError } from "./ai/errors.js";
 import { buildApp, type BuildAppOptions } from "./app.js";
 import { readServerConfig } from "./config.js";
 import { MockContentAnalyzer } from "./content/analyzer.js";
 import { createDemoContentItems } from "./content/demo-data.js";
+import type { ContentGenerator } from "./content/generator.js";
 import {
   createContentRepository,
   InMemoryContentRepository,
@@ -46,6 +48,16 @@ describe("mock API", () => {
     expect(() => readServerConfig({ CONTENT_REPOSITORY: "database" })).toThrow();
     expect(() => readServerConfig({ NODE_ENV: "production", CONTENT_REPOSITORY: "memory" }))
       .toThrow();
+    expect(readServerConfig({}).AI_PROVIDER).toBe("mock");
+    expect(() => readServerConfig({ AI_PROVIDER: "deepseek" })).toThrow();
+    expect(readServerConfig({
+      AI_PROVIDER: "deepseek",
+      DEEPSEEK_API_KEY: "unit-test-key",
+    })).toMatchObject({
+      AI_PROVIDER: "deepseek",
+      DEEPSEEK_MODEL: "deepseek-v4-flash",
+      AI_MAX_ATTEMPTS: 3,
+    });
   });
 
   it("returns a request id and mock health state", async () => {
@@ -60,6 +72,8 @@ describe("mock API", () => {
       service: "emotion-studio-api",
       mode: "mock",
       repository: "memory",
+      aiProvider: "mock",
+      analysisProvider: "mock",
     });
   });
 
@@ -331,6 +345,7 @@ describe("mock API", () => {
     });
     const generated = createSuccessResponseSchema(GeneratedContentSchema).parse(generatedResponse.json()).data;
     expect(generated.generatorLabel).toBe("DEMO AI 生成结果");
+    expect(generated).toMatchObject({ provider: "mock", model: "mock-rules-v1" });
     expect(generated.status).toBe("draft");
     expect(generated.body.length).toBeGreaterThanOrEqual(200);
     expect(generated.body.length).toBeLessThanOrEqual(400);
@@ -356,10 +371,51 @@ describe("mock API", () => {
     }
   });
 
+  it("maps provider failures safely and never persists an invalid generated result", async () => {
+    const analyzer = new MockContentAnalyzer();
+    const repository = new InMemoryContentRepository();
+    const seed = (await createDemoContentItems(analyzer))[0];
+    expect(seed).toBeDefined();
+    const inserted = await repository.addMany([seed!]);
+    const saveGenerated = vi.spyOn(repository, "saveGenerated");
+    const generate = vi.fn(async () => {
+      throw new AiProviderError({
+        statusCode: 503,
+        code: "AI_UNAVAILABLE",
+        message: "AI 服务暂时不可用，请稍后重试",
+        provider: "deepseek",
+        attempts: 3,
+        upstreamStatus: 503,
+      });
+    });
+    const contentGenerator: ContentGenerator = { generate };
+    const app = await createApp({
+      contentAnalyzer: analyzer,
+      contentGenerator,
+      contentRepository: repository,
+      aiProvider: "deepseek",
+    });
+    const response = await app.inject({
+      method: "POST",
+      url: "/api/v1/generated-contents",
+      payload: { contentIds: [inserted.items[0]!.id] },
+    });
+    const error = ApiErrorSchema.parse(response.json());
+
+    expect(response.statusCode).toBe(503);
+    expect(error.error).toEqual({
+      code: "AI_UNAVAILABLE",
+      message: "AI 服务暂时不可用，请稍后重试",
+    });
+    expect(response.body).not.toContain("unit-test-key");
+    expect(generate).toHaveBeenCalledTimes(1);
+    expect(saveGenerated).not.toHaveBeenCalled();
+  });
+
   it("blocks reference-only content at the generation boundary", async () => {
     const analyzer = new MockContentAnalyzer();
     const repository = new InMemoryContentRepository();
-    const seed = createDemoContentItems(analyzer)[0];
+    const seed = (await createDemoContentItems(analyzer))[0];
     expect(seed).toBeDefined();
     const inserted = await repository.addMany([
       { ...seed!, licenseStatus: "reference_only" },
@@ -367,7 +423,14 @@ describe("mock API", () => {
     const restrictedId = inserted.items[0]?.id;
     expect(restrictedId).toBeTruthy();
 
-    const app = await createApp({ contentAnalyzer: analyzer, contentRepository: repository });
+    const generate = vi.fn(async () => {
+      throw new Error("generator must not run for restricted content");
+    });
+    const app = await createApp({
+      contentAnalyzer: analyzer,
+      contentGenerator: { generate },
+      contentRepository: repository,
+    });
     const response = await app.inject({
       method: "POST",
       url: "/api/v1/generated-contents",
@@ -375,5 +438,6 @@ describe("mock API", () => {
     });
     expect(response.statusCode).toBe(409);
     expect(ApiErrorSchema.parse(response.json()).error.code).toBe("LICENSE_RESTRICTED");
+    expect(generate).not.toHaveBeenCalled();
   });
 });

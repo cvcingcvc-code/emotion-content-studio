@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react';
-import type { ApiResponse } from '@emotion-studio/contracts';
+import {
+  ApiErrorSchema,
+  createSuccessResponseSchema,
+  type ContractSchema,
+} from '@emotion-studio/contracts';
 
 export type PreviewMode = 'normal' | 'empty' | 'loading' | 'error' | 'long' | 'blocked';
 
@@ -18,7 +22,12 @@ export class ApiError extends Error {
   }
 }
 
-export async function apiRequest<T>(path: string, mode: PreviewMode, init?: RequestInit): Promise<T> {
+export async function apiRequest<T>(
+  path: string,
+  mode: PreviewMode,
+  schema: ContractSchema<T>,
+  init?: RequestInit,
+): Promise<T> {
   const url = new URL(path, window.location.origin);
   url.searchParams.set('state', mode);
   const response = await fetch(`${url.pathname}${url.search}`, {
@@ -29,15 +38,28 @@ export async function apiRequest<T>(path: string, mode: PreviewMode, init?: Requ
       ...init?.headers,
     },
   });
-  const payload = await response.json().catch(() => null) as ApiResponse<T> | null;
-  if (!response.ok || !payload || payload.ok !== true) {
-    const failed = payload && payload.ok === false ? payload : null;
-    throw new ApiError(failed?.error?.message ?? '暂时无法读取内容，请稍后重试。', response.status, failed?.requestId);
+  const payload: unknown = await response.json().catch(() => null);
+  if (!response.ok) {
+    const failed = ApiErrorSchema.safeParse(payload);
+    throw new ApiError(
+      failed.success ? failed.data.error.message : '暂时无法读取内容，请稍后重试。',
+      response.status,
+      failed.success ? failed.data.requestId : undefined,
+    );
   }
-  return payload.data;
+  const parsed = createSuccessResponseSchema(schema).safeParse(payload);
+  if (!parsed.success) {
+    throw new ApiError('服务返回的数据格式无效，请稍后重试。', 502);
+  }
+  return parsed.data.data;
 }
 
-export function useRemote<T>(path: string, mode: PreviewMode, refreshKey = 0) {
+export function useRemote<T>(
+  path: string,
+  mode: PreviewMode,
+  schema: ContractSchema<T>,
+  refreshKey = 0,
+) {
   const [state, setState] = useState<RemoteState<T>>({ status: 'loading', data: null, error: null });
 
   useEffect(() => {
@@ -51,14 +73,14 @@ export function useRemote<T>(path: string, mode: PreviewMode, refreshKey = 0) {
     }
     const controller = new AbortController();
     setState({ status: 'loading', data: null, error: null });
-    void apiRequest<T>(path, mode, { signal: controller.signal })
+    void apiRequest(path, mode, schema, { signal: controller.signal })
       .then((data) => setState({ status: 'ready', data, error: null }))
       .catch((error: unknown) => {
         if (controller.signal.aborted) return;
         setState({ status: 'error', data: null, error: error instanceof Error ? error.message : '加载失败' });
       });
     return () => controller.abort();
-  }, [path, mode, refreshKey]);
+  }, [path, mode, refreshKey, schema]);
 
   return state;
 }

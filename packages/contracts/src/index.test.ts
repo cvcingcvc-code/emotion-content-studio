@@ -2,11 +2,13 @@ import { describe, expect, it } from "vitest";
 import {
   ApiErrorSchema,
   ContentItemQuerySchema,
+  ContentAnalysisSchema,
   ContentItemSchema,
   ConfirmDraftInputSchema,
   CreateVideoProjectInputSchema,
   GenerateContentInputSchema,
   GeneratedContentSchema,
+  GeneratedDraftSchema,
   MaterialSchema,
   ReviewMaterialInputSchema,
   SimulateExportInputSchema,
@@ -97,8 +99,40 @@ describe("public contracts", () => {
       hashtags: ["#情绪"],
       status: "draft",
       generatorLabel: "DEMO AI 生成结果",
+      provider: "mock",
+      model: "mock-rules-v1",
       contentIds: ["1"],
       createdAt: "2026-08-31T08:00:00.000Z",
+    }).success).toBe(false);
+  });
+
+  it("strictly validates normalized AI analysis and draft payloads", () => {
+    expect(ContentAnalysisSchema.safeParse({
+      emotion: "治愈",
+      emotionScore: 86,
+      resonanceScore: 82,
+      category: "成长",
+      tags: ["自我照顾"],
+    }).success).toBe(true);
+    expect(ContentAnalysisSchema.safeParse({
+      emotion: "治愈",
+      emotionScore: 101,
+      resonanceScore: 82,
+      category: "成长",
+      tags: [],
+    }).success).toBe(false);
+
+    const body = "愿意承认自己的疲惫，不代表我们停在原地。很多改变都发生在无人看见的时刻：按时吃饭，把混乱的房间收拾一点，拒绝一段让自己持续消耗的关系，也允许今天没有答案。情绪不必被立刻解决，它更像一封需要慢慢读完的信。我们可以保留敏感，同时练习边界；可以记得遗憾，也继续为明天留下位置。真正的成长并不是从此不再难过，而是在难过之后仍知道怎样照顾自己。愿每一次停顿都不是退后，而是重新辨认方向；愿你不再用别人的节奏衡量自己的恢复，先把今天过成一个可以安稳呼吸的日子。";
+    expect(GeneratedDraftSchema.safeParse({
+      title: "把心里的天气慢慢说清楚",
+      body,
+      hashtags: ["#情绪", "#成长"],
+    }).success).toBe(true);
+    expect(GeneratedDraftSchema.safeParse({
+      title: "标题",
+      body,
+      hashtags: ["没有井号"],
+      unexpected: true,
     }).success).toBe(false);
   });
 });

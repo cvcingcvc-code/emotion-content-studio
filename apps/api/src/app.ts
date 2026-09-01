@@ -1,5 +1,7 @@
 import cors from "@fastify/cors";
 import Fastify, { type FastifyInstance } from "fastify";
+import type { AiProvider } from "@emotion-studio/contracts";
+import { AiProviderError } from "./ai/errors.js";
 import { MockContentAnalyzer, type ContentAnalyzer } from "./content/analyzer.js";
 import { MockContentGenerator, type ContentGenerator } from "./content/generator.js";
 import {
@@ -36,6 +38,7 @@ export interface BuildAppOptions {
   contentRepositoryMode?: "database" | "memory" | "custom";
   contentAnalyzer?: ContentAnalyzer;
   contentGenerator?: ContentGenerator;
+  aiProvider?: AiProvider;
 }
 
 export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyInstance> {
@@ -65,6 +68,24 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
   });
 
   app.setErrorHandler(async (error, request, reply) => {
+    if (error instanceof AiProviderError) {
+      request.log.warn(
+        {
+          provider: error.provider,
+          errorCode: error.code,
+          upstreamStatus: error.upstreamStatus,
+          attempts: error.attempts,
+          requestId: request.id,
+        },
+        "AI provider request failed",
+      );
+      await reply.status(error.statusCode).send({
+        ok: false,
+        error: { code: error.code, message: error.message },
+        requestId: request.id,
+      });
+      return;
+    }
     if (error instanceof AppError) {
       const details = error.fieldErrors ? { fieldErrors: error.fieldErrors } : {};
       await reply.status(error.statusCode).send({
@@ -124,6 +145,7 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
     contentAnalyzer,
     contentGenerator,
     options.contentRepositoryMode ?? (options.contentRepository ? "custom" : "memory"),
+    options.aiProvider ?? "mock",
   );
   return app;
 }

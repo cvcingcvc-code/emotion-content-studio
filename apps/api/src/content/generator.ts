@@ -1,12 +1,31 @@
-import { randomUUID } from "node:crypto";
-import type { ContentItem, GeneratedContent } from "@emotion-studio/contracts";
+import {
+  GeneratedDraftSchema,
+  type ContentItem,
+  type GeneratedDraft,
+} from "@emotion-studio/contracts";
+import type { AiCallOptions, AiResult } from "../ai/types.js";
+
+export type GenerateContentItem = Pick<
+  ContentItem,
+  "id" | "content" | "emotion" | "category" | "tags"
+>;
+
+export interface GenerateContentInput {
+  items: readonly GenerateContentItem[];
+}
 
 export interface ContentGenerator {
-  generate(items: ContentItem[]): GeneratedContent;
+  generate(
+    input: GenerateContentInput,
+    options?: AiCallOptions,
+  ): Promise<AiResult<GeneratedDraft>>;
 }
 
 export class MockContentGenerator implements ContentGenerator {
-  generate(items: ContentItem[]): GeneratedContent {
+  async generate(
+    { items }: GenerateContentInput,
+    _options?: AiCallOptions,
+  ): Promise<AiResult<GeneratedDraft>> {
     const categories = Array.from(new Set(items.map((item) => item.category)));
     const emotions = Array.from(new Set(items.map((item) => item.emotion)));
     const leadingCategory = categories[0] ?? "生活";
@@ -20,20 +39,19 @@ export class MockContentGenerator implements ContentGenerator {
     ].join("\n\n");
 
     return {
-      id: `generated-${randomUUID()}`,
-      title,
-      body,
-      hashtags: Array.from(new Set([
-        `#${leadingCategory}`,
-        `#${leadingEmotion}`,
-        "#情绪",
-        "#成长",
-        "#生活感悟",
-      ])),
-      status: "draft",
-      generatorLabel: "DEMO AI 生成结果",
-      contentIds: items.map((item) => item.id),
-      createdAt: new Date().toISOString(),
+      data: GeneratedDraftSchema.parse({
+        title,
+        body,
+        hashtags: Array.from(new Set([
+          `#${leadingCategory}`,
+          `#${leadingEmotion}`,
+          "#情绪",
+          "#成长",
+          "#生活感悟",
+        ])),
+      }),
+      provider: "mock",
+      model: "mock-rules-v1",
     };
   }
 }

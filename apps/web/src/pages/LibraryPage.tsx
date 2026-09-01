@@ -1,7 +1,11 @@
 import { ArrowRight, Heart, Search, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import type { ContentItem } from '@emotion-studio/contracts';
+import {
+  ContentItemListSchema,
+  ContentItemSchema,
+  type ContentItem,
+} from '@emotion-studio/contracts';
 import { usePreviewMode } from '../components/AppShell';
 import { BlockedNotice, EmptyState, ErrorState, LoadingState, StatusPill } from '../components/States';
 import { apiRequest, useRemote } from '../lib/api';
@@ -34,13 +38,13 @@ export default function LibraryPage() {
     return `/api/v1/content-items?${params.toString()}`;
   }, [category, emotion, highOnly, search, sort]);
 
-  const state = useRemote<ContentItem[]>(endpoint, mode, refreshKey);
+  const state = useRemote<ContentItem[]>(endpoint, mode, ContentItemListSchema, refreshKey);
 
   async function toggleFavorite(item: ContentItem) {
     if (mode === 'blocked') return;
     setActionError('');
     try {
-      await apiRequest<ContentItem>(`/api/v1/content-items/${item.id}/favorite`, mode, {
+      await apiRequest(`/api/v1/content-items/${item.id}/favorite`, mode, ContentItemSchema, {
         method: 'POST',
         body: JSON.stringify({ favorite: !item.isFavorite }),
       });

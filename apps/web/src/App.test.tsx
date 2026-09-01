@@ -2,8 +2,15 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import type { ContentDashboard, ContentItem, CsvImportSummary, GeneratedContent } from '@emotion-studio/contracts';
+import {
+  DemoDataLoadResultSchema,
+  type ContentDashboard,
+  type ContentItem,
+  type CsvImportSummary,
+  type GeneratedContent,
+} from '@emotion-studio/contracts';
 import App from './App';
+import { ApiError, apiRequest } from './lib/api';
 
 const contentItems: ContentItem[] = [
   {
@@ -37,6 +44,7 @@ const generatedBody = [
 const generatedFixture: GeneratedContent = {
   id: 'generated-01', title: '孤独里，那些值得被看见的时刻', body: generatedBody,
   hashtags: ['#情绪', '#成长', '#生活感悟'], status: 'draft', generatorLabel: 'DEMO AI 生成结果',
+  provider: 'mock', model: 'mock-rules-v1',
   contentIds: ['content-0001'], createdAt: '2026-09-01T02:00:00.000Z',
 };
 
@@ -132,6 +140,27 @@ function installDemoApi() {
 afterEach(() => vi.unstubAllGlobals());
 
 describe('emotion content studio demo', () => {
+  it('rejects a malformed successful DTO at the HTTP boundary', async () => {
+    vi.stubGlobal('fetch', vi.fn(async () => success({ loadedCount: 'forty', totalCount: 40 })));
+    await expect(apiRequest('/api/v1/demo-data/load', 'normal', DemoDataLoadResultSchema))
+      .rejects.toMatchObject({ status: 502, message: '服务返回的数据格式无效，请稍后重试。' });
+  });
+
+  it('preserves a safe request id from a validated API error envelope', async () => {
+    vi.stubGlobal('fetch', vi.fn(async () => failure('输入内容无效', 400)));
+    try {
+      await apiRequest('/api/v1/demo-data/load', 'normal', DemoDataLoadResultSchema);
+      throw new Error('expected request to fail');
+    } catch (error) {
+      expect(error).toBeInstanceOf(ApiError);
+      expect(error).toMatchObject({
+        status: 400,
+        message: '输入内容无效',
+        requestId: 'request-web-error',
+      });
+    }
+  });
+
   it('loads the dashboard through HTTP and exposes the four workflow destinations', async () => {
     installDemoApi();
     render(<MemoryRouter initialEntries={['/']}><App /></MemoryRouter>);

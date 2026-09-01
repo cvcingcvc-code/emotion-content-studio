@@ -1,4 +1,5 @@
 import {
+  GeneratedContentSchema,
   ContentItemQuerySchema,
   CsvImportInputSchema,
   GenerateContentInputSchema,
@@ -11,6 +12,7 @@ import {
   type DemoDataLoadResult,
   type GeneratedContent,
 } from "@emotion-studio/contracts";
+import { randomUUID } from "node:crypto";
 import type { FastifyInstance, FastifyRequest } from "fastify";
 import { AppError } from "../errors.js";
 import { parseOrThrow } from "../validation.js";
@@ -51,7 +53,7 @@ export async function registerContentRoutes(
   app.post(
     "/api/v1/demo-data/load",
     async (request): Promise<ApiSuccess<DemoDataLoadResult>> => {
-      const result = await repository.addMany(createDemoContentItems(analyzer));
+      const result = await repository.addMany(await createDemoContentItems(analyzer));
       const totalCount = (await repository.list()).length;
       return success(request, { loadedCount: result.items.length, totalCount });
     },
@@ -61,7 +63,7 @@ export async function registerContentRoutes(
     "/api/v1/imports/csv",
     async (request): Promise<ApiSuccess<CsvImportSummary>> => {
       const input = parseOrThrow(CsvImportInputSchema, request.body);
-      const parsed = parseContentCsv(
+      const parsed = await parseContentCsv(
         input.csvText,
         input.licenseStatus,
         input.sourceName,
@@ -169,7 +171,37 @@ export async function registerContentRoutes(
         );
       }
 
-      const generated = generator.generate(resolvedItems);
+      const controller = new AbortController();
+      const abortProvider = () => controller.abort();
+      request.raw.once("aborted", abortProvider);
+      const result = await (async () => {
+        try {
+          return await generator.generate(
+            {
+              items: resolvedItems.map(({ id, content, emotion, category, tags }) => ({
+                id,
+                content,
+                emotion,
+                category,
+                tags,
+              })),
+            },
+            { signal: controller.signal },
+          );
+        } finally {
+          request.raw.removeListener("aborted", abortProvider);
+        }
+      })();
+      const generated = GeneratedContentSchema.parse({
+        id: `generated-${randomUUID()}`,
+        ...result.data,
+        status: "draft",
+        generatorLabel: result.provider === "mock" ? "DEMO AI 生成结果" : "AI 生成草稿",
+        provider: result.provider,
+        model: result.model,
+        contentIds: resolvedItems.map((item) => item.id),
+        createdAt: new Date().toISOString(),
+      });
       await repository.saveGenerated(generated);
       return success(request, generated);
     },

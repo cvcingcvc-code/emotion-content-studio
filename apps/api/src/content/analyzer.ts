@@ -1,16 +1,21 @@
-import type {
-  ContentCategory,
-  ContentEmotion,
-  ContentItem,
+import {
+  ContentAnalysisSchema,
+  type ContentAnalysis,
+  type ContentCategory,
+  type ContentEmotion,
 } from "@emotion-studio/contracts";
+import type { AiCallOptions, AiResult } from "../ai/types.js";
 
-export type ContentAnalysis = Pick<
-  ContentItem,
-  "emotion" | "emotionScore" | "resonanceScore" | "category" | "tags"
->;
+export interface AnalyzeContentInput {
+  content: string;
+  likes: number;
+}
 
 export interface ContentAnalyzer {
-  analyze(content: string, likes: number): ContentAnalysis;
+  analyze(
+    input: AnalyzeContentInput,
+    options?: AiCallOptions,
+  ): Promise<AiResult<ContentAnalysis>>;
 }
 
 interface EmotionRule {
@@ -54,7 +59,10 @@ function bestMatch<T extends { keywords: string[] }>(content: string, rules: T[]
 }
 
 export class MockContentAnalyzer implements ContentAnalyzer {
-  analyze(content: string, likes: number): ContentAnalysis {
+  async analyze(
+    { content, likes }: AnalyzeContentInput,
+    _options?: AiCallOptions,
+  ): Promise<AiResult<ContentAnalysis>> {
     const emotionRule = bestMatch(content, emotionRules);
     const categoryRule = bestMatch(content, categoryRules);
     const emotion = emotionRule?.emotion ?? "其他";
@@ -73,11 +81,15 @@ export class MockContentAnalyzer implements ContentAnalyzer {
     ])).slice(0, 4);
 
     return {
-      emotion,
-      emotionScore: Math.round(emotionScore),
-      resonanceScore: Math.round(resonanceScore),
-      category,
-      tags,
+      data: ContentAnalysisSchema.parse({
+        emotion,
+        emotionScore: Math.round(emotionScore),
+        resonanceScore: Math.round(resonanceScore),
+        category,
+        tags,
+      }),
+      provider: "mock",
+      model: "mock-rules-v1",
     };
   }
 }

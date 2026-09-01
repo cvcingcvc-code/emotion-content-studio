@@ -7,9 +7,13 @@
     "node": ">=24"
   },
   "scripts": {
+    "build:contracts": "npm --prefix ../.. run build -w @emotion-studio/contracts",
+    "predev": "npm run build:contracts",
     "dev": "vite --host 127.0.0.1",
     "typecheck": "tsc -p tsconfig.json --noEmit",
+    "pretest": "npm run build:contracts",
     "test": "vitest run",
+    "prebuild": "npm run build:contracts",
     "build": "tsc -p tsconfig.json --noEmit && vite build",
     "preview": "vite preview --host 127.0.0.1"
   },

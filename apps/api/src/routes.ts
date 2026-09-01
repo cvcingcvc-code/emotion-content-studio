@@ -5,6 +5,7 @@ import {
   ReviewMaterialInputSchema,
   SimulateExportInputSchema,
   type ApiSuccess,
+  type AiProvider,
   type Dashboard,
   type Draft,
   type ExportRecord,
@@ -56,6 +57,7 @@ export async function registerRoutes(
   contentAnalyzer: ContentAnalyzer,
   contentGenerator: ContentGenerator,
   contentRepositoryMode: "database" | "memory" | "custom",
+  aiProvider: AiProvider,
 ): Promise<void> {
   await registerContentRoutes(app, contentRepository, contentAnalyzer, contentGenerator);
   app.get("/api/v1/health", async (request) =>
@@ -64,6 +66,8 @@ export async function registerRoutes(
       service: "emotion-studio-api",
       mode: "mock" as const,
       repository: contentRepositoryMode,
+      aiProvider,
+      analysisProvider: "mock" as const,
     }),
   );
 

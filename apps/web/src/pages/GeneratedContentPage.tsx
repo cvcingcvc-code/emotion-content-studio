@@ -1,7 +1,10 @@
 import { ArrowLeft, FileText, Sparkles } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import type { GeneratedContent } from '@emotion-studio/contracts';
+import {
+  GeneratedContentSchema,
+  type GeneratedContent,
+} from '@emotion-studio/contracts';
 import { usePreviewMode } from '../components/AppShell';
 import { BlockedNotice, EmptyState, ErrorState, LoadingState, StatusPill } from '../components/States';
 import { useRemote } from '../lib/api';
@@ -10,13 +13,17 @@ export default function GeneratedContentPage() {
   const { id = '' } = useParams();
   const { mode, setMode } = usePreviewMode();
   const [refreshKey, setRefreshKey] = useState(0);
-  const state = useRemote<GeneratedContent>(`/api/v1/generated-contents/${encodeURIComponent(id)}`, mode, refreshKey);
+  const state = useRemote<GeneratedContent>(`/api/v1/generated-contents/${encodeURIComponent(id)}`, mode, GeneratedContentSchema, refreshKey);
 
   if (state.status === 'loading') return <LoadingState rows={4} />;
   if (state.status === 'error') return <ErrorState message={state.error} onRetry={() => { setMode('normal'); setRefreshKey((value) => value + 1); }} />;
   if (mode === 'empty') return <EmptyState title="没有找到生成结果" description="回到灵感库选择 1–5 条素材，再生成一份新的 DEMO 草稿。" action="返回灵感库" actionTo="/inspirations" />;
 
   const generated = state.data;
+  const generatorName = generated.provider === 'mock' ? 'MockContentGenerator' : 'DeepSeek';
+  const generatorDescription = generated.provider === 'mock'
+    ? '当前结果由固定规则生成，没有调用真实 AI。'
+    : '当前结果由已配置的 DeepSeek 模型生成。';
 
   return (
     <>
@@ -26,7 +33,7 @@ export default function GeneratedContentPage() {
       <div className="generated-layout">
         <article className="panel generated-paper">
           <header>
-            <div><span className="demo-ai-label"><Sparkles size={14} />{generated.generatorLabel}</span><p>由 MockContentGenerator 根据 {generated.contentIds.length} 条素材组合生成</p></div>
+            <div><span className="demo-ai-label"><Sparkles size={14} />{generated.generatorLabel}</span><p>由 {generatorName} 根据 {generated.contentIds.length} 条素材组合生成</p></div>
             <FileText size={22} strokeWidth={1.4} />
           </header>
           <section className="generated-section">
@@ -46,8 +53,8 @@ export default function GeneratedContentPage() {
         <aside className="panel generated-note">
           <p className="kicker">DEMO ONLY</p>
           <h3>这不是可直接发布的成稿。</h3>
-          <p>当前结果由固定规则生成，没有调用真实 AI。接入模型后，仍需保留授权校验、相似度检查和人工确认。</p>
-          <dl><div><dt>状态</dt><dd>草稿</dd></div><div><dt>生成器</dt><dd>Mock</dd></div><div><dt>素材数</dt><dd>{generated.contentIds.length}</dd></div><div><dt>正文长度</dt><dd>{generated.body.length} 字</dd></div></dl>
+          <p>{generatorDescription} 无论使用哪种生成器，都必须保留授权校验、相似度检查和人工确认。</p>
+          <dl><div><dt>状态</dt><dd>草稿</dd></div><div><dt>生成器</dt><dd>{generatorName}</dd></div><div><dt>模型</dt><dd>{generated.model}</dd></div><div><dt>素材数</dt><dd>{generated.contentIds.length}</dd></div><div><dt>正文长度</dt><dd>{generated.body.length} 字</dd></div></dl>
           <Link className="secondary-button" to="/inspirations">重新选择素材</Link>
         </aside>
       </div>

@@ -1,7 +1,11 @@
 import { ArrowRight, BookOpenText, Heart, Inbox, Sparkles } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import type { ContentDashboard } from '@emotion-studio/contracts';
+import {
+  ContentDashboardSchema,
+  DemoDataLoadResultSchema,
+  type ContentDashboard,
+} from '@emotion-studio/contracts';
 import { usePreviewMode } from '../components/AppShell';
 import { BlockedNotice, EmptyState, ErrorState, LoadingState } from '../components/States';
 import { apiRequest, useRemote } from '../lib/api';
@@ -13,12 +17,12 @@ export default function DashboardPage() {
   const [refreshKey, setRefreshKey] = useState(0);
   const [loadState, setLoadState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [loadMessage, setLoadMessage] = useState('');
-  const state = useRemote<ContentDashboard>('/api/v1/content-dashboard', mode, refreshKey);
+  const state = useRemote<ContentDashboard>('/api/v1/content-dashboard', mode, ContentDashboardSchema, refreshKey);
 
   async function loadDemoData() {
     setLoadState('loading');
     try {
-      const result = await apiRequest<{ loadedCount: number; totalCount: number }>('/api/v1/demo-data/load', mode, { method: 'POST' });
+      const result = await apiRequest('/api/v1/demo-data/load', mode, DemoDataLoadResultSchema, { method: 'POST' });
       setLoadMessage(`已载入 ${result.loadedCount} 条演示素材，当前共 ${result.totalCount} 条。`);
       setLoadState('success');
       setRefreshKey((value) => value + 1);

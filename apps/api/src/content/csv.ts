@@ -123,13 +123,13 @@ function parseLikes(value: string): number {
     : 0;
 }
 
-export function parseContentCsv(
+export async function parseContentCsv(
   csvText: string,
   licenseStatus: DemoLicenseStatus,
   sourceName: string | undefined,
   analyzer: ContentAnalyzer,
   importedAt = new Date().toISOString(),
-): ParsedCsvImport {
+): Promise<ParsedCsvImport> {
   const rows = parseCsvRows(csvText);
   const headerRow = rows[0];
   if (!headerRow) {
@@ -152,37 +152,37 @@ export function parseContentCsv(
   const candidates: ParsedCsvCandidate[] = [];
   const errors: CsvImportError[] = [];
 
-  dataRows.forEach((values, index) => {
+  for (const [index, values] of dataRows.entries()) {
     const rowNumber = index + 2;
     const originalContent = values[contentIndex] ?? "";
     const content = originalContent.trim();
     if (!content) {
       errors.push({ row: rowNumber, message: "content 不能为空" });
-      return;
+      continue;
     }
     if (originalContent.length > MAX_CONTENT_LENGTH || content.length > MAX_CONTENT_LENGTH) {
       errors.push({ row: rowNumber, message: `content 不能超过 ${MAX_CONTENT_LENGTH} 个字符` });
-      return;
+      continue;
     }
 
     const sourceUrl = parseHttpUrl(urlIndex >= 0 ? (values[urlIndex] ?? "") : "");
     if (sourceUrl === undefined) {
       errors.push({ row: rowNumber, message: "url 必须是有效的 http(s) 地址" });
-      return;
+      continue;
     }
 
     const authorValue = authorIndex >= 0 ? (values[authorIndex] ?? "").trim() : "";
     const sourceValue = sourceIndex >= 0 ? (values[sourceIndex] ?? "").trim() : "";
     if (authorValue.length > MAX_AUTHOR_LENGTH) {
       errors.push({ row: rowNumber, message: `author 不能超过 ${MAX_AUTHOR_LENGTH} 个字符` });
-      return;
+      continue;
     }
     if (sourceValue.length > MAX_SOURCE_LENGTH) {
       errors.push({ row: rowNumber, message: `source 不能超过 ${MAX_SOURCE_LENGTH} 个字符` });
-      return;
+      continue;
     }
     const likes = parseLikes(likesIndex >= 0 ? (values[likesIndex] ?? "") : "");
-    const analysis = analyzer.analyze(content, likes);
+    const analysis = await analyzer.analyze({ content, likes });
 
     candidates.push({
       row: rowNumber,
@@ -194,12 +194,12 @@ export function parseContentCsv(
         source: sourceValue || sourceName || "CSV 导入",
         sourceUrl,
         licenseStatus,
-        ...analysis,
+        ...analysis.data,
         isFavorite: false,
         importedAt,
       },
     });
-  });
+  }
 
   return { totalRows: dataRows.length, candidates, errors };
 }

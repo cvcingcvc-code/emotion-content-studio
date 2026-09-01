@@ -30,6 +30,7 @@ services:
       WEB_ORIGIN: http://localhost:5173
       DATABASE_URL: postgresql://emotion_studio:local-prototype-only@db:5432/emotion_studio
       CONTENT_REPOSITORY: database
+      AI_PROVIDER: mock
       LOG_LEVEL: info
     ports:
       - "127.0.0.1:8787:8787"

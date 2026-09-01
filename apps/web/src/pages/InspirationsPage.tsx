@@ -1,7 +1,12 @@
 import { ArrowRight, Heart, Sparkles, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import type { ContentItem, GeneratedContent } from '@emotion-studio/contracts';
+import {
+  ContentItemListSchema,
+  ContentItemSchema,
+  GeneratedContentSchema,
+  type ContentItem,
+} from '@emotion-studio/contracts';
 import { usePreviewMode } from '../components/AppShell';
 import { BlockedNotice, EmptyState, ErrorState, LoadingState, StatusPill } from '../components/States';
 import { apiRequest, useRemote } from '../lib/api';
@@ -15,7 +20,7 @@ export default function InspirationsPage() {
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState('');
-  const state = useRemote<ContentItem[]>('/api/v1/favorites', mode, refreshKey);
+  const state = useRemote<ContentItem[]>('/api/v1/favorites', mode, ContentItemListSchema, refreshKey);
 
   function toggleSelected(id: string) {
     setMessage('');
@@ -39,7 +44,7 @@ export default function InspirationsPage() {
     setBusy(true);
     setMessage('');
     try {
-      await apiRequest<ContentItem>(`/api/v1/favorites/${id}`, mode, { method: 'DELETE' });
+      await apiRequest(`/api/v1/favorites/${id}`, mode, ContentItemSchema, { method: 'DELETE' });
       setSelected((current) => {
         const next = new Set(current);
         next.delete(id);
@@ -58,7 +63,7 @@ export default function InspirationsPage() {
     setBusy(true);
     setMessage('');
     try {
-      const generated = await apiRequest<GeneratedContent>('/api/v1/generated-contents', mode, {
+      const generated = await apiRequest('/api/v1/generated-contents', mode, GeneratedContentSchema, {
         method: 'POST',
         body: JSON.stringify({ contentIds: Array.from(selected) }),
       });
@@ -81,7 +86,7 @@ export default function InspirationsPage() {
         <div className="page-intro-copy">
           <p className="kicker">CURATED MATERIALS</p>
           <h2>把喜欢的素材，组合成一个新的表达起点。</h2>
-          <p>选择 1–5 条素材交给 MockContentGenerator。生成结果只是一份 DEMO 草稿，仍需人工改写和确认。</p>
+          <p>选择 1–5 条素材交给当前生成器。生成结果只是一份 DEMO 草稿，仍需人工改写和确认。</p>
         </div>
         <Link className="secondary-button" to="/library">继续挑选素材 <ArrowRight size={15} /></Link>
       </div>

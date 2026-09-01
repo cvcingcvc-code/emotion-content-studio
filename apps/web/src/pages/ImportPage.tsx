@@ -1,7 +1,11 @@
 import { AlertCircle, ArrowRight, CheckCircle2, FileSpreadsheet, Sparkles, UploadCloud } from 'lucide-react';
 import { useRef, useState, type ChangeEvent } from 'react';
 import { Link } from 'react-router-dom';
-import type { CsvImportSummary } from '@emotion-studio/contracts';
+import {
+  CsvImportSummarySchema,
+  DemoDataLoadResultSchema,
+  type CsvImportSummary,
+} from '@emotion-studio/contracts';
 import { usePreviewMode } from '../components/AppShell';
 import { BlockedNotice, ErrorState, LoadingState } from '../components/States';
 import { apiRequest } from '../lib/api';
@@ -51,7 +55,7 @@ export default function ImportPage() {
     try {
       const csvText = await file.text();
       setStatus('uploading');
-      const summary = await apiRequest<CsvImportSummary>('/api/v1/imports/csv', mode, {
+      const summary = await apiRequest('/api/v1/imports/csv', mode, CsvImportSummarySchema, {
         method: 'POST',
         body: JSON.stringify({ csvText, licenseStatus, ...(sourceName.trim() ? { sourceName: sourceName.trim() } : {}) }),
       });
@@ -67,7 +71,7 @@ export default function ImportPage() {
     if (blocked) return;
     setDemoMessage('正在载入演示素材…');
     try {
-      const response = await apiRequest<{ loadedCount: number; totalCount: number }>('/api/v1/demo-data/load', mode, { method: 'POST' });
+      const response = await apiRequest('/api/v1/demo-data/load', mode, DemoDataLoadResultSchema, { method: 'POST' });
       setDemoMessage(`已载入 ${response.loadedCount} 条原创演示素材，当前共 ${response.totalCount} 条。`);
     } catch (error) {
       setDemoMessage(error instanceof Error ? error.message : '演示数据加载失败。');
@@ -93,7 +97,7 @@ export default function ImportPage() {
 
       <div className="demo-import-grid">
         <section className="panel csv-import-panel">
-          <div className="panel-head"><div><h3>选择 CSV 文件</h3><span>文件内容只会发送给当前 Mock API</span></div><FileSpreadsheet size={20} /></div>
+          <div className="panel-head"><div><h3>选择 CSV 文件</h3><span>文件内容只会发送给当前 API</span></div><FileSpreadsheet size={20} /></div>
           <div className="panel-body csv-import-body">
             <input ref={inputRef} className="visually-hidden" aria-label="选择 CSV 文件" type="file" accept=".csv,text/csv" onChange={chooseFile} />
             <button className={`real-upload-zone ${file ? 'has-file' : ''}`} disabled={blocked} onClick={() => inputRef.current?.click()}>

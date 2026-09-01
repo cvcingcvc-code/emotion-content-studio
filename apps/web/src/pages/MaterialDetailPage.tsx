@@ -1,7 +1,11 @@
 import { ArrowLeft, ExternalLink, Heart, Sparkles } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import type { ContentItem, GeneratedContent } from '@emotion-studio/contracts';
+import {
+  ContentItemSchema,
+  GeneratedContentSchema,
+  type ContentItem,
+} from '@emotion-studio/contracts';
 import { usePreviewMode } from '../components/AppShell';
 import { BlockedNotice, EmptyState, ErrorState, LoadingState, StatusPill } from '../components/States';
 import { apiRequest, useRemote } from '../lib/api';
@@ -20,13 +24,13 @@ export default function MaterialDetailPage() {
   const [refreshKey, setRefreshKey] = useState(0);
   const [action, setAction] = useState<'idle' | 'favorite' | 'generate'>('idle');
   const [message, setMessage] = useState('');
-  const state = useRemote<ContentItem>(`/api/v1/content-items/${encodeURIComponent(id)}`, mode, refreshKey);
+  const state = useRemote<ContentItem>(`/api/v1/content-items/${encodeURIComponent(id)}`, mode, ContentItemSchema, refreshKey);
 
   async function setFavorite(item: ContentItem) {
     setAction('favorite');
     setMessage('');
     try {
-      await apiRequest<ContentItem>(`/api/v1/content-items/${item.id}/favorite`, mode, { method: 'POST', body: JSON.stringify({ favorite: !item.isFavorite }) });
+      await apiRequest(`/api/v1/content-items/${item.id}/favorite`, mode, ContentItemSchema, { method: 'POST', body: JSON.stringify({ favorite: !item.isFavorite }) });
       setRefreshKey((value) => value + 1);
       setMessage(item.isFavorite ? '已从灵感库移除。' : '已加入灵感库。');
     } catch (error) {
@@ -40,7 +44,7 @@ export default function MaterialDetailPage() {
     setAction('generate');
     setMessage('');
     try {
-      const generated = await apiRequest<GeneratedContent>('/api/v1/generated-contents', mode, { method: 'POST', body: JSON.stringify({ contentIds: [item.id] }) });
+      const generated = await apiRequest('/api/v1/generated-contents', mode, GeneratedContentSchema, { method: 'POST', body: JSON.stringify({ contentIds: [item.id] }) });
       navigate(`/generated/${generated.id}`);
     } catch (error) {
       setMessage(error instanceof Error ? error.message : '生成失败。');
