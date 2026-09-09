@@ -350,6 +350,9 @@ export const generatedContents = pgTable(
     generator: text("generator").notNull(),
     model: text("model").notNull(),
     generatorLabel: text("generator_label").notNull(),
+    promptVersion: text("prompt_version").notNull().default("legacy.v1"),
+    reviewDecision: text("review_decision"),
+    humanEditedOutput: jsonb("human_edited_output").$type<{ title: string; body: string; hashtags: string[] } | null>(),
     outputKind: generatedOutputKindEnum("output_kind").notNull(),
     outputPayload: jsonb("output_payload").$type<Record<string, unknown>>(),
     reviewIssues: jsonb("review_issues").$type<string[]>().notNull(),
@@ -367,13 +370,17 @@ export const generatedContents = pgTable(
       foreignColumns: [contentItems.id, contentItems.accountId],
       name: "generated_contents_primary_content_account_fk",
     }).onDelete("restrict"),
-    check(
-      "generated_contents_account_lane_match",
+      check(
+        "generated_contents_account_lane_match",
       sql`(
         (${table.accountId} = 'personal_growth' AND ${table.contentLane} IN ('growth_review', 'growth_story', 'problem_solution') AND ${table.outputKind} = 'growth_post.v1') OR
         (${table.accountId} = 'fun_english' AND ${table.contentLane} = 'english_50' AND ${table.outputKind} = 'english_50.v1') OR
         (${table.accountId} = 'emotion_library' AND ${table.contentLane} = 'emotion_post' AND ${table.outputKind} IN ('emotion_post.v1', 'legacy.v1'))
       )`,
+      ),
+    check(
+      "generated_contents_review_decision_allowed",
+      sql`${table.reviewDecision} IS NULL OR ${table.reviewDecision} IN ('accepted', 'rejected')`,
     ),
   ],
 );

@@ -94,13 +94,22 @@ export class MockGrowthGenerator implements GrowthGenerator {
       kind: "growth_post.v1",
       titles,
       recommendedTitle: titles[0],
+      hook: "进入新环境时，最容易误读的不是工作量，而是沉默本身。",
+      story: "把一次具体经历还原成更普遍的场景：刚进入团队时，表面节奏、临时安排和成员互动会给人不同信号。",
+      problemBreakdown: "当样本还很少时，把一次观察直接当成团队结论，容易把未知当成答案。",
+      solution: "先记录可重复观察的事实，再给判断加上置信度；在更多样本出现前，只保留可验证的问题。",
+      endingQuestion: "你会用什么信号判断一个新环境值得继续观察？",
       body: [
-        analysis.truthAnchors.map((fact) => fact.quote).join("\n"),
-        "这段记录里，事实、情绪和对结果的担心缠在了一起。真正需要处理的，不是立刻证明自己做对了，而是先确认哪些信息已经发生，哪些只是当下的推测。",
-        "普通人遇到类似问题，可以先暂停给自己下结论。把确定的事实写下来，把还不知道的部分单独列出，再选一个能够马上验证的小行动。行动之后继续记录反馈，下一次选择就会比这一次更有依据。",
-        "接下来可以先核对信息，再完成一个小步骤，最后根据真实反馈调整方向。不确定的时候，允许答案暂时留白；把注意力放在能做的事情上，也是在认真地向前走。",
+        "进入新环境时，最容易误读的不是工作量，而是沉默本身。一次看似普通的记录，常常会让人开始猜测团队、关系和自己的位置。",
+        "更稳妥的做法，是把已经发生的事实、当下的感受和还没有证据的判断分开。样本还少的时候，不急着替一个环境下结论，也不急着把未知理解成对自己的否定。",
+        "下一次可以先记录可重复观察的信号，再给判断加上置信度；在更多信息出现前，只保留一个能被验证的问题。这样既不会忽略直觉，也不会让一次经历替你决定全部答案。",
+        "你会用什么信号判断一个新环境值得继续观察？",
       ].join("\n\n"),
       hashtags: ["#成长复盘", "#停止内耗", "#行动方法"],
+      visualSuggestions: [
+        { kind: "real_photo", count: 1, description: "不带公司标识的通勤、桌面或笔记照片，保留真实记录感。" },
+        { kind: "text_card", count: 2, description: "把‘事实 / 感受 / 判断’做成两张低饱和文字卡片。" },
+      ],
       usedTruthAnchorIds: analysis.truthAnchors.map((fact) => fact.id),
       factClaims: analysis.truthAnchors.map((fact) => ({ claim: fact.quote, truthAnchorIds: [fact.id] })),
     });
@@ -114,7 +123,7 @@ export class MockGrowthGenerator implements GrowthGenerator {
 
 type Phrase = readonly [english: string, chinese: string, usageNote?: string];
 
-const englishGroups: readonly { groupName: string; phrases: readonly Phrase[] }[] = [
+const sleepEnglishGroups: readonly { groupName: string; phrases: readonly Phrase[] }[] = [
   {
     groupName: "昨晚发生了什么",
     phrases: [
@@ -192,15 +201,60 @@ const englishGroups: readonly { groupName: string; phrases: readonly Phrase[] }[
   },
 ];
 
+const procrastinationEnglishGroups: readonly { groupName: string; phrases: readonly Phrase[] }[] = [
+  { groupName: "承认自己在拖延", phrases: [
+    ["I keep putting it off.", "我一直把它往后拖。"], ["I know I need to start.", "我知道自己需要开始。"], ["I am avoiding the first step.", "我在逃避第一步。"], ["The task feels bigger than it is.", "这件事感觉比实际更难。"], ["I have been making excuses.", "我一直在找借口。"], ["I lost another hour to my phone.", "我又把一个小时耗在手机上了。"], ["I am waiting to feel ready.", "我在等自己准备好。"], ["I keep changing the plan.", "我一直在改计划。"], ["I want to stop delaying this.", "我想停止拖延这件事。"], ["I need a smaller starting point.", "我需要一个更小的开始。"],
+  ] },
+  { groupName: "开始一个小步骤", phrases: [
+    ["I will work on it for ten minutes.", "我先做十分钟。"], ["Let me open the file first.", "我先把文件打开。"], ["I only need to do the next step.", "我只需要做下一步。"], ["I can make a rough first draft.", "我可以先写一个粗稿。"], ["I will put my phone away.", "我会把手机放到一边。"], ["I am starting before I feel motivated.", "我会在有动力之前先开始。"], ["This does not have to be perfect.", "这不必一开始就完美。"], ["I can ask for help if I get stuck.", "卡住时我可以求助。"], ["I will set a short timer.", "我会设一个短计时器。"], ["Starting is enough for now.", "现在先开始就够了。"],
+  ] },
+  { groupName: "解释进度和边界", phrases: [
+    ["I am making slow progress.", "我进展得比较慢。"], ["I need a little more time.", "我还需要一点时间。"], ["I will send you a rough version today.", "我今天会发你一个粗稿。"], ["I am focusing on one thing at a time.", "我在一次专注一件事。"], ["Could we move the deadline slightly?", "我们可以稍微调整截止时间吗？"], ["I do not want to promise too much.", "我不想做过多承诺。"], ["I will update you after this step.", "完成这一步后我会更新你。"], ["I found the part that was blocking me.", "我找到卡住我的部分了。"], ["I am back on track now.", "我现在回到正轨了。"], ["Thanks for giving me room to finish.", "谢谢你给我完成的空间。"],
+  ] },
+  { groupName: "处理分心", phrases: [
+    ["I need to remove a few distractions.", "我需要先移除几个干扰。"], ["I will check messages later.", "我晚点再看消息。"], ["I am closing the extra tabs.", "我要关掉多余的标签页。"], ["A short break will help me reset.", "短暂休息能帮我重新集中。"], ["I am working in a quiet place.", "我在安静的地方工作。"], ["I keep a note for random ideas.", "我会把突然的想法记下来。"], ["I do not need to answer everything now.", "我不必现在回复所有事情。"], ["I am protecting this focus time.", "我在保护这段专注时间。"], ["I will take a real break after this.", "做完这件事后我会真正休息。"], ["My attention is coming back.", "我的注意力正在回来。"],
+  ] },
+  { groupName: "完成之后复盘", phrases: [
+    ["I finished more than I expected.", "我完成的比预想更多。"], ["The hardest part was starting.", "最难的是开始。"], ["I should have asked sooner.", "我本可以早点求助。"], ["I learned what makes me delay.", "我发现了让我拖延的原因。"], ["Next time I will start earlier.", "下次我会早点开始。"], ["A simple plan worked better.", "简单的计划效果更好。"], ["I will leave a note for tomorrow.", "我会给明天留一张便签。"], ["I am proud that I kept going.", "我很庆幸自己坚持下来了。"], ["Progress feels better than pressure.", "进展比压力更让人舒服。"], ["I can do the next small thing.", "我可以继续做下一件小事。"],
+  ] },
+];
+
+const socialBatteryEnglishGroups: readonly { groupName: string; phrases: readonly Phrase[] }[] = [
+  { groupName: "描述社交电量", phrases: [
+    ["My social battery is running low.", "我的社交电量快没了。"], ["I need some quiet time.", "我需要一点安静时间。"], ["I have had a very social day.", "我今天社交很多。"], ["I am happy to be here, just tired.", "我很开心来这里，只是有点累。"], ["I need a moment to recharge.", "我需要一点时间充电。"], ["Small talk takes energy today.", "今天寒暄很消耗能量。"], ["I am feeling more quiet than usual.", "我今天比平时更安静。"], ["I want company without talking much.", "我想有人陪，但不太想说话。"], ["I am comfortable with a slower evening.", "我更喜欢今晚慢一点。"], ["My energy comes and goes.", "我的精力时高时低。"],
+  ] },
+  { groupName: "礼貌地拒绝邀约", phrases: [
+    ["Can we do this another day?", "我们可以改天吗？"], ["I need a quiet night tonight.", "我今晚需要安静一点。"], ["I am going to pass this time.", "这次我就先不去了。"], ["Thank you for inviting me.", "谢谢你邀请我。"], ["I would love to join next time.", "下次我很愿意参加。"], ["I do not have the energy for a crowd.", "我没有精力应付人群。"], ["Could we keep it short?", "我们可以简单一点吗？"], ["I need to leave early today.", "我今天需要早点离开。"], ["I hope you have a great time.", "希望你们玩得开心。"], ["I will check in tomorrow.", "我明天再联系你。"],
+  ] },
+  { groupName: "在场但不勉强自己", phrases: [
+    ["I am listening even if I am quiet.", "即使我安静，我也在听。"], ["I may not talk much tonight.", "我今晚可能不会说太多。"], ["I am glad to see you.", "我很高兴见到你。"], ["I need a short pause.", "我需要短暂休息一下。"], ["Let me take this in slowly.", "让我慢慢消化一下。"], ["I am here, just taking it easy.", "我在这里，只是想放松一点。"], ["I will join the next conversation.", "我会加入下一段聊天。"], ["I appreciate the calm moments.", "我很珍惜安静的时刻。"], ["I do not have to perform tonight.", "今晚我不必一直表现得很热络。"], ["Being present is enough.", "在场就已经足够了。"],
+  ] },
+  { groupName: "表达自己的需要", phrases: [
+    ["I need a little personal space.", "我需要一点个人空间。"], ["Could we talk somewhere quieter?", "我们可以去安静一点的地方聊吗？"], ["I need time to think before I reply.", "我需要想一想再回复。"], ["Please do not take my silence personally.", "请不要把我的沉默当成针对你。"], ["I will tell you when I am ready.", "准备好时我会告诉你。"], ["I care about this conversation.", "我很在意这次谈话。"], ["I just need to slow down.", "我只是需要慢下来。"], ["I want to be honest about my energy.", "我想诚实说说我的精力状态。"], ["A little notice would help me prepare.", "提前告诉我会更方便准备。"], ["I can meet you halfway.", "我可以和你互相配合。"],
+  ] },
+  { groupName: "恢复和重新连接", phrases: [
+    ["I feel more like myself now.", "我现在感觉更像自己了。"], ["A quiet morning helped a lot.", "一个安静的早晨帮了我很多。"], ["I am ready to catch up.", "我准备好叙叙旧了。"], ["Thanks for giving me time.", "谢谢你给我时间。"], ["I missed talking to you.", "我想念和你聊天。"], ["Let us keep it simple today.", "今天我们简单一点。"], ["I have more energy this afternoon.", "我今天下午精力多一些。"], ["I am glad we waited.", "我很庆幸我们等了一等。"], ["Small moments help me recharge.", "小小的时刻能帮我充电。"], ["I am happy to be connected again.", "我很开心我们又联系上了。"],
+  ] },
+];
+
+const topicProfiles: readonly { match: RegExp; groups: readonly { groupName: string; phrases: readonly Phrase[] }[]; positioning: string; visual: string[] }[] = [
+  { match: /拖延|拖着|启动困难/u, groups: procrastinationEnglishGroups, positioning: "用五个场景拆开拖延：识别、启动、沟通、专注和复盘。", visual: ["使用清爽的纸张、计时器和待办清单视觉", "每页突出一个可立刻开口的动作"] },
+  { match: /社交电量|社恐|独处|社交疲惫/u, groups: socialBatteryEnglishGroups, positioning: "从社交电量出发，练习表达状态、边界与重新连接。", visual: ["使用低饱和室内和耳机视觉", "每页保留安静留白，突出边界表达"] },
+  { match: /熬夜|睡|晚睡/u, groups: sleepEnglishGroups, positioning: "从熬夜后的真实生活场景出发，覆盖描述状态、工作交流和调整作息。", visual: ["使用低饱和蓝灰夜色", "每页突出一个生活场景"] },
+  { match: /打工|上班|职场/u, groups: procrastinationEnglishGroups, positioning: "把日常工作中的表达拆成五个可复用场景。", visual: ["使用桌面、会议和通勤的真实照片", "每页突出一个工作动作"] },
+  { match: /吃货|美食|月底吃土/u, groups: socialBatteryEnglishGroups, positioning: "从点餐、分享和满足感出发，练习轻松生活英语。", visual: ["使用食物细节和手写菜单视觉", "每页突出一个生活场景"] },
+];
+
 export class MockEnglish50Generator implements EnglishGenerator {
   async generate(input: Parameters<EnglishGenerator["generate"]>[0], options?: AiCallOptions) {
     assertNotAborted(options);
     const topic = input.topic.trim();
     if (!topic) throw new Error("English topic is required");
-    if (!/熬夜|睡|晚睡/.test(topic)) {
-      throw new PipelineGuardError("UNSUPPORTED_MOCK_TOPIC", "演示模式提供熬夜主题 50 句；其他主题请配置 DeepSeek 后生成");
+    const profile = topicProfiles.find((candidate) => candidate.match.test(topic));
+    if (!profile) {
+      throw new PipelineGuardError("UNSUPPORTED_MOCK_TOPIC", "演示模式支持拖延症、社交电量、熬夜、打工人和吃货主题");
     }
-    const groups = englishGroups.map((group) => ({
+    const groups = profile.groups.map((group) => ({
       groupName: group.groupName,
       sentences: group.phrases.map(([english, chinese, usageNote]) => ({
         english,
@@ -213,23 +267,19 @@ export class MockEnglish50Generator implements EnglishGenerator {
       kind: "english_50.v1",
       topic,
       audience: input.audience?.trim() || "希望利用碎片时间学习生活英语的中文用户",
-      positioning: "从熬夜后的真实生活场景出发，覆盖描述状态、工作交流和调整作息时能直接使用的表达。",
+      positioning: profile.positioning,
       groups,
       titles,
       recommendedTitle: titles[0],
-      body: "这组表达按五个真实场景整理：昨晚发生了什么、早晨起床、白天工作学习、向别人解释，以及今晚如何调整。每页十句，建议先挑最符合自己状态的句子朗读，再换成自己的真实信息练习。",
-      hashtags: ["#生活英语", "#英语口语", "#碎片时间学习"],
+      body: `这组表达按五个真实场景整理：${groups.map((group) => group.groupName).join("、")}。每页十句，建议先挑最符合自己状态的句子朗读，再换成自己的真实信息练习。`,
+      hashtags: topic.includes("社交") ? ["#社交电量", "#生活英语", "#边界表达"] : topic.includes("拖延") ? ["#拖延症", "#生活英语", "#行动表达"] : ["#生活英语", "#英语口语", "#碎片时间学习"],
       fivePageLayout: groups.map((group, index) => ({
         pageNumber: index + 1,
         groupNumber: index + 1,
         headline: group.groupName,
-        visualSuggestion: index === 0
-          ? "深夜台灯、手机与时钟的简洁插画"
-          : index === 4
-            ? "暖色床头灯与放下手机的表情"
-            : "低饱和生活场景插画，配一个对应情绪表情",
+        visualSuggestion: profile.visual[index % profile.visual.length] ?? "低饱和生活场景插画，配一个对应情绪表情",
       })),
-      visualSuggestions: ["使用低饱和蓝灰夜色", "每页突出一个生活场景", "用月亮、咖啡和困倦表情辅助记忆"],
+      visualSuggestions: profile.visual,
     });
     return { data, provider: "mock" as const, model: "mock-english50-generator-v1" };
   }
@@ -303,6 +353,8 @@ export class MockEmotionGenerator implements EmotionGenerator {
       kind: "emotion_post.v1",
       titles,
       recommendedTitle: titles[0],
+      hook: `有些${primary.primaryEmotion}不是脆弱，而是提醒你停下来看看真正的需要。`,
+      endingQuestion: "你最近有没有一种情绪，其实是在提醒你重新照顾自己？",
       body: [
         `有些${primary.primaryEmotion}并不会在热闹结束后立刻消失。它更像一种提醒：眼前的感受还没有被认真看见，内心真正需要的也尚未被说清。`,
         `与其急着把情绪压下去，不如先辨认它发生在什么场景，又牵动了怎样的心理冲突。${primary.resonanceReason}理解这一点，不是为了停留在感受里，而是为了把注意力带回自己能够选择的部分。`,
@@ -310,6 +362,14 @@ export class MockEmotionGenerator implements EmotionGenerator {
       ].join("\n\n"),
       hashtags: ["#情绪共鸣", `#${primary.primaryEmotion}`, "#自我理解", "#成年人情绪"],
       themes,
+      goldenQuotes: [
+        "情绪不是答案，但它会提醒你去寻找真正的问题。",
+        "先把感受放回自己身上，再决定要不要向别人解释。",
+      ],
+      visualSuggestions: [
+        { kind: "real_photo", count: 1, description: "一张安静的窗边、夜路或手部照片，保留具体生活感。" },
+        { kind: "text_card", count: 2, description: "用两张留白文字卡片承接情绪与可执行的小动作。" },
+      ],
       originalityRisk: {
         level: "medium",
         similarityScore: 20,

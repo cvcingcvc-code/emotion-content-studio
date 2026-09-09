@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import {
   ContentDashboardSchema,
   DemoDataLoadResultSchema,
+  StudioDemoSeedResultSchema,
   type ContentDashboard,
 } from '@emotion-studio/contracts';
 import { usePreviewMode } from '../components/AppShell';
@@ -23,8 +24,9 @@ export default function DashboardPage() {
   async function loadDemoData() {
     setLoadState('loading');
     try {
-      const result = await apiRequest('/api/v1/demo-data/load', mode, DemoDataLoadResultSchema, { method: 'POST' });
-      setLoadMessage(`已载入 ${result.loadedCount} 条演示素材，当前共 ${result.totalCount} 条。`);
+      const emotion = await apiRequest('/api/v1/demo-data/load', mode, DemoDataLoadResultSchema, { method: 'POST' });
+      const studio = await apiRequest('/api/v1/studio/demo-seed/load', mode, StudioDemoSeedResultSchema, { method: 'POST' });
+      setLoadMessage(`已载入 ${emotion.loadedCount + studio.loadedCount} 条三账号演示素材（成长 ${studio.byAccount.personal_growth}、英语 ${studio.byAccount.fun_english}、情绪 ${emotion.loadedCount}）。`);
       setLoadState('success');
       setRefreshKey((value) => value + 1);
     } catch (error) {

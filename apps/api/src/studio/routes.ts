@@ -4,6 +4,7 @@ import {
   ACCOUNT_PROFILES, AccountIdSchema, ContentItemSchema, CreateContentInputSchema,
   EmotionAnalysisSchema, English50PackageSchema, EmotionPostPackageSchema,
   GenerateContentInputSchema, GeneratedContentSchema, GrowthAnalysisSchema, GrowthPostPackageSchema,
+  StudioDemoSeedResultSchema,
   PerformanceSchema, PostRecordSchema, SavePostInputSchema,
   type ApiSuccess, type ContentItem, type GeneratedContent, type StudioAnalysis, type StudioOutput,
 } from "@emotion-studio/contracts";
@@ -80,6 +81,34 @@ export async function registerStudioRoutes(app: FastifyInstance, repository: Con
   }
 
   app.get("/api/v1/accounts", async (request) => success(request, ACCOUNT_PROFILES));
+  app.post("/api/v1/studio/demo-seed/load", async (request) => {
+    const importedAt = new Date().toISOString();
+    const rawSeeds = [
+      ["personal_growth", "daily_review", "growth_review", "今天第一次进入新团队，我发现真正需要观察的不是忙不忙，而是信息如何流动。", "成长演示：新环境观察"],
+      ["personal_growth", "daily_review", "growth_review", "一件小事没有立刻得到回应时，我差点把沉默理解成否定，后来决定先补充信息再判断。", "成长演示：把事实和判断分开"],
+      ["personal_growth", "daily_review", "growth_review", "今天的复盘让我意识到，成熟不是每次都选对，而是能把下一步变得更具体。", "成长演示：下一步行动"],
+      ["fun_english", "english_topic", "english_50", "拖延症英语", "英语演示主题：拖延"],
+      ["fun_english", "english_topic", "english_50", "社交电量英语", "英语演示主题：社交电量"],
+      ["fun_english", "english_topic", "english_50", "熬夜人的英语50句", "英语演示主题：熬夜"],
+      ["fun_english", "english_topic", "english_50", "打工人英语", "英语演示主题：工作表达"],
+      ["fun_english", "english_topic", "english_50", "吃货英语", "英语演示主题：美食"],
+    ] as const;
+    const seeds: NewContentItem[] = rawSeeds.map(([accountId, sourceType, contentLane, content, source]) => ({
+      accountId: accountId as NewContentItem["accountId"], sourceType: sourceType as NewContentItem["sourceType"], contentLane: contentLane as NewContentItem["contentLane"],
+      originalContent: content, content, author: null, likes: 0, source, sourcePlatform: null, sourceUrl: null,
+      licenseStatus: "original", emotion: null, emotionScore: null, resonanceScore: null, category: null, tags: [],
+      scene: null, relationshipType: null, theme: null, analysisKind: null, analysis: null, analysisProvider: null, analysisModel: null, analyzedAt: null,
+      isFavorite: false, isPublished: false, collectedAt: importedAt, importedAt,
+    }));
+    const result = await repository.addMany(seeds);
+    const totalCount = (await repository.list()).length;
+    const byAccount = {
+      personal_growth: result.items.filter((item) => item.accountId === "personal_growth").length,
+      fun_english: result.items.filter((item) => item.accountId === "fun_english").length,
+      emotion_library: 0,
+    };
+    return success(request, StudioDemoSeedResultSchema.parse({ loadedCount: result.items.length, totalCount, byAccount }));
+  });
   app.get("/api/v1/studio-dashboard", async (request) => {
     const [items, posts] = await Promise.all([repository.list(), repository.listPosts()]);
     return success(request, studioDashboard(items, posts));
@@ -164,7 +193,9 @@ export async function registerStudioRoutes(app: FastifyInstance, repository: Con
         body: result.data.body, hashtags: result.data.hashtags, status: "draft", confirmedAt: null,
         publishability, reviewIssues: Array.from(new Set(reviewIssues)).slice(0, 20),
         generatorLabel: result.provider === "mock" ? "DEMO AI 生成结果" : "AI 生成草稿",
-        provider: result.provider, model: result.model, contentIds: items.map((item) => item.id), createdAt: new Date().toISOString(),
+        provider: result.provider, model: result.model, contentIds: items.map((item) => item.id),
+        promptVersion: `${first.accountId}.demo.v1`, reviewDecision: null, humanEditedOutput: null,
+        createdAt: new Date().toISOString(),
       });
       await repository.saveGenerated(value);
       return value;
@@ -205,6 +236,11 @@ export async function registerStudioRoutes(app: FastifyInstance, repository: Con
       contentLane: generated.contentLane, coverType: input.coverType, performance: existing?.performance ?? null,
       createdAt: existing?.createdAt ?? now, updatedAt: now,
     });
+    await repository.saveGenerated(GeneratedContentSchema.parse({
+      ...generated,
+      reviewDecision: "accepted",
+      humanEditedOutput: { title: input.titleUsed, body: input.bodyUsed, hashtags: input.hashtagsUsed },
+    }));
     return success(request, await repository.savePost(post));
   });
   app.put("/api/v1/post-records/:id/performance", async (request) => {

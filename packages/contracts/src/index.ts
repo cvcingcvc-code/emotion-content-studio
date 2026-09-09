@@ -368,6 +368,13 @@ export const OriginalityRiskSchema = z
   })
   .strict();
 
+export const VisualRecommendationKindSchema = z.enum(["real_photo", "screenshot", "text_card", "ai_image"]);
+export const VisualRecommendationSchema = z.object({
+  kind: VisualRecommendationKindSchema,
+  count: z.number().int().min(1).max(10),
+  description: z.string().trim().min(1).max(300),
+}).strict();
+
 export const EmotionAnalysisSchema = z
   .object({
     kind: z.literal("emotion.v1"),
@@ -524,6 +531,16 @@ export const DemoDataLoadResultSchema = z.object({
   totalCount: z.number().int().nonnegative(),
 });
 
+export const StudioDemoSeedResultSchema = z.object({
+  loadedCount: z.number().int().nonnegative(),
+  totalCount: z.number().int().nonnegative(),
+  byAccount: z.object({
+    personal_growth: z.number().int().nonnegative(),
+    fun_english: z.number().int().nonnegative(),
+    emotion_library: z.number().int().nonnegative(),
+  }).strict(),
+}).strict();
+
 export const ContentDistributionSchema = z.object({
   label: z.string().min(1),
   count: z.number().int().nonnegative(),
@@ -546,6 +563,17 @@ export const GenerateContentInputSchema = z.object({
     .refine((ids) => new Set(ids).size === ids.length, "素材不能重复选择"),
 });
 
+export const RegenerateSectionSchema = z.enum(["title", "hook", "body", "ending", "tags"]);
+export const RegenerateContentInputSchema = z.object({
+  section: RegenerateSectionSchema,
+}).strict();
+export const ReviewGeneratedContentInputSchema = z.object({
+  decision: z.enum(["accepted", "rejected"]),
+  title: z.string().trim().min(1).max(80).optional(),
+  body: z.string().trim().min(1).max(8_000).optional(),
+  hashtags: z.array(z.string().trim().startsWith("#").max(40)).min(1).max(10).optional(),
+}).strict();
+
 export const GeneratedDraftSchema = z
   .object({
     title: z.string().trim().min(1).max(80),
@@ -567,6 +595,8 @@ const postPackageFields = {
   recommendedTitle: z.string().trim().min(1).max(80),
   body: z.string().trim().min(1).max(8_000),
   hashtags: z.array(z.string().trim().startsWith("#").max(40)).min(1).max(10),
+  hook: z.string().trim().min(1).max(300).optional(),
+  endingQuestion: z.string().trim().min(1).max(300).optional(),
 };
 
 export const GrowthPostPackageSchema = z.object({
@@ -577,6 +607,10 @@ export const GrowthPostPackageSchema = z.object({
     claim: z.string().trim().min(1).max(1_200),
     truthAnchorIds: z.array(z.string()).min(1).max(12),
   }).strict()).min(1).max(20),
+  story: z.string().trim().min(1).max(2_000).optional(),
+  problemBreakdown: z.string().trim().min(1).max(1_200).optional(),
+  solution: z.string().trim().min(1).max(1_200).optional(),
+  visualSuggestions: z.array(VisualRecommendationSchema).min(1).max(8).optional(),
 }).strict().refine((value) => value.titles.includes(value.recommendedTitle), {
   path: ["recommendedTitle"], message: "推荐标题必须来自候选标题",
 });
@@ -623,6 +657,8 @@ export const EmotionPostPackageSchema = z.object({
   ...postPackageFields,
   themes: z.array(z.string().trim().min(1).max(120)).min(1).max(5),
   originalityRisk: OriginalityRiskSchema,
+  goldenQuotes: z.array(z.string().trim().min(1).max(240)).min(1).max(6).optional(),
+  visualSuggestions: z.array(VisualRecommendationSchema).min(1).max(8).optional(),
 }).strict().refine((value) => value.titles.includes(value.recommendedTitle), {
   path: ["recommendedTitle"], message: "推荐标题必须来自候选标题",
 });
@@ -650,6 +686,13 @@ export const GeneratedContentSchema = z.object({
   provider: AiProviderSchema,
   model: z.string().trim().min(1).max(100),
   contentIds: z.array(z.string().min(1)).min(1).max(5),
+  promptVersion: z.string().trim().min(1).max(80).optional(),
+  reviewDecision: z.enum(["accepted", "rejected"]).nullable().optional(),
+  humanEditedOutput: z.object({
+    title: z.string().trim().min(1).max(80),
+    body: z.string().trim().min(1).max(8_000),
+    hashtags: z.array(z.string().trim().startsWith("#").max(40)).min(1).max(10),
+  }).strict().nullable().optional(),
   createdAt: z.string().datetime({ offset: true }),
 }).strict().superRefine((value, context) => {
   if (!accountLaneMatrix[value.accountId].has(value.contentLane)) {
@@ -859,6 +902,7 @@ export type GrowthAnalysis = z.infer<typeof GrowthAnalysisSchema>;
 export type EmotionAnalysis = z.infer<typeof EmotionAnalysisSchema>;
 export type StudioAnalysis = z.infer<typeof StudioAnalysisSchema>;
 export type OriginalityRisk = z.infer<typeof OriginalityRiskSchema>;
+export type VisualRecommendation = z.infer<typeof VisualRecommendationSchema>;
 export type GrowthPostPackage = z.infer<typeof GrowthPostPackageSchema>;
 export type English50Package = z.infer<typeof English50PackageSchema>;
 export type EmotionPostPackage = z.infer<typeof EmotionPostPackageSchema>;
@@ -878,9 +922,12 @@ export type CsvImportInput = z.infer<typeof CsvImportInputSchema>;
 export type CsvImportError = z.infer<typeof CsvImportErrorSchema>;
 export type CsvImportSummary = z.infer<typeof CsvImportSummarySchema>;
 export type DemoDataLoadResult = z.infer<typeof DemoDataLoadResultSchema>;
+export type StudioDemoSeedResult = z.infer<typeof StudioDemoSeedResultSchema>;
 export type ContentDistribution = z.infer<typeof ContentDistributionSchema>;
 export type ContentDashboard = z.infer<typeof ContentDashboardSchema>;
 export type GenerateContentInput = z.infer<typeof GenerateContentInputSchema>;
+export type RegenerateContentInput = z.infer<typeof RegenerateContentInputSchema>;
+export type ReviewGeneratedContentInput = z.infer<typeof ReviewGeneratedContentInputSchema>;
 export type GeneratedDraft = z.infer<typeof GeneratedDraftSchema>;
 export type GeneratorLabel = z.infer<typeof GeneratorLabelSchema>;
 export type GeneratedContent = z.infer<typeof GeneratedContentSchema>;

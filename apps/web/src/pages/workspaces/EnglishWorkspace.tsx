@@ -49,7 +49,7 @@ export default function EnglishWorkspace({ mode }: { mode: PreviewMode }) {
         <article className="panel workspace-input-card english-topic-card">
           <label htmlFor="english-topic">主题</label>
           <input id="english-topic" value={topic} maxLength={120} onChange={(event) => { setTopic(event.target.value); setItem(null); }} placeholder="例如：熬夜人的英语50句" />
-          <div className="topic-suggestions" aria-label="演示主题建议"><button type="button" onClick={() => { setTopic('熬夜人的英语50句'); setItem(null); }}>熬夜人的英语50句</button><small>Mock 演示先支持这一主题；配置 DeepSeek 后可扩展其他主题。</small></div>
+          <div className="topic-suggestions" aria-label="演示主题建议"><button type="button" onClick={() => { setTopic('拖延症英语'); setItem(null); }}>拖延症英语</button><button type="button" onClick={() => { setTopic('社交电量英语'); setItem(null); }}>社交电量英语</button><button type="button" onClick={() => { setTopic('熬夜人的英语50句'); setItem(null); }}>熬夜人的英语50句</button><small>演示模式支持拖延症、社交电量、熬夜、打工人和吃货主题。</small></div>
           <footer><span>{topic.length} / 120</span><button className="primary-button" disabled={!topic.trim() || blocked || busy} onClick={() => void generate()}><Sparkles size={15} />{busy ? '正在生成 50 句…' : '生成英语 50 句'} <ArrowRight size={15} /></button></footer>
         </article>
         <aside className="panel english-spec-card"><p className="kicker">FIXED OUTPUT</p><h3>5 组 × 10 句</h3><ol><li>生活化英文</li><li>自然中文解释</li><li>必要的使用语境</li><li>5 页内容拆分</li><li>标题、正文和标签</li></ol></aside>

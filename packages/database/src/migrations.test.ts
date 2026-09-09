@@ -37,6 +37,7 @@ integrationDescribe("database migrations", () => {
       "0000_independent_prototype.sql",
       "0001_content_repository.sql",
       "0002_multi_account_foundation.sql",
+      "0003_generation_observability.sql",
     ]);
     expect(secondRun).toEqual([]);
 
@@ -169,7 +170,7 @@ integrationDescribe("database migrations", () => {
       );
 
       expect((await runMigrations(legacyDatabase.pool)).map((migration) => migration.name))
-        .toEqual(["0002_multi_account_foundation.sql"]);
+        .toEqual(["0002_multi_account_foundation.sql", "0003_generation_observability.sql"]);
       expect(await runMigrations(legacyDatabase.pool)).toEqual([]);
 
       const upgradedContent = await legacyDatabase.pool.query<{

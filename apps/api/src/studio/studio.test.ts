@@ -131,4 +131,23 @@ describe("three-account product workflow", () => {
       expect(response.json().requestId).toBeTruthy();
     }
   });
+
+  it("supports phase 4 demo topics, local section regeneration and account seed data", async () => {
+    const { app } = await setup();
+    const seed = await app.inject({ method: "POST", url: "/api/v1/studio/demo-seed/load" });
+    expect(seed.statusCode, seed.body).toBe(200);
+    expect(seed.json().data.byAccount).toMatchObject({ personal_growth: 3, fun_english: 5, emotion_library: 0 });
+    for (const topic of ["拖延症英语", "社交电量英语"]) {
+      const item = await create(app, { ...englishInput, content: topic });
+      const generated = await generate(app, [item.id]);
+      expect(generated.output?.kind).toBe("english_50.v1");
+      const output = English50PackageSchema.parse(generated.output);
+      expect(output.groups).toHaveLength(5);
+      expect(output.groups.flatMap((group) => group.sentences)).toHaveLength(50);
+      const regenerated = await app.inject({ method: "POST", url: `/api/v1/generated-contents/${generated.id}/regenerate`, payload: { section: "title" } });
+      expect(regenerated.statusCode, regenerated.body).toBe(200);
+      expect(GeneratedContentSchema.parse(regenerated.json().data).status).toBe("draft");
+      expect(GeneratedContentSchema.parse(regenerated.json().data).title).not.toBe(generated.title);
+    }
+  });
 });

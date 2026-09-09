@@ -2,6 +2,7 @@ import {
   ContentItemSchema,
   CreateContentInputSchema,
   GenerateContentInputSchema,
+  RegenerateContentInputSchema,
   GeneratedContentSchema,
   type ContentItem,
   type GeneratedContent,
@@ -28,6 +29,14 @@ export function analyzeStudioContent(id: string, mode: PreviewMode): Promise<Con
 export async function generateStudioContent(contentIds: string[], mode: PreviewMode): Promise<GeneratedContent> {
   const payload = GenerateContentInputSchema.parse({ contentIds });
   return apiRequest('/api/v1/studio/generated-contents', mode, GeneratedContentSchema, {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  });
+}
+
+export async function regenerateStudioContent(id: string, section: string, mode: PreviewMode): Promise<GeneratedContent> {
+  const payload = RegenerateContentInputSchema.parse({ section });
+  return apiRequest(`/api/v1/generated-contents/${encodeURIComponent(id)}/regenerate`, mode, GeneratedContentSchema, {
     method: 'POST',
     body: JSON.stringify(payload),
   });

@@ -93,6 +93,9 @@ function installDemoApi() {
       demoLoaded = true;
       return success({ loadedCount, totalCount: 40 });
     }
+    if (method === 'POST' && url.pathname === '/api/v1/studio/demo-seed/load') {
+      return success({ loadedCount: 8, totalCount: 48, byAccount: { personal_growth: 3, fun_english: 5, emotion_library: 0 } });
+    }
     if (method === 'POST' && url.pathname === '/api/v1/imports/csv') {
       const body = JSON.parse(String(init?.body ?? '{}')) as { csvText?: string };
       if (!body.csvText?.replace(/^\uFEFF/, '').startsWith('content')) return failure('CSV 必须包含 content 表头');
@@ -210,7 +213,7 @@ describe('emotion content studio demo', () => {
     const user = userEvent.setup();
     render(<MemoryRouter initialEntries={['/']}><App /></MemoryRouter>);
     await user.click(await screen.findByRole('button', { name: /加载演示数据/ }));
-    expect(await screen.findByText('已载入 40 条演示素材，当前共 40 条。')).toBeInTheDocument();
+    expect(await screen.findByText(/已载入 48 条三账号演示素材/)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /查看素材库/ })).toHaveAttribute('href', '/library');
   });
 
