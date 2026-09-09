@@ -11,6 +11,8 @@ import {
 import { AppError } from "./errors.js";
 import { createMockStore, type MockStore } from "./mock/store.js";
 import { registerRoutes } from "./routes.js";
+import { registerStudioRoutes } from "./studio/routes.js";
+import { createMockPipelines, PipelineGuardError, type PipelineRegistry } from "./studio/pipelines/index.js";
 
 const DATABASE_UNAVAILABLE_CODES = new Set([
   "ECONNREFUSED",
@@ -39,6 +41,7 @@ export interface BuildAppOptions {
   contentAnalyzer?: ContentAnalyzer;
   contentGenerator?: ContentGenerator;
   aiProvider?: AiProvider;
+  pipelines?: PipelineRegistry;
 }
 
 export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyInstance> {
@@ -52,7 +55,7 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
 
   await app.register(cors, {
     origin: options.webOrigin ?? "http://localhost:5173",
-    methods: ["GET", "POST", "DELETE", "OPTIONS"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   });
 
   app.addHook("onRequest", async (request, reply) => {
@@ -68,6 +71,12 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
   });
 
   app.setErrorHandler(async (error, request, reply) => {
+    if (error instanceof PipelineGuardError) {
+      await reply.status(422).send({
+        ok: false, error: { code: error.code, message: error.message }, requestId: request.id,
+      });
+      return;
+    }
     if (error instanceof AiProviderError) {
       request.log.warn(
         {
@@ -147,5 +156,6 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
     options.contentRepositoryMode ?? (options.contentRepository ? "custom" : "memory"),
     options.aiProvider ?? "mock",
   );
+  await registerStudioRoutes(app, contentRepository, options.pipelines ?? createMockPipelines());
   return app;
 }

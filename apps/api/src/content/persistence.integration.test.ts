@@ -31,7 +31,7 @@ describe("persistent application restart", () => {
       await adminPool.query(`CREATE SCHEMA "${schemaName}"`);
       firstDatabase = createDatabase(testDatabaseUrl!, { searchPath: schemaName });
       expect((await runMigrations(firstDatabase.pool)).map((migration) => migration.name))
-        .toEqual(["0000_independent_prototype.sql", "0001_content_repository.sql"]);
+        .toEqual(["0000_independent_prototype.sql", "0001_content_repository.sql", "0002_multi_account_foundation.sql"]);
       firstApp = await buildApp({
         contentRepository: new DatabaseContentRepository(firstDatabase.db),
         contentRepositoryMode: "database",

@@ -29,12 +29,18 @@ export async function apiRequest<T>(
   init?: RequestInit,
 ): Promise<T> {
   const url = new URL(path, window.location.origin);
-  url.searchParams.set('state', mode);
+  if (import.meta.env.DEV && mode !== 'normal') url.searchParams.set('state', mode);
+  const method = (init?.method ?? 'GET').toUpperCase();
+  const jsonBodyMethod = ['POST', 'PUT', 'PATCH'].includes(method);
+  const hasBody = init?.body !== undefined && init.body !== null;
   const response = await fetch(`${url.pathname}${url.search}`, {
     ...init,
+    ...(jsonBodyMethod && !hasBody ? { body: '{}' } : {}),
     headers: {
       accept: 'application/json',
-      ...(init?.body ? { 'content-type': 'application/json' } : {}),
+      ...(hasBody || jsonBodyMethod
+        ? { 'content-type': 'application/json' }
+        : {}),
       ...init?.headers,
     },
   });
@@ -74,7 +80,7 @@ export function useRemote<T>(
     const controller = new AbortController();
     setState({ status: 'loading', data: null, error: null });
     void apiRequest(path, mode, schema, { signal: controller.signal })
-      .then((data) => setState({ status: 'ready', data, error: null }))
+      .then((data) => { if (!controller.signal.aborted) setState({ status: 'ready', data, error: null }); })
       .catch((error: unknown) => {
         if (controller.signal.aborted) return;
         setState({ status: 'error', data: null, error: error instanceof Error ? error.message : '加载失败' });

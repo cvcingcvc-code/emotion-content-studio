@@ -2,12 +2,14 @@ import { createContext, useContext, useMemo, useState, type ReactNode } from 're
 import {
   BookOpenText,
   FileUp,
-  Heart,
   LayoutDashboard,
   Menu,
+  Send,
+  Sparkles,
   X,
 } from 'lucide-react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { accountProfiles, getAccountIdFromUrl, parseAccountId, withAccount } from '../lib/accounts';
 import type { PreviewMode } from '../lib/api';
 
 type PreviewContextValue = {
@@ -23,20 +25,17 @@ export function usePreviewMode() {
   return value;
 }
 
-const navigation = [
-  { to: '/', label: '仪表盘', icon: LayoutDashboard },
-  { to: '/import', label: 'CSV 导入', icon: FileUp },
-  { to: '/library', label: '情绪素材库', icon: BookOpenText },
-  { to: '/inspirations', label: '灵感库', icon: Heart },
-];
-
 const pageMeta = [
   { match: /^\/$/, eyebrow: 'DEMO / CONTENT DESK', title: '今日内容台' },
+  { match: /^\/accounts\/personal_growth/, eyebrow: 'PERSONAL GROWTH', title: '成长复盘工作区' },
+  { match: /^\/accounts\/fun_english/, eyebrow: 'FUN ENGLISH', title: '趣味英语工作区' },
+  { match: /^\/accounts\/emotion_library/, eyebrow: 'EMOTION LIBRARY', title: '情绪素材工作区' },
   { match: /^\/import/, eyebrow: 'INGEST / CSV', title: '导入素材' },
-  { match: /^\/library/, eyebrow: 'MATERIALS / ANALYSIS', title: '情绪素材库' },
+  { match: /^\/library/, eyebrow: 'MATERIALS / ANALYSIS', title: '统一素材库' },
   { match: /^\/materials/, eyebrow: 'MATERIAL / DETAIL', title: '素材详情' },
   { match: /^\/inspirations/, eyebrow: 'CURATED / IDEAS', title: '灵感库' },
   { match: /^\/generated/, eyebrow: 'DEMO AI / DRAFT', title: '文案生成结果' },
+  { match: /^\/posts/, eyebrow: 'PUBLISH / PERFORMANCE', title: '发布与数据' },
 ];
 
 const previewOptions: Array<{ value: PreviewMode; label: string }> = [
@@ -50,10 +49,25 @@ const previewOptions: Array<{ value: PreviewMode; label: string }> = [
 
 export function AppShell({ children }: { children: ReactNode }) {
   const location = useLocation();
+  const navigate = useNavigate();
   const [mode, setMode] = useState<PreviewMode>('normal');
   const [menuOpen, setMenuOpen] = useState(false);
   const meta = pageMeta.find((item) => item.match.test(location.pathname)) ?? pageMeta[0]!;
   const context = useMemo(() => ({ mode, setMode }), [mode]);
+  const activeAccountId = getAccountIdFromUrl(location.pathname, location.search);
+  const profiles = accountProfiles;
+  const navigation = [
+    { to: '/', label: '总览', icon: LayoutDashboard },
+    { to: `/accounts/${activeAccountId}`, label: '账号工作区', icon: Sparkles },
+    { to: withAccount('/library', activeAccountId), label: '统一素材库', icon: BookOpenText },
+    { to: withAccount('/posts', activeAccountId), label: '发布与数据', icon: Send },
+    ...(activeAccountId === 'emotion_library' ? [{ to: '/import', label: 'CSV 导入', icon: FileUp }] : []),
+  ];
+
+  function switchAccount(value: string) {
+    const accountId = parseAccountId(value);
+    if (accountId) navigate(`/accounts/${accountId}`);
+  }
 
   return (
     <PreviewContext.Provider value={context}>
@@ -73,10 +87,10 @@ export function AppShell({ children }: { children: ReactNode }) {
             ))}
           </nav>
           <div className="sidebar-note">
-            <span>DEMO 工作流</span>
-            <strong>导入 → 分析 → 生成</strong>
-            <div className="mini-progress"><i style={{ width: '72%' }} /></div>
-            <p>所有分析与文案均由 Mock 服务生成，便于快速验证。</p>
+            <span>THREE ACCOUNT DESK</span>
+            <strong>记录 → 生成 → 复盘</strong>
+            <div className="mini-progress"><i style={{ width: '68%' }} /></div>
+            <p>每份生成结果都会标注 Provider 与模型，发布前必须人工确认。</p>
           </div>
           <div className="profile-chip"><span>创</span><div><strong>个人工作台</strong><small>内容创作者</small></div></div>
         </aside>
@@ -86,12 +100,21 @@ export function AppShell({ children }: { children: ReactNode }) {
             <button className="icon-button mobile-menu" aria-label="打开菜单" aria-controls="primary-sidebar" aria-expanded={menuOpen} onClick={() => setMenuOpen(true)}><Menu size={20} /></button>
             <div className="page-heading"><span>{meta.eyebrow}</span><h1>{meta.title}</h1></div>
             <div className="topbar-actions">
-              <label className="state-switcher">
+              <nav className="account-switcher" aria-label="账号切换">
+                {profiles.map((profile) => <NavLink key={profile.id} to={`/accounts/${profile.id}`} className={profile.id === activeAccountId ? 'is-active' : ''}>{profile.displayName}</NavLink>)}
+              </nav>
+              <label className="account-switcher-mobile">
+                <span>当前账号</span>
+                <select aria-label="切换内容账号" value={activeAccountId} onChange={(event) => switchAccount(event.target.value)}>
+                  {profiles.map((profile) => <option key={profile.id} value={profile.id}>{profile.displayName}</option>)}
+                </select>
+              </label>
+              {import.meta.env.DEV ? <label className="state-switcher">
                 <span>状态预览</span>
                 <select aria-label="切换页面演示状态" value={mode} onChange={(event) => setMode(event.target.value as PreviewMode)}>
                   {previewOptions.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
                 </select>
-              </label>
+              </label> : null}
             </div>
           </header>
           <main className="page-content">{children}</main>

@@ -12,23 +12,33 @@ import {
 import App from './App';
 import { ApiError, apiRequest } from './lib/api';
 
+const contentDomainFields = {
+  accountId: 'emotion_library', sourceType: 'legacy_import', contentLane: 'emotion_material',
+  sourcePlatform: null, collectedAt: null, scene: null, relationshipType: null, theme: null,
+  analysisKind: null, analysis: null, analysisProvider: null, analysisModel: null, analyzedAt: null,
+  isPublished: false,
+} as const;
 const contentItems: ContentItem[] = [
   {
+    ...contentDomainFields,
     id: 'content-0001', originalContent: '夜深以后，我开始认真听见自己的声音。', content: '夜深以后，我开始认真听见自己的声音。',
     author: null, likes: 1680, source: '内置演示数据', sourceUrl: null, licenseStatus: 'original', emotion: '孤独', emotionScore: 91,
     resonanceScore: 94, category: '孤独', tags: ['孤独', '夜晚心绪'], isFavorite: false, importedAt: '2026-09-01T01:00:00.000Z',
   },
   {
+    ...contentDomainFields,
     id: 'content-0002', originalContent: '慢慢来，也是在认真向前。', content: '慢慢来，也是在认真向前。',
     author: '演示素材', likes: 920, source: '内置演示数据', sourceUrl: null, licenseStatus: 'original', emotion: '治愈', emotionScore: 87,
     resonanceScore: 84, category: '成长', tags: ['成长', '自我疗愈'], isFavorite: true, importedAt: '2026-09-01T01:01:00.000Z',
   },
   {
+    ...contentDomainFields,
     id: 'content-0003', originalContent: '那次没说出口的喜欢，后来成了温柔的遗憾。', content: '那次没说出口的喜欢，后来成了温柔的遗憾。',
     author: null, likes: 430, source: 'CSV 导入', sourceUrl: 'https://example.com/source', licenseStatus: 'licensed', emotion: '遗憾', emotionScore: 82,
     resonanceScore: 76, category: '爱情', tags: ['爱情', '遗憾'], isFavorite: false, importedAt: '2026-09-01T01:02:00.000Z',
   },
   {
+    ...contentDomainFields,
     id: 'content-0004', originalContent: '这条素材只用于研究授权状态。', content: '这条素材只用于研究授权状态。',
     author: null, likes: 12, source: '研究素材', sourceUrl: null, licenseStatus: 'reference_only', emotion: '其他', emotionScore: 60,
     resonanceScore: 60, category: '其他', tags: ['研究'], isFavorite: false, importedAt: '2026-09-01T01:03:00.000Z',
@@ -42,6 +52,8 @@ const generatedBody = [
 ].join('\n\n');
 
 const generatedFixture: GeneratedContent = {
+  accountId: 'emotion_library', contentLane: 'emotion_post', outputKind: 'legacy.v1', output: null,
+  confirmedAt: null, publishability: 'eligible', reviewIssues: [],
   id: 'generated-01', title: '孤独里，那些值得被看见的时刻', body: generatedBody,
   hashtags: ['#情绪', '#成长', '#生活感悟'], status: 'draft', generatorLabel: 'DEMO AI 生成结果',
   provider: 'mock', model: 'mock-rules-v1',
@@ -64,11 +76,12 @@ function installDemoApi() {
     const rawUrl = input instanceof Request ? input.url : input.toString();
     const url = new URL(rawUrl, 'http://localhost');
     const method = init?.method ?? (input instanceof Request ? input.method : 'GET');
+    if (method === 'GET' && url.pathname === '/api/v1/post-records') return success([]);
 
     if (method === 'GET' && url.pathname === '/api/v1/content-dashboard') {
       const dashboard: ContentDashboard = {
         todayCount: demoLoaded ? 40 : items.length, totalCount: demoLoaded ? 40 : items.length,
-        highResonanceCount: demoLoaded ? 31 : items.filter((item) => item.resonanceScore >= 80).length,
+        highResonanceCount: demoLoaded ? 31 : items.filter((item) => (item.resonanceScore ?? 0) >= 80).length,
         favoriteCount: items.filter((item) => item.isFavorite).length,
         emotionDistribution: [{ label: '孤独', count: 1 }, { label: '治愈', count: 1 }, { label: '遗憾', count: 1 }],
         categoryDistribution: [{ label: '孤独', count: 1 }, { label: '成长', count: 1 }, { label: '爱情', count: 1 }],
@@ -94,8 +107,8 @@ function installDemoApi() {
       if (emotion) result = result.filter((item) => item.emotion === emotion);
       if (category) result = result.filter((item) => item.category === category);
       if (search) result = result.filter((item) => `${item.content}${item.source}${item.tags.join('')}`.toLowerCase().includes(search));
-      if (url.searchParams.get('highResonance') === 'true') result = result.filter((item) => item.resonanceScore >= 80);
-      if (url.searchParams.get('sort') === 'resonance_desc') result.sort((a, b) => b.resonanceScore - a.resonanceScore);
+      if (url.searchParams.get('highResonance') === 'true') result = result.filter((item) => (item.resonanceScore ?? 0) >= 80);
+      if (url.searchParams.get('sort') === 'resonance_desc') result.sort((a, b) => (b.resonanceScore ?? 0) - (a.resonanceScore ?? 0));
       if (url.searchParams.get('sort') === 'likes_desc') result.sort((a, b) => b.likes - a.likes);
       return success(result);
     }
@@ -165,7 +178,7 @@ describe('emotion content studio demo', () => {
     installDemoApi();
     render(<MemoryRouter initialEntries={['/']}><App /></MemoryRouter>);
     expect(await screen.findByText('把情绪素材，变成可继续创作的内容。')).toBeInTheDocument();
-    for (const label of ['仪表盘', 'CSV 导入', '情绪素材库', '灵感库']) expect(screen.getByRole('link', { name: label })).toBeInTheDocument();
+    for (const label of ['总览', '账号工作区', '统一素材库', '发布与数据']) expect(screen.getByRole('link', { name: label })).toBeInTheDocument();
   });
 
   it('retries a real dashboard request failure even when preview mode is already normal', async () => {
@@ -182,7 +195,7 @@ describe('emotion content studio demo', () => {
   it.each([
     ['/', '把情绪素材，变成可继续创作的内容。'],
     ['/import', '导入一份 CSV，自动完成清洗与模拟分析。'],
-    ['/library', '每条素材，都已有一份可见的分析。'],
+    ['/library', '把记录放在一起，把创作分得清楚。'],
     ['/materials/content-0001', '夜深以后，我开始认真听见自己的声音。'],
     ['/inspirations', '慢慢来，也是在认真向前。'],
     ['/generated/generated-01', '孤独里，那些值得被看见的时刻'],
@@ -267,7 +280,7 @@ describe('emotion content studio demo', () => {
     expect(await screen.findByText('这部分暂时没有加载出来')).toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: '重新加载' }));
     expect(await screen.findByRole('heading', { name: generatedFixture.title })).toBeInTheDocument();
-    expect(mock).toHaveBeenCalledTimes(2);
+    expect(mock.mock.calls.filter(([input]) => String(input).includes('/generated-contents/'))).toHaveLength(2);
   });
 
   it('selects a favorite material and generates from the inspiration library', async () => {

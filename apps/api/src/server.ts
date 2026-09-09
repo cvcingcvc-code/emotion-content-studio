@@ -5,6 +5,7 @@ import { readServerConfig } from "./config.js";
 import { MockContentAnalyzer } from "./content/analyzer.js";
 import { DatabaseContentRepository } from "./content/database-repository.js";
 import { createContentRepository } from "./content/repository.js";
+import { createConfiguredPipelines } from "./studio/pipelines/index.js";
 
 const config = readServerConfig();
 let database: DatabaseContext | undefined;
@@ -28,6 +29,7 @@ const app = await buildApp({
   contentGenerator,
   contentAnalyzer: ingestionAnalyzer,
   aiProvider: config.AI_PROVIDER,
+  pipelines: createConfiguredPipelines(config),
 });
 if (database) {
   app.addHook("onClose", async () => database?.close());

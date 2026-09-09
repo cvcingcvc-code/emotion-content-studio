@@ -9,6 +9,7 @@ import {
 import { usePreviewMode } from '../components/AppShell';
 import { BlockedNotice, EmptyState, ErrorState, LoadingState } from '../components/States';
 import { apiRequest, useRemote } from '../lib/api';
+import { accountProfiles } from '../lib/accounts';
 
 const metricIcons = [Inbox, BookOpenText, Sparkles, Heart];
 
@@ -49,6 +50,7 @@ export default function DashboardPage() {
 
   return (
     <>
+      <section className="account-stats-grid account-entries" aria-label="三个账号工作区">{accountProfiles.map((account) => <Link className="panel account-entry" key={account.id} to={'/accounts/' + account.id}><p className="kicker">{account.displayName}</p><h2>{account.shortName}</h2><p>{account.description}</p><span className="text-button">进入工作区 <ArrowRight size={14} /></span></Link>)}</section>
       <div className="page-intro demo-dashboard-intro">
         <div className="page-intro-copy">
           <p className="kicker">FROM RAW TEXT TO A FIRST DRAFT</p>

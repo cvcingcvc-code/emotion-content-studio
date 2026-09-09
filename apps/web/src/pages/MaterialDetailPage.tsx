@@ -9,6 +9,8 @@ import {
 import { usePreviewMode } from '../components/AppShell';
 import { BlockedNotice, EmptyState, ErrorState, LoadingState, StatusPill } from '../components/States';
 import { apiRequest, useRemote } from '../lib/api';
+import { AnalysisDetails } from '../components/AnalysisDetails';
+import { analyzeStudioContent } from '../lib/studioApi';
 
 const licenseLabels: Record<ContentItem['licenseStatus'], string> = {
   original: '本人原创',
@@ -22,7 +24,7 @@ export default function MaterialDetailPage() {
   const navigate = useNavigate();
   const { mode, setMode } = usePreviewMode();
   const [refreshKey, setRefreshKey] = useState(0);
-  const [action, setAction] = useState<'idle' | 'favorite' | 'generate'>('idle');
+  const [action, setAction] = useState<'idle' | 'favorite' | 'generate' | 'analyze'>('idle');
   const [message, setMessage] = useState('');
   const state = useRemote<ContentItem>(`/api/v1/content-items/${encodeURIComponent(id)}`, mode, ContentItemSchema, refreshKey);
 
@@ -44,12 +46,20 @@ export default function MaterialDetailPage() {
     setAction('generate');
     setMessage('');
     try {
-      const generated = await apiRequest('/api/v1/generated-contents', mode, GeneratedContentSchema, { method: 'POST', body: JSON.stringify({ contentIds: [item.id] }) });
+      const endpoint = item.sourceType === 'legacy_import' ? '/api/v1/generated-contents' : '/api/v1/studio/generated-contents';
+      const generated = await apiRequest(endpoint, mode, GeneratedContentSchema, { method: 'POST', body: JSON.stringify({ contentIds: [item.id] }) });
       navigate(`/generated/${generated.id}`);
     } catch (error) {
       setMessage(error instanceof Error ? error.message : '生成失败。');
       setAction('idle');
     }
+  }
+  async function analyze(item: ContentItem) {
+    if (mode === 'blocked' || action !== 'idle') return;
+    setAction('analyze'); setMessage('');
+    try { await analyzeStudioContent(item.id, mode); setRefreshKey((value) => value + 1); setMessage('分析已保存。'); }
+    catch (error) { setMessage(error instanceof Error ? error.message : '分析失败，可重试。'); }
+    finally { setAction('idle'); }
   }
 
   if (state.status === 'loading') return <LoadingState rows={4} />;
@@ -58,12 +68,12 @@ export default function MaterialDetailPage() {
 
   const item = state.data;
   const blocked = mode === 'blocked';
-  const licenseRestricted = item.licenseStatus === 'reference_only' || item.licenseStatus === 'prohibited';
+  const licenseRestricted = item.licenseStatus === 'prohibited' || (item.sourceType === 'legacy_import' && item.licenseStatus === 'reference_only');
   const displayContent = mode === 'long' ? `${item.originalContent}。有些情绪不用立刻得到解释，先让它在一个安静的地方停留，再等自己有力气时慢慢读完。` : item.originalContent;
 
   return (
     <>
-      <div className="detail-topline"><Link className="text-button" to="/library"><ArrowLeft size={15} />返回素材库</Link><StatusPill>MockAnalyzer 分析</StatusPill></div>
+      <div className="detail-topline"><Link className="text-button" to={'/library?accountId=' + item.accountId}><ArrowLeft size={15} />返回素材库</Link><StatusPill>{item.analysisProvider ?? (item.sourceType === 'legacy_import' ? 'MockAnalyzer 分析' : '尚未分析')}</StatusPill></div>
       {blocked ? <BlockedNotice title="当前只能浏览" description="禁止操作状态下不能收藏或生成文案。" /> : null}
       {message ? <div className="action-notice" role="status"><span>{message}</span></div> : null}
 
@@ -79,10 +89,11 @@ export default function MaterialDetailPage() {
         </article>
 
         <aside className="panel analysis-card">
-          <header><div><span>MOCK ANALYSIS</span><h2>情绪分析</h2></div><StatusPill tone="warning">DEMO</StatusPill></header>
+          <header><div><span>CONTENT ANALYSIS</span><h2>素材分析</h2></div><StatusPill tone="warning">{item.analysisProvider === 'deepseek' ? 'AI 草稿' : 'DEMO'}</StatusPill></header>
           <div className="analysis-primary"><div><span>主情绪</span><strong>{item.emotion}</strong></div><ScoreRing label="情绪分" score={item.emotionScore} /><ScoreRing label="共鸣分" score={item.resonanceScore} /></div>
           <div className="analysis-meta"><div><span>内容分类</span><strong>{item.category}</strong></div><div><span>标签</span><div className="detail-tags">{item.tags.map((tag, tagIndex) => <i key={`${tag}-${tagIndex}`}>#{tag}</i>)}</div></div></div>
-          <p className="mock-disclaimer">评分来自关键词规则，不代表真实 AI 模型判断。</p>
+          {item.analysis ? <AnalysisDetails analysis={item.analysis} /> : <p className="mock-disclaimer">{item.accountId === 'fun_english' ? '英语主题直接进入独立的 50 句生成流程。' : '尚无完整复盘，可保存分析后继续创作。历史共鸣分来自演示规则。'}</p>}
+          {item.accountId !== 'fun_english' ? <button className="secondary-button" disabled={blocked || action !== 'idle' || item.licenseStatus === 'prohibited'} onClick={() => void analyze(item)}>{action === 'analyze' ? '正在分析…' : item.analysis ? '重新分析' : '分析素材'}</button> : null}
           <div className="detail-actions"><button className="secondary-button" disabled={blocked || action !== 'idle'} onClick={() => void setFavorite(item)}><Heart size={15} fill={item.isFavorite ? 'currentColor' : 'none'} />{item.isFavorite ? '移出灵感库' : '加入灵感库'}</button><button className="primary-button" disabled={blocked || licenseRestricted || action !== 'idle'} onClick={() => void generate(item)}><Sparkles size={15} />{licenseRestricted ? '授权状态不可生成' : action === 'generate' ? '正在生成…' : '生成文案'}</button></div>
         </aside>
       </div>
@@ -90,6 +101,6 @@ export default function MaterialDetailPage() {
   );
 }
 
-function ScoreRing({ label, score }: { label: string; score: number }) {
+function ScoreRing({ label, score }: { label: string; score: number | null }) {
   return <div className="score-ring" style={{ background: `conic-gradient(var(--accent) ${score}%, var(--paper-deep) 0)` }}><div><strong>{score}</strong><span>{label}</span></div></div>;
 }

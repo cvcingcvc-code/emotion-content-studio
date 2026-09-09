@@ -68,6 +68,9 @@ describe("public contracts", () => {
 
   it("validates the public demo content DTO and explicit query booleans", () => {
     expect(ContentItemSchema.safeParse({
+      accountId: "emotion_library", sourceType: "manual", contentLane: "emotion_material",
+      sourcePlatform: null, collectedAt: null, scene: null, relationshipType: null, theme: null,
+      analysisKind: null, analysis: null, analysisProvider: null, analysisModel: null, analyzedAt: null, isPublished: false,
       id: "content-01",
       originalContent: "  今天也值得被认真对待。  ",
       content: "今天也值得被认真对待。",
@@ -93,6 +96,8 @@ describe("public contracts", () => {
     expect(GenerateContentInputSchema.safeParse({ contentIds: ["1", "2", "3", "4", "5", "6"] }).success).toBe(false);
     expect(GenerateContentInputSchema.safeParse({ contentIds: ["1", "1"] }).success).toBe(false);
     expect(GeneratedContentSchema.safeParse({
+      accountId: "emotion_library", contentLane: "emotion_post", outputKind: "legacy.v1", output: null,
+      confirmedAt: null, publishability: "eligible", reviewIssues: [],
       id: "generated-01",
       title: "把心里的天气慢慢说清楚",
       body: "这是一段用于验证长度规则的短文本。",

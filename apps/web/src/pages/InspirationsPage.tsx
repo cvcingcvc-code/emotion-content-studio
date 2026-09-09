@@ -115,7 +115,7 @@ export default function InspirationsPage() {
                       <input type="checkbox" checked={isSelected} disabled={blocked || (!isSelected && selected.size >= maxSelection)} onChange={() => toggleSelected(item.id)} />
                       <span>{String(index + 1).padStart(2, '0')}</span>
                     </label>
-                    <StatusPill tone={item.resonanceScore >= 80 ? 'good' : 'neutral'}>{item.resonanceScore} 共鸣</StatusPill>
+                    <StatusPill tone={(item.resonanceScore ?? 0) >= 80 ? 'good' : 'neutral'}>{item.resonanceScore ?? '—'} 共鸣</StatusPill>
                   </header>
                   <Link className="favorite-copy" to={`/materials/${item.id}`}>{item.originalContent}</Link>
                   <div className="favorite-meta"><span>{item.emotion}</span><span>{item.category}</span><span>{item.likes.toLocaleString('zh-CN')} 赞</span></div>

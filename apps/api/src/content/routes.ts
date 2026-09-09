@@ -20,7 +20,7 @@ import type { ContentAnalyzer } from "./analyzer.js";
 import { parseContentCsv } from "./csv.js";
 import { createDemoContentItems } from "./demo-data.js";
 import type { ContentGenerator } from "./generator.js";
-import type { ContentRepository } from "./repository.js";
+import { legacyGeneratedFields, type ContentRepository } from "./repository.js";
 
 function success<T>(request: FastifyRequest, data: T, total?: number): ApiSuccess<T> {
   return total === undefined
@@ -136,10 +136,10 @@ export async function registerContentRoutes(
       const dashboard: ContentDashboard = {
         todayCount: items.filter((item) => item.importedAt.startsWith(today)).length,
         totalCount: items.length,
-        highResonanceCount: items.filter((item) => item.resonanceScore >= 80).length,
+        highResonanceCount: items.filter((item) => (item.resonanceScore ?? 0) >= 80).length,
         favoriteCount: items.filter((item) => item.isFavorite).length,
-        emotionDistribution: countDistribution(items.map((item) => item.emotion)),
-        categoryDistribution: countDistribution(items.map((item) => item.category)),
+        emotionDistribution: countDistribution(items.flatMap((item) => item.emotion ? [item.emotion] : [])),
+        categoryDistribution: countDistribution(items.flatMap((item) => item.category ? [item.category] : [])),
       };
       return success(request, dashboard);
     },
@@ -160,6 +160,9 @@ export async function registerContentRoutes(
       }
 
       const resolvedItems = items.filter((item): item is ContentItem => item !== undefined);
+      if (resolvedItems.some((item) => item.accountId !== "emotion_library")) {
+        throw new AppError(409, "ACCOUNT_MISMATCH", "请从对应账号工作区生成内容");
+      }
       const restrictedItem = resolvedItems.find(
         (item) => item.licenseStatus !== "original" && item.licenseStatus !== "licensed",
       );
@@ -193,6 +196,7 @@ export async function registerContentRoutes(
         }
       })();
       const generated = GeneratedContentSchema.parse({
+        ...legacyGeneratedFields,
         id: `generated-${randomUUID()}`,
         ...result.data,
         status: "draft",

@@ -1,7 +1,7 @@
 import type { CsvImportError, DemoLicenseStatus } from "@emotion-studio/contracts";
 import { AppError } from "../errors.js";
 import type { ContentAnalyzer } from "./analyzer.js";
-import type { NewContentItem } from "./repository.js";
+import { legacyContentFields, type NewContentItem } from "./repository.js";
 
 export interface ParsedCsvCandidate {
   row: number;
@@ -110,6 +110,13 @@ function parseHttpUrl(value: string): string | null | undefined {
   if (cleaned.length > MAX_URL_LENGTH) return undefined;
   try {
     const url = new URL(cleaned);
+    if (
+      url.username ||
+      url.password ||
+      Array.from(url.searchParams.keys()).some((key) =>
+        /token|secret|password|authorization|api.?key/i.test(key),
+      )
+    ) return undefined;
     return url.protocol === "http:" || url.protocol === "https:" ? url.toString() : undefined;
   } catch {
     return undefined;
@@ -187,6 +194,7 @@ export async function parseContentCsv(
     candidates.push({
       row: rowNumber,
       item: {
+        ...legacyContentFields,
         originalContent,
         content,
         author: authorValue || null,

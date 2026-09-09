@@ -1,6 +1,6 @@
 import type { DemoLicenseStatus } from "@emotion-studio/contracts";
 import type { ContentAnalyzer } from "./analyzer.js";
-import type { NewContentItem } from "./repository.js";
+import { legacyContentFields, type NewContentItem } from "./repository.js";
 
 interface DemoSeed {
   content: string;
@@ -58,6 +58,7 @@ export async function createDemoContentItems(
   return Promise.all(demoSeeds.map(async (seed) => {
     const analysis = await analyzer.analyze({ content: seed.content, likes: seed.likes });
     return {
+      ...legacyContentFields,
       originalContent: seed.content,
       content: seed.content,
       author: null,

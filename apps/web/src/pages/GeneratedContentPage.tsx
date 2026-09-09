@@ -1,63 +1,119 @@
-import { ArrowLeft, FileText, Sparkles } from 'lucide-react';
-import { useState } from 'react';
+import { ArrowLeft, Copy, Sparkles } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {
-  GeneratedContentSchema,
-  type GeneratedContent,
+  GeneratedContentSchema, PostRecordListSchema, PostRecordSchema, SavePostInputSchema,
+  type English50Package, type GeneratedContent,
 } from '@emotion-studio/contracts';
 import { usePreviewMode } from '../components/AppShell';
 import { BlockedNotice, EmptyState, ErrorState, LoadingState, StatusPill } from '../components/States';
-import { useRemote } from '../lib/api';
+import { apiRequest, useRemote, type PreviewMode } from '../lib/api';
+import { accountLabels } from '../lib/accounts';
 
 export default function GeneratedContentPage() {
   const { id = '' } = useParams();
   const { mode, setMode } = usePreviewMode();
   const [refreshKey, setRefreshKey] = useState(0);
-  const state = useRemote<GeneratedContent>(`/api/v1/generated-contents/${encodeURIComponent(id)}`, mode, GeneratedContentSchema, refreshKey);
-
+  const state = useRemote('/api/v1/generated-contents/' + encodeURIComponent(id), mode, GeneratedContentSchema, refreshKey);
   if (state.status === 'loading') return <LoadingState rows={4} />;
   if (state.status === 'error') return <ErrorState message={state.error} onRetry={() => { setMode('normal'); setRefreshKey((value) => value + 1); }} />;
-  if (mode === 'empty') return <EmptyState title="没有找到生成结果" description="回到灵感库选择 1–5 条素材，再生成一份新的 DEMO 草稿。" action="返回灵感库" actionTo="/inspirations" />;
+  if (mode === 'empty') return <EmptyState title="没有找到生成结果" description="回到工作区保存一份输入，再生成草稿。" action="返回工作区" actionTo="/accounts/personal_growth" />;
+  return <GeneratedEditor key={id} generated={state.data} mode={mode} />;
+}
 
-  const generated = state.data;
-  const generatorName = generated.provider === 'mock' ? 'MockContentGenerator' : 'DeepSeek';
-  const generatorDescription = generated.provider === 'mock'
-    ? '当前结果由固定规则生成，没有调用真实 AI。'
-    : '当前结果由已配置的 DeepSeek 模型生成。';
+function localDateTime() {
+  const value = new Date();
+  return new Date(value.getTime() - value.getTimezoneOffset() * 60_000).toISOString().slice(0, 16);
+}
 
-  return (
-    <>
-      <div className="detail-topline"><Link className="text-button" to="/inspirations"><ArrowLeft size={15} />返回灵感库</Link><StatusPill tone="warning">草稿 · 待人工确认</StatusPill></div>
-      {mode === 'blocked' ? <BlockedNotice title="当前为只读预览" description="你可以阅读生成结果，但后续编辑与发布能力尚未开放。" /> : null}
+function GeneratedEditor({ generated, mode }: { generated: GeneratedContent; mode: PreviewMode }) {
+  const [title, setTitle] = useState(generated.title);
+  const [body, setBody] = useState(generated.body);
+  const [tags, setTags] = useState(generated.hashtags.join(' '));
+  const [confirmed, setConfirmed] = useState(false);
+  const [cover, setCover] = useState('');
+  const [publishedAt, setPublishedAt] = useState(localDateTime);
+  const [busy, setBusy] = useState(false);
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+  const [dirty, setDirty] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const records = useRemote('/api/v1/post-records?accountId=' + generated.accountId, mode, PostRecordListSchema);
+  useEffect(() => {
+    if (records.status !== 'ready' || dirty) return;
+    const post = records.data.find((item) => item.generatedContentId === generated.id);
+    if (post) {
+      setTitle(post.titleUsed); setBody(post.bodyUsed); setTags(post.hashtagsUsed.join(' '));
+      setCover(post.coverType ?? ''); setSaved(true);
+    }
+  }, [records, generated.id, dirty]);
+  const restricted = generated.publishability !== 'eligible';
+  const blocked = mode === 'blocked' || restricted;
+  const output = generated.output;
+  const edit = () => { setDirty(true); setConfirmed(false); setSaved(false); };
+  async function copy() {
+    if (blocked) return;
+    setError('');
+    const english = output?.kind === 'english_50.v1' ? output.groups.map((group) =>
+      group.groupName + '\n' + group.sentences.map((sentence, index) => (index + 1) + '. ' + sentence.english + '\n' + sentence.chinese + (sentence.usageNote ? '\n' + sentence.usageNote : '')).join('\n\n')).join('\n\n') : '';
+    try { await navigator.clipboard.writeText([title, body, english, tags].filter(Boolean).join('\n\n')); setMessage('已复制发布包。请人工核对后再到平台发布。'); }
+    catch { setError('浏览器未允许复制，请在正文中手动选择并复制。'); }
+  }
+  async function save(status: 'draft' | 'published') {
+    if (blocked || busy || !confirmed) return;
+    setBusy(true); setError(''); setMessage('');
+    try {
+      const payload = SavePostInputSchema.parse({
+        generatedContentId: generated.id, humanConfirmed: confirmed, status,
+        publishedAt: status === 'published' ? new Date(publishedAt).toISOString() : null,
+        titleUsed: title, bodyUsed: body, hashtagsUsed: tags.trim().split(/\s+/).filter(Boolean), coverType: cover.trim() || null,
+      });
+      await apiRequest('/api/v1/post-records', mode, PostRecordSchema, { method: 'POST', body: JSON.stringify(payload) });
+      setSaved(true);
+      setMessage(status === 'published' ? '已记录为发布。可以前往“发布与数据”录入表现。' : '已保存人工确认稿，可在发布与数据中继续查看。');
+    } catch (caught) { setError(caught instanceof Error ? caught.message : '保存失败，请重试。'); }
+    finally { setBusy(false); }
+  }
+  return <>
+    <div className="detail-topline"><Link className="text-button" to={'/accounts/' + generated.accountId}><ArrowLeft size={15} />返回{accountLabels[generated.accountId]}工作区</Link><StatusPill tone="warning">{saved || generated.status === 'confirmed' ? '已有人工作品记录' : '草稿 · 待人工确认'}</StatusPill></div>
+    {blocked ? <BlockedNotice title={restricted ? (generated.publishability === 'research_only' ? '仅供研究' : '需重新创作') : '当前为只读预览'} description="可以阅读研究结果；当前状态不能复制发布包或记录发布。" /> : null}
+    {message ? <div className="action-notice is-success" role="status">{message}<Link to={'/posts?accountId=' + generated.accountId}>查看发布与数据</Link></div> : null}
+    {error ? <div className="action-notice is-error" role="alert">{error}</div> : null}
+    <div className="generated-layout">
+      <article className="panel generated-paper">
+        <header><div><span className="demo-ai-label"><Sparkles size={14} />{generated.generatorLabel}</span><p>{generated.provider === 'mock' ? '当前使用演示生成器，未调用真实 AI。' : '由已配置的 DeepSeek 模型生成。'}</p></div></header>
+        {output ? <div className="title-options" aria-label="候选标题">{output.titles.map((option, index) => <button key={index} disabled={blocked} onClick={() => { edit(); setTitle(option); }}>{option}</button>)}</div> : null}
+        <section className="generated-section"><span>小红书标题</span><h2>{title}</h2><label className="studio-field">编辑标题<input aria-label="编辑标题" maxLength={80} value={title} disabled={blocked} onChange={(event) => { edit(); setTitle(event.target.value); }} /></label></section>
+        <section className="generated-section generated-body"><label className="studio-field">正文<textarea aria-label="编辑正文" value={body} maxLength={8000} disabled={blocked} onChange={(event) => { edit(); setBody(event.target.value); }} /></label><small>{body.length} 字 · 编辑后需重新确认</small></section>
+        {output?.kind === 'english_50.v1' ? <EnglishPackage output={output} /> : null}
+        {output?.kind === 'growth_post.v1' ? <details className="package-detail"><summary>查看生成稿的事实引用</summary>{output.factClaims.map((fact, index) => <blockquote key={index}>{fact.claim}<small>{fact.truthAnchorIds.join('、')}</small></blockquote>)}</details> : null}
+        {output?.kind === 'emotion_post.v1' ? <div className="workspace-warning"><strong>原创相似风险：{output.originalityRisk.level}</strong><span>{output.originalityRisk.reasons.join('；')}</span><span>来源主题：{output.themes.join(' / ')}</span></div> : null}
+        <section className="generated-section"><span>标签</span><div className="generated-tags">{tags.split(/\s+/).filter(Boolean).map((tag, index) => <i key={index}>{tag}</i>)}</div><label className="studio-field">编辑标签<input aria-label="编辑标签" value={tags} maxLength={400} disabled={blocked} onChange={(event) => { edit(); setTags(event.target.value); }} /></label></section>
+      </article>
+      <aside className="panel generated-note studio-form">
+        <p className="kicker">REVIEW & RECORD</p><h3>由你完成最后确认。</h3>
+        <p>记录的是你手动完成的发布。作品正文与表现数据会分开保存。</p>
+        <dl><div><dt>生成器</dt><dd>{generated.provider}</dd></div><div><dt>模型</dt><dd>{generated.model}</dd></div><div><dt>来源素材</dt><dd>{generated.contentIds.length} 条</dd></div></dl>
+        <details className="package-detail"><summary>查看生成与来源提醒</summary><ul>{generated.reviewIssues.map((issue, index) => <li key={index}>{issue}</li>)}</ul></details>
+        <button className="secondary-button" disabled={blocked} onClick={() => void copy()}><Copy size={15} />复制完整发布包</button>
+        <label className="studio-field">封面类型<input value={cover} onChange={(event) => setCover(event.target.value)} maxLength={100} placeholder="例如：文字卡片" disabled={blocked} /></label>
+        <label className="studio-field">实际发布时间<input aria-label="实际发布时间" type="datetime-local" value={publishedAt} onChange={(event) => setPublishedAt(event.target.value)} disabled={blocked} /></label>
+        <label className="human-confirm"><input type="checkbox" checked={confirmed} disabled={blocked} onChange={(event) => setConfirmed(event.target.checked)} />我已核对事实、语言、来源与原创表达</label>
+        <button className="secondary-button" disabled={blocked || busy || !confirmed} onClick={() => void save('draft')}>保存人工确认稿</button>
+        <button className="primary-button" disabled={blocked || busy || !confirmed || !publishedAt} onClick={() => void save('published')}>{busy ? '正在保存…' : '标记已手动发布'}</button>
+      </aside>
+    </div>
+  </>;
+}
 
-      <div className="generated-layout">
-        <article className="panel generated-paper">
-          <header>
-            <div><span className="demo-ai-label"><Sparkles size={14} />{generated.generatorLabel}</span><p>由 {generatorName} 根据 {generated.contentIds.length} 条素材组合生成</p></div>
-            <FileText size={22} strokeWidth={1.4} />
-          </header>
-          <section className="generated-section">
-            <span>小红书标题</span>
-            <h2>{generated.title}</h2>
-          </section>
-          <section className="generated-section generated-body">
-            <span>正文</span>
-            {generated.body.split(/\n{2,}/).map((paragraph, index) => <p key={`${index}-${paragraph.slice(0, 24)}`}>{paragraph}</p>)}
-          </section>
-          <section className="generated-section">
-            <span>标签</span>
-            <div className="generated-tags">{generated.hashtags.map((tag, index) => <i key={`${tag}-${index}`}>{tag}</i>)}</div>
-          </section>
-        </article>
-
-        <aside className="panel generated-note">
-          <p className="kicker">DEMO ONLY</p>
-          <h3>这不是可直接发布的成稿。</h3>
-          <p>{generatorDescription} 无论使用哪种生成器，都必须保留授权校验、相似度检查和人工确认。</p>
-          <dl><div><dt>状态</dt><dd>草稿</dd></div><div><dt>生成器</dt><dd>{generatorName}</dd></div><div><dt>模型</dt><dd>{generated.model}</dd></div><div><dt>素材数</dt><dd>{generated.contentIds.length}</dd></div><div><dt>正文长度</dt><dd>{generated.body.length} 字</dd></div></dl>
-          <Link className="secondary-button" to="/inspirations">重新选择素材</Link>
-        </aside>
-      </div>
-    </>
-  );
+function EnglishPackage({ output }: { output: English50Package }) {
+  return <section className="english-package">
+    <header><h3>5 组 · 50 句 · 5 页</h3><p>{output.positioning}</p><p>{output.audience}</p></header>
+    {output.groups.map((group, index) => <details className="package-detail english-group" key={group.groupName} open={index === 0}>
+      <summary>第 {index + 1} 页 · {group.groupName} · 10 句</summary>
+      <ol start={index * 10 + 1}>{group.sentences.map((sentence) => <li key={sentence.english}><strong>{sentence.english}</strong><p>{sentence.chinese}</p>{sentence.usageNote ? <small>{sentence.usageNote}</small> : null}</li>)}</ol>
+      <p className="page-visual-note">{output.fivePageLayout[index]?.visualSuggestion}</p>
+    </details>)}
+    <details className="package-detail"><summary>五页排版与配图建议</summary>{output.fivePageLayout.map((page) => <p key={page.pageNumber}>第 {page.pageNumber} 页 / {page.headline}：{page.visualSuggestion}</p>)}<p>{output.visualSuggestions.join('；')}</p></details>
+  </section>;
 }

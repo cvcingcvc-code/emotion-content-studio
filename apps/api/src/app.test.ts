@@ -285,6 +285,29 @@ describe("mock API", () => {
     });
   });
 
+  it("does not persist credential-bearing source URLs from CSV", async () => {
+    const app = await createApp();
+    const response = await app.inject({
+      method: "POST",
+      url: "/api/v1/imports/csv",
+      payload: {
+        csvText: [
+          "content,url",
+          "可研究的情绪素材,https://example.org/notes?access_token=placeholder",
+          "另一条素材,https://user:password@example.org/notes",
+        ].join("\n"),
+        licenseStatus: "licensed",
+      },
+    });
+    const summary = createSuccessResponseSchema(CsvImportSummarySchema).parse(response.json());
+
+    expect(response.statusCode).toBe(200);
+    expect(summary.data).toMatchObject({ totalRows: 2, importedCount: 0, failedCount: 2 });
+    expect(summary.data.errors.every((error) => error.message.includes("url"))).toBe(true);
+    const list = await app.inject({ method: "GET", url: "/api/v1/content-items" });
+    expect(createSuccessResponseSchema(ContentItemSchema.array()).parse(list.json()).data).toHaveLength(0);
+  });
+
   it("rejects malformed or excessive CSV input before repository writes", async () => {
     const app = await createApp();
     const malformed = await app.inject({
