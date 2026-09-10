@@ -24,10 +24,17 @@ export const legacyContentFields = {
 } as const;
 
 export const legacyGeneratedFields = {
-  accountId: "emotion_library", contentLane: "emotion_post", outputKind: "legacy.v1", output: null,
-  confirmedAt: null, publishability: "eligible", reviewIssues: [],
+  accountId: "emotion_library",
+  contentLane: "emotion_post",
+  outputKind: "legacy.v1",
+  output: null,
+  confirmedAt: null,
+  publishability: "eligible",
+  reviewIssues: [],
+  promptVersion: "legacy.v1",
+  reviewDecision: null,
+  humanEditedOutput: null,
 } as const;
-
 export function analysisFields(result: AiResult<StudioAnalysis>) {
   const analysis = result.data;
   return {
