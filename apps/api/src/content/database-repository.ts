@@ -30,6 +30,7 @@ import {
   type NewContentItem,
 } from "./repository.js";
 import type { AiResult } from "../ai/types.js";
+import { DatabaseGrowthLoopRepository } from "../growth-loop/database-repository.js";
 
 type ContentItemRow = typeof contentItems.$inferSelect;
 type GeneratedContentRow = typeof generatedContents.$inferSelect;
@@ -105,10 +106,12 @@ function mapGeneratedContent(row: GeneratedContentRow): GeneratedContent {
 }
 
 export class DatabaseContentRepository implements ContentRepository {
+  readonly growthLoop: DatabaseGrowthLoopRepository;
   readonly #db: DatabaseContext["db"];
 
   constructor(database: DatabaseContext["db"]) {
     this.#db = database;
+    this.growthLoop = new DatabaseGrowthLoopRepository(database);
   }
 
   async addMany(items: NewContentItem[]): Promise<AddContentItemsResult> {

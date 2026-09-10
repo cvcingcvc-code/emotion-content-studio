@@ -12,6 +12,7 @@ import {
   type GeneratedContent,
 } from "@emotion-studio/contracts";
 import type { AiResult } from "../ai/types.js";
+import { InMemoryGrowthLoopRepository, type GrowthLoopRepository } from "../growth-loop/repository.js";
 
 export type NewContentItem = Omit<ContentItem, "id">;
 
@@ -73,6 +74,7 @@ export interface AddContentItemsResult {
 }
 
 export interface ContentRepository {
+  readonly growthLoop: GrowthLoopRepository;
   addMany(items: NewContentItem[]): Promise<AddContentItemsResult>;
   list(query?: ContentItemQuery): Promise<ContentItem[]>;
   findById(id: string): Promise<ContentItem | undefined>;
@@ -94,6 +96,7 @@ export interface InMemoryContentRepositoryOptions {
 }
 
 export class InMemoryContentRepository implements ContentRepository {
+  readonly growthLoop = new InMemoryGrowthLoopRepository();
   readonly #items: ContentItem[] = [];
   readonly #generatedContents = new Map<string, GeneratedContent>();
   readonly #posts = new Map<string, PostRecord>();

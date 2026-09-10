@@ -1,4 +1,5 @@
 import { sql } from "drizzle-orm";
+import type { Retrospective, PublishedContent, ContentMetrics, ContentFeedback } from "@emotion-studio/contracts";
 import {
   bigint,
   bigserial,
@@ -22,6 +23,25 @@ export const licenseStatusEnum = pgEnum("license_status", [
   "reference_only",
   "prohibited",
 ]);
+
+export const dailyRetrospectives = pgTable("daily_retrospectives", {
+  id: uuid("id").primaryKey(), revision: integer("revision").notNull(),
+  payload: jsonb("payload").$type<Retrospective>().notNull(),
+});
+export const publishedContents = pgTable("published_contents", {
+  id: uuid("id").primaryKey(), revision: integer("revision").notNull(),
+  sourceRetrospectiveId: uuid("source_retrospective_id").references(() => dailyRetrospectives.id),
+  status: text("status").notNull(), payload: jsonb("payload").$type<PublishedContent>().notNull(),
+});
+export const contentMetrics = pgTable("content_metrics", {
+  id: uuid("id").primaryKey(), contentId: uuid("content_id").notNull().references(() => publishedContents.id),
+  payload: jsonb("payload").$type<ContentMetrics>().notNull(),
+});
+export const contentFeedback = pgTable("content_feedback", {
+  id: uuid("id").primaryKey(), contentId: uuid("content_id").notNull().references(() => publishedContents.id),
+  metricsId: uuid("metrics_id").notNull().references(() => contentMetrics.id),
+  payload: jsonb("payload").$type<ContentFeedback>().notNull(),
+});
 
 export const reviewStatusEnum = pgEnum("review_status", [
   "pending",

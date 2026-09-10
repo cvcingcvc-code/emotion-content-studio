@@ -1,5 +1,6 @@
 import { z } from "zod";
 export * from "./english-workflow.js";
+export * from "./growth-loop.js";
 export { englishCardHtml } from "./english-card.js";
 
 export const LicenseStatusSchema = z.enum([
