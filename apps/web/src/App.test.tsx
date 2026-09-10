@@ -179,7 +179,7 @@ describe('emotion content studio demo', () => {
 
   it('loads the dashboard through HTTP and exposes the four workflow destinations', async () => {
     installDemoApi();
-    render(<MemoryRouter initialEntries={['/']}><App /></MemoryRouter>);
+    render(<MemoryRouter initialEntries={['/studio']}><App /></MemoryRouter>);
     expect(await screen.findByText('把情绪素材，变成可继续创作的内容。')).toBeInTheDocument();
     for (const label of ['总览', '账号工作区', '统一素材库', '发布与数据']) expect(screen.getByRole('link', { name: label })).toBeInTheDocument();
   });
@@ -188,7 +188,7 @@ describe('emotion content studio demo', () => {
     const { mock } = installDemoApi();
     mock.mockImplementationOnce(async () => failure('临时网络错误', 503));
     const user = userEvent.setup();
-    render(<MemoryRouter initialEntries={['/']}><App /></MemoryRouter>);
+    render(<MemoryRouter initialEntries={['/studio']}><App /></MemoryRouter>);
     expect(await screen.findByText('这部分暂时没有加载出来')).toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: '重新加载' }));
     expect(await screen.findByText('把情绪素材，变成可继续创作的内容。')).toBeInTheDocument();
@@ -196,7 +196,7 @@ describe('emotion content studio demo', () => {
   });
 
   it.each([
-    ['/', '把情绪素材，变成可继续创作的内容。'],
+    ['/studio', '把情绪素材，变成可继续创作的内容。'],
     ['/import', '导入一份 CSV，自动完成清洗与模拟分析。'],
     ['/library', '把记录放在一起，把创作分得清楚。'],
     ['/materials/content-0001', '夜深以后，我开始认真听见自己的声音。'],
@@ -211,7 +211,7 @@ describe('emotion content studio demo', () => {
   it('loads demo data and exposes a direct path to the material library', async () => {
     installDemoApi();
     const user = userEvent.setup();
-    render(<MemoryRouter initialEntries={['/']}><App /></MemoryRouter>);
+    render(<MemoryRouter initialEntries={['/studio']}><App /></MemoryRouter>);
     await user.click(await screen.findByRole('button', { name: /加载演示数据/ }));
     expect(await screen.findByText(/已载入 48 条三账号演示素材/)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /查看素材库/ })).toHaveAttribute('href', '/library');
@@ -309,7 +309,7 @@ describe('emotion content studio demo', () => {
   it('renders the empty and recoverable error states', async () => {
     installDemoApi();
     const user = userEvent.setup();
-    render(<MemoryRouter initialEntries={['/']}><App /></MemoryRouter>);
+    render(<MemoryRouter initialEntries={['/studio']}><App /></MemoryRouter>);
     await screen.findByText('把情绪素材，变成可继续创作的内容。');
     const switcher = screen.getByRole('combobox', { name: '切换页面演示状态' });
     await user.selectOptions(switcher, 'empty');

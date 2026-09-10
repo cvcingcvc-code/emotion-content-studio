@@ -1,4 +1,5 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import EnglishWorkflowPage from './pages/EnglishWorkflowPage';
 import { AppShell } from './components/AppShell';
 import DashboardPage from './pages/DashboardPage';
 import GeneratedContentPage from './pages/GeneratedContentPage';
@@ -10,10 +11,14 @@ import AccountWorkspacePage from './pages/AccountWorkspacePage';
 import PublishingPage from './pages/PublishingPage';
 
 export default function App() {
+  const { pathname } = useLocation();
+  if (pathname === '/' || pathname === '/english' || pathname.startsWith('/english/')) {
+    return <Routes><Route path="/" element={<EnglishWorkflowPage />} /><Route path="/english" element={<EnglishWorkflowPage />} /><Route path="/english/:id" element={<EnglishWorkflowPage />} /></Routes>;
+  }
   return (
     <AppShell>
       <Routes>
-        <Route path="/" element={<DashboardPage />} />
+        <Route path="/studio" element={<DashboardPage />} />
         <Route path="/accounts/:accountId" element={<AccountWorkspacePage />} />
         <Route path="/import" element={<ImportPage />} />
         <Route path="/library" element={<LibraryPage />} />

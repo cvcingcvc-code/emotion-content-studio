@@ -9,6 +9,7 @@ import {
   type ContentRepository,
 } from "./content/repository.js";
 import { AppError } from "./errors.js";
+import { registerEnglishWorkflow, type EnglishWorkflowOptions } from "./english/workflow.js";
 import { createMockStore, type MockStore } from "./mock/store.js";
 import { registerRoutes } from "./routes.js";
 import { registerStudioRoutes } from "./studio/routes.js";
@@ -33,6 +34,7 @@ function getErrorCode(error: unknown): string | undefined {
 }
 
 export interface BuildAppOptions {
+  englishWorkflow?: EnglishWorkflowOptions;
   logger?: boolean;
   webOrigin?: string;
   store?: MockStore;
@@ -157,5 +159,6 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
     options.aiProvider ?? "mock",
   );
   await registerStudioRoutes(app, contentRepository, options.pipelines ?? createMockPipelines());
+  await registerEnglishWorkflow(app, contentRepository, options.englishWorkflow);
   return app;
 }

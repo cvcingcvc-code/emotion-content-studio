@@ -9,7 +9,9 @@ Thumbs.db
 .env
 .env.*
 !.env.example
-data/
+data/*
+!data/english-topic-history.json
+output/
 uploads/
 imports/
 tmp/
