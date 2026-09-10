@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import {
   ENGLISH_DEMO_TOPICS, ENGLISH_CANDIDATE_TOPICS, EnglishToneSchema,
   EnglishWorkflowInfoSchema, EnglishGenerateResultSchema, EnglishWorkflowDraftSchema,
-  EnglishReviewInputSchema, EnglishExportResultSchema, normalizeEnglishTopic, similarEnglishTopics,
+  EnglishReviewInputSchema, EnglishExportResultSchema, normalizeEnglishTopic, similarEnglishTopics, englishCardHtml,
   type EnglishWorkflowDraft, type EnglishWorkflowInput, type EnglishHistoryEntry, type EnglishWriting,
 } from '@emotion-studio/contracts';
 import { apiRequest } from '../lib/api';
@@ -127,6 +127,27 @@ function EnglishReview({ id }: { id: string }) {
     try { await navigator.clipboard.writeText(text); setNotice('已复制。'); }
     catch { setError('浏览器未允许复制，请从编辑框中手动复制。'); }
   }
+  async function exportPage() {
+    if (!writing || operation.current) return;
+    operation.current = true; setBusy(true); setError('');
+    try {
+      const response = await fetch(base + '/preview/png', {
+        method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ writing, page }),
+      });
+      if (!response.ok) {
+        const failure = await response.json();
+        throw new Error(failure.error?.message ?? 'PNG 导出失败');
+      }
+      const url = URL.createObjectURL(await response.blob());
+      const link = document.createElement('a');
+      link.href = url; link.download = 'english-topic-page-' + page + '.png';
+      document.body.appendChild(link); link.click(); link.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 60_000);
+      setNotice('已导出当前第 ' + page + ' 页，900 × 1200 PNG。');
+    } catch (caught) { setError(messageOf(caught)); }
+    finally { operation.current = false; setBusy(false); }
+  }
   if (!writing || !draft) return <p role={error ? 'alert' : 'status'}>{error || '正在读取内容…'}</p>;
   const approved = draft.status === 'approved' && !dirty;
   return <section className="english-review">
@@ -136,8 +157,9 @@ function EnglishReview({ id }: { id: string }) {
     <div className="english-review-actions"><button disabled={busy} onClick={() => void save('needs_revision')}>需要修改 / 保存预览</button><button className="em-primary" disabled={busy} onClick={() => void save('approved')}>批准</button><button className="em-primary" disabled={busy || !approved} onClick={() => void publishingPackage()}>{busy ? '处理中…' : 'Generate Publishing Package'}</button></div>
     <label className="english-topic-edit">主题<input aria-label="编辑主题" value={writing.topic} maxLength={60} disabled={busy} onChange={(event) => change({ topic: event.target.value })} /></label>
     <details><summary>主题分析与分组方向</summary><p>{writing.analysis}</p><p>{writing.groupNames.join(' / ')}</p></details>
-    <div className="english-section-head"><h2>五张卡片 · 3:4</h2><span>{dirty ? '有未保存修改，保存后更新预览' : '与导出 PNG 使用同一模板'}</span></div>
-    <div className="english-card-grid">{[1, 2, 3, 4, 5].map((n) => <figure key={n}><div className="english-card-frame"><iframe title={'Page ' + n} sandbox="" src={base + '/drafts/' + id + '/pages/' + n + '?revision=' + draft.revision} /></div><figcaption>Page {n} · {n * 10 - 9}–{n * 10}</figcaption></figure>)}</div>
+    <div className="english-section-head"><h2>Preview · 3:4</h2><span>实时同步 Review · PNG 900 × 1200</span></div>
+    <nav aria-label="预览页码" className="english-review-actions">{[1, 2, 3, 4, 5].map((n) => <button key={n} aria-pressed={page === n} onClick={() => setPage(n)}>{n}</button>)}<button disabled={busy} onClick={() => void exportPage()}>Export Current Page</button></nav>
+    <div className="english-card-grid english-current-preview"><figure><div className="english-card-frame"><iframe title={'Preview Page ' + page} sandbox="" srcDoc={englishCardHtml(writing, page)} /></div><figcaption>Page {page} / 5 · {page * 10 - 9}–{page * 10}</figcaption></figure></div>
     <section className="english-lines"><div className="english-section-head"><h2>逐句核对</h2><span>英文为主，中文自然好懂</span></div><nav aria-label="编辑页码">{[1, 2, 3, 4, 5].map((n) => <button key={n} aria-pressed={page === n} onClick={() => setPage(n)}>Page {n}</button>)}</nav>
       {writing.sentences.slice((page - 1) * 10, page * 10).map((line) => <div className="english-edit-line" key={line.number}><span>{String(line.number).padStart(2, '0')}</span><label>英文<input aria-label={'英文 ' + line.number} value={line.english} maxLength={110} disabled={busy} onChange={(event) => change({ sentences: writing.sentences.map((value) => value.number === line.number ? { ...value, english: event.target.value } : value) })} /></label><label>中文<input aria-label={'中文 ' + line.number} value={line.chinese} maxLength={55} disabled={busy} onChange={(event) => change({ sentences: writing.sentences.map((value) => value.number === line.number ? { ...value, chinese: event.target.value } : value) })} /></label></div>)}
     </section>

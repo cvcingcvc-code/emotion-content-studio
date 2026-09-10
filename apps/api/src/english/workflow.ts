@@ -12,7 +12,8 @@ import { AppError } from "../errors.js";
 import { parseOrThrow } from "../validation.js";
 import type { ContentRepository } from "../content/repository.js";
 import { createEnglishWriter, type EnglishWriter } from "./provider.js";
-import { englishCardHtml, renderEnglishPngs } from "./cards.js";
+import { englishCardHtml, renderEnglishPngs, renderEnglishPagePng } from "./cards.js";
+import { EnglishWritingSchema } from "@emotion-studio/contracts";
 
 const defaultRoot = fileURLToPath(new URL("../../../../", import.meta.url));
 const files = ["page-01.png", "page-02.png", "page-03.png", "page-04.png", "page-05.png", "content.md", "content.json"];
@@ -174,6 +175,20 @@ export async function registerEnglishWorkflow(app: FastifyInstance, repository: 
   const workflow = new EnglishWorkflow(repository, options);
   const ok = (id: string, data: unknown) => ({ ok: true, data, requestId: id });
   const idOf = (params: unknown) => parseOrThrow(z.object({ id: IdSchema }), params).id;
+  let rendering = false;
+  app.post("/api/v1/english/preview/png", async (request, reply) => {
+    const input = parseOrThrow(z.object({ writing: EnglishWritingSchema, page: z.number().int().min(1).max(5) }).strict(), request.body);
+    if (rendering) throw new AppError(429, "ENGLISH_BUSY", "正在导出图片，请稍后再试");
+    rendering = true;
+    try {
+      const png = await renderEnglishPagePng(input.writing, input.page);
+      reply.header("content-disposition", `attachment; filename="english-topic-page-${input.page}.png"`);
+      return reply.type("image/png").send(png);
+    } catch (error) {
+      throw new AppError(422, "CARD_RENDER_ERROR", error instanceof Error && error.message === "CARD_OVERFLOW"
+        ? "文字超出卡片范围，请缩短当前页句子后再导出。" : "PNG 导出失败，请确认本机 Edge 或 Chromium 可用。");
+    } finally { rendering = false; }
+  });
   app.get("/api/v1/english", async (request) => ok(request.id, { mode: workflow.writer.mode, history: await workflow.history() }));
   app.post("/api/v1/english/generate", async (request, reply) => {
     const controller = new AbortController();

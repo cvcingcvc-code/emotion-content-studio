@@ -27,6 +27,18 @@ async function setup() {
 }
 
 describe("English Account MVP", () => {
+  it("splits the current review into five pages and reflects edits only on the corresponding page", () => {
+    const writing = demoEnglishWriting(input);
+    writing.sentences[10] = { number: 11, english: "Let me say that again.", chinese: "让我再说一遍。" };
+    const pages = [1, 2, 3, 4, 5].map((page) => englishCardHtml(writing, page));
+    expect(pages).toHaveLength(5);
+    pages.forEach((html, index) => {
+      expect(html.match(/<li>/g)).toHaveLength(10);
+      for (const line of writing.sentences.slice(index * 10, index * 10 + 10)) expect(html).toContain(line.chinese);
+    });
+    expect(pages[1]).toContain("Let me say that again.");
+    expect(pages[0]).not.toContain("Let me say that again.");
+  });
   it.each(ENGLISH_DEMO_TOPICS)("provides newly authored 50-sentence demo %s", (topic) => {
     const draft = demoEnglishWriting({ ...input, topic });
     expect(EnglishWritingSchema.parse(draft).sentences).toHaveLength(50);
