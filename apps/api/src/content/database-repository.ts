@@ -36,7 +36,8 @@ type GeneratedContentRow = typeof generatedContents.$inferSelect;
 const ContentItemIdSchema = z.string().uuid();
 const publishedExpression = sql<boolean>`exists (
   select 1 from ${postRecords} p join ${generatedContents} g on p.generated_content_id = g.id
-  where p.status = 'published' and g.selected_content_ids @> jsonb_build_array(${contentItems.id}::text)
+  where p.status = 'published'
+    and g.selected_content_ids @> jsonb_build_array("content_items"."id"::text)
 )`;
 const contentSelection = { ...getTableColumns(contentItems), isPublished: publishedExpression };
 
