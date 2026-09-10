@@ -381,7 +381,7 @@ export function englishCardHtml(writing: EnglishWriting, page: number): string {
     <div class="sticker sticker-a">Plan<br>today? ♡</div>
     <div class="sticker sticker-b">Speak it<br>little by little ♡</div>
 
-    <div class="mascot-shadow"></div>
+    <div class="page-badge">${String(page).padStart(2, "0")} / 05</div>
     <div class="mascot">
       <div class="mascot-face">•ᴗ•</div>
     </div>
