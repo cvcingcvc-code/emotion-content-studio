@@ -217,4 +217,5 @@ export async function registerEnglishWorkflow(app: FastifyInstance, repository: 
     reply.header("content-disposition", `attachment; filename="${params.name}"`);
     return reply.type(params.name.endsWith(".png") ? "image/png" : params.name.endsWith(".json") ? "application/json" : "text/markdown; charset=utf-8").send(bytes);
   });
+  return workflow;
 }

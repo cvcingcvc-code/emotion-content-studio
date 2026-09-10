@@ -9,6 +9,9 @@ import {
   type ContentRepository,
 } from "./content/repository.js";
 import { AppError } from "./errors.js";
+import { GrowthLoopAgent } from "./growth-loop/provider.js";
+import { GrowthLoopService } from "./growth-loop/service.js";
+import { registerGrowthLoopRoutes } from "./growth-loop/routes.js";
 import { registerEnglishWorkflow, type EnglishWorkflowOptions } from "./english/workflow.js";
 import { createMockStore, type MockStore } from "./mock/store.js";
 import { registerRoutes } from "./routes.js";
@@ -34,6 +37,7 @@ function getErrorCode(error: unknown): string | undefined {
 }
 
 export interface BuildAppOptions {
+  growthLoopAgent?: GrowthLoopAgent;
   englishWorkflow?: EnglishWorkflowOptions;
   logger?: boolean;
   webOrigin?: string;
@@ -158,7 +162,9 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
     options.contentRepositoryMode ?? (options.contentRepository ? "custom" : "memory"),
     options.aiProvider ?? "mock",
   );
-  await registerStudioRoutes(app, contentRepository, options.pipelines ?? createMockPipelines());
-  await registerEnglishWorkflow(app, contentRepository, options.englishWorkflow);
+  const pipelines = options.pipelines ?? createMockPipelines();
+  await registerStudioRoutes(app, contentRepository, pipelines);
+  const english = await registerEnglishWorkflow(app, contentRepository, options.englishWorkflow);
+  await registerGrowthLoopRoutes(app, new GrowthLoopService(contentRepository.growthLoop, options.growthLoopAgent ?? new GrowthLoopAgent(), english, pipelines));
   return app;
 }

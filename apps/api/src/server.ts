@@ -1,6 +1,7 @@
 import { createDatabase, type DatabaseContext } from "@emotion-studio/database";
 import { createConfiguredContentGenerator } from "./ai/provider-factory.js";
 import { buildApp } from "./app.js";
+import { createGrowthLoopAgent } from "./growth-loop/provider.js";
 import { readServerConfig } from "./config.js";
 import { MockContentAnalyzer } from "./content/analyzer.js";
 import { DatabaseContentRepository } from "./content/database-repository.js";
@@ -22,6 +23,7 @@ const contentRepository = config.CONTENT_REPOSITORY === "database"
 const contentGenerator = createConfiguredContentGenerator(config);
 const ingestionAnalyzer = new MockContentAnalyzer();
 const app = await buildApp({
+  growthLoopAgent: createGrowthLoopAgent(config),
   logger: true,
   webOrigin: config.WEB_ORIGIN,
   contentRepository,
