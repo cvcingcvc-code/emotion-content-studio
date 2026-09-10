@@ -4,6 +4,10 @@ import { z } from "zod";
 import { RetrospectiveInputSchema, ContentAccountSchema, ContentTypeSchema, LoopWritingSchema, EnglishWritingSchema, MetricsInputSchema } from "@emotion-studio/contracts";
 import { parseOrThrow } from "../validation.js";
 import type { GrowthLoopService } from "./service.js";
+import { analyzePerformance } from "./feedback.js";
+import { latestMetrics } from "./metrics.js";
+import { dashboard } from "./dashboard.js";
+import { AppError } from "../errors.js";
 
 export async function registerGrowthLoopRoutes(app: FastifyInstance, service: GrowthLoopService) {
   const base = "/api/v1/growth-loop";
@@ -11,6 +15,16 @@ export async function registerGrowthLoopRoutes(app: FastifyInstance, service: Gr
   const idOf = (params: unknown) => parseOrThrow(z.object({ id: z.string().uuid() }), params).id;
   const revisionSchema = z.object({ revision: z.number().int().nonnegative() }).strict();
   app.get(base, async request => ok(request.id, await service.repository.snapshot()));
+  app.get(base + "/dashboard", async request => ok(request.id, dashboard(await service.repository.snapshot(), service.agent.mode, service.repository.mode)));
+  app.post(base + "/contents/:id/analyze", async request => {
+    const state = await service.repository.snapshot(), id = idOf(request.params);
+    const content = state.contents.find(x => x.id === id), metric = latestMetrics(state).get(id);
+    if (!content || !metric) throw new AppError(409, "METRICS_REQUIRED", "请先录入已发布内容的表现");
+    const cached = state.feedback.find(x => x.contentId === id && x.metricsId === metric.id);
+    if (cached) return ok(request.id, cached);
+    const feedback = analyzePerformance(content, metric, state);
+    await service.repository.addFeedback(feedback); return ok(request.id, feedback);
+  });
   app.post(base + "/retrospectives", async request => ok(request.id, await service.createRetrospective(parseOrThrow(RetrospectiveInputSchema, request.body))));
   app.put(base + "/retrospectives/:id", async request => {
     const input = parseOrThrow(z.object({ revision: z.number().int().nonnegative(), input: RetrospectiveInputSchema }).strict(), request.body);

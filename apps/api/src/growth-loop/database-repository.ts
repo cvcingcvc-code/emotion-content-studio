@@ -5,6 +5,7 @@ import { AppError } from "../errors.js";
 import { assertRevision, type GrowthLoopRepository } from "./repository.js";
 
 export class DatabaseGrowthLoopRepository implements GrowthLoopRepository {
+  readonly mode = "database" as const;
   constructor(private db: DatabaseContext["db"]) {}
   async snapshot() {
     return this.db.transaction(async tx => {
