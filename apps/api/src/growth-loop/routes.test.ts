@@ -44,6 +44,10 @@ describe("growth loop API", () => {
     const feedbackId = response.json().data.id;
     expect((await app.inject({ method: "POST", url: `${base}/contents/${content.id}/analyze` })).json().data.id).toBe(feedbackId);
     expect((await app.inject(base + "/dashboard")).json().data.focus.NEXT_3_POSTS).toHaveLength(3);
+    const next = (await app.inject({ method: "POST", url: base + "/contents", payload: { account: "growth", topic: "新的交付经历", contentType: "solution", sourceRetrospectiveId: retro.id, sourceContentId: content.id } })).json().data;
+    expect(next.experiment.variable).toBe("hook");
+    const generatedNext = (await app.inject({ method: "POST", url: `${base}/contents/${next.id}/generate`, payload: { revision: 0 } })).json().data;
+    expect(generatedNext.writing.body).toContain("如果你也遇到");
     response = await app.inject({ method: "PUT", url: `${base}/retrospectives/${retro.id}`, payload: { revision: retro.revision, input } });
     expect(response.json().data.analysis).toBeNull();
   });

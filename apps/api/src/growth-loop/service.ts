@@ -5,6 +5,8 @@ import type { EnglishWorkflow } from "../english/workflow.js";
 import type { PipelineRegistry } from "../studio/pipelines/types.js";
 import type { GrowthLoopRepository } from "./repository.js";
 import { GrowthLoopAgent } from "./provider.js";
+import { recommendNextExperiment } from "./feedback.js";
+import { latestMetrics } from "./metrics.js";
 
 export class GrowthLoopService {
   constructor(readonly repository: GrowthLoopRepository, readonly agent: GrowthLoopAgent, private english: EnglishWorkflow, private pipelines: PipelineRegistry) {}
@@ -42,7 +44,10 @@ export class GrowthLoopService {
       if (!retro.analysis || retro.analysis.contentPotential < CONTENT_POTENTIAL_THRESHOLD) throw new AppError(409, "MORE_DETAIL_REQUIRED", "请先补充并分析真实经历，内容潜力达到6分后再生产");
     }
     const now = new Date().toISOString();
-    const value = PublishedContentSchema.parse({ ...input, id: randomUUID(), revision: 0, title: input.topic.slice(0, 80), englishDraftId: null, createdAt: now, updatedAt: now, publishedAt: null, publishTime: null, status: "draft", writing: null, english: null, note: "", provider: this.agent.mode, isDemo: false });
+    const state = await this.repository.snapshot();
+    const previous = state.contents.find(x => x.id === input.sourceContentId), metric = previous ? latestMetrics(state).get(previous.id) : null;
+    const experiment = previous && metric ? recommendNextExperiment(previous, metric, state) : null;
+    const value = PublishedContentSchema.parse({ ...input, id: randomUUID(), revision: 0, title: input.topic.slice(0, 80), englishDraftId: null, createdAt: now, updatedAt: now, publishedAt: null, publishTime: null, status: "draft", writing: null, english: null, note: previous?.isDemo ? "策略来自合成 Demo，仅用于演示，不代表真实业绩证据。" : "", provider: this.agent.mode, isDemo: false, experiment });
     await this.repository.saveContent(value, null); return value;
   }
   async generate(id: string, revision: number) {
@@ -60,7 +65,7 @@ export class GrowthLoopService {
       value = { ...value, provider: result.provider, title: result.data.recommendedTitle, writing: { title: result.data.recommendedTitle, body: result.data.body, tags: result.data.hashtags, corePoint: theme.data.reusableTheme, solution: "表达感受，不替读者作判断。", endingQuestion: result.data.endingQuestion ?? "哪一句说中了你的感受？" } };
     } else {
       if (!existing.sourceRetrospectiveId) throw new AppError(409, "RETROSPECTIVE_REQUIRED", "Growth 内容需要真实复盘来源；请先填写复盘");
-      const writing = await this.agent.generateContentOpportunity(await this.retrospective(existing.sourceRetrospectiveId), existing.topic, existing.contentType);
+      const writing = await this.agent.generateContentOpportunity(await this.retrospective(existing.sourceRetrospectiveId), existing.topic, existing.contentType, existing.experiment);
       value = { ...value, writing, title: writing.title };
     }
     value = PublishedContentSchema.parse(value);

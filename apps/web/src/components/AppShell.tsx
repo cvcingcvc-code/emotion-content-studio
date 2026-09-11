@@ -58,6 +58,12 @@ export function AppShell({ children }: { children: ReactNode }) {
   const profiles = accountProfiles;
   const navigation = [
     { to: '/', label: '总览', icon: LayoutDashboard },
+    { to: '/retrospectives', label: 'Retrospective', icon: BookOpenText },
+    { to: '/create', label: 'Create / Review / Preview', icon: Sparkles },
+    { to: '/performance', label: 'Performance', icon: Send },
+    { to: '/history', label: 'History', icon: BookOpenText },
+    { to: '/english', label: 'English Demo', icon: Sparkles },
+    { to: '/settings', label: 'Settings', icon: LayoutDashboard },
     { to: `/accounts/${activeAccountId}`, label: '账号工作区', icon: Sparkles },
     { to: withAccount('/library', activeAccountId), label: '统一素材库', icon: BookOpenText },
     { to: withAccount('/posts', activeAccountId), label: '发布与数据', icon: Send },

@@ -5,6 +5,11 @@ export const ContentAccountSchema = z.enum(["growth", "english", "emotion"]);
 export const CONTENT_ACCOUNT_IDS = { growth: "personal_growth", english: "fun_english", emotion: "emotion_library" } as const;
 export const ContentTypeSchema = z.enum(["story", "solution", "reflection", "list", "educational"]);
 export const CONTENT_POTENTIAL_THRESHOLD = 6;
+export const ExperimentSchema = z.object({
+  variable: z.enum(["title", "hook", "actionSteps", "sampleSize"]),
+  instruction: z.string().trim().min(1).max(600), keepConstant: z.string().trim().min(1).max(600),
+  metric: z.enum(["views", "favoriteRate", "followConversionRate"]),
+});
 const short = z.string().trim().max(1_000);
 export const RetrospectiveInputSchema = z.object({
   date: z.iso.date(),
@@ -52,6 +57,7 @@ export const PublishedContentSchema = z.object({
   note: z.string().max(2_000),
   provider: z.enum(["mock", "deepseek"]),
   isDemo: z.boolean().default(false),
+  experiment: ExperimentSchema.nullable().default(null),
 }).strict().superRefine((value, ctx) => {
   if (value.status === "published" ? (!value.publishedAt || !value.publishTime) : (value.publishedAt !== null || value.publishTime !== null)) {
     ctx.addIssue({ code: "custom", path: ["publishedAt"], message: "已发布状态必须有发布时间" });
@@ -79,11 +85,6 @@ export const ComparisonSchema = z.object({
 });
 export const ComparisonsSchema = z.object({
   recent3: ComparisonSchema, recent7: ComparisonSchema, sameAccount: ComparisonSchema, sameContentType: ComparisonSchema,
-});
-export const ExperimentSchema = z.object({
-  variable: z.enum(["title", "hook", "actionSteps", "sampleSize"]),
-  instruction: text, keepConstant: text,
-  metric: z.enum(["views", "favoriteRate", "followConversionRate"]),
 });
 export const ContentFeedbackSchema = z.object({
   id: z.string().uuid(), contentId: z.string().uuid(), metricsId: z.string().uuid(), createdAt: z.iso.datetime(),

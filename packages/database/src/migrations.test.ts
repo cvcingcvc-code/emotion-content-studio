@@ -171,7 +171,7 @@ integrationDescribe("database migrations", () => {
       );
 
       expect((await runMigrations(legacyDatabase.pool)).map((migration) => migration.name))
-        .toEqual(["0002_multi_account_foundation.sql", "0003_generation_observability.sql"]);
+        .toEqual(["0002_multi_account_foundation.sql", "0003_generation_observability.sql", "0004_growth_loop.sql"]);
       expect(await runMigrations(legacyDatabase.pool)).toEqual([]);
 
       const upgradedContent = await legacyDatabase.pool.query<{

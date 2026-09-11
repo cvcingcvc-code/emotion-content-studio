@@ -14,7 +14,7 @@ async function capture(page: Page, writing: EnglishWriting, index: number): Prom
   return page.screenshot({ type: "png" });
 }
 
-async function withCanvas<T>(action: (page: Page) => Promise<T>): Promise<T> {
+export async function withCanvas<T>(action: (page: Page) => Promise<T>): Promise<T> {
   const browser = await chromium.launch({ headless: true, ...(process.platform === "win32" ? { channel: "msedge" } : {}) });
   try {
     const page = await browser.newPage({ viewport: { width: 900, height: 1200 }, deviceScaleFactor: 1 });

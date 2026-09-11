@@ -1,19 +1,42 @@
 import { randomUUID } from "node:crypto";
 import type { FastifyInstance } from "fastify";
 import { z } from "zod";
-import { RetrospectiveInputSchema, ContentAccountSchema, ContentTypeSchema, LoopWritingSchema, EnglishWritingSchema, MetricsInputSchema } from "@emotion-studio/contracts";
+import { RetrospectiveInputSchema, ContentAccountSchema, ContentTypeSchema, LoopWritingSchema, EnglishWritingSchema, MetricsInputSchema, PublishedContentSchema, growthCardPages } from "@emotion-studio/contracts";
 import { parseOrThrow } from "../validation.js";
 import type { GrowthLoopService } from "./service.js";
 import { analyzePerformance } from "./feedback.js";
 import { latestMetrics } from "./metrics.js";
 import { dashboard } from "./dashboard.js";
 import { AppError } from "../errors.js";
+import { renderGrowthCard } from "./cards.js";
+import { seedGrowthLoopDemo } from "./demo.js";
 
 export async function registerGrowthLoopRoutes(app: FastifyInstance, service: GrowthLoopService) {
   const base = "/api/v1/growth-loop";
   const ok = (requestId: string, data: unknown) => ({ ok: true, data, requestId });
   const idOf = (params: unknown) => parseOrThrow(z.object({ id: z.string().uuid() }), params).id;
   const revisionSchema = z.object({ revision: z.number().int().nonnegative() }).strict();
+  let rendering = false;
+  let seeding = false;
+  app.post(base + "/demo", async request => {
+    if (seeding) throw new AppError(429, "DEMO_BUSY", "正在加载演示数据");
+    seeding = true;
+    try { return ok(request.id, await seedGrowthLoopDemo(service.repository)); }
+    finally { seeding = false; }
+  });
+  app.post(base + "/preview/png", async (request, reply) => {
+    const input = parseOrThrow(z.object({ content: PublishedContentSchema, page: z.number().int().min(1) }).strict(), request.body);
+    if (input.page > growthCardPages(input.content).length) throw new AppError(400, "INVALID_PAGE", "页码无效");
+    if (rendering) throw new AppError(429, "RENDER_BUSY", "正在导出，请稍后再试");
+    rendering = true;
+    try {
+      const bytes = await renderGrowthCard(input.content, input.page);
+      reply.header("content-disposition", `attachment; filename="${input.content.account}-page-${input.page}.png"`);
+      return reply.type("image/png").send(bytes);
+    } catch {
+      throw new AppError(422, "RENDER_ERROR", "PNG未导出。请缩短过长标题，或确认本机 Edge / Chromium 可用。");
+    } finally { rendering = false; }
+  });
   app.get(base, async request => ok(request.id, await service.repository.snapshot()));
   app.get(base + "/dashboard", async request => ok(request.id, dashboard(await service.repository.snapshot(), service.agent.mode, service.repository.mode)));
   app.post(base + "/contents/:id/analyze", async request => {

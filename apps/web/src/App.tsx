@@ -9,15 +9,17 @@ import LibraryPage from './pages/LibraryPage';
 import MaterialDetailPage from './pages/MaterialDetailPage';
 import AccountWorkspacePage from './pages/AccountWorkspacePage';
 import PublishingPage from './pages/PublishingPage';
+import GrowthLoopPage from './pages/GrowthLoopPage';
 
 export default function App() {
   const { pathname } = useLocation();
-  if (pathname === '/' || pathname === '/english' || pathname.startsWith('/english/')) {
-    return <Routes><Route path="/" element={<EnglishWorkflowPage />} /><Route path="/english" element={<EnglishWorkflowPage />} /><Route path="/english/:id" element={<EnglishWorkflowPage />} /></Routes>;
+  if (pathname === '/english' || pathname.startsWith('/english/')) {
+    return <Routes><Route path="/english" element={<EnglishWorkflowPage />} /><Route path="/english/:id" element={<EnglishWorkflowPage />} /></Routes>;
   }
   return (
     <AppShell>
       <Routes>
+        {['/', '/create', '/retrospectives', '/retrospectives/:id', '/growth-content/:id', '/performance', '/history', '/settings'].map(path => <Route key={path} path={path} element={<GrowthLoopPage />} />)}
         <Route path="/studio" element={<DashboardPage />} />
         <Route path="/accounts/:accountId" element={<AccountWorkspacePage />} />
         <Route path="/import" element={<ImportPage />} />

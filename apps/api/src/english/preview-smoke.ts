@@ -17,7 +17,7 @@ try {
     const url = new URL(route.request().url());
     await route.fulfill({ response: await route.fetch({ url: address + url.pathname + url.search }) });
   });
-  await page.goto(process.env.ENGLISH_SMOKE_WEB_URL ?? "http://127.0.0.1:5173");
+  await page.goto(process.env.ENGLISH_SMOKE_WEB_URL ?? "http://127.0.0.1:5173/english");
   await page.getByLabel("主题", { exact: true }).fill("尴尬时刻英语50句");
   await page.getByRole("button", { name: /^Generate/ }).click();
   await page.getByLabel("英文 1", { exact: true }).fill("Sorry, I thought you were my friend.");
