@@ -1,7 +1,6 @@
-import { randomUUID } from "node:crypto";
 import type { FastifyInstance } from "fastify";
 import { z } from "zod";
-import { RetrospectiveInputSchema, ContentAccountSchema, ContentTypeSchema, LoopWritingSchema, EnglishWritingSchema, MetricsInputSchema, PublishedContentSchema, growthCardPages } from "@emotion-studio/contracts";
+import { ExperimentOutcomeSchema, RejectReasonSchema, RetrospectiveInputSchema, ContentAccountSchema, ContentTypeSchema, LoopWritingSchema, EnglishWritingSchema, MetricsInputSchema, PublishedContentSchema, growthCardPages } from "@emotion-studio/contracts";
 import { parseOrThrow } from "../validation.js";
 import type { GrowthLoopService } from "./service.js";
 import { analyzePerformance } from "./feedback.js";
@@ -67,9 +66,13 @@ export async function registerGrowthLoopRoutes(app: FastifyInstance, service: Gr
     const input = parseOrThrow(z.object({ revision: z.number().int().nonnegative(), publishTime: z.iso.datetime() }).strict(), request.body);
     return ok(request.id, await service.publish(idOf(request.params), input.revision, input.publishTime));
   });
-  app.post(base + "/contents/:id/metrics", async request => {
-    const input = parseOrThrow(MetricsInputSchema, request.body);
-    const value = { ...input, id: randomUUID(), contentId: idOf(request.params), capturedAt: new Date().toISOString() };
-    await service.repository.addMetrics(value); return ok(request.id, value);
+  app.post(base + "/contents/:id/metrics", async request => ok(request.id, await service.recordMetrics(idOf(request.params), parseOrThrow(MetricsInputSchema, request.body))));
+  app.post(base + "/contents/:id/experiment", async request => {
+    const input = parseOrThrow(z.object({ revision: z.number().int().nonnegative(), outcome: ExperimentOutcomeSchema }).strict(), request.body);
+    return ok(request.id, await service.decideExperiment(idOf(request.params), input.revision, input.outcome));
+  });
+  app.post(base + "/contents/:id/reject", async request => {
+    const input = parseOrThrow(z.object({ revision: z.number().int().nonnegative(), reason: RejectReasonSchema }).strict(), request.body);
+    return ok(request.id, await service.reject(idOf(request.params), input.revision, input.reason));
   });
 }

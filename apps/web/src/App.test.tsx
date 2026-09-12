@@ -181,7 +181,7 @@ describe('emotion content studio demo', () => {
     installDemoApi();
     render(<MemoryRouter initialEntries={['/studio']}><App /></MemoryRouter>);
     expect(await screen.findByText('把情绪素材，变成可继续创作的内容。')).toBeInTheDocument();
-    for (const label of ['总览', '账号工作区', '统一素材库', '发布与数据']) expect(screen.getByRole('link', { name: label })).toBeInTheDocument();
+    for (const label of ['内容总览', '账号工作区', '统一素材库', '发布与数据']) expect(screen.getByRole('link', { name: label })).toBeInTheDocument();
   });
 
   it('retries a real dashboard request failure even when preview mode is already normal', async () => {

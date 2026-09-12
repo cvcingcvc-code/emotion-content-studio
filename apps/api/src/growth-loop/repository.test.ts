@@ -22,7 +22,7 @@ function contract(factory: () => GrowthLoopRepository) {
     const repo = factory(), now = new Date().toISOString();
     const content = PublishedContentSchema.parse({ id: randomUUID(), revision: 0, account: "growth", title: "确认范围", topic: "返工", contentType: "solution", sourceRetrospectiveId: null, sourceContentId: null, englishDraftId: null, createdAt: now, updatedAt: now, publishedAt: null, publishTime: null, status: "draft", writing: null, english: null, note: "", provider: "mock", isDemo: false });
     await repo.saveContent(content, null);
-    const metrics = { id: randomUUID(), contentId: content.id, capturedAt: now, views: 0, likes: 0, favorites: 0, comments: 0, followersGained: 0, note: "" };
+    const metrics = { id: randomUUID(), contentId: content.id, capturedAt: now, views: 0, likes: 0, favorites: 0, comments: 0, followersGained: 0, note: "", hoursSincePublish: null };
     await expect(repo.addMetrics(metrics)).rejects.toThrow();
     await repo.saveContent({ ...content, revision: 1, status: "published", publishedAt: now, publishTime: now, writing: { title: content.title, body: "先确认范围", corePoint: "确认", solution: "列标准", endingQuestion: "你呢？", tags: ["#工作"] } }, 0);
     await repo.addMetrics(metrics);

@@ -26,16 +26,16 @@ export function usePreviewMode() {
 }
 
 const pageMeta = [
-  { match: /^\/$/, eyebrow: 'DEMO / CONTENT DESK', title: '今日内容台' },
-  { match: /^\/accounts\/personal_growth/, eyebrow: 'PERSONAL GROWTH', title: '成长复盘工作区' },
-  { match: /^\/accounts\/fun_english/, eyebrow: 'FUN ENGLISH', title: '趣味英语工作区' },
-  { match: /^\/accounts\/emotion_library/, eyebrow: 'EMOTION LIBRARY', title: '情绪素材工作区' },
-  { match: /^\/import/, eyebrow: 'INGEST / CSV', title: '导入素材' },
-  { match: /^\/library/, eyebrow: 'MATERIALS / ANALYSIS', title: '统一素材库' },
-  { match: /^\/materials/, eyebrow: 'MATERIAL / DETAIL', title: '素材详情' },
-  { match: /^\/inspirations/, eyebrow: 'CURATED / IDEAS', title: '灵感库' },
-  { match: /^\/generated/, eyebrow: 'DEMO AI / DRAFT', title: '文案生成结果' },
-  { match: /^\/posts/, eyebrow: 'PUBLISH / PERFORMANCE', title: '发布与数据' },
+  { match: /^\/$/, eyebrow: '演示 / 内容工作台', title: '内容总览' },
+  { match: /^\/accounts\/personal_growth/, eyebrow: '个人成长', title: '成长复盘工作区' },
+  { match: /^\/accounts\/fun_english/, eyebrow: '趣味英语', title: '趣味英语工作区' },
+  { match: /^\/accounts\/emotion_library/, eyebrow: '情绪灵感库', title: '情绪素材工作区' },
+  { match: /^\/import/, eyebrow: '导入 / CSV', title: '导入素材' },
+  { match: /^\/library/, eyebrow: '素材 / 分析', title: '统一素材库' },
+  { match: /^\/materials/, eyebrow: '素材 / 详情', title: '素材详情' },
+  { match: /^\/inspirations/, eyebrow: '灵感 / 收藏', title: '灵感库' },
+  { match: /^\/generated/, eyebrow: '生成 / 草稿', title: '文案生成结果' },
+  { match: /^\/posts/, eyebrow: '发布 / 表现', title: '发布与数据' },
 ];
 
 const previewOptions: Array<{ value: PreviewMode; label: string }> = [
@@ -57,13 +57,13 @@ export function AppShell({ children }: { children: ReactNode }) {
   const activeAccountId = getAccountIdFromUrl(location.pathname, location.search);
   const profiles = accountProfiles;
   const navigation = [
-    { to: '/', label: '总览', icon: LayoutDashboard },
-    { to: '/retrospectives', label: 'Retrospective', icon: BookOpenText },
-    { to: '/create', label: 'Create / Review / Preview', icon: Sparkles },
-    { to: '/performance', label: 'Performance', icon: Send },
-    { to: '/history', label: 'History', icon: BookOpenText },
-    { to: '/english', label: 'English Demo', icon: Sparkles },
-    { to: '/settings', label: 'Settings', icon: LayoutDashboard },
+    { to: '/', label: '内容总览', icon: LayoutDashboard },
+    { to: '/retrospectives', label: '复盘记录', icon: BookOpenText },
+    { to: '/create', label: '内容创作', icon: Sparkles },
+    { to: '/performance', label: '数据表现', icon: Send },
+    { to: '/history', label: '历史记录', icon: BookOpenText },
+    { to: '/english', label: '趣味英语', icon: Sparkles },
+    { to: '/settings', label: '设置', icon: LayoutDashboard },
     { to: `/accounts/${activeAccountId}`, label: '账号工作区', icon: Sparkles },
     { to: withAccount('/library', activeAccountId), label: '统一素材库', icon: BookOpenText },
     { to: withAccount('/posts', activeAccountId), label: '发布与数据', icon: Send },
@@ -81,7 +81,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         <aside id="primary-sidebar" className={`sidebar ${menuOpen ? 'is-open' : ''}`}>
           <div className="brand-lockup">
             <div className="brand-mark">字</div>
-            <div><strong>字里</strong><span>CONTENT DESK</span></div>
+            <div><strong>字里</strong><span>内容工作室</span></div>
             <button className="icon-button sidebar-close" aria-label="关闭菜单" onClick={() => setMenuOpen(false)}><X size={18} /></button>
           </div>
           <nav className="primary-nav" aria-label="主要导航">
@@ -93,12 +93,12 @@ export function AppShell({ children }: { children: ReactNode }) {
             ))}
           </nav>
           <div className="sidebar-note">
-            <span>THREE ACCOUNT DESK</span>
+            <span>三账号工作台</span>
             <strong>记录 → 生成 → 复盘</strong>
             <div className="mini-progress"><i style={{ width: '68%' }} /></div>
             <p>每份生成结果都会标注 Provider 与模型，发布前必须人工确认。</p>
           </div>
-          <div className="profile-chip"><span>创</span><div><strong>个人工作台</strong><small>内容创作者</small></div></div>
+          <div className="profile-chip"><span>创</span><div><strong>内容创作者</strong><small>多账号管理</small></div></div>
         </aside>
 
         <div className="workspace">
@@ -110,13 +110,13 @@ export function AppShell({ children }: { children: ReactNode }) {
                 {profiles.map((profile) => <NavLink key={profile.id} to={`/accounts/${profile.id}`} className={profile.id === activeAccountId ? 'is-active' : ''}>{profile.displayName}</NavLink>)}
               </nav>
               <label className="account-switcher-mobile">
-                <span>当前账号</span>
+                <span>切换账号</span>
                 <select aria-label="切换内容账号" value={activeAccountId} onChange={(event) => switchAccount(event.target.value)}>
                   {profiles.map((profile) => <option key={profile.id} value={profile.id}>{profile.displayName}</option>)}
                 </select>
               </label>
               {import.meta.env.DEV ? <label className="state-switcher">
-                <span>状态预览</span>
+                <span>演示状态</span>
                 <select aria-label="切换页面演示状态" value={mode} onChange={(event) => setMode(event.target.value as PreviewMode)}>
                   {previewOptions.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
                 </select>

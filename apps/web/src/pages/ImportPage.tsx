@@ -84,11 +84,11 @@ export default function ImportPage() {
   return (
     <>
       <div className="page-intro compact-intro">
-        <div className="page-intro-copy">
-          <p className="kicker">CSV IN, SIGNAL OUT</p>
-          <h2>导入一份 CSV，自动完成清洗与模拟分析。</h2>
-          <p>只有 <code>content</code> 列是必填的。可选列为 author、likes、source 和 url。原文会保留，分析结果由 MockAnalyzer 生成。</p>
-        </div>
+<div className="page-intro-copy">
+            <p className="kicker">CSV 导入与分析</p>
+            <h2>导入一份 CSV，自动完成清洗与模拟分析。</h2>
+            <p>只有 <code>content</code> 列是必填的。可选列为 author、likes、source 和 url。原文会保留，分析结果由 MockAnalyzer 生成。</p>
+          </div>
         <button className="secondary-button" disabled={blocked || demoMessage.startsWith('正在')} onClick={() => void loadDemoData()}><Sparkles size={15} />加载演示数据</button>
       </div>
 

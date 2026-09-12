@@ -5,7 +5,7 @@ import { analyzePerformance, recommendEffortDirection } from "./feedback.js";
 import { historicalComparison } from "./metrics.js";
 
 function sample(count = 9): GrowthLoopState {
-  const state: GrowthLoopState = { retrospectives: [], contents: [], metrics: [], feedback: [] };
+  const state: GrowthLoopState = { retrospectives: [], contents: [], metrics: [], feedback: [], strategies: [] };
   for (let index = 0; index < count; index++) {
     const time = new Date(Date.UTC(2026, 8, index + 1)).toISOString();
     const item = PublishedContentSchema.parse({ id: randomUUID(), revision: 0, account: "growth", title: "真实工作经历", topic: "工作复盘", contentType: "solution", sourceRetrospectiveId: null, sourceContentId: null, englishDraftId: null, createdAt: time, updatedAt: time, publishedAt: time, publishTime: time, status: "published", writing: { title: "复盘", body: "先确认范围", corePoint: "确认", solution: "列标准", endingQuestion: "你呢", tags: ["#工作"] }, english: null, note: "", provider: "mock", isDemo: false });
@@ -23,13 +23,16 @@ describe("feedback and effort direction", () => {
     expect(comparison.recent7.contentIds).not.toContain(current.id);
     expect(comparison.recent3.avgFavoriteRate).toBeCloseTo(.05);
     state.metrics.push({ ...state.metrics[7]!, id: randomUUID(), capturedAt: "2026-09-08T01:00:00.000Z", views: 400 });
-    expect(historicalComparison(current, metric, state).recent3.avgViews).toBe(200);
+    // PHASE H 起基线改用 median：median(100, 100, 400) = 100（旧的 average 会得到 200）。
+    expect(historicalComparison(current, metric, state).recent3.avgViews).toBe(100);
   });
   it("outputs bounded KEEP CHANGE and exactly one experimental variable", () => {
     const state = sample(); const metric = { ...state.metrics[8]!, views: 50 };
     const result = analyzePerformance(state.contents[8]!, metric, state);
-    expect(result.KEEP).toHaveLength(1); expect(result.CHANGE).toHaveLength(1);
-    expect(result.NEXT_EXPERIMENT.variable).toBe("title");
+    // 相对表现 -50% => CHANGE。KEEP/CHANGE 允许为空，不再强行输出结论。
+    expect(result.verdict).toBe("CHANGE");
+    expect(result.KEEP).toHaveLength(0); expect(result.CHANGE).toHaveLength(1);
+    expect(result.NEXT_EXPERIMENT.variable).toBe("title_style");
     expect(result.performanceSummary).toContain("不证明");
     expect(analyzePerformance(state.contents[8]!, { ...metric, views: 0 }, state).rates.likeRate).toBeNull();
   });

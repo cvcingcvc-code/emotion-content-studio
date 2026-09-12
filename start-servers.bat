@@ -1,0 +1,26 @@
+@echo off
+cd /d "C:\Users\lin\Documents\ChatGPT\情绪灵感库\emotion-content-studio"
+echo Starting development servers...
+echo API: http://127.0.0.1:8787
+echo Web: http://localhost:5173
+echo.
+echo Building dependencies...
+call npm run build:dependencies
+echo.
+echo Starting API server first...
+start "API Server" cmd /k "cd apps/api && npx tsx watch src/server.ts"
+echo Waiting for API to start...
+timeout /t 8 /nobreak >nul
+echo Checking API health...
+curl -s http://127.0.0.1:8787/api/v1/health >nul 2>&1
+if %errorlevel% equ 0 (
+    echo API server is ready.
+) else (
+    echo API server might still be starting, continuing with web...
+)
+echo.
+echo Starting Web server...
+start "Web Server" cmd /k "cd apps/web && npx vite --host 127.0.0.1"
+echo.
+echo Both servers started. Press any key to stop...
+pause >nul

@@ -1,4 +1,4 @@
-import { GrowthLoopStateSchema, RetrospectiveSchema, PublishedContentSchema, ContentMetricsSchema, ContentFeedbackSchema, type GrowthLoopState, type Retrospective, type PublishedContent, type ContentMetrics, type ContentFeedback } from "@emotion-studio/contracts";
+import { GrowthLoopStateSchema, RetrospectiveSchema, PublishedContentSchema, ContentMetricsSchema, ContentFeedbackSchema, StrategyEntrySchema, type GrowthLoopState, type Retrospective, type PublishedContent, type ContentMetrics, type ContentFeedback, type StrategyEntry } from "@emotion-studio/contracts";
 import { AppError } from "../errors.js";
 
 export interface GrowthLoopRepository {
@@ -8,6 +8,7 @@ export interface GrowthLoopRepository {
   saveContent(value: PublishedContent, expectedRevision: number | null): Promise<void>;
   addMetrics(value: ContentMetrics): Promise<void>;
   addFeedback(value: ContentFeedback): Promise<void>;
+  saveStrategies(values: StrategyEntry[]): Promise<void>;
 }
 export function assertRevision(existing: { revision: number } | undefined, value: { revision: number }, expected: number | null) {
   if (expected === null ? existing || value.revision !== 0 : !existing || existing.revision !== expected || value.revision !== expected + 1) {
@@ -16,7 +17,7 @@ export function assertRevision(existing: { revision: number } | undefined, value
 }
 export class InMemoryGrowthLoopRepository implements GrowthLoopRepository {
   readonly mode = "memory" as const;
-  private state: GrowthLoopState = { retrospectives: [], contents: [], metrics: [], feedback: [] };
+  private state: GrowthLoopState = { retrospectives: [], contents: [], metrics: [], feedback: [], strategies: [] };
   async snapshot() { return GrowthLoopStateSchema.parse(structuredClone(this.state)); }
   async saveRetrospective(value: Retrospective, expected: number | null) {
     value = RetrospectiveSchema.parse(value);
@@ -40,5 +41,11 @@ export class InMemoryGrowthLoopRepository implements GrowthLoopRepository {
     if (!this.state.metrics.some(x => x.id === value.metricsId && x.contentId === value.contentId)) throw new AppError(404, "METRICS_NOT_FOUND", "指标不存在");
     if (this.state.feedback.some(x => x.id === value.id)) throw new AppError(409, "DUPLICATE", "反馈已存在");
     this.state.feedback.push(value);
+  }
+  async saveStrategies(values: StrategyEntry[]) {
+    const parsed = values.map(value => StrategyEntrySchema.parse(value));
+    const activeKeys = parsed.filter(x => x.status === "active").map(x => `${x.account}/${x.key}`);
+    if (new Set(activeKeys).size !== activeKeys.length) throw new AppError(409, "STRATEGY_CONFLICT", "同一个策略 key 只能有一个 active value");
+    this.state.strategies = parsed;
   }
 }

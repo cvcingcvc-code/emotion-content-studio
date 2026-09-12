@@ -1,0 +1,323 @@
+.retrospective-workspace {
+  max-width: 1180px;
+  padding: 32px 0 60px;
+}
+
+.retrospective-header {
+  margin-bottom: 32px;
+}
+
+.retrospective-header h1 {
+  font-size: 36px;
+  font-weight: 600;
+  margin: 0 0 12px;
+  color: #2f3a2c;
+}
+
+.retrospective-subtitle {
+  color: #65755f;
+  font-size: 18px;
+  margin: 0 0 24px;
+  font-weight: 400;
+}
+
+.retrospective-flow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 14px;
+  color: #607257;
+  margin-bottom: 32px;
+}
+
+.retrospective-flow-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.retrospective-flow-item:not(:last-child)::after {
+  content: '→';
+  color: #8b9688;
+}
+
+.retrospective-editor {
+  margin-bottom: 48px;
+}
+
+.retrospective-editor-top {
+  margin-bottom: 24px;
+}
+
+.retrospective-editor-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #2f3a2c;
+  margin-bottom: 16px;
+}
+
+.retrospective-editor-description {
+  font-size: 16px;
+  color: #607257;
+  line-height: 1.6;
+}
+
+.retrospective-main-content {
+  margin-bottom: 32px;
+}
+
+.retrospective-main-input {
+  width: 100%;
+  min-height: 280px;
+  border: 0;
+  border-bottom: 1px solid #d8dfd0;
+  background: transparent;
+  padding: 8px 2px 20px;
+  font: inherit;
+  color: inherit;
+  font-size: 16px;
+  line-height: 1.8;
+  resize: vertical;
+}
+
+.retrospective-main-input:focus {
+  outline: none;
+  border-bottom-color: #52734d;
+  background: #fdfdfa;
+}
+
+.retrospective-main-input::placeholder {
+  color: #8b9688;
+  font-style: italic;
+}
+
+.retrospective-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.retrospective-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.retrospective-field-label {
+  font-size: 14px;
+  color: #607257;
+  letter-spacing: 0.06em;
+}
+
+.retrospective-field-input {
+  border: 0;
+  border-bottom: 1px solid #d8dfd0;
+  background: transparent;
+  padding: 6px 2px 10px;
+  font: inherit;
+  color: inherit;
+  font-size: 14px;
+}
+
+.retrospective-field-input:focus {
+  outline: none;
+  border-bottom-color: #52734d;
+  background: #fdfdfa;
+}
+
+.retrospective-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.retrospective-actions button {
+  padding: 10px 20px;
+  border: 1px solid #52734d;
+  background: white;
+  color: #52734d;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.retrospective-actions button:hover {
+  background: #f0f7f0;
+}
+
+.retrospective-actions button.em-primary {
+  background: #52734d;
+  color: white;
+  border-color: #52734d;
+}
+
+.retrospective-actions button.em-primary:hover {
+  background: #4a6b45;
+}
+
+.retrospective-history {
+  margin-top: 60px;
+}
+
+.retrospective-history-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #2f3a2c;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e2e8de;
+}
+
+.retrospective-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.retrospective-history-item {
+  background: #fdfdfa;
+  border: 1px solid #e2e8de;
+  border-radius: 4px;
+  padding: 24px;
+  transition: all 0.2s;
+}
+
+.retrospective-history-item:hover {
+  border-color: #52734d;
+  box-shadow: 0 2px 4px rgba(82, 115, 77, 0.05);
+}
+
+.retrospective-history-date {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2f3a2c;
+  margin-bottom: 12px;
+}
+
+.retrospective-history-content {
+  font-size: 15px;
+  color: #2f3a2c;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.retrospective-history-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.retrospective-history-actions a {
+  font-size: 14px;
+  color: #52734d;
+  text-decoration: none;
+}
+
+.retrospective-history-actions a:hover {
+  text-decoration: underline;
+}
+
+.retrospective-history-opportunity {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #52734d;
+  background: #e8f5e9;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.retrospective-history-opportunity .icon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.retrospective-history-empty {
+  text-align: center;
+  padding: 40px;
+  color: #607257;
+  font-size: 16px;
+}
+
+.retrospective-analysis {
+  margin-top: 32px;
+  padding: 24px;
+  background: #fdfdfa;
+  border: 1px solid #e2e8de;
+  border-radius: 4px;
+}
+
+.retrospective-analysis-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2f3a2c;
+  margin-bottom: 16px;
+}
+
+.retrospective-analysis-content {
+  font-size: 14px;
+  color: #607257;
+  line-height: 1.6;
+}
+
+.retrospective-analysis-content dl {
+  margin: 16px 0;
+}
+
+.retrospective-analysis-content dt {
+  font-weight: 600;
+  color: #2f3a2c;
+  margin-bottom: 4px;
+}
+
+.retrospective-analysis-content dd {
+  margin: 0;
+  color: #607257;
+}
+
+.retrospective-analysis-content h3 {
+  font-size: 16px;
+  margin: 16px 0 8px;
+  color: #2f3a2c;
+}
+
+.retrospective-analysis-content p {
+  margin: 0 0 8px;
+}
+
+.retrospective-analysis-content .create-content-link {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 8px 16px;
+  background: #52734d;
+  color: white;
+  border-radius: 4px;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.retrospective-analysis-content .create-content-link:hover {
+  background: #4a6b45;
+}
+
+@media (max-width: 768px) {
+  .retrospective-fields {
+    grid-template-columns: 1fr;
+  }
+  
+  .retrospective-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .retrospective-history-item {
+    padding: 16px;
+  }
+}

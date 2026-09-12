@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import type { Retrospective, PublishedContent, ContentMetrics, ContentFeedback } from "@emotion-studio/contracts";
+import type { Retrospective, PublishedContent, ContentMetrics, ContentFeedback, StrategyEntry } from "@emotion-studio/contracts";
 import {
   bigint,
   bigserial,
@@ -41,6 +41,11 @@ export const contentFeedback = pgTable("content_feedback", {
   id: uuid("id").primaryKey(), contentId: uuid("content_id").notNull().references(() => publishedContents.id),
   metricsId: uuid("metrics_id").notNull().references(() => contentMetrics.id),
   payload: jsonb("payload").$type<ContentFeedback>().notNull(),
+});
+export const strategyMemory = pgTable("strategy_memory", {
+  id: uuid("id").primaryKey(), account: text("account").notNull(),
+  strategyKey: text("strategy_key").notNull(), status: text("status").notNull(),
+  payload: jsonb("payload").$type<StrategyEntry>().notNull(),
 });
 
 export const reviewStatusEnum = pgEnum("review_status", [

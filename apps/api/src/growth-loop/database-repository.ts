@@ -1,6 +1,6 @@
 import { and, eq } from "drizzle-orm";
-import { dailyRetrospectives, publishedContents, contentMetrics, contentFeedback, type DatabaseContext } from "@emotion-studio/database";
-import { GrowthLoopStateSchema, RetrospectiveSchema, PublishedContentSchema, ContentMetricsSchema, ContentFeedbackSchema, type Retrospective, type PublishedContent, type ContentMetrics, type ContentFeedback } from "@emotion-studio/contracts";
+import { dailyRetrospectives, publishedContents, contentMetrics, contentFeedback, strategyMemory, type DatabaseContext } from "@emotion-studio/database";
+import { GrowthLoopStateSchema, RetrospectiveSchema, PublishedContentSchema, ContentMetricsSchema, ContentFeedbackSchema, StrategyEntrySchema, type Retrospective, type PublishedContent, type ContentMetrics, type ContentFeedback, type StrategyEntry } from "@emotion-studio/contracts";
 import { AppError } from "../errors.js";
 import { assertRevision, type GrowthLoopRepository } from "./repository.js";
 
@@ -13,7 +13,8 @@ export class DatabaseGrowthLoopRepository implements GrowthLoopRepository {
       const contents = (await tx.select().from(publishedContents)).map(x => x.payload);
       const metrics = (await tx.select().from(contentMetrics)).map(x => x.payload);
       const feedback = (await tx.select().from(contentFeedback)).map(x => x.payload);
-      return GrowthLoopStateSchema.parse({ retrospectives, contents, metrics, feedback });
+      const strategies = (await tx.select().from(strategyMemory)).map(x => x.payload);
+      return GrowthLoopStateSchema.parse({ retrospectives, contents, metrics, feedback, strategies });
     }, { isolationLevel: "repeatable read", accessMode: "read only" });
   }
   async saveRetrospective(value: Retrospective, expected: number | null) {
@@ -52,5 +53,15 @@ export class DatabaseGrowthLoopRepository implements GrowthLoopRepository {
     if (!(await this.db.select().from(contentMetrics).where(and(eq(contentMetrics.id, value.metricsId), eq(contentMetrics.contentId, value.contentId)))).length) throw new AppError(404, "METRICS_NOT_FOUND", "指标不存在");
     const rows = await this.db.insert(contentFeedback).values({ id: value.id, contentId: value.contentId, metricsId: value.metricsId, payload: value }).onConflictDoNothing().returning();
     if (!rows.length) throw new AppError(409, "DUPLICATE", "反馈已存在");
+  }
+  async saveStrategies(values: StrategyEntry[]) {
+    const parsed = values.map(value => StrategyEntrySchema.parse(value));
+    if (!parsed.length) return;
+    await this.db.transaction(async tx => {
+      for (const value of parsed) {
+        const row = { id: value.id, account: value.account, strategyKey: value.key, status: value.status, payload: value };
+        await tx.insert(strategyMemory).values(row).onConflictDoUpdate({ target: strategyMemory.id, set: row });
+      }
+    });
   }
 }

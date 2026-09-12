@@ -32,7 +32,7 @@ export async function seedGrowthLoopDemo(repository: GrowthLoopRepository) {
       await repository.saveContent(content, null);
     }
     if (!state.metrics.some(x => x.id === metricId)) {
-      await repository.addMetrics({ id: metricId, contentId, capturedAt: new Date(Date.parse(content.publishedAt!) + 12 * 3600_000).toISOString(), views: entry.views, favorites: entry.favorites, likes: Math.round(entry.views * .07), comments: 8 + index, followersGained: 3 + index, note: "合成的发布后12小时数据" });
+      await repository.addMetrics({ id: metricId, contentId, capturedAt: new Date(Date.parse(content.publishedAt!) + 12 * 3600_000).toISOString(), hoursSincePublish: 12, views: entry.views, favorites: entry.favorites, likes: Math.round(entry.views * .07), comments: 8 + index, followersGained: 3 + index, note: "合成的发布后12小时数据" });
     }
     state = await repository.snapshot();
     if (!state.feedback.some(x => x.metricsId === metricId)) {

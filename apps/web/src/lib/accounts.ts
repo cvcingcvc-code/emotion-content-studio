@@ -9,9 +9,9 @@ import {
 export const accountProfiles: readonly AccountProfile[] = ACCOUNT_PROFILES;
 
 export const accountLabels: Record<AccountId, string> = {
-  personal_growth: '成长复盘',
+  personal_growth: '个人成长',
   fun_english: '趣味英语',
-  emotion_library: '情绪素材',
+  emotion_library: '情绪灵感库',
 };
 
 export const laneLabels: Record<ContentLane, string> = {
