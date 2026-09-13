@@ -35,7 +35,8 @@ afterEach(async () => {
   await Promise.all(apps.splice(0).map(async (app) => app.close()));
 });
 
-describe("mock API", () => {
+// e2e：每个用例都 buildApp（正常约 1s），高负载下曾超过 5s 默认超时（抖动，非断言回归）。
+describe("mock API", { timeout: 15_000 }, () => {
   it("binds local development to loopback unless explicitly configured", () => {
     expect(readServerConfig({})).toMatchObject({
       HOST: "127.0.0.1",

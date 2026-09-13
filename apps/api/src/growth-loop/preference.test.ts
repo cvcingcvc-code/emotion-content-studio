@@ -29,7 +29,8 @@ describe("preference signal", () => {
   });
 });
 
-describe("human edit and reject learning signal wiring", () => {
+// e2e：buildApp + 完整生成/拒绝流程（正常约 1.2s），高负载下曾超过 5s 默认超时（抖动，非断言回归）。
+describe("human edit and reject learning signal wiring", { timeout: 15_000 }, () => {
   const cleanups: Array<() => Promise<unknown>> = [];
   afterEach(async () => { for (const cleanup of cleanups.splice(0)) await cleanup(); });
   async function setup() {

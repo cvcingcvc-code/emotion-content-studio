@@ -32,7 +32,8 @@ const growthInput = { accountId: "personal_growth", sourceType: "daily_review", 
 const englishInput = { accountId: "fun_english", sourceType: "english_topic", contentLane: "english_50", licenseStatus: "original", content: "熬夜人的英语50句" };
 const emotionInput = { accountId: "emotion_library", sourceType: "external_emotion_source", contentLane: "emotion_material", licenseStatus: "licensed", sourcePlatform: "本人获许可的测试材料", content: "夜里独处时，窗边的小灯陪我整理心情。" };
 
-describe("three-account product workflow", () => {
+// e2e：buildApp + 三账号全流程（正常约 1.4s），高负载下曾超过 5s 默认超时（抖动，非断言回归）。
+describe("three-account product workflow", { timeout: 15_000 }, () => {
   it("completes all pipelines, manual confirmation, publication and nullable performance", async () => {
     const { app } = await setup();
     const accounts = await app.inject({ method: "GET", url: "/api/v1/accounts" });

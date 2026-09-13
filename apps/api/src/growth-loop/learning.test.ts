@@ -123,7 +123,8 @@ const twelveHoursAgo = () => new Date(Date.now() - 12 * 3_600_000).toISOString()
 
 type App = Awaited<ReturnType<typeof buildApp>>;
 
-describe("feedback really flows into the next generation", () => {
+// e2e：每个用例做 5 次完整发布闭环（正常 0.7~1.7s），高负载下曾超过 5s 默认超时（抖动，非断言回归）。
+describe("feedback really flows into the next generation", { timeout: 15_000 }, () => {
   const cleanups: Array<() => Promise<unknown>> = [];
   afterEach(async () => { for (const cleanup of cleanups.splice(0)) await cleanup(); });
   async function setup() {

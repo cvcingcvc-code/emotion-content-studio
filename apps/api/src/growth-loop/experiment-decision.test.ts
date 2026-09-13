@@ -29,7 +29,8 @@ type ContentView = { id: string; revision: number; status: string; experiment: E
  * 若它把 status 写成 completed，decideExperiment 顶部的 EXPERIMENT_COMPLETED 守卫
  * 会让这个选项在第一次点击之后就永久失效 —— 这里把正确语义锁死。
  */
-describe("decideExperiment：continue_testing 必须让实验保持开放", () => {
+// e2e：单个用例走 7 次完整发布闭环，正常约 2s，机器高负载时曾超过 5s 默认超时（抖动，非断言回归）。
+describe("decideExperiment：continue_testing 必须让实验保持开放", { timeout: 15_000 }, () => {
   const cleanups: Array<() => Promise<unknown>> = [];
   afterEach(async () => { for (const cleanup of cleanups.splice(0)) await cleanup(); });
 

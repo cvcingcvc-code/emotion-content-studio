@@ -26,7 +26,8 @@ async function setup() {
   return { root, writer, generate, render, repository, workflow };
 }
 
-describe("English Account MVP", () => {
+// e2e：完整英语工作流（生成/审核/导出，正常 0.5~1.3s），高负载下曾超过 5s 默认超时（抖动，非断言回归）。
+describe("English Account MVP", { timeout: 15_000 }, () => {
   it("splits the current review into five pages and reflects edits only on the corresponding page", () => {
     const writing = demoEnglishWriting(input);
     writing.sentences[10] = { number: 11, english: "Let me say that again.", chinese: "让我再说一遍。" };

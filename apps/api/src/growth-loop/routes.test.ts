@@ -7,7 +7,8 @@ import { createEnglishWriter } from "../english/provider.js";
 
 const base = "/api/v1/growth-loop";
 const input = { date: "2026-09-10", whatHappened: "今天工作中没有确认交付范围，花了一下午反复修改材料。", myReaction: "直接开始做", whatBotheredMe: "反复返工", whatCouldBeHandledBetter: "先写清交付标准", lessonLearned: "先确认再行动", nextAction: "开始前确认三项标准" };
-describe("growth loop API", () => {
+// e2e：buildApp + 完整增长闭环（正常约 1.4s），高负载下曾超过 5s 默认超时（抖动，非断言回归）。
+describe("growth loop API", { timeout: 15_000 }, () => {
   const cleanups: Array<() => Promise<unknown>> = [];
   afterEach(async () => { for (const cleanup of cleanups.splice(0)) await cleanup(); });
   async function setup() {
