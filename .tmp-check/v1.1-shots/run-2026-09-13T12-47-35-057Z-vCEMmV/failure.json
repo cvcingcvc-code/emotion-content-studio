@@ -1,0 +1,9 @@
+{
+  "message": "locator.waitFor: Timeout 25000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.retro-selector select') to be visible\u001b[22m\n",
+  "steps": [
+    "Demo 数据已加载；真实首页 Focus / NEXT 3 POSTS 无 Demo topic 或 sourceContentId",
+    "Retrospective 已记录并分析（潜力 8/10）"
+  ],
+  "pageErrors": [],
+  "consoleErrors": []
+}

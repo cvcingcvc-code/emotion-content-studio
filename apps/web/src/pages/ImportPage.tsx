@@ -21,6 +21,7 @@ export default function ImportPage() {
   const [status, setStatus] = useState<'idle' | 'reading' | 'uploading' | 'success' | 'error'>('idle');
   const [result, setResult] = useState<CsvImportSummary | null>(null);
   const [message, setMessage] = useState('');
+  const [demoState, setDemoState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [demoMessage, setDemoMessage] = useState('');
   const blocked = mode === 'blocked';
 
@@ -68,13 +69,16 @@ export default function ImportPage() {
   }
 
   async function loadDemoData() {
-    if (blocked) return;
+    if (blocked || demoState === 'loading') return;
+    setDemoState('loading');
     setDemoMessage('正在载入演示素材…');
     try {
       const response = await apiRequest('/api/v1/demo-data/load', mode, DemoDataLoadResultSchema, { method: 'POST' });
       setDemoMessage(`已载入 ${response.loadedCount} 条原创演示素材，当前共 ${response.totalCount} 条。`);
+      setDemoState('success');
     } catch (error) {
       setDemoMessage(error instanceof Error ? error.message : '演示数据加载失败。');
+      setDemoState('error');
     }
   }
 
@@ -89,11 +93,11 @@ export default function ImportPage() {
             <h2>导入一份 CSV，自动完成清洗与模拟分析。</h2>
             <p>只有 <code>content</code> 列是必填的。可选列为 author、likes、source 和 url。原文会保留，分析结果由 MockAnalyzer 生成。</p>
           </div>
-        <button className="secondary-button" disabled={blocked || demoMessage.startsWith('正在')} onClick={() => void loadDemoData()}><Sparkles size={15} />加载演示数据</button>
+        <button className="secondary-button" disabled={blocked || demoState === 'loading'} onClick={() => void loadDemoData()}><Sparkles size={15} />{demoState === 'loading' ? '正在载入…' : '加载演示数据'}</button>
       </div>
 
       {blocked ? <BlockedNotice title="导入已停用" description="当前为禁止操作状态，不会读取或发送文件内容。" /> : null}
-      {demoMessage ? <div className={`action-notice ${demoMessage.startsWith('已') ? 'is-success' : ''}`} role="status"><span>{demoMessage}</span>{demoMessage.startsWith('已') ? <Link to="/library">查看素材库 <ArrowRight size={14} /></Link> : null}</div> : null}
+      {demoState !== 'idle' ? <div className={`action-notice ${demoState === 'success' ? 'is-success' : demoState === 'error' ? 'is-error' : ''}`} role={demoState === 'error' ? 'alert' : 'status'}><span>{demoMessage}</span>{demoState === 'success' ? <Link to="/library">查看素材库 <ArrowRight size={14} /></Link> : null}</div> : null}
 
       <div className="demo-import-grid">
         <section className="panel csv-import-panel">

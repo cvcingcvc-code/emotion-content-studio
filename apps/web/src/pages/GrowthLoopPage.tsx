@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { CONTENT_POTENTIAL_THRESHOLD, ContentAccountSchema, ContentTypeSchema, GrowthLoopStateSchema, GrowthDashboardSchema, RetrospectiveSchema, RetrospectiveInputSchema, PublishedContentSchema, ContentMetricsSchema, ContentFeedbackSchema, type GrowthLoopState, type Retrospective, type RetrospectiveInput, type PublishedContent, type ContentMetrics, type ContentFeedback, type ContentAccount, type ContentType, type ExperimentOutcome } from '@emotion-studio/contracts';
 import { apiRequest, useRemote } from '../lib/api';
@@ -24,9 +24,10 @@ const analysisValue = (key: string, value: unknown) => key === 'recommendedAccou
 
 export default function GrowthLoopPage() {
   const [refresh, setRefresh] = useState(0), [busy, setBusy] = useState(false), [error, setError] = useState('');
+  const inFlight = useRef(false);
   const remote = useRemote(base, 'normal', GrowthLoopStateSchema, refresh);
   const location = useLocation();
-  const act: LoopAction = task => { if (busy) return; setBusy(true); setError(''); void task().then(() => setRefresh(value => value + 1)).catch((failure: unknown) => setError(failure instanceof Error ? failure.message : '操作失败')).finally(() => setBusy(false)); };
+  const act: LoopAction = task => { if (inFlight.current) return; inFlight.current = true; setBusy(true); setError(''); void Promise.resolve().then(task).then(() => setRefresh(value => value + 1)).catch((failure: unknown) => setError(failure instanceof Error ? failure.message : '操作失败')).finally(() => { inFlight.current = false; setBusy(false); }); };
   const state = remote.data, path = location.pathname, id = path.split('/')[2];
   const content = state?.contents.find(x => x.id === id), retro = state?.retrospectives.find(x => x.id === id);
   // "创建成功" 是瞬时 UI 状态，必须放在这一层：
@@ -65,7 +66,8 @@ export default function GrowthLoopPage() {
 
 function Dashboard({ settings, busy, act, state }: { settings: boolean; busy: boolean; act: LoopAction; state: GrowthLoopState }) {
   const remote = useRemote(base + '/dashboard', 'normal', GrowthDashboardSchema);
-  if (!remote.data) return <p>{remote.error ?? '读取今日重点…'}</p>;
+  if (remote.status === 'loading') return <p role="status">读取今日重点…</p>;
+  if (remote.status === 'error') return <p role="alert">{remote.error}</p>;
   const data = remote.data;
   const active = state.strategies.filter(x => x.status === 'active');
   return <section><h1>{settings ? 'Settings / 运行状态' : 'Today · 今日行动'}</h1>
@@ -87,10 +89,35 @@ function RetrospectiveEditor({ record, state, busy, act }: { record: Retrospecti
   const navigate = useNavigate();
   const [input, setInput] = useState<RetrospectiveInput>(() => record ? RetrospectiveInputSchema.parse(Object.fromEntries(['date', ...retroFields.map(x => x[0])].map(key => [key, record[key as keyof Retrospective]]))) : { date: isoDate(), whatHappened: '', myReaction: '', whatBotheredMe: '', whatCouldBeHandledBetter: '', lessonLearned: '', nextAction: '', optionalNote: '' });
   const [newBlank, setNewBlank] = useState(!record);
+  const [directContentId, setDirectContentId] = useState<string | null>(null);
   const actual = { ...input, whatHappened: newBlank ? '' : input.whatHappened };
   const dirty = !record || Object.entries(actual).some(([key, value]) => record[key as keyof Retrospective] !== value);
   function submit() { act(async () => { const parsed = RetrospectiveInputSchema.parse(actual); const saved = await apiRequest(record ? `${base}/retrospectives/${record.id}` : base + '/retrospectives', 'normal', RetrospectiveSchema, { method: record ? 'PUT' : 'POST', body: JSON.stringify(record ? { input: parsed, revision: record.revision } : parsed) }); navigate(`/retrospectives/${saved.id}`); }); }
   const analysis = record?.analysis;
+  function generateDirectly() {
+    if (!record || dirty || !analysis || analysis.contentPotential < CONTENT_POTENTIAL_THRESHOLD) return;
+    act(async () => {
+      let content: PublishedContent;
+      if (directContentId) {
+        const current = await apiRequest(base, 'normal', GrowthLoopStateSchema);
+        const existing = current.contents.find(item => item.id === directContentId);
+        if (!existing) throw new Error('未找到已创建的草稿，请先检查历史记录。');
+        content = existing;
+      } else {
+        content = await apiRequest(base + '/contents', 'normal', PublishedContentSchema, {
+          method: 'POST',
+          body: JSON.stringify({ account: analysis.recommendedAccount === 'none' ? 'growth' : analysis.recommendedAccount, topic: analysis.recommendedTitleIdeas[0], contentType: analysis.recommendedContentType, sourceRetrospectiveId: record.id, sourceContentId: null }),
+        });
+        setDirectContentId(content.id);
+      }
+      if (content.status === 'draft') {
+        await apiRequest(`${base}/contents/${content.id}/generate`, 'normal', PublishedContentSchema, {
+          method: 'POST', body: JSON.stringify({ revision: content.revision }),
+        });
+      }
+      navigate(`/growth-content/${content.id}`);
+    });
+  }
   return <section className="retrospective-workspace">
     <header className="retrospective-header">
       <h1>复盘记录</h1>
@@ -176,7 +203,12 @@ function RetrospectiveEditor({ record, state, busy, act }: { record: Retrospecti
       </div>
 
       <div className="retrospective-actions">
-        <button type="submit" className="em-primary" onClick={submit}>保存复盘</button>
+        <button type="submit" className="em-primary" disabled={busy} onClick={submit}>保存复盘</button>
+        {analysis && !dirty && analysis.contentPotential >= CONTENT_POTENTIAL_THRESHOLD ? (
+          <button type="button" className="em-primary" disabled={busy} onClick={generateDirectly}>
+            {busy ? '处理中…' : directContentId ? '继续生成内容' : '直接生成内容'}
+          </button>
+        ) : null}
         {record && !dirty && (
           <button
             disabled={busy}
@@ -186,6 +218,8 @@ function RetrospectiveEditor({ record, state, busy, act }: { record: Retrospecti
           </button>
         )}
       </div>
+      {analysis && !dirty && analysis.contentPotential >= CONTENT_POTENTIAL_THRESHOLD ? <p>直接生成将使用推荐账号、内容类型和第一个候选标题，完成后进入人工审核。</p> : null}
+      {directContentId && !busy ? <p>已创建的内容会保留，继续生成将复用这一篇。<Link reloadDocument to={`/growth-content/${directContentId}`}>查看草稿</Link></p> : null}
     </div>
 
     {analysis && !dirty && (
@@ -431,6 +465,8 @@ function CreateContent({ state, busy, act, createdId, onCreated }: { state: Grow
 
 function MetricsEditor({ content, state, busy, act }: { content: PublishedContent; state: GrowthLoopState; busy: boolean; act: LoopAction }) {
   const metric = latest(state.metrics, content.id);
+  // 成功后保持禁用，直到工作台刷新并用新指标重新挂载表单。
+  const [saved, setSaved] = useState(false);
   const [values, setValues] = useState(() => ({ views: metric?.views ?? 0, likes: metric?.likes ?? 0, favorites: metric?.favorites ?? 0, comments: metric?.comments ?? 0, followersGained: metric?.followersGained ?? 0, note: '' }));
   const records = state.metrics.filter(x => x.contentId === content.id).sort((a, b) => b.capturedAt.localeCompare(a.capturedAt));
   const feedback = state.feedback.filter(x => x.contentId === content.id).sort((a, b) => b.createdAt.localeCompare(a.createdAt));
@@ -438,8 +474,8 @@ function MetricsEditor({ content, state, busy, act }: { content: PublishedConten
     <section className="loop-performance">
       <h2>Daily Content Feedback · 手动录入</h2>
       <p>请输入当前累计数据，尽量统一发布后观察时长。每次保存保留历史，不覆盖旧记录。{content.isDemo ? '当前为合成演示内容，数据不计入真实表现。' : ''}</p>
-      <form className="english-compose" onSubmit={event => { event.preventDefault(); act(() => apiRequest(`${base}/contents/${content.id}/metrics`, 'normal', ContentMetricsSchema, { method: 'POST', body: JSON.stringify(values) })); }}>
-        <fieldset className="loop-fields" disabled={busy}>
+      <form className="english-compose" onSubmit={event => { event.preventDefault(); if (saved) return; act(async () => { await apiRequest(`${base}/contents/${content.id}/metrics`, 'normal', ContentMetricsSchema, { method: 'POST', body: JSON.stringify(values) }); setSaved(true); }); }}>
+        <fieldset className="loop-fields" disabled={busy || saved}>
           {(['views', 'likes', 'favorites', 'comments', 'followersGained'] as const).map(key => (
             <label key={key}>
               {key}
@@ -590,6 +626,7 @@ function History({ state }: { state: GrowthLoopState }) {
     <section>
       <h1>History</h1>
       <h2>Retrospective History</h2>
+      {!state.retrospectives.length ? <p>暂无复盘记录。<Link to="/retrospectives">记录第一篇复盘</Link></p> : null}
       <div className="loop-list">
         {state.retrospectives.map(item => (
           <Link key={item.id} to={`/retrospectives/${item.id}`}>
@@ -601,6 +638,7 @@ function History({ state }: { state: GrowthLoopState }) {
       <h2>Content History</h2>
       <ContentList items={state.contents} state={state} />
       <h2>Performance History</h2>
+      {!state.metrics.length ? <p>暂无流量记录。发布内容后可手动录入指标。</p> : null}
       <div className="loop-list">
         {state.metrics.map(item => (
           <Link key={item.id} to={`/growth-content/${item.contentId}#metric-${item.id}`}>
@@ -609,6 +647,7 @@ function History({ state }: { state: GrowthLoopState }) {
         ))}
       </div>
       <h2>Feedback History</h2>
+      {!state.feedback.length ? <p>暂无反馈。录入指标后点击 Analyze Performance 生成反馈。</p> : null}
       <div className="loop-list">
         {state.feedback.map(item => (
           <Link key={item.id} to={`/growth-content/${item.contentId}#feedback-${item.id}`}>

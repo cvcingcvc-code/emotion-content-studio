@@ -1,0 +1,54 @@
+{
+  "id": "d9969e95-78e7-4fe6-931c-26759d50093e",
+  "debug": {
+    "promptVersion": "growth-loop.v3",
+    "provider": "mock",
+    "model": null,
+    "factsUsed": [
+      "今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工。当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚。我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始。"
+    ],
+    "interpretationsUsed": [
+      "行为模式（推断）：面对「今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下」时，记录里写的第一反应是「当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚」",
+      "改法空间（推断）：当时还存在其他可选行动，需要在下一个相似场景里验证",
+      "经验迁移（推断）：我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+      "内容价值（推断）：事件、困扰与处理建议较具体，适合分享；分数是离线规则评估，不预测流量"
+    ],
+    "strategyUsed": [],
+    "experimentUsed": null,
+    "userPreferenceUsed": [],
+    "feedbackUsed": [
+      {
+        "feedbackId": "83dc19a5-3ef2-4845-a5c2-615d1bc13d9d",
+        "contentId": "0950e780-6dd8-4d99-bc27-0af16ebde3cb",
+        "source": "feedback",
+        "verdict": "NEXT_EXPERIMENT",
+        "confidence": "MEDIUM",
+        "createdAt": "2026-09-14T15:31:16.631Z",
+        "experimentId": "8f2f6a88-770a-4423-bc95-9b2d23aa9eb0",
+        "text": "《照常推进的一天》上一轮留有进行中的实验（置信度 MEDIUM）；上一轮提议的唯一变量 hook=scene_first（实验 8f2f6a88-770a-4423-bc95-9b2d23aa9eb0，状态 proposed）"
+      },
+      {
+        "feedbackId": "c42e68a6-af3d-4cfe-9725-38dd8ecbad5b",
+        "contentId": "a25c5439-496e-42c0-bdbc-b3b2cfc2014d",
+        "source": "feedback",
+        "verdict": "CHANGE",
+        "confidence": "HIGH",
+        "createdAt": "2026-09-14T15:31:15.025Z",
+        "experimentId": "ec6f171b-93eb-4388-98f7-e5dcee562a42",
+        "text": "《被临时消息打断的一天》上一轮判定 CHANGE，本轮必须调整（置信度 HIGH）；调整：下一篇「被临时消息打断的一天」同类内容，仅把标题改为问题型（疑问句），观察阅读量。；上一轮提议的唯一变量 title_style=question（实验 ec6f171b-93eb-4388-98f7-e5dcee562a42，状态 proposed）"
+      },
+      {
+        "feedbackId": "73626ab2-4968-4b25-a3ad-d62f129c5bc5",
+        "contentId": "d6388efe-ddb9-4e80-b61b-70f2092408c5",
+        "source": "feedback",
+        "verdict": "KEEP",
+        "confidence": "MEDIUM",
+        "createdAt": "2026-09-14T15:31:12.969Z",
+        "experimentId": "a96fa1ce-0f07-4bfd-9498-d88a4f2805f0",
+        "text": "《确认清单让返工消失了》上一轮判定 KEEP，可以继续沿用（置信度 MEDIUM）；继续：当前写法在本窗口表现高于同窗口中位数（+500%），在出现新的反证前继续沿用。；上一轮提议的唯一变量 hook=scene_first（实验 a96fa1ce-0f07-4bfd-9498-d88a4f2805f0，状态 proposed）"
+      }
+    ],
+    "constraintsApplied": [],
+    "finalGenerationContext": "account=growth | facts=1 | interpretations=4 | strategy={\"works\":[],\"avoid\":[],\"testing\":[],\"watch\":[],\"unknown\":[]} | userPreferences=[] | learnings=3 | experiment=none | promptVersion=growth-loop.v3"
+  }
+}

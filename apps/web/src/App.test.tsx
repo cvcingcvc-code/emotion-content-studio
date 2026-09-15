@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { afterEach, describe, expect, it, vi } from 'vitest';
@@ -195,6 +195,39 @@ describe('emotion content studio demo', () => {
     expect(mock).toHaveBeenCalledTimes(2);
   });
 
+  it.each([0, 4])('shows material totals without inventing single-post results when totalCount is %i', async (totalCount) => {
+    const { mock } = installDemoApi();
+    mock.mockImplementationOnce(async () => success({
+      todayCount: totalCount, totalCount, highResonanceCount: 0, favoriteCount: 0,
+      emotionDistribution: [], categoryDistribution: [],
+    } satisfies ContentDashboard));
+    render(<MemoryRouter initialEntries={['/studio']}><App /></MemoryRouter>);
+    expect(await screen.findByText('尚未选择单篇内容进行分析')).toBeInTheDocument();
+    expect(screen.getByText('总素材数').nextElementSibling).toHaveTextContent(String(totalCount));
+    expect(screen.getByRole('link', { name: '前往发布与数据' })).toHaveAttribute('href', '/performance');
+    expect(screen.getByText('尚未选择内容，暂无可展示的 KEEP 结论。')).toBeInTheDocument();
+    expect(screen.queryByText('12,450')).not.toBeInTheDocument();
+    expect(screen.queryByText('↑ 15%')).not.toBeInTheDocument();
+    expect(screen.queryByText('保持个人成长主题的深度分析')).not.toBeInTheDocument();
+    expect(screen.queryByText('测试不同发布时间对互动率的影响')).not.toBeInTheDocument();
+    if (totalCount === 0) expect(screen.getByText('素材库还是空的')).toBeInTheDocument();
+  });
+
+  it('shows loading while the dashboard request is pending, then the actual empty state', async () => {
+    const { mock } = installDemoApi();
+    let finish!: (response: Response) => void;
+    mock.mockImplementationOnce(() => new Promise<Response>((resolve) => { finish = resolve; }));
+    render(<MemoryRouter initialEntries={['/studio']}><App /></MemoryRouter>);
+    expect(screen.getByText('正在整理内容')).toBeInTheDocument();
+    expect(screen.queryByText('素材库还是空的')).not.toBeInTheDocument();
+    await act(async () => finish(success({
+      todayCount: 0, totalCount: 0, highResonanceCount: 0, favoriteCount: 0,
+      emotionDistribution: [], categoryDistribution: [],
+    } satisfies ContentDashboard)));
+    expect(await screen.findByText('素材库还是空的')).toBeInTheDocument();
+    expect(screen.queryByText('正在整理内容')).not.toBeInTheDocument();
+  });
+
   it.each([
     ['/studio', '把情绪素材，变成可继续创作的内容。'],
     ['/import', '导入一份 CSV，自动完成清洗与模拟分析。'],
@@ -229,6 +262,48 @@ describe('emotion content studio demo', () => {
     expect(await screen.findByRole('heading', { name: '导入完成' })).toBeInTheDocument();
     expect(screen.getByText('成功导入').previousElementSibling).toHaveTextContent('1');
     expect(screen.getByText('重复').previousElementSibling).toHaveTextContent('1');
+  });
+
+  it.each(['已达到演示数据加载上限', '正在维护，暂时无法载入'])('restores demo loading after failure without inferring success from the message: %s', async (errorMessage) => {
+    const { mock } = installDemoApi();
+    let finish!: (response: Response) => void;
+    mock.mockImplementationOnce(() => new Promise<Response>((resolve) => { finish = resolve; }));
+    const user = userEvent.setup();
+    render(<MemoryRouter initialEntries={['/import']}><App /></MemoryRouter>);
+    await user.click(screen.getByRole('button', { name: '加载演示数据' }));
+    expect(screen.getByRole('button', { name: '正在载入…' })).toBeDisabled();
+    expect(screen.getByRole('status')).toHaveTextContent('正在载入演示素材…');
+    await act(async () => finish(failure(errorMessage, 503)));
+    expect(await screen.findByRole('alert')).toHaveTextContent(errorMessage);
+    expect(screen.getByRole('alert')).toHaveClass('is-error');
+    expect(screen.getByRole('button', { name: '加载演示数据' })).toBeEnabled();
+    expect(screen.queryByRole('link', { name: /查看素材库/ })).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: '导入完成' })).not.toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: '加载演示数据' }));
+    expect(await screen.findByRole('status')).toHaveTextContent('已载入 40 条原创演示素材');
+    expect(screen.getByRole('status')).toHaveClass('is-success');
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: '加载演示数据' })).toBeEnabled();
+    expect(screen.getByRole('link', { name: /查看素材库/ })).toHaveAttribute('href', '/library');
+    expect(mock).toHaveBeenCalledTimes(2);
+  });
+
+  it('keeps the empty import form explicit and restores it after loading and error previews', async () => {
+    installDemoApi();
+    const user = userEvent.setup();
+    render(<MemoryRouter initialEntries={['/import']}><App /></MemoryRouter>);
+    expect(screen.getByRole('button', { name: /点击选择 CSV/ })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /导入并自动处理/ })).toBeDisabled();
+    expect(screen.queryByRole('heading', { name: '导入完成' })).not.toBeInTheDocument();
+    const switcher = screen.getByRole('combobox', { name: '切换页面演示状态' });
+    await user.selectOptions(switcher, 'loading');
+    expect(screen.getByText('正在整理内容')).toBeInTheDocument();
+    await user.selectOptions(switcher, 'error');
+    expect(screen.getByRole('alert')).toHaveTextContent('导入服务暂时不可用');
+    await user.click(screen.getByRole('button', { name: '重新加载' }));
+    expect(screen.getByRole('button', { name: /导入并自动处理/ })).toBeDisabled();
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: '导入完成' })).not.toBeInTheDocument();
   });
 
   it('surfaces a CSV header error without showing a false success', async () => {

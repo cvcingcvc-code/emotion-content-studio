@@ -7,6 +7,23 @@ import { buildDebug, STRATEGY_FILTERS, stripDrama, type GrowthGenerationContext 
 
 type LoopWriting = NonNullable<PublishedContent["writing"]>;
 
+/** 将模型偶尔返回的 Markdown 排版整理成可直接复制发布的纯文本。 */
+export function normalizePublishText(value: string): string {
+  return value.split(/\r?\n/).map(line => {
+    const trimmed = line.trim();
+    if (!trimmed || /^\|?\s*:?-{3,}/.test(trimmed)) return "";
+    if (trimmed.includes("|") && trimmed.startsWith("|")) {
+      const cells = trimmed.split("|").map(cell => cell.trim()).filter(Boolean);
+      return cells.length ? `· ${cells.join("：")}` : "";
+    }
+    return line.replace(/^#{1,6}\s*/, "").replace(/^>\s*/, "").replace(/\*\*(.*?)\*\*/g, "$1").replace(/\*([^*]+)\*/g, "$1").replace(/^[-*]\s+/, "· ");
+  }).join("\n").replace(/\n{3,}/g, "\n\n").trim();
+}
+
+function normalizeWriting(writing: LoopWriting): LoopWriting {
+  return LoopWritingSchema.parse(Object.fromEntries(Object.entries(writing).map(([key, value]) => [key, Array.isArray(value) ? value : normalizePublishText(String(value))])));
+}
+
 const VARIANT_RULES: Record<string, string> = {
   question: "标题必须是一个疑问句，以「为什么…？」的形式提出，不要写成陈述句。",
   statement: "标题必须是陈述句，不得出现问号。",
@@ -101,7 +118,7 @@ export class GrowthLoopAgent {
         { role: "user", content: JSON.stringify({ retrospective: retro, topic: context.topic, contentType: context.contentType, experiment, accountStrategy: context.strategy, userPreferences: context.userPreferences, learnings: context.learnings }) },
       ], { maxTokens: 2200 })
       : offlineDraft(retro, context.topic);
-    const withExperiment = applyExperiment(LoopWritingSchema.parse(draft), retro, experiment);
+    const withExperiment = applyExperiment(normalizeWriting(LoopWritingSchema.parse(draft)), retro, experiment);
     const constrained = applyStrategyConstraints(withExperiment, context);
     return {
       writing: LoopWritingSchema.parse(constrained.writing),

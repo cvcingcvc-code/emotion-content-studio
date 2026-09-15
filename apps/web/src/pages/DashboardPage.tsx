@@ -41,7 +41,7 @@ export default function DashboardPage() {
 
   const dashboard = state.data;
   const metrics = [
-    { label: '今日素材', value: dashboard.todayCount, note: '本地 DEMO 今日新增' },
+    { label: '今日素材', value: dashboard.todayCount, note: '今日新增素材' },
     { label: '总素材数', value: dashboard.totalCount, note: '已完成清洗与分析' },
     { label: '高共鸣素材', value: dashboard.highResonanceCount, note: '共鸣分数 ≥ 80' },
     { label: '已收藏素材', value: dashboard.favoriteCount, note: '可组合生成文案' },
@@ -78,12 +78,12 @@ export default function DashboardPage() {
       {loadState === 'success' ? <div className="action-notice is-success" role="status"><span>{loadMessage}</span><Link to="/library">查看素材库 <ArrowRight size={14} /></Link></div> : null}
       {loadState === 'error' ? <div className="action-notice is-error" role="alert"><span>{loadMessage}</span><button onClick={() => void loadDemoData()}>重试</button></div> : null}
 
-      {/* 这篇内容表现如何 */}
+      {/* 素材统计 */}
       <section className="dashboard-section">
         <div className="dashboard-section-header">
           <div>
-            <h2 className="dashboard-section-title">这篇内容表现如何</h2>
-            <p className="dashboard-section-description">核心指标概览</p>
+            <h2 className="dashboard-section-title">素材统计</h2>
+            <p className="dashboard-section-description">当前素材库概览</p>
           </div>
         </div>
         <div className="dashboard-metrics">
@@ -105,43 +105,11 @@ export default function DashboardPage() {
         <div className="dashboard-section-header">
           <div>
             <h2 className="dashboard-section-title">和历史内容相比</h2>
-            <p className="dashboard-section-description">与历史平均的对比分析</p>
+            <p className="dashboard-section-description">选择已发布内容后查看历史比较</p>
           </div>
         </div>
         <div className="dashboard-comparison">
-          <div className="dashboard-comparison-header">
-            <h3 className="dashboard-comparison-title">内容表现对比</h3>
-          </div>
-          <div className="dashboard-comparison-items">
-            <div className="dashboard-comparison-item">
-              <span className="dashboard-comparison-label">浏览量</span>
-              <div className="dashboard-comparison-value">
-                <strong>12,450</strong>
-                <span className="trend-up">↑ 15%</span>
-              </div>
-            </div>
-            <div className="dashboard-comparison-item">
-              <span className="dashboard-comparison-label">点赞数</span>
-              <div className="dashboard-comparison-value">
-                <strong>823</strong>
-                <span className="trend-up">↑ 8%</span>
-              </div>
-            </div>
-            <div className="dashboard-comparison-item">
-              <span className="dashboard-comparison-label">收藏数</span>
-              <div className="dashboard-comparison-value">
-                <strong>156</strong>
-                <span className="trend-down">↓ 3%</span>
-              </div>
-            </div>
-            <div className="dashboard-comparison-item">
-              <span className="dashboard-comparison-label">评论数</span>
-              <div className="dashboard-comparison-value">
-                <strong>89</strong>
-                <span className="trend-up">↑ 22%</span>
-              </div>
-            </div>
-          </div>
+          <EmptyState title="尚未选择单篇内容进行分析" description="请前往发布与数据，选择已发布内容并录入指标，再查看对应的历史比较。" action="前往发布与数据" actionTo="/performance" />
         </div>
       </section>
 
@@ -150,7 +118,7 @@ export default function DashboardPage() {
         <div className="dashboard-section-header">
           <div>
             <h2 className="dashboard-section-title">下一轮怎么做</h2>
-            <p className="dashboard-section-description">内容实验复盘结论</p>
+            <p className="dashboard-section-description">KEEP / CHANGE / NEXT 需要对应内容的分析证据</p>
           </div>
         </div>
         <div className="dashboard-experiments">
@@ -162,9 +130,7 @@ export default function DashboardPage() {
               <h3 className="dashboard-experiment-title">KEEP</h3>
             </div>
             <div className="dashboard-experiment-content">
-              <p>继续保留真实经历作为内容核心</p>
-              <p>保持个人成长主题的深度分析</p>
-              <p>维持情感共鸣的叙事方式</p>
+              <p>尚未选择内容，暂无可展示的 KEEP 结论。</p>
             </div>
           </div>
 
@@ -176,9 +142,7 @@ export default function DashboardPage() {
               <h3 className="dashboard-experiment-title">CHANGE</h3>
             </div>
             <div className="dashboard-experiment-content">
-              <p>下一篇要改什么</p>
-              <p>增加互动性元素，提高用户参与度</p>
-              <p>优化标题结构，提升点击率</p>
+              <p>尚未选择内容，暂无可展示的 CHANGE 结论。</p>
             </div>
           </div>
 
@@ -190,9 +154,8 @@ export default function DashboardPage() {
               <h3 className="dashboard-experiment-title">NEXT EXPERIMENT</h3>
             </div>
             <div className="dashboard-experiment-content">
-              <p>下一篇具体测试什么</p>
-              <p>测试不同发布时间对互动率的影响</p>
-              <p>尝试新的内容格式，如问答式结构</p>
+              <p>完成单篇分析后，查看有证据来源的下一轮实验。</p>
+              <Link className="text-button" to="/performance">选择内容查看反馈 <ArrowRight size={14} /></Link>
             </div>
           </div>
         </div>

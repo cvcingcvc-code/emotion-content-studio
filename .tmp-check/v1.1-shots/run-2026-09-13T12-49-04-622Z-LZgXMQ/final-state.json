@@ -1,0 +1,3803 @@
+{
+  "retrospectives": [
+    {
+      "date": "2026-09-13",
+      "whatHappened": "今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工。当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚。我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始。",
+      "myReaction": "",
+      "whatBotheredMe": "",
+      "whatCouldBeHandledBetter": "",
+      "lessonLearned": "",
+      "nextAction": "",
+      "optionalNote": "",
+      "id": "ee56d7bb-c66f-45db-86af-049b5ef5a5b8",
+      "revision": 1,
+      "createdAt": "2026-09-13T12:49:09.735Z",
+      "updatedAt": "2026-09-13T12:49:09.853Z",
+      "analysis": {
+        "summary": "今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工。当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚。我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始。",
+        "coreProblem": "今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工",
+        "decisionPattern": "可供核对的行为线索：当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚",
+        "betterApproach": "补充当时有哪些可选行动，再比较各自的代价",
+        "lesson": "我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+        "nextAction": "记录下一次出现相似情境时可以先做的一个具体动作",
+        "contentPotential": 8,
+        "contentReason": "事件、困扰与处理建议足够具体，可尝试分享；分数是离线规则评估，不预测流量",
+        "recommendedAccount": "growth",
+        "recommendedContentType": "solution",
+        "contentAngle": "从一个真实场景解释：今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工",
+        "recommendedTitleIdeas": [
+          "这件事，下次我会换个处理方式",
+          "一次真实经历留下的提醒",
+          "我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交"
+        ],
+        "facts": [
+          "今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工。当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚。我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始。"
+        ],
+        "interpretations": [
+          "行为模式（推断）：面对「今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下」时，记录里写的第一反应是「当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚」",
+          "改法空间（推断）：当时还存在其他可选行动，需要在下一个相似场景里验证",
+          "经验迁移（推断）：我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+          "内容价值（推断）：事件、困扰与处理建议较具体，适合分享；分数是离线规则评估，不预测流量"
+        ]
+      },
+      "analysisProvider": "mock"
+    }
+  ],
+  "contents": [
+    {
+      "id": "f17ed000-0000-4000-8000-000000000001",
+      "revision": 0,
+      "account": "growth",
+      "title": "交付前先确认三件事",
+      "topic": "交付前先确认三件事",
+      "contentType": "solution",
+      "sourceRetrospectiveId": null,
+      "sourceContentId": null,
+      "englishDraftId": null,
+      "createdAt": "2026-09-06T12:49:07.865Z",
+      "updatedAt": "2026-09-06T12:49:07.865Z",
+      "publishedAt": "2026-09-06T12:49:07.865Z",
+      "publishTime": "2026-09-06T12:49:07.865Z",
+      "status": "published",
+      "writing": {
+        "title": "交付前先确认三件事",
+        "body": "演示经历：反复修改一份材料后，创作者把目标、格式和截止时间写成了三项确认清单。\n这是合成演示，不代表用户真实经历。",
+        "corePoint": "先把模糊感受变成一个具体问题。",
+        "solution": "只选择一个行动，在下一次类似场景中验证。",
+        "endingQuestion": "你会先尝试哪一步？",
+        "tags": [
+          "#创作复盘",
+          "#具体行动"
+        ]
+      },
+      "english": null,
+      "aiDraft": null,
+      "preferenceSignal": null,
+      "rejectReason": null,
+      "rejectedAt": null,
+      "note": "合成演示内容与指标，不是真实发布业绩。",
+      "provider": "mock",
+      "isDemo": true,
+      "experiment": null,
+      "debug": null
+    },
+    {
+      "id": "f17ed000-0000-4000-8000-000000000002",
+      "revision": 0,
+      "account": "english",
+      "title": "尴尬时刻时能直接用的50句英语",
+      "topic": "尴尬时刻英语50句",
+      "contentType": "educational",
+      "sourceRetrospectiveId": null,
+      "sourceContentId": null,
+      "englishDraftId": null,
+      "createdAt": "2026-09-07T12:49:07.887Z",
+      "updatedAt": "2026-09-07T12:49:07.887Z",
+      "publishedAt": "2026-09-07T12:49:07.887Z",
+      "publishTime": "2026-09-07T12:49:07.887Z",
+      "status": "published",
+      "writing": null,
+      "english": {
+        "topic": "尴尬时刻英语50句",
+        "tone": "日常",
+        "analysis": "认错人、叫错名字、笑点没跟上，尴尬现场也能用一句简单英语接住。 按五个生活场景分组，短句为主，适合 A2–B1 学习者。离线样稿不随语气选项改写。",
+        "groupNames": [
+          "认错人了",
+          "嘴比脑子快",
+          "小失误现场",
+          "聊天突然冷场",
+          "轻松翻篇"
+        ],
+        "sentences": [
+          {
+            "number": 1,
+            "english": "Sorry, I thought you were someone else.",
+            "chinese": "不好意思，我认错人了。"
+          },
+          {
+            "number": 2,
+            "english": "Have we met before?",
+            "chinese": "我们以前见过吗？"
+          },
+          {
+            "number": 3,
+            "english": "You look really familiar.",
+            "chinese": "你看着好眼熟。"
+          },
+          {
+            "number": 4,
+            "english": "Oh, wrong person!",
+            "chinese": "啊，认错人了！"
+          },
+          {
+            "number": 5,
+            "english": "I was waving at my friend.",
+            "chinese": "我刚才是在跟朋友招手。"
+          },
+          {
+            "number": 6,
+            "english": "I forgot your name. Sorry!",
+            "chinese": "抱歉，我忘记你的名字了！"
+          },
+          {
+            "number": 7,
+            "english": "Could you remind me of your name?",
+            "chinese": "能再告诉我一下你的名字吗？"
+          },
+          {
+            "number": 8,
+            "english": "I mixed up your names.",
+            "chinese": "我把你们的名字搞混了。"
+          },
+          {
+            "number": 9,
+            "english": "I didn't recognize you at first.",
+            "chinese": "我一开始没认出你。"
+          },
+          {
+            "number": 10,
+            "english": "Let's start over. I'm Alex.",
+            "chinese": "重新认识一下吧，我叫Alex。"
+          },
+          {
+            "number": 11,
+            "english": "That came out wrong.",
+            "chinese": "我刚才没表达好。"
+          },
+          {
+            "number": 12,
+            "english": "That's not what I meant.",
+            "chinese": "我不是那个意思。"
+          },
+          {
+            "number": 13,
+            "english": "Let me try that again.",
+            "chinese": "让我重新说一遍。"
+          },
+          {
+            "number": 14,
+            "english": "I spoke too soon.",
+            "chinese": "我话说早了。"
+          },
+          {
+            "number": 15,
+            "english": "Did I just say that out loud?",
+            "chinese": "我刚才把心里话说出来了？"
+          },
+          {
+            "number": 16,
+            "english": "Sorry, I lost my train of thought.",
+            "chinese": "不好意思，我突然忘记说到哪儿了。"
+          },
+          {
+            "number": 17,
+            "english": "I can't find the right word.",
+            "chinese": "我一下子想不到该用什么词。"
+          },
+          {
+            "number": 18,
+            "english": "My brain isn't working today.",
+            "chinese": "我今天脑子不太在线。"
+          },
+          {
+            "number": 19,
+            "english": "I meant Tuesday, not Thursday.",
+            "chinese": "我说的是周二，不是周四。"
+          },
+          {
+            "number": 20,
+            "english": "Can we pretend I didn't say that?",
+            "chinese": "能当我刚才没说过吗？"
+          },
+          {
+            "number": 21,
+            "english": "Oops, that was me.",
+            "chinese": "哎呀，是我弄的。"
+          },
+          {
+            "number": 22,
+            "english": "I pushed instead of pulled.",
+            "chinese": "我把拉门当成推门了。"
+          },
+          {
+            "number": 23,
+            "english": "Is this seat taken?",
+            "chinese": "这个座位有人吗？"
+          },
+          {
+            "number": 24,
+            "english": "I think I'm in the wrong room.",
+            "chinese": "我好像走错房间了。"
+          },
+          {
+            "number": 25,
+            "english": "Sorry, my phone wasn't on silent.",
+            "chinese": "抱歉，我手机没调静音。"
+          },
+          {
+            "number": 26,
+            "english": "I spilled a little water.",
+            "chinese": "我不小心洒了点水。"
+          },
+          {
+            "number": 27,
+            "english": "Do you have a tissue?",
+            "chinese": "你有纸巾吗？"
+          },
+          {
+            "number": 28,
+            "english": "There's something on my face, isn't there?",
+            "chinese": "我脸上是不是沾东西了？"
+          },
+          {
+            "number": 29,
+            "english": "My camera was on the whole time?",
+            "chinese": "我的摄像头一直开着？"
+          },
+          {
+            "number": 30,
+            "english": "I forgot to unmute myself.",
+            "chinese": "我忘了开麦。"
+          },
+          {
+            "number": 31,
+            "english": "Sorry, I missed the joke.",
+            "chinese": "不好意思，我没听懂那个笑话。"
+          },
+          {
+            "number": 32,
+            "english": "Was that a joke?",
+            "chinese": "你刚才是在开玩笑吗？"
+          },
+          {
+            "number": 33,
+            "english": "I laughed at the wrong moment.",
+            "chinese": "我笑得有点不是时候。"
+          },
+          {
+            "number": 34,
+            "english": "Well, this is awkward.",
+            "chinese": "嗯，这就有点尴尬了。"
+          },
+          {
+            "number": 35,
+            "english": "I wasn't sure how to respond.",
+            "chinese": "我刚才不知道怎么接话。"
+          },
+          {
+            "number": 36,
+            "english": "What were we talking about?",
+            "chinese": "我们刚才聊到哪儿了？"
+          },
+          {
+            "number": 37,
+            "english": "Did you say something?",
+            "chinese": "你刚才说话了吗？"
+          },
+          {
+            "number": 38,
+            "english": "Sorry, go ahead.",
+            "chinese": "不好意思，你先说。"
+          },
+          {
+            "number": 39,
+            "english": "We both started talking at once.",
+            "chinese": "我们俩同时开口了。"
+          },
+          {
+            "number": 40,
+            "english": "So, how's your day going?",
+            "chinese": "对了，你今天过得怎么样？"
+          },
+          {
+            "number": 41,
+            "english": "No worries. It happens.",
+            "chinese": "没事，谁都会遇到。"
+          },
+          {
+            "number": 42,
+            "english": "I've done that too.",
+            "chinese": "我也干过这事。"
+          },
+          {
+            "number": 43,
+            "english": "Let's just move on.",
+            "chinese": "咱们翻篇吧。"
+          },
+          {
+            "number": 44,
+            "english": "Nobody noticed. You're fine.",
+            "chinese": "没人注意到，没事的。"
+          },
+          {
+            "number": 45,
+            "english": "That could have been worse.",
+            "chinese": "还好，没尴尬到最坏的地步。"
+          },
+          {
+            "number": 46,
+            "english": "I'll laugh about this later.",
+            "chinese": "过阵子想起来我肯定会笑。"
+          },
+          {
+            "number": 47,
+            "english": "Thanks for being cool about it.",
+            "chinese": "谢谢你没放在心上。"
+          },
+          {
+            "number": 48,
+            "english": "At least we have a funny story now.",
+            "chinese": "至少现在有个好笑的故事了。"
+          },
+          {
+            "number": 49,
+            "english": "Let's keep this between us.",
+            "chinese": "这事就咱们知道就好。"
+          },
+          {
+            "number": 50,
+            "english": "Okay, take two!",
+            "chinese": "好，重来一遍！"
+          }
+        ],
+        "titles": [
+          "尴尬时刻时能直接用的50句英语",
+          "每天学10句｜尴尬时刻英语合集",
+          "一句就能接住场面｜尴尬时刻英语",
+          "收藏慢慢学：尴尬时刻英语50句",
+          "五个生活场景，学会用英语聊尴尬时刻"
+        ],
+        "title": "尴尬时刻时能直接用的50句英语",
+        "body": "认错人、叫错名字、笑点没跟上，尴尬现场也能用一句简单英语接住。\n\n这次整理了50句尴尬时刻时用得上的英语，分成5页，每天挑10句读一读。中文用日常说话的方式理解，不用逐字背。\n\n你最想先用哪一句？",
+        "tags": [
+          "#英语学习",
+          "#实用英语",
+          "#英语口语",
+          "#碎片化学习",
+          "#每天学英语",
+          "#生活英语"
+        ]
+      },
+      "aiDraft": null,
+      "preferenceSignal": null,
+      "rejectReason": null,
+      "rejectedAt": null,
+      "note": "合成演示内容与指标，不是真实发布业绩。",
+      "provider": "mock",
+      "isDemo": true,
+      "experiment": null,
+      "debug": null
+    },
+    {
+      "id": "f17ed000-0000-4000-8000-000000000003",
+      "revision": 0,
+      "account": "growth",
+      "title": "把模糊任务变成可确认的问题",
+      "topic": "把模糊任务变成可确认的问题",
+      "contentType": "solution",
+      "sourceRetrospectiveId": null,
+      "sourceContentId": null,
+      "englishDraftId": null,
+      "createdAt": "2026-09-08T12:49:07.947Z",
+      "updatedAt": "2026-09-08T12:49:07.947Z",
+      "publishedAt": "2026-09-08T12:49:07.947Z",
+      "publishTime": "2026-09-08T12:49:07.947Z",
+      "status": "published",
+      "writing": {
+        "title": "把模糊任务变成可确认的问题",
+        "body": "演示经历：接到模糊任务时，先问清谁使用、解决什么问题、完成后如何验收。\n这是合成演示，不代表用户真实经历。",
+        "corePoint": "先把模糊感受变成一个具体问题。",
+        "solution": "只选择一个行动，在下一次类似场景中验证。",
+        "endingQuestion": "你会先尝试哪一步？",
+        "tags": [
+          "#创作复盘",
+          "#具体行动"
+        ]
+      },
+      "english": null,
+      "aiDraft": null,
+      "preferenceSignal": null,
+      "rejectReason": null,
+      "rejectedAt": null,
+      "note": "合成演示内容与指标，不是真实发布业绩。",
+      "provider": "mock",
+      "isDemo": true,
+      "experiment": null,
+      "debug": null
+    },
+    {
+      "id": "f17ed000-0000-4000-8000-000000000004",
+      "revision": 0,
+      "account": "english",
+      "title": "拒绝别人时能直接用的50句英语",
+      "topic": "拒绝别人英语50句",
+      "contentType": "educational",
+      "sourceRetrospectiveId": null,
+      "sourceContentId": null,
+      "englishDraftId": null,
+      "createdAt": "2026-09-09T12:49:07.954Z",
+      "updatedAt": "2026-09-09T12:49:07.954Z",
+      "publishedAt": "2026-09-09T12:49:07.954Z",
+      "publishTime": "2026-09-09T12:49:07.954Z",
+      "status": "published",
+      "writing": null,
+      "english": {
+        "topic": "拒绝别人英语50句",
+        "tone": "日常",
+        "analysis": "不想去的聚会、排满的周末、不方便帮的忙，都可以好好说不。 按五个生活场景分组，短句为主，适合 A2–B1 学习者。离线样稿不随语气选项改写。",
+        "groupNames": [
+          "婉拒邀请",
+          "守住时间",
+          "不接额外任务",
+          "表达个人边界",
+          "拒绝后也友好"
+        ],
+        "sentences": [
+          {
+            "number": 1,
+            "english": "Thanks, but I'll pass.",
+            "chinese": "谢谢，不过这次我就不参加了。"
+          },
+          {
+            "number": 2,
+            "english": "I can't make it tonight.",
+            "chinese": "我今晚去不了了。"
+          },
+          {
+            "number": 3,
+            "english": "I'm staying in this weekend.",
+            "chinese": "这周末我想待在家。"
+          },
+          {
+            "number": 4,
+            "english": "That sounds fun, but I'm busy.",
+            "chinese": "听着挺有意思，但我没空。"
+          },
+          {
+            "number": 5,
+            "english": "Not this time, sorry.",
+            "chinese": "抱歉，这次不行。"
+          },
+          {
+            "number": 6,
+            "english": "I'd rather have a quiet night.",
+            "chinese": "我更想安静地过个晚上。"
+          },
+          {
+            "number": 7,
+            "english": "I'm not up for a party today.",
+            "chinese": "我今天不太想参加聚会。"
+          },
+          {
+            "number": 8,
+            "english": "Thanks for thinking of me.",
+            "chinese": "谢谢你还想着我。"
+          },
+          {
+            "number": 9,
+            "english": "I'll sit this one out.",
+            "chinese": "这次我就不凑热闹了。"
+          },
+          {
+            "number": 10,
+            "english": "Maybe another time.",
+            "chinese": "换个时间吧。"
+          },
+          {
+            "number": 11,
+            "english": "I don't have time right now.",
+            "chinese": "我现在没有时间。"
+          },
+          {
+            "number": 12,
+            "english": "My schedule is full this week.",
+            "chinese": "我这周已经排满了。"
+          },
+          {
+            "number": 13,
+            "english": "I need to leave by six.",
+            "chinese": "我六点前得走。"
+          },
+          {
+            "number": 14,
+            "english": "I can't stay any longer.",
+            "chinese": "我不能再待了。"
+          },
+          {
+            "number": 15,
+            "english": "Today doesn't work for me.",
+            "chinese": "今天对我来说不太方便。"
+          },
+          {
+            "number": 16,
+            "english": "I'm taking a break from calls.",
+            "chinese": "我想暂时歇一歇，不接电话。"
+          },
+          {
+            "number": 17,
+            "english": "I need some time to myself.",
+            "chinese": "我需要一点自己的时间。"
+          },
+          {
+            "number": 18,
+            "english": "I won't be available tomorrow.",
+            "chinese": "我明天没空。"
+          },
+          {
+            "number": 19,
+            "english": "Can we keep this short?",
+            "chinese": "我们能简单聊一下吗？"
+          },
+          {
+            "number": 20,
+            "english": "I have other plans.",
+            "chinese": "我另有安排。"
+          },
+          {
+            "number": 21,
+            "english": "I can't take on anything else.",
+            "chinese": "我没法再接别的事了。"
+          },
+          {
+            "number": 22,
+            "english": "That's more than I can handle.",
+            "chinese": "这超出我能处理的范围了。"
+          },
+          {
+            "number": 23,
+            "english": "I can't promise that deadline.",
+            "chinese": "我没法保证那个截止时间。"
+          },
+          {
+            "number": 24,
+            "english": "I'm already working on something urgent.",
+            "chinese": "我已经在忙一件急事了。"
+          },
+          {
+            "number": 25,
+            "english": "I won't be able to help today.",
+            "chinese": "我今天帮不了忙。"
+          },
+          {
+            "number": 26,
+            "english": "You'll need to ask someone else.",
+            "chinese": "你得问问其他人了。"
+          },
+          {
+            "number": 27,
+            "english": "I don't have the skills for that.",
+            "chinese": "这方面我还不会。"
+          },
+          {
+            "number": 28,
+            "english": "I can help for ten minutes only.",
+            "chinese": "我只能帮十分钟。"
+          },
+          {
+            "number": 29,
+            "english": "That isn't part of my role.",
+            "chinese": "那不属于我的工作范围。"
+          },
+          {
+            "number": 30,
+            "english": "I need to finish my own work first.",
+            "chinese": "我得先做完自己的工作。"
+          },
+          {
+            "number": 31,
+            "english": "I'm not comfortable with that.",
+            "chinese": "那样做我不太舒服。"
+          },
+          {
+            "number": 32,
+            "english": "I'd rather not talk about it.",
+            "chinese": "这件事我不太想聊。"
+          },
+          {
+            "number": 33,
+            "english": "That's a bit too personal.",
+            "chinese": "这个问题有点太私人了。"
+          },
+          {
+            "number": 34,
+            "english": "Please don't share my photo.",
+            "chinese": "请不要分享我的照片。"
+          },
+          {
+            "number": 35,
+            "english": "I don't lend out my laptop.",
+            "chinese": "我的笔记本电脑不外借。"
+          },
+          {
+            "number": 36,
+            "english": "I'd like to decide for myself.",
+            "chinese": "我想自己做决定。"
+          },
+          {
+            "number": 37,
+            "english": "I'm not ready to say yes.",
+            "chinese": "我还没准备好答应。"
+          },
+          {
+            "number": 38,
+            "english": "No, that doesn't work for me.",
+            "chinese": "不行，那不适合我。"
+          },
+          {
+            "number": 39,
+            "english": "I don't want to explain further.",
+            "chinese": "我不想再多解释了。"
+          },
+          {
+            "number": 40,
+            "english": "Please respect my decision.",
+            "chinese": "请尊重我的决定。"
+          },
+          {
+            "number": 41,
+            "english": "I hope you understand.",
+            "chinese": "希望你能理解。"
+          },
+          {
+            "number": 42,
+            "english": "It's nothing personal.",
+            "chinese": "不是针对你。"
+          },
+          {
+            "number": 43,
+            "english": "I'm glad you asked, though.",
+            "chinese": "不过，还是很高兴你问了我。"
+          },
+          {
+            "number": 44,
+            "english": "I hope it goes well.",
+            "chinese": "希望事情顺利。"
+          },
+          {
+            "number": 45,
+            "english": "Let's find another way.",
+            "chinese": "我们想想别的办法吧。"
+          },
+          {
+            "number": 46,
+            "english": "Coffee next week instead?",
+            "chinese": "要不下周一起喝咖啡？"
+          },
+          {
+            "number": 47,
+            "english": "I can send you a useful link.",
+            "chinese": "我可以发你一个有用的链接。"
+          },
+          {
+            "number": 48,
+            "english": "Thanks for understanding.",
+            "chinese": "谢谢你的理解。"
+          },
+          {
+            "number": 49,
+            "english": "Let me know how it turns out.",
+            "chinese": "到时候告诉我结果怎么样。"
+          },
+          {
+            "number": 50,
+            "english": "I'll catch up with you soon.",
+            "chinese": "过几天再找你聊。"
+          }
+        ],
+        "titles": [
+          "拒绝别人时能直接用的50句英语",
+          "每天学10句｜拒绝别人英语合集",
+          "一句就能接住场面｜拒绝别人英语",
+          "收藏慢慢学：拒绝别人英语50句",
+          "五个生活场景，学会用英语聊拒绝别人"
+        ],
+        "title": "拒绝别人时能直接用的50句英语",
+        "body": "不想去的聚会、排满的周末、不方便帮的忙，都可以好好说不。\n\n这次整理了50句拒绝别人时用得上的英语，分成5页，每天挑10句读一读。中文用日常说话的方式理解，不用逐字背。\n\n你最想先用哪一句？",
+        "tags": [
+          "#英语学习",
+          "#实用英语",
+          "#英语口语",
+          "#碎片化学习",
+          "#每天学英语",
+          "#生活英语"
+        ]
+      },
+      "aiDraft": null,
+      "preferenceSignal": null,
+      "rejectReason": null,
+      "rejectedAt": null,
+      "note": "合成演示内容与指标，不是真实发布业绩。",
+      "provider": "mock",
+      "isDemo": true,
+      "experiment": null,
+      "debug": null
+    },
+    {
+      "id": "f17ed000-0000-4000-8000-000000000005",
+      "revision": 0,
+      "account": "emotion",
+      "title": "关系里允许片刻安静",
+      "topic": "关系里允许片刻安静",
+      "contentType": "reflection",
+      "sourceRetrospectiveId": null,
+      "sourceContentId": null,
+      "englishDraftId": null,
+      "createdAt": "2026-09-10T12:49:07.965Z",
+      "updatedAt": "2026-09-10T12:49:07.965Z",
+      "publishedAt": "2026-09-10T12:49:07.965Z",
+      "publishTime": "2026-09-10T12:49:07.965Z",
+      "status": "published",
+      "writing": {
+        "title": "关系里允许片刻安静",
+        "body": "不是每段安静都需要立刻填满。想说的话可以慢一点整理，想休息的时刻也可以认真承认。\n原创合成演示，不取自真实用户素材。",
+        "corePoint": "先把模糊感受变成一个具体问题。",
+        "solution": "只选择一个行动，在下一次类似场景中验证。",
+        "endingQuestion": "你会先尝试哪一步？",
+        "tags": [
+          "#创作复盘",
+          "#具体行动"
+        ]
+      },
+      "english": null,
+      "aiDraft": null,
+      "preferenceSignal": null,
+      "rejectReason": null,
+      "rejectedAt": null,
+      "note": "合成演示内容与指标，不是真实发布业绩。",
+      "provider": "mock",
+      "isDemo": true,
+      "experiment": null,
+      "debug": null
+    },
+    {
+      "id": "f17ed000-0000-4000-8000-000000000006",
+      "revision": 0,
+      "account": "english",
+      "title": "夸人时能直接用的50句英语",
+      "topic": "夸人英语50句",
+      "contentType": "educational",
+      "sourceRetrospectiveId": null,
+      "sourceContentId": null,
+      "englishDraftId": null,
+      "createdAt": "2026-09-11T12:49:07.972Z",
+      "updatedAt": "2026-09-11T12:49:07.972Z",
+      "publishedAt": "2026-09-11T12:49:07.972Z",
+      "publishTime": "2026-09-11T12:49:07.972Z",
+      "status": "published",
+      "writing": null,
+      "english": {
+        "topic": "夸人英语50句",
+        "tone": "日常",
+        "analysis": "夸人不用只会 good。看到对方具体做了什么，一句简单英语就很真诚。 按五个生活场景分组，短句为主，适合 A2–B1 学习者。离线样稿不随语气选项改写。",
+        "groupNames": [
+          "夸穿搭和品味",
+          "肯定认真付出",
+          "夸能力和想法",
+          "看见温柔细节",
+          "接住对方的进步"
+        ],
+        "sentences": [
+          {
+            "number": 1,
+            "english": "That color looks great on you.",
+            "chinese": "这个颜色很衬你。"
+          },
+          {
+            "number": 2,
+            "english": "I love your jacket.",
+            "chinese": "我好喜欢你的外套。"
+          },
+          {
+            "number": 3,
+            "english": "You've got great taste.",
+            "chinese": "你眼光真好。"
+          },
+          {
+            "number": 4,
+            "english": "Your outfit works so well together.",
+            "chinese": "你这身搭得真好看。"
+          },
+          {
+            "number": 5,
+            "english": "Those shoes are really cool.",
+            "chinese": "那双鞋真酷。"
+          },
+          {
+            "number": 6,
+            "english": "Your haircut suits you.",
+            "chinese": "这个发型很适合你。"
+          },
+          {
+            "number": 7,
+            "english": "You make it look so easy.",
+            "chinese": "你穿起来感觉毫不费力。"
+          },
+          {
+            "number": 8,
+            "english": "Where did you find that bag?",
+            "chinese": "这么好看的包你在哪儿买的？"
+          },
+          {
+            "number": 9,
+            "english": "That's such a nice photo.",
+            "chinese": "这张照片拍得真好。"
+          },
+          {
+            "number": 10,
+            "english": "Your room feels really cozy.",
+            "chinese": "你的房间让人觉得好舒服。"
+          },
+          {
+            "number": 11,
+            "english": "You worked really hard on this.",
+            "chinese": "看得出来你在这上面下了功夫。"
+          },
+          {
+            "number": 12,
+            "english": "I can see how much you care.",
+            "chinese": "我能看出来你有多用心。"
+          },
+          {
+            "number": 13,
+            "english": "Thanks for paying attention to the details.",
+            "chinese": "谢谢你连细节都考虑到了。"
+          },
+          {
+            "number": 14,
+            "english": "You didn't give up. That's impressive.",
+            "chinese": "你没有放弃，真的很棒。"
+          },
+          {
+            "number": 15,
+            "english": "You put a lot of thought into it.",
+            "chinese": "你为这件事想得很周到。"
+          },
+          {
+            "number": 16,
+            "english": "I appreciate the effort you made.",
+            "chinese": "我很感谢你的付出。"
+          },
+          {
+            "number": 17,
+            "english": "You handled that really well.",
+            "chinese": "你把那件事处理得很好。"
+          },
+          {
+            "number": 18,
+            "english": "That must have taken a lot of patience.",
+            "chinese": "那一定需要很大的耐心。"
+          },
+          {
+            "number": 19,
+            "english": "You showed up when it mattered.",
+            "chinese": "关键时刻你在，真好。"
+          },
+          {
+            "number": 20,
+            "english": "Your hard work really shows.",
+            "chinese": "你的努力大家都看得到。"
+          },
+          {
+            "number": 21,
+            "english": "That's a smart idea.",
+            "chinese": "这个想法真不错。"
+          },
+          {
+            "number": 22,
+            "english": "You're good at explaining things.",
+            "chinese": "你很会把事情讲明白。"
+          },
+          {
+            "number": 23,
+            "english": "I never thought of it that way.",
+            "chinese": "我以前没从这个角度想过。"
+          },
+          {
+            "number": 24,
+            "english": "You ask really good questions.",
+            "chinese": "你提的问题很到位。"
+          },
+          {
+            "number": 25,
+            "english": "You picked that up quickly.",
+            "chinese": "你学得好快。"
+          },
+          {
+            "number": 26,
+            "english": "Your timing was perfect.",
+            "chinese": "你把时机拿捏得刚刚好。"
+          },
+          {
+            "number": 27,
+            "english": "You've got a good eye for detail.",
+            "chinese": "你很善于发现细节。"
+          },
+          {
+            "number": 28,
+            "english": "That was a creative solution.",
+            "chinese": "这个解决办法很有创意。"
+          },
+          {
+            "number": 29,
+            "english": "You make the team better.",
+            "chinese": "有你在，团队变得更好了。"
+          },
+          {
+            "number": 30,
+            "english": "I'd love to learn that from you.",
+            "chinese": "这方面我真想向你学学。"
+          },
+          {
+            "number": 31,
+            "english": "You're a really good listener.",
+            "chinese": "你真的很会倾听。"
+          },
+          {
+            "number": 32,
+            "english": "That was kind of you.",
+            "chinese": "你这样做真贴心。"
+          },
+          {
+            "number": 33,
+            "english": "You made me feel welcome.",
+            "chinese": "你让我觉得很自在。"
+          },
+          {
+            "number": 34,
+            "english": "You always remember the little things.",
+            "chinese": "你总能记住那些小细节。"
+          },
+          {
+            "number": 35,
+            "english": "I feel comfortable around you.",
+            "chinese": "跟你相处我很放松。"
+          },
+          {
+            "number": 36,
+            "english": "You know how to cheer people up.",
+            "chinese": "你很会让人开心起来。"
+          },
+          {
+            "number": 37,
+            "english": "Thanks for checking on me.",
+            "chinese": "谢谢你关心我的情况。"
+          },
+          {
+            "number": 38,
+            "english": "You have a great sense of humor.",
+            "chinese": "你真的很有幽默感。"
+          },
+          {
+            "number": 39,
+            "english": "That message made my day.",
+            "chinese": "你那条消息让我开心了一整天。"
+          },
+          {
+            "number": 40,
+            "english": "You're easy to talk to.",
+            "chinese": "跟你聊天很轻松。"
+          },
+          {
+            "number": 41,
+            "english": "You've come a long way.",
+            "chinese": "你已经进步很多了。"
+          },
+          {
+            "number": 42,
+            "english": "You're getting better at this.",
+            "chinese": "这件事你做得越来越好了。"
+          },
+          {
+            "number": 43,
+            "english": "That took courage.",
+            "chinese": "这需要勇气，你做到了。"
+          },
+          {
+            "number": 44,
+            "english": "You should be proud of yourself.",
+            "chinese": "你可以为自己感到骄傲。"
+          },
+          {
+            "number": 45,
+            "english": "I noticed the progress you made.",
+            "chinese": "我有看到你的进步。"
+          },
+          {
+            "number": 46,
+            "english": "You sound more confident now.",
+            "chinese": "你现在说话自信多了。"
+          },
+          {
+            "number": 47,
+            "english": "That was a big step.",
+            "chinese": "这是很重要的一步。"
+          },
+          {
+            "number": 48,
+            "english": "You did better than you think.",
+            "chinese": "你比自己以为的做得更好。"
+          },
+          {
+            "number": 49,
+            "english": "I'm happy for you.",
+            "chinese": "我真为你高兴。"
+          },
+          {
+            "number": 50,
+            "english": "Keep going. It's working.",
+            "chinese": "继续吧，你的努力在见效。"
+          }
+        ],
+        "titles": [
+          "夸人时能直接用的50句英语",
+          "每天学10句｜夸人英语合集",
+          "不只会说 good｜夸人的简单表达",
+          "收藏慢慢学：夸人英语50句",
+          "五个生活场景，学会用英语聊夸人"
+        ],
+        "title": "夸人时能直接用的50句英语",
+        "body": "夸人不用只会 good。看到对方具体做了什么，一句简单英语就很真诚。\n\n这次整理了50句夸人时用得上的英语，分成5页，每天挑10句读一读。中文用日常说话的方式理解，不用逐字背。\n\n你最想先用哪一句？",
+        "tags": [
+          "#英语学习",
+          "#实用英语",
+          "#英语口语",
+          "#碎片化学习",
+          "#每天学英语",
+          "#生活英语"
+        ]
+      },
+      "aiDraft": null,
+      "preferenceSignal": null,
+      "rejectReason": null,
+      "rejectedAt": null,
+      "note": "合成演示内容与指标，不是真实发布业绩。",
+      "provider": "mock",
+      "isDemo": true,
+      "experiment": null,
+      "debug": null
+    },
+    {
+      "id": "f17ed000-0000-4000-8000-000000000007",
+      "revision": 0,
+      "account": "growth",
+      "title": "一天忙完却没完成重点",
+      "topic": "一天忙完却没完成重点",
+      "contentType": "reflection",
+      "sourceRetrospectiveId": null,
+      "sourceContentId": null,
+      "englishDraftId": null,
+      "createdAt": "2026-09-12T12:49:07.981Z",
+      "updatedAt": "2026-09-12T12:49:07.981Z",
+      "publishedAt": "2026-09-12T12:49:07.981Z",
+      "publishTime": "2026-09-12T12:49:07.981Z",
+      "status": "published",
+      "writing": {
+        "title": "一天忙完却没完成重点",
+        "body": "演示经历：一整天被临时消息打断，下班时才发现最重要的一件事没有推进。下一次计划先留出一个不处理消息的工作时段。\n这是合成演示，不代表用户真实经历。",
+        "corePoint": "先把模糊感受变成一个具体问题。",
+        "solution": "只选择一个行动，在下一次类似场景中验证。",
+        "endingQuestion": "你会先尝试哪一步？",
+        "tags": [
+          "#创作复盘",
+          "#具体行动"
+        ]
+      },
+      "english": null,
+      "aiDraft": null,
+      "preferenceSignal": null,
+      "rejectReason": null,
+      "rejectedAt": null,
+      "note": "合成演示内容与指标，不是真实发布业绩。",
+      "provider": "mock",
+      "isDemo": true,
+      "experiment": null,
+      "debug": null
+    },
+    {
+      "id": "7f909508-ae0f-466f-a7c5-f0f89e47b415",
+      "revision": 3,
+      "account": "growth",
+      "title": "返工前先确认这三件事",
+      "topic": "返工前先确认这三件事",
+      "contentType": "solution",
+      "sourceRetrospectiveId": "ee56d7bb-c66f-45db-86af-049b5ef5a5b8",
+      "sourceContentId": null,
+      "englishDraftId": null,
+      "createdAt": "2026-09-13T12:49:10.985Z",
+      "updatedAt": "2026-09-13T12:49:12.017Z",
+      "publishedAt": "2026-09-13T10:19:00.000Z",
+      "publishTime": "2026-09-13T10:19:00.000Z",
+      "status": "published",
+      "writing": {
+        "title": "返工前先确认这三件事",
+        "body": "人工审核后的正文：返工前先确认这三件事。先把使用对象、交付格式和截止时间写清楚，再开始动手。",
+        "corePoint": "我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+        "solution": "补充当时有哪些可选行动，再比较各自的代价",
+        "endingQuestion": "遇到类似情况，你会先确认哪件事？",
+        "tags": [
+          "#真实复盘",
+          "#工作成长",
+          "#行动记录"
+        ]
+      },
+      "english": null,
+      "aiDraft": {
+        "title": "返工前先确认这三件事",
+        "body": "今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工。当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚。我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始。\n\n我当时的处理：当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚\n让我在意的是：今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工\n\n复盘后，我想尝试：补充当时有哪些可选行动，再比较各自的代价\n下一次的具体行动：记录下一次出现相似情境时可以先做的一个具体动作\n\n这些是下一步计划，还需要用真实结果验证。",
+        "corePoint": "我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+        "solution": "补充当时有哪些可选行动，再比较各自的代价",
+        "endingQuestion": "遇到类似情况，你会先确认哪件事？",
+        "tags": [
+          "#真实复盘",
+          "#工作成长",
+          "#行动记录"
+        ]
+      },
+      "preferenceSignal": {
+        "titleRewritten": false,
+        "removedPhrases": [
+          "今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下",
+          "当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚",
+          "我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+          "我当时的处理：当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚",
+          "让我在意的是：今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的",
+          "复盘后，我想尝试：补充当时有哪些可选行动，再比较各自的代价",
+          "下一次的具体行动：记录下一次出现相似情境时可以先做的一个具体动作",
+          "这些是下一步计划，还需要用真实结果验证"
+        ],
+        "addedPhrases": [
+          "人工审核后的正文：返工前先确认这三件事",
+          "先把使用对象、交付格式和截止时间写清楚，再开始动手"
+        ],
+        "lowerIntensity": false,
+        "removedDrama": false,
+        "perspectiveShift": false,
+        "summary": "人工修改信号：删掉 8 句原稿；补写 2 句。"
+      },
+      "rejectReason": null,
+      "rejectedAt": null,
+      "note": "",
+      "provider": "mock",
+      "isDemo": false,
+      "experiment": null,
+      "debug": {
+        "promptVersion": "growth-loop.v3",
+        "provider": "mock",
+        "model": null,
+        "factsUsed": [
+          "今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工。当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚。我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始。"
+        ],
+        "interpretationsUsed": [
+          "行为模式（推断）：面对「今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下」时，记录里写的第一反应是「当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚」",
+          "改法空间（推断）：当时还存在其他可选行动，需要在下一个相似场景里验证",
+          "经验迁移（推断）：我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+          "内容价值（推断）：事件、困扰与处理建议较具体，适合分享；分数是离线规则评估，不预测流量"
+        ],
+        "strategyUsed": [],
+        "experimentUsed": null,
+        "userPreferenceUsed": [],
+        "feedbackUsed": [],
+        "constraintsApplied": [],
+        "finalGenerationContext": "account=growth | facts=1 | interpretations=4 | strategy={\"works\":[],\"avoid\":[],\"testing\":[],\"watch\":[],\"unknown\":[]} | userPreferences=[] | learnings=0 | experiment=none | promptVersion=growth-loop.v3"
+      }
+    },
+    {
+      "id": "73dc359f-bedf-4569-8a4a-eac8f72d8287",
+      "revision": 4,
+      "account": "growth",
+      "title": "确认范围之后效率变高",
+      "topic": "确认范围之后效率变高",
+      "contentType": "solution",
+      "sourceRetrospectiveId": "ee56d7bb-c66f-45db-86af-049b5ef5a5b8",
+      "sourceContentId": "7f909508-ae0f-466f-a7c5-f0f89e47b415",
+      "englishDraftId": null,
+      "createdAt": "2026-09-13T12:49:13.551Z",
+      "updatedAt": "2026-09-13T12:49:14.257Z",
+      "publishedAt": "2026-09-13T10:39:00.000Z",
+      "publishTime": "2026-09-13T10:39:00.000Z",
+      "status": "published",
+      "writing": {
+        "title": "确认范围之后效率变高",
+        "body": "人工审核后的正文：确认范围之后效率变高。先把使用对象、交付格式和截止时间写清楚，再开始动手。",
+        "corePoint": "我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+        "solution": "补充当时有哪些可选行动，再比较各自的代价",
+        "endingQuestion": "遇到类似情况，你会先确认哪件事？",
+        "tags": [
+          "#真实复盘",
+          "#工作成长",
+          "#行动记录"
+        ]
+      },
+      "english": null,
+      "aiDraft": {
+        "title": "确认范围之后效率变高",
+        "body": "如果你也遇到「今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下」，可以先看这次真实复盘。\n\n今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工。当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚。我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始。\n\n我当时的处理：当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚\n让我在意的是：今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工\n\n复盘后，我想尝试：补充当时有哪些可选行动，再比较各自的代价\n下一次的具体行动：记录下一次出现相似情境时可以先做的一个具体动作\n\n这些是下一步计划，还需要用真实结果验证。",
+        "corePoint": "我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+        "solution": "补充当时有哪些可选行动，再比较各自的代价",
+        "endingQuestion": "遇到类似情况，你会先确认哪件事？",
+        "tags": [
+          "#真实复盘",
+          "#工作成长",
+          "#行动记录"
+        ]
+      },
+      "preferenceSignal": {
+        "titleRewritten": false,
+        "removedPhrases": [
+          "如果你也遇到「今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的",
+          "今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下",
+          "当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚",
+          "我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+          "我当时的处理：当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚",
+          "让我在意的是：今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的",
+          "复盘后，我想尝试：补充当时有哪些可选行动，再比较各自的代价",
+          "下一次的具体行动：记录下一次出现相似情境时可以先做的一个具体动作",
+          "这些是下一步计划，还需要用真实结果验证"
+        ],
+        "addedPhrases": [
+          "人工审核后的正文：确认范围之后效率变高",
+          "先把使用对象、交付格式和截止时间写清楚，再开始动手"
+        ],
+        "lowerIntensity": false,
+        "removedDrama": false,
+        "perspectiveShift": false,
+        "summary": "人工修改信号：删掉 9 句原稿；补写 2 句。"
+      },
+      "rejectReason": null,
+      "rejectedAt": null,
+      "note": "",
+      "provider": "mock",
+      "isDemo": false,
+      "experiment": {
+        "id": "766d9f64-0310-4cf9-8d2e-893de568a9f4",
+        "hypothesis": "开头改成具体使用场景可能提高收藏率（假设，尚未验证）",
+        "variable": "hook",
+        "variant": "scene_first",
+        "baseline": "同账号同窗口历史样本不足，尚无可用基线",
+        "targetMetric": "favoriteRate",
+        "requiredSamples": 3,
+        "currentSamples": 1,
+        "status": "running",
+        "createdAt": "2026-09-13T12:49:13.555Z",
+        "completedAt": null,
+        "result": null,
+        "confidence": "LOW",
+        "instruction": "下一篇同类growth内容，仅把开头改为一个具体使用场景；记录收藏率，暂不判断因果。",
+        "keepConstant": "标题风格、正文结构、篇幅和发布时段保持接近；用相同发布后时长录入指标。"
+      },
+      "debug": {
+        "promptVersion": "growth-loop.v3",
+        "provider": "mock",
+        "model": null,
+        "factsUsed": [
+          "今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工。当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚。我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始。"
+        ],
+        "interpretationsUsed": [
+          "行为模式（推断）：面对「今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下」时，记录里写的第一反应是「当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚」",
+          "改法空间（推断）：当时还存在其他可选行动，需要在下一个相似场景里验证",
+          "经验迁移（推断）：我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+          "内容价值（推断）：事件、困扰与处理建议较具体，适合分享；分数是离线规则评估，不预测流量"
+        ],
+        "strategyUsed": [],
+        "experimentUsed": "hook=scene_first",
+        "userPreferenceUsed": [],
+        "feedbackUsed": [
+          {
+            "feedbackId": "bb04f94b-b554-4c76-93ef-be902504f78f",
+            "contentId": "7f909508-ae0f-466f-a7c5-f0f89e47b415",
+            "source": "feedback",
+            "verdict": "INSUFFICIENT_EVIDENCE",
+            "confidence": "LOW",
+            "createdAt": "2026-09-13T12:49:12.376Z",
+            "experimentId": "c2b2fc4c-b86e-4722-949f-6e7aefe8dbc6",
+            "text": "《返工前先确认这三件事》上一轮证据不足（置信度 LOW）；本轮不要据此改动写法，只把它当作待验证信号；上一轮提议的唯一变量 hook=scene_first（实验 c2b2fc4c-b86e-4722-949f-6e7aefe8dbc6，状态 proposed）"
+          }
+        ],
+        "constraintsApplied": [],
+        "finalGenerationContext": "account=growth | facts=1 | interpretations=4 | strategy={\"works\":[],\"avoid\":[],\"testing\":[],\"watch\":[],\"unknown\":[]} | userPreferences=[] | learnings=1 | experiment=hook=scene_first(proposed) | promptVersion=growth-loop.v3"
+      }
+    },
+    {
+      "id": "d3ad35d9-ed27-49b1-bfda-4dfe5bff00cd",
+      "revision": 4,
+      "account": "growth",
+      "title": "把交付标准写成清单",
+      "topic": "把交付标准写成清单",
+      "contentType": "solution",
+      "sourceRetrospectiveId": "ee56d7bb-c66f-45db-86af-049b5ef5a5b8",
+      "sourceContentId": "73dc359f-bedf-4569-8a4a-eac8f72d8287",
+      "englishDraftId": null,
+      "createdAt": "2026-09-13T12:49:15.107Z",
+      "updatedAt": "2026-09-13T12:49:15.835Z",
+      "publishedAt": "2026-09-13T10:49:00.000Z",
+      "publishTime": "2026-09-13T10:49:00.000Z",
+      "status": "published",
+      "writing": {
+        "title": "把交付标准写成清单",
+        "body": "人工审核后的正文：把交付标准写成清单。先把使用对象、交付格式和截止时间写清楚，再开始动手。",
+        "corePoint": "我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+        "solution": "补充当时有哪些可选行动，再比较各自的代价",
+        "endingQuestion": "遇到类似情况，你会先确认哪件事？",
+        "tags": [
+          "#真实复盘",
+          "#工作成长",
+          "#行动记录"
+        ]
+      },
+      "english": null,
+      "aiDraft": {
+        "title": "把交付标准写成清单",
+        "body": "如果你也遇到「今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下」，可以先看这次真实复盘。\n\n今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工。当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚。我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始。\n\n我当时的处理：当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚\n让我在意的是：今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工\n\n复盘后，我想尝试：补充当时有哪些可选行动，再比较各自的代价\n下一次的具体行动：记录下一次出现相似情境时可以先做的一个具体动作\n\n这些是下一步计划，还需要用真实结果验证。",
+        "corePoint": "我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+        "solution": "补充当时有哪些可选行动，再比较各自的代价",
+        "endingQuestion": "遇到类似情况，你会先确认哪件事？",
+        "tags": [
+          "#真实复盘",
+          "#工作成长",
+          "#行动记录"
+        ]
+      },
+      "preferenceSignal": {
+        "titleRewritten": false,
+        "removedPhrases": [
+          "如果你也遇到「今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的",
+          "今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下",
+          "当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚",
+          "我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+          "我当时的处理：当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚",
+          "让我在意的是：今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的",
+          "复盘后，我想尝试：补充当时有哪些可选行动，再比较各自的代价",
+          "下一次的具体行动：记录下一次出现相似情境时可以先做的一个具体动作",
+          "这些是下一步计划，还需要用真实结果验证"
+        ],
+        "addedPhrases": [
+          "人工审核后的正文：把交付标准写成清单",
+          "先把使用对象、交付格式和截止时间写清楚，再开始动手"
+        ],
+        "lowerIntensity": false,
+        "removedDrama": false,
+        "perspectiveShift": false,
+        "summary": "人工修改信号：删掉 9 句原稿；补写 2 句。"
+      },
+      "rejectReason": null,
+      "rejectedAt": null,
+      "note": "",
+      "provider": "mock",
+      "isDemo": false,
+      "experiment": {
+        "id": "cea78d5c-e480-47bc-8771-f866d32711bf",
+        "hypothesis": "开头改成具体使用场景可能提高收藏率（假设，尚未验证）",
+        "variable": "hook",
+        "variant": "scene_first",
+        "baseline": "同账号同窗口（24h）历史 1 篇，中位阅读 100；本篇 100",
+        "targetMetric": "favoriteRate",
+        "requiredSamples": 3,
+        "currentSamples": 2,
+        "status": "running",
+        "createdAt": "2026-09-13T12:49:15.111Z",
+        "completedAt": null,
+        "result": null,
+        "confidence": "LOW",
+        "instruction": "下一篇同类growth内容，仅把开头改为一个具体使用场景；记录收藏率，暂不判断因果。",
+        "keepConstant": "标题风格、正文结构、篇幅和发布时段保持接近；用相同发布后时长录入指标。"
+      },
+      "debug": {
+        "promptVersion": "growth-loop.v3",
+        "provider": "mock",
+        "model": null,
+        "factsUsed": [
+          "今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工。当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚。我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始。"
+        ],
+        "interpretationsUsed": [
+          "行为模式（推断）：面对「今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下」时，记录里写的第一反应是「当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚」",
+          "改法空间（推断）：当时还存在其他可选行动，需要在下一个相似场景里验证",
+          "经验迁移（推断）：我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+          "内容价值（推断）：事件、困扰与处理建议较具体，适合分享；分数是离线规则评估，不预测流量"
+        ],
+        "strategyUsed": [],
+        "experimentUsed": "hook=scene_first",
+        "userPreferenceUsed": [],
+        "feedbackUsed": [
+          {
+            "feedbackId": "58e132fb-a592-4ff2-a801-b32978db89d4",
+            "contentId": "73dc359f-bedf-4569-8a4a-eac8f72d8287",
+            "source": "feedback",
+            "verdict": "INSUFFICIENT_EVIDENCE",
+            "confidence": "LOW",
+            "createdAt": "2026-09-13T12:49:14.410Z",
+            "experimentId": "9124af9e-031a-493f-b61a-3662d6c2c679",
+            "text": "《确认范围之后效率变高》上一轮证据不足（置信度 LOW）；本轮不要据此改动写法，只把它当作待验证信号；上一轮提议的唯一变量 hook=scene_first（实验 9124af9e-031a-493f-b61a-3662d6c2c679，状态 proposed）"
+          },
+          {
+            "feedbackId": "bb04f94b-b554-4c76-93ef-be902504f78f",
+            "contentId": "7f909508-ae0f-466f-a7c5-f0f89e47b415",
+            "source": "feedback",
+            "verdict": "INSUFFICIENT_EVIDENCE",
+            "confidence": "LOW",
+            "createdAt": "2026-09-13T12:49:12.376Z",
+            "experimentId": "c2b2fc4c-b86e-4722-949f-6e7aefe8dbc6",
+            "text": "《返工前先确认这三件事》上一轮证据不足（置信度 LOW）；本轮不要据此改动写法，只把它当作待验证信号；上一轮提议的唯一变量 hook=scene_first（实验 c2b2fc4c-b86e-4722-949f-6e7aefe8dbc6，状态 proposed）"
+          }
+        ],
+        "constraintsApplied": [],
+        "finalGenerationContext": "account=growth | facts=1 | interpretations=4 | strategy={\"works\":[],\"avoid\":[],\"testing\":[],\"watch\":[],\"unknown\":[]} | userPreferences=[] | learnings=2 | experiment=hook=scene_first(proposed) | promptVersion=growth-loop.v3"
+      }
+    },
+    {
+      "id": "d7558a97-5367-40b5-980d-41a83e253944",
+      "revision": 4,
+      "account": "growth",
+      "title": "先问清楚再动手",
+      "topic": "先问清楚再动手",
+      "contentType": "solution",
+      "sourceRetrospectiveId": "ee56d7bb-c66f-45db-86af-049b5ef5a5b8",
+      "sourceContentId": "d3ad35d9-ed27-49b1-bfda-4dfe5bff00cd",
+      "englishDraftId": null,
+      "createdAt": "2026-09-13T12:49:16.704Z",
+      "updatedAt": "2026-09-13T12:49:17.295Z",
+      "publishedAt": "2026-09-13T10:59:00.000Z",
+      "publishTime": "2026-09-13T10:59:00.000Z",
+      "status": "published",
+      "writing": {
+        "title": "先问清楚再动手",
+        "body": "人工审核后的正文：先问清楚再动手。先把使用对象、交付格式和截止时间写清楚，再开始动手。",
+        "corePoint": "我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+        "solution": "补充当时有哪些可选行动，再比较各自的代价",
+        "endingQuestion": "遇到类似情况，你会先确认哪件事？",
+        "tags": [
+          "#真实复盘",
+          "#工作成长",
+          "#行动记录"
+        ]
+      },
+      "english": null,
+      "aiDraft": {
+        "title": "先问清楚再动手",
+        "body": "如果你也遇到「今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下」，可以先看这次真实复盘。\n\n今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工。当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚。我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始。\n\n我当时的处理：当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚\n让我在意的是：今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工\n\n复盘后，我想尝试：补充当时有哪些可选行动，再比较各自的代价\n下一次的具体行动：记录下一次出现相似情境时可以先做的一个具体动作\n\n这些是下一步计划，还需要用真实结果验证。",
+        "corePoint": "我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+        "solution": "补充当时有哪些可选行动，再比较各自的代价",
+        "endingQuestion": "遇到类似情况，你会先确认哪件事？",
+        "tags": [
+          "#真实复盘",
+          "#工作成长",
+          "#行动记录"
+        ]
+      },
+      "preferenceSignal": {
+        "titleRewritten": false,
+        "removedPhrases": [
+          "如果你也遇到「今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的",
+          "今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下",
+          "当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚",
+          "我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+          "我当时的处理：当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚",
+          "让我在意的是：今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的",
+          "复盘后，我想尝试：补充当时有哪些可选行动，再比较各自的代价",
+          "下一次的具体行动：记录下一次出现相似情境时可以先做的一个具体动作",
+          "这些是下一步计划，还需要用真实结果验证"
+        ],
+        "addedPhrases": [
+          "人工审核后的正文：先问清楚再动手",
+          "先把使用对象、交付格式和截止时间写清楚，再开始动手"
+        ],
+        "lowerIntensity": false,
+        "removedDrama": false,
+        "perspectiveShift": false,
+        "summary": "人工修改信号：删掉 9 句原稿；补写 2 句。"
+      },
+      "rejectReason": null,
+      "rejectedAt": null,
+      "note": "",
+      "provider": "mock",
+      "isDemo": false,
+      "experiment": {
+        "id": "9c9773ce-7210-4cc7-8821-b0c700a59942",
+        "hypothesis": "开头改成具体使用场景可能提高收藏率（假设，尚未验证）",
+        "variable": "hook",
+        "variant": "scene_first",
+        "baseline": "同账号同窗口（24h）历史 2 篇，中位阅读 100；本篇 100",
+        "targetMetric": "favoriteRate",
+        "requiredSamples": 3,
+        "currentSamples": 3,
+        "status": "evaluating",
+        "createdAt": "2026-09-13T12:49:16.709Z",
+        "completedAt": null,
+        "result": null,
+        "confidence": "LOW",
+        "instruction": "下一篇同类growth内容，仅把开头改为一个具体使用场景；记录收藏率，暂不判断因果。",
+        "keepConstant": "标题风格、正文结构、篇幅和发布时段保持接近；用相同发布后时长录入指标。"
+      },
+      "debug": {
+        "promptVersion": "growth-loop.v3",
+        "provider": "mock",
+        "model": null,
+        "factsUsed": [
+          "今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工。当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚。我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始。"
+        ],
+        "interpretationsUsed": [
+          "行为模式（推断）：面对「今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下」时，记录里写的第一反应是「当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚」",
+          "改法空间（推断）：当时还存在其他可选行动，需要在下一个相似场景里验证",
+          "经验迁移（推断）：我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+          "内容价值（推断）：事件、困扰与处理建议较具体，适合分享；分数是离线规则评估，不预测流量"
+        ],
+        "strategyUsed": [],
+        "experimentUsed": "hook=scene_first",
+        "userPreferenceUsed": [],
+        "feedbackUsed": [
+          {
+            "feedbackId": "3e8e53d2-a633-4d32-8d24-e1afa760ef00",
+            "contentId": "d3ad35d9-ed27-49b1-bfda-4dfe5bff00cd",
+            "source": "feedback",
+            "verdict": "INSUFFICIENT_EVIDENCE",
+            "confidence": "LOW",
+            "createdAt": "2026-09-13T12:49:15.989Z",
+            "experimentId": "53d9145e-f55e-44ce-bd8d-6d94cd6bc123",
+            "text": "《把交付标准写成清单》上一轮证据不足（置信度 LOW）；本轮不要据此改动写法，只把它当作待验证信号；上一轮提议的唯一变量 hook=scene_first（实验 53d9145e-f55e-44ce-bd8d-6d94cd6bc123，状态 proposed）"
+          },
+          {
+            "feedbackId": "58e132fb-a592-4ff2-a801-b32978db89d4",
+            "contentId": "73dc359f-bedf-4569-8a4a-eac8f72d8287",
+            "source": "feedback",
+            "verdict": "INSUFFICIENT_EVIDENCE",
+            "confidence": "LOW",
+            "createdAt": "2026-09-13T12:49:14.410Z",
+            "experimentId": "9124af9e-031a-493f-b61a-3662d6c2c679",
+            "text": "《确认范围之后效率变高》上一轮证据不足（置信度 LOW）；本轮不要据此改动写法，只把它当作待验证信号；上一轮提议的唯一变量 hook=scene_first（实验 9124af9e-031a-493f-b61a-3662d6c2c679，状态 proposed）"
+          },
+          {
+            "feedbackId": "bb04f94b-b554-4c76-93ef-be902504f78f",
+            "contentId": "7f909508-ae0f-466f-a7c5-f0f89e47b415",
+            "source": "feedback",
+            "verdict": "INSUFFICIENT_EVIDENCE",
+            "confidence": "LOW",
+            "createdAt": "2026-09-13T12:49:12.376Z",
+            "experimentId": "c2b2fc4c-b86e-4722-949f-6e7aefe8dbc6",
+            "text": "《返工前先确认这三件事》上一轮证据不足（置信度 LOW）；本轮不要据此改动写法，只把它当作待验证信号；上一轮提议的唯一变量 hook=scene_first（实验 c2b2fc4c-b86e-4722-949f-6e7aefe8dbc6，状态 proposed）"
+          }
+        ],
+        "constraintsApplied": [],
+        "finalGenerationContext": "account=growth | facts=1 | interpretations=4 | strategy={\"works\":[],\"avoid\":[],\"testing\":[],\"watch\":[],\"unknown\":[]} | userPreferences=[] | learnings=3 | experiment=hook=scene_first(proposed) | promptVersion=growth-loop.v3"
+      }
+    },
+    {
+      "id": "3edf5d41-d4e8-476f-9afd-694796099622",
+      "revision": 4,
+      "account": "growth",
+      "title": "确认清单让返工消失了",
+      "topic": "确认清单让返工消失了",
+      "contentType": "solution",
+      "sourceRetrospectiveId": "ee56d7bb-c66f-45db-86af-049b5ef5a5b8",
+      "sourceContentId": "d7558a97-5367-40b5-980d-41a83e253944",
+      "englishDraftId": null,
+      "createdAt": "2026-09-13T12:49:18.204Z",
+      "updatedAt": "2026-09-13T12:49:18.807Z",
+      "publishedAt": "2026-09-13T11:19:00.000Z",
+      "publishTime": "2026-09-13T11:19:00.000Z",
+      "status": "published",
+      "writing": {
+        "title": "确认清单让返工消失了",
+        "body": "人工审核后的正文：确认清单让返工消失了。先把使用对象、交付格式和截止时间写清楚，再开始动手。",
+        "corePoint": "我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+        "solution": "补充当时有哪些可选行动，再比较各自的代价",
+        "endingQuestion": "遇到类似情况，你会先确认哪件事？",
+        "tags": [
+          "#真实复盘",
+          "#工作成长",
+          "#行动记录"
+        ]
+      },
+      "english": null,
+      "aiDraft": {
+        "title": "确认清单让返工消失了",
+        "body": "如果你也遇到「今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下」，可以先看这次真实复盘。\n\n今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工。当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚。我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始。\n\n我当时的处理：当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚\n让我在意的是：今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工\n\n复盘后，我想尝试：补充当时有哪些可选行动，再比较各自的代价\n下一次的具体行动：记录下一次出现相似情境时可以先做的一个具体动作\n\n这些是下一步计划，还需要用真实结果验证。",
+        "corePoint": "我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+        "solution": "补充当时有哪些可选行动，再比较各自的代价",
+        "endingQuestion": "遇到类似情况，你会先确认哪件事？",
+        "tags": [
+          "#真实复盘",
+          "#工作成长",
+          "#行动记录"
+        ]
+      },
+      "preferenceSignal": {
+        "titleRewritten": false,
+        "removedPhrases": [
+          "如果你也遇到「今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的",
+          "今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下",
+          "当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚",
+          "我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+          "我当时的处理：当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚",
+          "让我在意的是：今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的",
+          "复盘后，我想尝试：补充当时有哪些可选行动，再比较各自的代价",
+          "下一次的具体行动：记录下一次出现相似情境时可以先做的一个具体动作",
+          "这些是下一步计划，还需要用真实结果验证"
+        ],
+        "addedPhrases": [
+          "人工审核后的正文：确认清单让返工消失了",
+          "先把使用对象、交付格式和截止时间写清楚，再开始动手"
+        ],
+        "lowerIntensity": false,
+        "removedDrama": false,
+        "perspectiveShift": false,
+        "summary": "人工修改信号：删掉 9 句原稿；补写 2 句。"
+      },
+      "rejectReason": null,
+      "rejectedAt": null,
+      "note": "",
+      "provider": "mock",
+      "isDemo": false,
+      "experiment": {
+        "id": "4b0a36f0-bf1d-403e-b896-26d4d289c8a7",
+        "hypothesis": "开头改成具体使用场景可能提高收藏率（假设，尚未验证）",
+        "variable": "hook",
+        "variant": "scene_first",
+        "baseline": "同账号同窗口（24h）历史 3 篇，中位阅读 100；本篇 100",
+        "targetMetric": "favoriteRate",
+        "requiredSamples": 3,
+        "currentSamples": 4,
+        "status": "evaluating",
+        "createdAt": "2026-09-13T12:49:18.208Z",
+        "completedAt": null,
+        "result": null,
+        "confidence": "LOW",
+        "instruction": "下一篇同类growth内容，仅把开头改为一个具体使用场景；记录收藏率，暂不判断因果。",
+        "keepConstant": "标题风格、正文结构、篇幅和发布时段保持接近；用相同发布后时长录入指标。"
+      },
+      "debug": {
+        "promptVersion": "growth-loop.v3",
+        "provider": "mock",
+        "model": null,
+        "factsUsed": [
+          "今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工。当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚。我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始。"
+        ],
+        "interpretationsUsed": [
+          "行为模式（推断）：面对「今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下」时，记录里写的第一反应是「当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚」",
+          "改法空间（推断）：当时还存在其他可选行动，需要在下一个相似场景里验证",
+          "经验迁移（推断）：我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+          "内容价值（推断）：事件、困扰与处理建议较具体，适合分享；分数是离线规则评估，不预测流量"
+        ],
+        "strategyUsed": [],
+        "experimentUsed": "hook=scene_first",
+        "userPreferenceUsed": [],
+        "feedbackUsed": [
+          {
+            "feedbackId": "431ca6f0-0411-4635-a5c3-7e3e17e89fb1",
+            "contentId": "d7558a97-5367-40b5-980d-41a83e253944",
+            "source": "feedback",
+            "verdict": "NEXT_EXPERIMENT",
+            "confidence": "MEDIUM",
+            "createdAt": "2026-09-13T12:49:17.451Z",
+            "experimentId": "c079b909-a984-4d2f-b853-770f30fde85b",
+            "text": "《先问清楚再动手》上一轮留有进行中的实验（置信度 MEDIUM）；上一轮提议的唯一变量 hook=scene_first（实验 c079b909-a984-4d2f-b853-770f30fde85b，状态 proposed）"
+          },
+          {
+            "feedbackId": "3e8e53d2-a633-4d32-8d24-e1afa760ef00",
+            "contentId": "d3ad35d9-ed27-49b1-bfda-4dfe5bff00cd",
+            "source": "feedback",
+            "verdict": "INSUFFICIENT_EVIDENCE",
+            "confidence": "LOW",
+            "createdAt": "2026-09-13T12:49:15.989Z",
+            "experimentId": "53d9145e-f55e-44ce-bd8d-6d94cd6bc123",
+            "text": "《把交付标准写成清单》上一轮证据不足（置信度 LOW）；本轮不要据此改动写法，只把它当作待验证信号；上一轮提议的唯一变量 hook=scene_first（实验 53d9145e-f55e-44ce-bd8d-6d94cd6bc123，状态 proposed）"
+          },
+          {
+            "feedbackId": "58e132fb-a592-4ff2-a801-b32978db89d4",
+            "contentId": "73dc359f-bedf-4569-8a4a-eac8f72d8287",
+            "source": "feedback",
+            "verdict": "INSUFFICIENT_EVIDENCE",
+            "confidence": "LOW",
+            "createdAt": "2026-09-13T12:49:14.410Z",
+            "experimentId": "9124af9e-031a-493f-b61a-3662d6c2c679",
+            "text": "《确认范围之后效率变高》上一轮证据不足（置信度 LOW）；本轮不要据此改动写法，只把它当作待验证信号；上一轮提议的唯一变量 hook=scene_first（实验 9124af9e-031a-493f-b61a-3662d6c2c679，状态 proposed）"
+          }
+        ],
+        "constraintsApplied": [],
+        "finalGenerationContext": "account=growth | facts=1 | interpretations=4 | strategy={\"works\":[],\"avoid\":[],\"testing\":[],\"watch\":[],\"unknown\":[]} | userPreferences=[] | learnings=3 | experiment=hook=scene_first(proposed) | promptVersion=growth-loop.v3"
+      }
+    },
+    {
+      "id": "18c16ece-80b6-43f4-ade5-7d171b1e4ccb",
+      "revision": 4,
+      "account": "growth",
+      "title": "被临时消息打断的一天",
+      "topic": "被临时消息打断的一天",
+      "contentType": "solution",
+      "sourceRetrospectiveId": "ee56d7bb-c66f-45db-86af-049b5ef5a5b8",
+      "sourceContentId": "3edf5d41-d4e8-476f-9afd-694796099622",
+      "englishDraftId": null,
+      "createdAt": "2026-09-13T12:49:20.188Z",
+      "updatedAt": "2026-09-13T12:49:21.042Z",
+      "publishedAt": "2026-09-13T11:39:00.000Z",
+      "publishTime": "2026-09-13T11:39:00.000Z",
+      "status": "published",
+      "writing": {
+        "title": "被临时消息打断的一天",
+        "body": "人工审核后的正文：被临时消息打断的一天。先把使用对象、交付格式和截止时间写清楚，再开始动手。",
+        "corePoint": "我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+        "solution": "补充当时有哪些可选行动，再比较各自的代价",
+        "endingQuestion": "遇到类似情况，你会先确认哪件事？",
+        "tags": [
+          "#真实复盘",
+          "#工作成长",
+          "#行动记录"
+        ]
+      },
+      "english": null,
+      "aiDraft": {
+        "title": "被临时消息打断的一天",
+        "body": "如果你也遇到「今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下」，可以先看这次真实复盘。\n\n今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工。当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚。我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始。\n\n我当时的处理：当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚\n让我在意的是：今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工\n\n复盘后，我想尝试：补充当时有哪些可选行动，再比较各自的代价\n下一次的具体行动：记录下一次出现相似情境时可以先做的一个具体动作\n\n这些是下一步计划，还需要用真实结果验证。",
+        "corePoint": "我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+        "solution": "补充当时有哪些可选行动，再比较各自的代价",
+        "endingQuestion": "遇到类似情况，你会先确认哪件事？",
+        "tags": [
+          "#真实复盘",
+          "#工作成长",
+          "#行动记录"
+        ]
+      },
+      "preferenceSignal": {
+        "titleRewritten": false,
+        "removedPhrases": [
+          "如果你也遇到「今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的",
+          "今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下",
+          "当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚",
+          "我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+          "我当时的处理：当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚",
+          "让我在意的是：今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的",
+          "复盘后，我想尝试：补充当时有哪些可选行动，再比较各自的代价",
+          "下一次的具体行动：记录下一次出现相似情境时可以先做的一个具体动作",
+          "这些是下一步计划，还需要用真实结果验证"
+        ],
+        "addedPhrases": [
+          "人工审核后的正文：被临时消息打断的一天",
+          "先把使用对象、交付格式和截止时间写清楚，再开始动手"
+        ],
+        "lowerIntensity": false,
+        "removedDrama": false,
+        "perspectiveShift": false,
+        "summary": "人工修改信号：删掉 9 句原稿；补写 2 句。"
+      },
+      "rejectReason": null,
+      "rejectedAt": null,
+      "note": "",
+      "provider": "mock",
+      "isDemo": false,
+      "experiment": {
+        "id": "2d60b8ba-4f4a-4907-8c6f-1ba6ef0ebb5b",
+        "hypothesis": "开头改成具体使用场景可能提高收藏率（假设，尚未验证）",
+        "variable": "hook",
+        "variant": "scene_first",
+        "baseline": "同账号同窗口（24h）历史 4 篇，中位阅读 100；本篇 600",
+        "targetMetric": "favoriteRate",
+        "requiredSamples": 3,
+        "currentSamples": 5,
+        "status": "evaluating",
+        "createdAt": "2026-09-13T12:49:20.203Z",
+        "completedAt": null,
+        "result": null,
+        "confidence": "LOW",
+        "instruction": "下一篇同类growth内容，仅把开头改为一个具体使用场景；记录收藏率，暂不判断因果。",
+        "keepConstant": "标题风格、正文结构、篇幅和发布时段保持接近；用相同发布后时长录入指标。"
+      },
+      "debug": {
+        "promptVersion": "growth-loop.v3",
+        "provider": "mock",
+        "model": null,
+        "factsUsed": [
+          "今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工。当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚。我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始。"
+        ],
+        "interpretationsUsed": [
+          "行为模式（推断）：面对「今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下」时，记录里写的第一反应是「当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚」",
+          "改法空间（推断）：当时还存在其他可选行动，需要在下一个相似场景里验证",
+          "经验迁移（推断）：我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+          "内容价值（推断）：事件、困扰与处理建议较具体，适合分享；分数是离线规则评估，不预测流量"
+        ],
+        "strategyUsed": [],
+        "experimentUsed": "hook=scene_first",
+        "userPreferenceUsed": [],
+        "feedbackUsed": [
+          {
+            "feedbackId": "a63d06f1-35b6-41af-be6c-6396dd5f475e",
+            "contentId": "3edf5d41-d4e8-476f-9afd-694796099622",
+            "source": "feedback",
+            "verdict": "KEEP",
+            "confidence": "MEDIUM",
+            "createdAt": "2026-09-13T12:49:18.952Z",
+            "experimentId": "04912112-8078-4618-b72f-9b4da5c0683c",
+            "text": "《确认清单让返工消失了》上一轮判定 KEEP，可以继续沿用（置信度 MEDIUM）；继续：当前写法在本窗口表现高于同窗口中位数（+500%），在出现新的反证前继续沿用。；上一轮提议的唯一变量 hook=scene_first（实验 04912112-8078-4618-b72f-9b4da5c0683c，状态 proposed）"
+          },
+          {
+            "feedbackId": "431ca6f0-0411-4635-a5c3-7e3e17e89fb1",
+            "contentId": "d7558a97-5367-40b5-980d-41a83e253944",
+            "source": "feedback",
+            "verdict": "NEXT_EXPERIMENT",
+            "confidence": "MEDIUM",
+            "createdAt": "2026-09-13T12:49:17.451Z",
+            "experimentId": "c079b909-a984-4d2f-b853-770f30fde85b",
+            "text": "《先问清楚再动手》上一轮留有进行中的实验（置信度 MEDIUM）；上一轮提议的唯一变量 hook=scene_first（实验 c079b909-a984-4d2f-b853-770f30fde85b，状态 proposed）"
+          },
+          {
+            "feedbackId": "3e8e53d2-a633-4d32-8d24-e1afa760ef00",
+            "contentId": "d3ad35d9-ed27-49b1-bfda-4dfe5bff00cd",
+            "source": "feedback",
+            "verdict": "INSUFFICIENT_EVIDENCE",
+            "confidence": "LOW",
+            "createdAt": "2026-09-13T12:49:15.989Z",
+            "experimentId": "53d9145e-f55e-44ce-bd8d-6d94cd6bc123",
+            "text": "《把交付标准写成清单》上一轮证据不足（置信度 LOW）；本轮不要据此改动写法，只把它当作待验证信号；上一轮提议的唯一变量 hook=scene_first（实验 53d9145e-f55e-44ce-bd8d-6d94cd6bc123，状态 proposed）"
+          }
+        ],
+        "constraintsApplied": [],
+        "finalGenerationContext": "account=growth | facts=1 | interpretations=4 | strategy={\"works\":[],\"avoid\":[],\"testing\":[],\"watch\":[],\"unknown\":[]} | userPreferences=[] | learnings=3 | experiment=hook=scene_first(proposed) | promptVersion=growth-loop.v3"
+      }
+    },
+    {
+      "id": "6754a74c-77d8-42bf-9e11-ed9f7a7d14a2",
+      "revision": 4,
+      "account": "growth",
+      "title": "为什么照常推进的一天？",
+      "topic": "照常推进的一天",
+      "contentType": "solution",
+      "sourceRetrospectiveId": "ee56d7bb-c66f-45db-86af-049b5ef5a5b8",
+      "sourceContentId": "18c16ece-80b6-43f4-ade5-7d171b1e4ccb",
+      "englishDraftId": null,
+      "createdAt": "2026-09-13T12:49:21.957Z",
+      "updatedAt": "2026-09-13T12:49:22.667Z",
+      "publishedAt": "2026-09-13T11:59:00.000Z",
+      "publishTime": "2026-09-13T11:59:00.000Z",
+      "status": "published",
+      "writing": {
+        "title": "为什么照常推进的一天？",
+        "body": "人工审核后的正文：照常推进的一天。先把使用对象、交付格式和截止时间写清楚，再开始动手。",
+        "corePoint": "我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+        "solution": "补充当时有哪些可选行动，再比较各自的代价",
+        "endingQuestion": "遇到类似情况，你会先确认哪件事？",
+        "tags": [
+          "#真实复盘",
+          "#工作成长",
+          "#行动记录"
+        ]
+      },
+      "english": null,
+      "aiDraft": {
+        "title": "为什么照常推进的一天？",
+        "body": "今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工。当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚。我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始。\n\n我当时的处理：当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚\n让我在意的是：今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工\n\n复盘后，我想尝试：补充当时有哪些可选行动，再比较各自的代价\n下一次的具体行动：记录下一次出现相似情境时可以先做的一个具体动作\n\n这些是下一步计划，还需要用真实结果验证。",
+        "corePoint": "我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+        "solution": "补充当时有哪些可选行动，再比较各自的代价",
+        "endingQuestion": "遇到类似情况，你会先确认哪件事？",
+        "tags": [
+          "#真实复盘",
+          "#工作成长",
+          "#行动记录"
+        ]
+      },
+      "preferenceSignal": {
+        "titleRewritten": false,
+        "removedPhrases": [
+          "今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下",
+          "当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚",
+          "我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+          "我当时的处理：当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚",
+          "让我在意的是：今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的",
+          "复盘后，我想尝试：补充当时有哪些可选行动，再比较各自的代价",
+          "下一次的具体行动：记录下一次出现相似情境时可以先做的一个具体动作",
+          "这些是下一步计划，还需要用真实结果验证"
+        ],
+        "addedPhrases": [
+          "人工审核后的正文：照常推进的一天",
+          "先把使用对象、交付格式和截止时间写清楚，再开始动手"
+        ],
+        "lowerIntensity": false,
+        "removedDrama": false,
+        "perspectiveShift": false,
+        "summary": "人工修改信号：删掉 8 句原稿；补写 2 句。"
+      },
+      "rejectReason": null,
+      "rejectedAt": null,
+      "note": "",
+      "provider": "mock",
+      "isDemo": false,
+      "experiment": {
+        "id": "0499e4e7-3702-45ce-9840-ba2876fd452c",
+        "hypothesis": "标题改成问题型可能提高阅读量（假设，尚未验证）",
+        "variable": "title_style",
+        "variant": "question",
+        "baseline": "同账号同窗口（24h）历史 5 篇，中位阅读 100；本篇 10",
+        "targetMetric": "views",
+        "requiredSamples": 3,
+        "currentSamples": 1,
+        "status": "running",
+        "createdAt": "2026-09-13T12:49:21.962Z",
+        "completedAt": null,
+        "result": null,
+        "confidence": "LOW",
+        "instruction": "下一篇「被临时消息打断的一天」同类内容，仅把标题改为问题型（疑问句），观察阅读量。",
+        "keepConstant": "账号、题材、正文结构、封面样式和发布时段保持接近；用相同发布后时长录入指标。"
+      },
+      "debug": {
+        "promptVersion": "growth-loop.v3",
+        "provider": "mock",
+        "model": null,
+        "factsUsed": [
+          "今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工。当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚。我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始。"
+        ],
+        "interpretationsUsed": [
+          "行为模式（推断）：面对「今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下」时，记录里写的第一反应是「当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚」",
+          "改法空间（推断）：当时还存在其他可选行动，需要在下一个相似场景里验证",
+          "经验迁移（推断）：我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+          "内容价值（推断）：事件、困扰与处理建议较具体，适合分享；分数是离线规则评估，不预测流量"
+        ],
+        "strategyUsed": [],
+        "experimentUsed": "title_style=question",
+        "userPreferenceUsed": [],
+        "feedbackUsed": [
+          {
+            "feedbackId": "5dbaed62-221f-495b-a20e-6ab1ac4cda5c",
+            "contentId": "18c16ece-80b6-43f4-ade5-7d171b1e4ccb",
+            "source": "feedback",
+            "verdict": "CHANGE",
+            "confidence": "HIGH",
+            "createdAt": "2026-09-13T12:49:21.216Z",
+            "experimentId": "e5d613af-c48f-47a0-adf4-b450c3a5adbf",
+            "text": "《被临时消息打断的一天》上一轮判定 CHANGE，本轮必须调整（置信度 HIGH）；调整：下一篇「被临时消息打断的一天」同类内容，仅把标题改为问题型（疑问句），观察阅读量。；上一轮提议的唯一变量 title_style=question（实验 e5d613af-c48f-47a0-adf4-b450c3a5adbf，状态 proposed）"
+          },
+          {
+            "feedbackId": "a63d06f1-35b6-41af-be6c-6396dd5f475e",
+            "contentId": "3edf5d41-d4e8-476f-9afd-694796099622",
+            "source": "feedback",
+            "verdict": "KEEP",
+            "confidence": "MEDIUM",
+            "createdAt": "2026-09-13T12:49:18.952Z",
+            "experimentId": "04912112-8078-4618-b72f-9b4da5c0683c",
+            "text": "《确认清单让返工消失了》上一轮判定 KEEP，可以继续沿用（置信度 MEDIUM）；继续：当前写法在本窗口表现高于同窗口中位数（+500%），在出现新的反证前继续沿用。；上一轮提议的唯一变量 hook=scene_first（实验 04912112-8078-4618-b72f-9b4da5c0683c，状态 proposed）"
+          },
+          {
+            "feedbackId": "431ca6f0-0411-4635-a5c3-7e3e17e89fb1",
+            "contentId": "d7558a97-5367-40b5-980d-41a83e253944",
+            "source": "feedback",
+            "verdict": "NEXT_EXPERIMENT",
+            "confidence": "MEDIUM",
+            "createdAt": "2026-09-13T12:49:17.451Z",
+            "experimentId": "c079b909-a984-4d2f-b853-770f30fde85b",
+            "text": "《先问清楚再动手》上一轮留有进行中的实验（置信度 MEDIUM）；上一轮提议的唯一变量 hook=scene_first（实验 c079b909-a984-4d2f-b853-770f30fde85b，状态 proposed）"
+          }
+        ],
+        "constraintsApplied": [],
+        "finalGenerationContext": "account=growth | facts=1 | interpretations=4 | strategy={\"works\":[],\"avoid\":[],\"testing\":[],\"watch\":[],\"unknown\":[]} | userPreferences=[] | learnings=3 | experiment=title_style=question(proposed) | promptVersion=growth-loop.v3"
+      }
+    },
+    {
+      "id": "4fb8d55e-f567-4b3e-a8ec-54a58cd33d27",
+      "revision": 1,
+      "account": "growth",
+      "title": "带着上一轮学习写下一篇",
+      "topic": "带着上一轮学习写下一篇",
+      "contentType": "solution",
+      "sourceRetrospectiveId": "ee56d7bb-c66f-45db-86af-049b5ef5a5b8",
+      "sourceContentId": "6754a74c-77d8-42bf-9e11-ed9f7a7d14a2",
+      "englishDraftId": null,
+      "createdAt": "2026-09-13T12:49:23.769Z",
+      "updatedAt": "2026-09-13T12:49:23.962Z",
+      "publishedAt": null,
+      "publishTime": null,
+      "status": "review",
+      "writing": {
+        "title": "带着上一轮学习写下一篇",
+        "body": "如果你也遇到「今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下」，可以先看这次真实复盘。\n\n今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工。当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚。我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始。\n\n我当时的处理：当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚\n让我在意的是：今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工\n\n复盘后，我想尝试：补充当时有哪些可选行动，再比较各自的代价\n下一次的具体行动：记录下一次出现相似情境时可以先做的一个具体动作\n\n这些是下一步计划，还需要用真实结果验证。",
+        "corePoint": "我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+        "solution": "补充当时有哪些可选行动，再比较各自的代价",
+        "endingQuestion": "遇到类似情况，你会先确认哪件事？",
+        "tags": [
+          "#真实复盘",
+          "#工作成长",
+          "#行动记录"
+        ]
+      },
+      "english": null,
+      "aiDraft": {
+        "title": "带着上一轮学习写下一篇",
+        "body": "如果你也遇到「今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下」，可以先看这次真实复盘。\n\n今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工。当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚。我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始。\n\n我当时的处理：当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚\n让我在意的是：今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工\n\n复盘后，我想尝试：补充当时有哪些可选行动，再比较各自的代价\n下一次的具体行动：记录下一次出现相似情境时可以先做的一个具体动作\n\n这些是下一步计划，还需要用真实结果验证。",
+        "corePoint": "我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+        "solution": "补充当时有哪些可选行动，再比较各自的代价",
+        "endingQuestion": "遇到类似情况，你会先确认哪件事？",
+        "tags": [
+          "#真实复盘",
+          "#工作成长",
+          "#行动记录"
+        ]
+      },
+      "preferenceSignal": null,
+      "rejectReason": null,
+      "rejectedAt": null,
+      "note": "",
+      "provider": "mock",
+      "isDemo": false,
+      "experiment": {
+        "id": "c82279ce-4c1d-4cc3-a102-62b1f53bce45",
+        "hypothesis": "开头改成具体使用场景可能提高收藏率（假设，尚未验证）",
+        "variable": "hook",
+        "variant": "scene_first",
+        "baseline": "同账号同窗口（24h）历史 6 篇，中位阅读 100；本篇 100",
+        "targetMetric": "favoriteRate",
+        "requiredSamples": 3,
+        "currentSamples": 5,
+        "status": "evaluating",
+        "createdAt": "2026-09-13T12:49:23.776Z",
+        "completedAt": null,
+        "result": null,
+        "confidence": "LOW",
+        "instruction": "下一篇同类growth内容，仅把开头改为一个具体使用场景；记录收藏率，暂不判断因果。",
+        "keepConstant": "标题风格、正文结构、篇幅和发布时段保持接近；用相同发布后时长录入指标。"
+      },
+      "debug": {
+        "promptVersion": "growth-loop.v3",
+        "provider": "mock",
+        "model": null,
+        "factsUsed": [
+          "今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工。当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚。我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始。"
+        ],
+        "interpretationsUsed": [
+          "行为模式（推断）：面对「今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下」时，记录里写的第一反应是「当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚」",
+          "改法空间（推断）：当时还存在其他可选行动，需要在下一个相似场景里验证",
+          "经验迁移（推断）：我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+          "内容价值（推断）：事件、困扰与处理建议较具体，适合分享；分数是离线规则评估，不预测流量"
+        ],
+        "strategyUsed": [],
+        "experimentUsed": "hook=scene_first",
+        "userPreferenceUsed": [],
+        "feedbackUsed": [
+          {
+            "feedbackId": "937f9d79-23c2-4359-96e2-da69521cdb15",
+            "contentId": "6754a74c-77d8-42bf-9e11-ed9f7a7d14a2",
+            "source": "feedback",
+            "verdict": "NEXT_EXPERIMENT",
+            "confidence": "MEDIUM",
+            "createdAt": "2026-09-13T12:49:22.829Z",
+            "experimentId": "ba128a25-686c-4d07-98fc-6c638197c86c",
+            "text": "《照常推进的一天》上一轮留有进行中的实验（置信度 MEDIUM）；上一轮提议的唯一变量 hook=scene_first（实验 ba128a25-686c-4d07-98fc-6c638197c86c，状态 proposed）"
+          },
+          {
+            "feedbackId": "5dbaed62-221f-495b-a20e-6ab1ac4cda5c",
+            "contentId": "18c16ece-80b6-43f4-ade5-7d171b1e4ccb",
+            "source": "feedback",
+            "verdict": "CHANGE",
+            "confidence": "HIGH",
+            "createdAt": "2026-09-13T12:49:21.216Z",
+            "experimentId": "e5d613af-c48f-47a0-adf4-b450c3a5adbf",
+            "text": "《被临时消息打断的一天》上一轮判定 CHANGE，本轮必须调整（置信度 HIGH）；调整：下一篇「被临时消息打断的一天」同类内容，仅把标题改为问题型（疑问句），观察阅读量。；上一轮提议的唯一变量 title_style=question（实验 e5d613af-c48f-47a0-adf4-b450c3a5adbf，状态 proposed）"
+          },
+          {
+            "feedbackId": "a63d06f1-35b6-41af-be6c-6396dd5f475e",
+            "contentId": "3edf5d41-d4e8-476f-9afd-694796099622",
+            "source": "feedback",
+            "verdict": "KEEP",
+            "confidence": "MEDIUM",
+            "createdAt": "2026-09-13T12:49:18.952Z",
+            "experimentId": "04912112-8078-4618-b72f-9b4da5c0683c",
+            "text": "《确认清单让返工消失了》上一轮判定 KEEP，可以继续沿用（置信度 MEDIUM）；继续：当前写法在本窗口表现高于同窗口中位数（+500%），在出现新的反证前继续沿用。；上一轮提议的唯一变量 hook=scene_first（实验 04912112-8078-4618-b72f-9b4da5c0683c，状态 proposed）"
+          }
+        ],
+        "constraintsApplied": [],
+        "finalGenerationContext": "account=growth | facts=1 | interpretations=4 | strategy={\"works\":[],\"avoid\":[],\"testing\":[],\"watch\":[],\"unknown\":[]} | userPreferences=[] | learnings=3 | experiment=hook=scene_first(proposed) | promptVersion=growth-loop.v3"
+      }
+    }
+  ],
+  "metrics": [
+    {
+      "views": 1800,
+      "likes": 126,
+      "favorites": 180,
+      "comments": 8,
+      "followersGained": 3,
+      "note": "合成的发布后12小时数据",
+      "id": "f17ed000-0000-4000-8000-000000000101",
+      "contentId": "f17ed000-0000-4000-8000-000000000001",
+      "capturedAt": "2026-09-07T00:49:07.865Z",
+      "hoursSincePublish": 12
+    },
+    {
+      "views": 1200,
+      "likes": 84,
+      "favorites": 100,
+      "comments": 9,
+      "followersGained": 4,
+      "note": "合成的发布后12小时数据",
+      "id": "f17ed000-0000-4000-8000-000000000102",
+      "contentId": "f17ed000-0000-4000-8000-000000000002",
+      "capturedAt": "2026-09-08T00:49:07.887Z",
+      "hoursSincePublish": 12
+    },
+    {
+      "views": 2200,
+      "likes": 154,
+      "favorites": 286,
+      "comments": 10,
+      "followersGained": 5,
+      "note": "合成的发布后12小时数据",
+      "id": "f17ed000-0000-4000-8000-000000000103",
+      "contentId": "f17ed000-0000-4000-8000-000000000003",
+      "capturedAt": "2026-09-09T00:49:07.947Z",
+      "hoursSincePublish": 12
+    },
+    {
+      "views": 950,
+      "likes": 67,
+      "favorites": 66,
+      "comments": 11,
+      "followersGained": 6,
+      "note": "合成的发布后12小时数据",
+      "id": "f17ed000-0000-4000-8000-000000000104",
+      "contentId": "f17ed000-0000-4000-8000-000000000004",
+      "capturedAt": "2026-09-10T00:49:07.954Z",
+      "hoursSincePublish": 12
+    },
+    {
+      "views": 680,
+      "likes": 48,
+      "favorites": 17,
+      "comments": 12,
+      "followersGained": 7,
+      "note": "合成的发布后12小时数据",
+      "id": "f17ed000-0000-4000-8000-000000000105",
+      "contentId": "f17ed000-0000-4000-8000-000000000005",
+      "capturedAt": "2026-09-11T00:49:07.965Z",
+      "hoursSincePublish": 12
+    },
+    {
+      "views": 1600,
+      "likes": 112,
+      "favorites": 176,
+      "comments": 13,
+      "followersGained": 8,
+      "note": "合成的发布后12小时数据",
+      "id": "f17ed000-0000-4000-8000-000000000106",
+      "contentId": "f17ed000-0000-4000-8000-000000000006",
+      "capturedAt": "2026-09-12T00:49:07.972Z",
+      "hoursSincePublish": 12
+    },
+    {
+      "views": 430,
+      "likes": 30,
+      "favorites": 9,
+      "comments": 14,
+      "followersGained": 9,
+      "note": "合成的发布后12小时数据",
+      "id": "f17ed000-0000-4000-8000-000000000107",
+      "contentId": "f17ed000-0000-4000-8000-000000000007",
+      "capturedAt": "2026-09-13T00:49:07.981Z",
+      "hoursSincePublish": 12
+    },
+    {
+      "views": 100,
+      "likes": 5,
+      "favorites": 3,
+      "comments": 1,
+      "followersGained": 1,
+      "note": "",
+      "id": "1a78a39c-b2d5-44aa-89de-d04d8ed07d59",
+      "contentId": "7f909508-ae0f-466f-a7c5-f0f89e47b415",
+      "capturedAt": "2026-09-13T12:49:12.227Z",
+      "hoursSincePublish": 2.503396388888889
+    },
+    {
+      "views": 100,
+      "likes": 5,
+      "favorites": 3,
+      "comments": 1,
+      "followersGained": 1,
+      "note": "",
+      "id": "6ebccc74-9ae6-41e0-9104-86e5d4a3d565",
+      "contentId": "73dc359f-bedf-4569-8a4a-eac8f72d8287",
+      "capturedAt": "2026-09-13T12:49:14.254Z",
+      "hoursSincePublish": 2.170626111111111
+    },
+    {
+      "views": 100,
+      "likes": 5,
+      "favorites": 3,
+      "comments": 1,
+      "followersGained": 1,
+      "note": "",
+      "id": "ad4f3c05-c114-4e28-9bc2-6c16442b818e",
+      "contentId": "d3ad35d9-ed27-49b1-bfda-4dfe5bff00cd",
+      "capturedAt": "2026-09-13T12:49:15.833Z",
+      "hoursSincePublish": 2.0043980555555554
+    },
+    {
+      "views": 100,
+      "likes": 5,
+      "favorites": 3,
+      "comments": 1,
+      "followersGained": 1,
+      "note": "",
+      "id": "8392e8a6-26f8-4d31-85e9-135d929985fe",
+      "contentId": "d7558a97-5367-40b5-980d-41a83e253944",
+      "capturedAt": "2026-09-13T12:49:17.293Z",
+      "hoursSincePublish": 1.8381369444444444
+    },
+    {
+      "views": 600,
+      "likes": 30,
+      "favorites": 18,
+      "comments": 1,
+      "followersGained": 1,
+      "note": "",
+      "id": "28ba531d-be0b-4f80-a819-eb2952417570",
+      "contentId": "3edf5d41-d4e8-476f-9afd-694796099622",
+      "capturedAt": "2026-09-13T12:49:18.803Z",
+      "hoursSincePublish": 1.5052230555555555
+    },
+    {
+      "views": 10,
+      "likes": 1,
+      "favorites": 0,
+      "comments": 1,
+      "followersGained": 1,
+      "note": "",
+      "id": "5398331b-880f-49ad-ae5b-4a45e9fef295",
+      "contentId": "18c16ece-80b6-43f4-ade5-7d171b1e4ccb",
+      "capturedAt": "2026-09-13T12:49:21.036Z",
+      "hoursSincePublish": 1.17251
+    },
+    {
+      "views": 100,
+      "likes": 5,
+      "favorites": 3,
+      "comments": 1,
+      "followersGained": 1,
+      "note": "",
+      "id": "6c16d5d4-b6ff-4704-a5ea-9875b8d6ce42",
+      "contentId": "6754a74c-77d8-42bf-9e11-ed9f7a7d14a2",
+      "capturedAt": "2026-09-13T12:49:22.662Z",
+      "hoursSincePublish": 0.8396283333333333
+    }
+  ],
+  "feedback": [
+    {
+      "id": "f17ed000-0000-4000-8000-000000000201",
+      "contentId": "f17ed000-0000-4000-8000-000000000001",
+      "metricsId": "f17ed000-0000-4000-8000-000000000101",
+      "createdAt": "2026-09-13T12:49:07.876Z",
+      "performanceSummary": "演示数据；当前 1800 次阅读。同账号历史 0 篇中位数 暂无 次。样本不足，不判定赢家。结论：INSUFFICIENT_EVIDENCE（LOW）。",
+      "observation": "当前 1800 次阅读（24h 窗口）；同账号同窗口 0 篇中位数 暂无 次，相对表现 无法计算。",
+      "hypothesis": "可能的解释（假设，尚未验证）：开头改成具体使用场景可能提高收藏率（假设，尚未验证）",
+      "evidence": "样本 0 篇，窗口 24h（样本不足，基线不可比）；证据不足，不下结论。相关不等于因果。",
+      "confidence": "LOW",
+      "verdict": "INSUFFICIENT_EVIDENCE",
+      "hoursSincePublish": 12,
+      "relative": {
+        "bucket": "24h",
+        "sampleCount": 0,
+        "medianViews": null,
+        "medianLikes": null,
+        "medianFavorites": null,
+        "medianComments": null,
+        "relativeViews": null,
+        "relativeLikes": null,
+        "relativeSaves": null,
+        "relativeComments": null,
+        "comparable": false
+      },
+      "KEEP": [],
+      "WATCH": [
+        "观察到相对表现 无法计算，值得继续记录，但证据不足以升级为长期策略。"
+      ],
+      "CHANGE": [],
+      "NEXT_EXPERIMENT": {
+        "id": "4aa0115d-0931-4a46-838e-81661198c333",
+        "hypothesis": "开头改成具体使用场景可能提高收藏率（假设，尚未验证）",
+        "variable": "hook",
+        "variant": "scene_first",
+        "baseline": "同账号同窗口历史样本不足，尚无可用基线",
+        "targetMetric": "favoriteRate",
+        "requiredSamples": 3,
+        "currentSamples": 0,
+        "status": "proposed",
+        "createdAt": "2026-09-13T12:49:07.875Z",
+        "completedAt": null,
+        "result": null,
+        "confidence": "LOW",
+        "instruction": "下一篇同类growth内容，仅把开头改为一个具体使用场景；记录收藏率，暂不判断因果。",
+        "keepConstant": "标题风格、正文结构、篇幅和发布时段保持接近；用相同发布后时长录入指标。"
+      },
+      "rates": {
+        "likeRate": 0.07,
+        "favoriteRate": 0.1,
+        "commentRate": 0.0044444444444444444,
+        "engagementRate": 0.17444444444444446,
+        "followConversionRate": 0.0016666666666666668
+      },
+      "comparisons": {
+        "recent3": {
+          "sampleCount": 0,
+          "rateSampleCount": 0,
+          "contentIds": [],
+          "avgViews": null,
+          "avgLikeRate": null,
+          "avgFavoriteRate": null,
+          "avgCommentRate": null,
+          "avgFollowConversionRate": null
+        },
+        "recent7": {
+          "sampleCount": 0,
+          "rateSampleCount": 0,
+          "contentIds": [],
+          "avgViews": null,
+          "avgLikeRate": null,
+          "avgFavoriteRate": null,
+          "avgCommentRate": null,
+          "avgFollowConversionRate": null
+        },
+        "sameAccount": {
+          "sampleCount": 0,
+          "rateSampleCount": 0,
+          "contentIds": [],
+          "avgViews": null,
+          "avgLikeRate": null,
+          "avgFavoriteRate": null,
+          "avgCommentRate": null,
+          "avgFollowConversionRate": null
+        },
+        "sameContentType": {
+          "sampleCount": 0,
+          "rateSampleCount": 0,
+          "contentIds": [],
+          "avgViews": null,
+          "avgLikeRate": null,
+          "avgFavoriteRate": null,
+          "avgCommentRate": null,
+          "avgFollowConversionRate": null
+        }
+      }
+    },
+    {
+      "id": "f17ed000-0000-4000-8000-000000000202",
+      "contentId": "f17ed000-0000-4000-8000-000000000002",
+      "metricsId": "f17ed000-0000-4000-8000-000000000102",
+      "createdAt": "2026-09-13T12:49:07.943Z",
+      "performanceSummary": "演示数据；当前 1200 次阅读。同账号历史 0 篇中位数 暂无 次。样本不足，不判定赢家。结论：INSUFFICIENT_EVIDENCE（LOW）。",
+      "observation": "当前 1200 次阅读（24h 窗口）；同账号同窗口 1 篇中位数 1800 次，相对表现 -33%。",
+      "hypothesis": "可能的解释（假设，尚未验证）：开头改成具体使用场景可能提高收藏率（假设，尚未验证）",
+      "evidence": "样本 1 篇，窗口 24h（样本不足，基线不可比）；证据不足，不下结论。相关不等于因果。",
+      "confidence": "LOW",
+      "verdict": "INSUFFICIENT_EVIDENCE",
+      "hoursSincePublish": 12,
+      "relative": {
+        "bucket": "24h",
+        "sampleCount": 1,
+        "medianViews": 1800,
+        "medianLikes": 126,
+        "medianFavorites": 180,
+        "medianComments": 8,
+        "relativeViews": -0.3333333333333333,
+        "relativeLikes": -0.3333333333333333,
+        "relativeSaves": -0.4444444444444444,
+        "relativeComments": 0.125,
+        "comparable": false
+      },
+      "KEEP": [],
+      "WATCH": [
+        "观察到相对表现 -33%，值得继续记录，但证据不足以升级为长期策略。"
+      ],
+      "CHANGE": [],
+      "NEXT_EXPERIMENT": {
+        "id": "e612c363-67b2-497b-a47d-a1615ef69dc2",
+        "hypothesis": "开头改成具体使用场景可能提高收藏率（假设，尚未验证）",
+        "variable": "hook",
+        "variant": "scene_first",
+        "baseline": "同账号同窗口（24h）历史 1 篇，中位阅读 1800；本篇 1200",
+        "targetMetric": "favoriteRate",
+        "requiredSamples": 3,
+        "currentSamples": 0,
+        "status": "proposed",
+        "createdAt": "2026-09-13T12:49:07.943Z",
+        "completedAt": null,
+        "result": null,
+        "confidence": "LOW",
+        "instruction": "下一篇同类english内容，仅把开头改为一个具体使用场景；记录收藏率，暂不判断因果。",
+        "keepConstant": "标题风格、正文结构、篇幅和发布时段保持接近；用相同发布后时长录入指标。"
+      },
+      "rates": {
+        "likeRate": 0.07,
+        "favoriteRate": 0.08333333333333333,
+        "commentRate": 0.0075,
+        "engagementRate": 0.16083333333333333,
+        "followConversionRate": 0.0033333333333333335
+      },
+      "comparisons": {
+        "recent3": {
+          "sampleCount": 1,
+          "rateSampleCount": 1,
+          "contentIds": [
+            "f17ed000-0000-4000-8000-000000000001"
+          ],
+          "avgViews": 1800,
+          "avgLikeRate": 0.07,
+          "avgFavoriteRate": 0.1,
+          "avgCommentRate": 0.0044444444444444444,
+          "avgFollowConversionRate": 0.0016666666666666668
+        },
+        "recent7": {
+          "sampleCount": 1,
+          "rateSampleCount": 1,
+          "contentIds": [
+            "f17ed000-0000-4000-8000-000000000001"
+          ],
+          "avgViews": 1800,
+          "avgLikeRate": 0.07,
+          "avgFavoriteRate": 0.1,
+          "avgCommentRate": 0.0044444444444444444,
+          "avgFollowConversionRate": 0.0016666666666666668
+        },
+        "sameAccount": {
+          "sampleCount": 0,
+          "rateSampleCount": 0,
+          "contentIds": [],
+          "avgViews": null,
+          "avgLikeRate": null,
+          "avgFavoriteRate": null,
+          "avgCommentRate": null,
+          "avgFollowConversionRate": null
+        },
+        "sameContentType": {
+          "sampleCount": 0,
+          "rateSampleCount": 0,
+          "contentIds": [],
+          "avgViews": null,
+          "avgLikeRate": null,
+          "avgFavoriteRate": null,
+          "avgCommentRate": null,
+          "avgFollowConversionRate": null
+        }
+      }
+    },
+    {
+      "id": "f17ed000-0000-4000-8000-000000000203",
+      "contentId": "f17ed000-0000-4000-8000-000000000003",
+      "metricsId": "f17ed000-0000-4000-8000-000000000103",
+      "createdAt": "2026-09-13T12:49:07.951Z",
+      "performanceSummary": "演示数据；当前 2200 次阅读。同账号历史 1 篇中位数 1800 次。样本不足，不判定赢家。结论：INSUFFICIENT_EVIDENCE（LOW）。",
+      "observation": "当前 2200 次阅读（24h 窗口）；同账号同窗口 2 篇中位数 1500 次，相对表现 +47%。",
+      "hypothesis": "可能的解释（假设，尚未验证）：开头改成具体使用场景可能提高收藏率（假设，尚未验证）",
+      "evidence": "样本 2 篇，窗口 24h（样本不足，基线不可比）；证据不足，不下结论。相关不等于因果。",
+      "confidence": "LOW",
+      "verdict": "INSUFFICIENT_EVIDENCE",
+      "hoursSincePublish": 12,
+      "relative": {
+        "bucket": "24h",
+        "sampleCount": 2,
+        "medianViews": 1500,
+        "medianLikes": 105,
+        "medianFavorites": 140,
+        "medianComments": 8.5,
+        "relativeViews": 0.4666666666666667,
+        "relativeLikes": 0.4666666666666667,
+        "relativeSaves": 1.042857142857143,
+        "relativeComments": 0.17647058823529413,
+        "comparable": false
+      },
+      "KEEP": [],
+      "WATCH": [
+        "观察到相对表现 +47%，值得继续记录，但证据不足以升级为长期策略。"
+      ],
+      "CHANGE": [],
+      "NEXT_EXPERIMENT": {
+        "id": "458ac543-ea4b-49d2-a0cd-696a6d6b0d8b",
+        "hypothesis": "开头改成具体使用场景可能提高收藏率（假设，尚未验证）",
+        "variable": "hook",
+        "variant": "scene_first",
+        "baseline": "同账号同窗口（24h）历史 2 篇，中位阅读 1500；本篇 2200",
+        "targetMetric": "favoriteRate",
+        "requiredSamples": 3,
+        "currentSamples": 0,
+        "status": "proposed",
+        "createdAt": "2026-09-13T12:49:07.951Z",
+        "completedAt": null,
+        "result": null,
+        "confidence": "LOW",
+        "instruction": "下一篇同类growth内容，仅把开头改为一个具体使用场景；记录收藏率，暂不判断因果。",
+        "keepConstant": "标题风格、正文结构、篇幅和发布时段保持接近；用相同发布后时长录入指标。"
+      },
+      "rates": {
+        "likeRate": 0.07,
+        "favoriteRate": 0.13,
+        "commentRate": 0.004545454545454545,
+        "engagementRate": 0.20454545454545456,
+        "followConversionRate": 0.0022727272727272726
+      },
+      "comparisons": {
+        "recent3": {
+          "sampleCount": 2,
+          "rateSampleCount": 2,
+          "contentIds": [
+            "f17ed000-0000-4000-8000-000000000002",
+            "f17ed000-0000-4000-8000-000000000001"
+          ],
+          "avgViews": 1500,
+          "avgLikeRate": 0.07,
+          "avgFavoriteRate": 0.09166666666666667,
+          "avgCommentRate": 0.0059722222222222225,
+          "avgFollowConversionRate": 0.0025
+        },
+        "recent7": {
+          "sampleCount": 2,
+          "rateSampleCount": 2,
+          "contentIds": [
+            "f17ed000-0000-4000-8000-000000000002",
+            "f17ed000-0000-4000-8000-000000000001"
+          ],
+          "avgViews": 1500,
+          "avgLikeRate": 0.07,
+          "avgFavoriteRate": 0.09166666666666667,
+          "avgCommentRate": 0.0059722222222222225,
+          "avgFollowConversionRate": 0.0025
+        },
+        "sameAccount": {
+          "sampleCount": 1,
+          "rateSampleCount": 1,
+          "contentIds": [
+            "f17ed000-0000-4000-8000-000000000001"
+          ],
+          "avgViews": 1800,
+          "avgLikeRate": 0.07,
+          "avgFavoriteRate": 0.1,
+          "avgCommentRate": 0.0044444444444444444,
+          "avgFollowConversionRate": 0.0016666666666666668
+        },
+        "sameContentType": {
+          "sampleCount": 1,
+          "rateSampleCount": 1,
+          "contentIds": [
+            "f17ed000-0000-4000-8000-000000000001"
+          ],
+          "avgViews": 1800,
+          "avgLikeRate": 0.07,
+          "avgFavoriteRate": 0.1,
+          "avgCommentRate": 0.0044444444444444444,
+          "avgFollowConversionRate": 0.0016666666666666668
+        }
+      }
+    },
+    {
+      "id": "f17ed000-0000-4000-8000-000000000204",
+      "contentId": "f17ed000-0000-4000-8000-000000000004",
+      "metricsId": "f17ed000-0000-4000-8000-000000000104",
+      "createdAt": "2026-09-13T12:49:07.962Z",
+      "performanceSummary": "演示数据；当前 950 次阅读。同账号历史 1 篇中位数 1200 次。样本不足，不判定赢家。结论：CHANGE（MEDIUM）。",
+      "observation": "当前 950 次阅读（24h 窗口）；同账号同窗口 3 篇中位数 1800 次，相对表现 -47%。",
+      "hypothesis": "可能的解释（假设，尚未验证）：标题改成问题型可能提高阅读量（假设，尚未验证）",
+      "evidence": "样本 3 篇，窗口 24h；仅描述差异，未控制其他变量。相关不等于因果。",
+      "confidence": "MEDIUM",
+      "verdict": "CHANGE",
+      "hoursSincePublish": 12,
+      "relative": {
+        "bucket": "24h",
+        "sampleCount": 3,
+        "medianViews": 1800,
+        "medianLikes": 126,
+        "medianFavorites": 180,
+        "medianComments": 9,
+        "relativeViews": -0.4722222222222222,
+        "relativeLikes": -0.46825396825396826,
+        "relativeSaves": -0.6333333333333333,
+        "relativeComments": 0.2222222222222222,
+        "comparable": true
+      },
+      "KEEP": [],
+      "WATCH": [],
+      "CHANGE": [
+        "下一篇「拒绝别人英语50句」同类内容，仅把标题改为问题型（疑问句），观察阅读量。"
+      ],
+      "NEXT_EXPERIMENT": {
+        "id": "508ea10d-fe7a-4827-b98c-82ff6e33795f",
+        "hypothesis": "标题改成问题型可能提高阅读量（假设，尚未验证）",
+        "variable": "title_style",
+        "variant": "question",
+        "baseline": "同账号同窗口（24h）历史 3 篇，中位阅读 1800；本篇 950",
+        "targetMetric": "views",
+        "requiredSamples": 3,
+        "currentSamples": 0,
+        "status": "proposed",
+        "createdAt": "2026-09-13T12:49:07.961Z",
+        "completedAt": null,
+        "result": null,
+        "confidence": "LOW",
+        "instruction": "下一篇「拒绝别人英语50句」同类内容，仅把标题改为问题型（疑问句），观察阅读量。",
+        "keepConstant": "账号、题材、正文结构、封面样式和发布时段保持接近；用相同发布后时长录入指标。"
+      },
+      "rates": {
+        "likeRate": 0.07052631578947369,
+        "favoriteRate": 0.06947368421052631,
+        "commentRate": 0.011578947368421053,
+        "engagementRate": 0.15157894736842106,
+        "followConversionRate": 0.00631578947368421
+      },
+      "comparisons": {
+        "recent3": {
+          "sampleCount": 3,
+          "rateSampleCount": 3,
+          "contentIds": [
+            "f17ed000-0000-4000-8000-000000000003",
+            "f17ed000-0000-4000-8000-000000000002",
+            "f17ed000-0000-4000-8000-000000000001"
+          ],
+          "avgViews": 1800,
+          "avgLikeRate": 0.07,
+          "avgFavoriteRate": 0.1,
+          "avgCommentRate": 0.004545454545454545,
+          "avgFollowConversionRate": 0.0022727272727272726
+        },
+        "recent7": {
+          "sampleCount": 3,
+          "rateSampleCount": 3,
+          "contentIds": [
+            "f17ed000-0000-4000-8000-000000000003",
+            "f17ed000-0000-4000-8000-000000000002",
+            "f17ed000-0000-4000-8000-000000000001"
+          ],
+          "avgViews": 1800,
+          "avgLikeRate": 0.07,
+          "avgFavoriteRate": 0.1,
+          "avgCommentRate": 0.004545454545454545,
+          "avgFollowConversionRate": 0.0022727272727272726
+        },
+        "sameAccount": {
+          "sampleCount": 1,
+          "rateSampleCount": 1,
+          "contentIds": [
+            "f17ed000-0000-4000-8000-000000000002"
+          ],
+          "avgViews": 1200,
+          "avgLikeRate": 0.07,
+          "avgFavoriteRate": 0.08333333333333333,
+          "avgCommentRate": 0.0075,
+          "avgFollowConversionRate": 0.0033333333333333335
+        },
+        "sameContentType": {
+          "sampleCount": 1,
+          "rateSampleCount": 1,
+          "contentIds": [
+            "f17ed000-0000-4000-8000-000000000002"
+          ],
+          "avgViews": 1200,
+          "avgLikeRate": 0.07,
+          "avgFavoriteRate": 0.08333333333333333,
+          "avgCommentRate": 0.0075,
+          "avgFollowConversionRate": 0.0033333333333333335
+        }
+      }
+    },
+    {
+      "id": "f17ed000-0000-4000-8000-000000000205",
+      "contentId": "f17ed000-0000-4000-8000-000000000005",
+      "metricsId": "f17ed000-0000-4000-8000-000000000105",
+      "createdAt": "2026-09-13T12:49:07.969Z",
+      "performanceSummary": "演示数据；当前 680 次阅读。同账号历史 0 篇中位数 暂无 次。样本不足，不判定赢家。结论：CHANGE（MEDIUM）。",
+      "observation": "当前 680 次阅读（24h 窗口）；同账号同窗口 4 篇中位数 1500 次，相对表现 -55%。",
+      "hypothesis": "可能的解释（假设，尚未验证）：标题改成问题型可能提高阅读量（假设，尚未验证）",
+      "evidence": "样本 4 篇，窗口 24h；仅描述差异，未控制其他变量。相关不等于因果。",
+      "confidence": "MEDIUM",
+      "verdict": "CHANGE",
+      "hoursSincePublish": 12,
+      "relative": {
+        "bucket": "24h",
+        "sampleCount": 4,
+        "medianViews": 1500,
+        "medianLikes": 105,
+        "medianFavorites": 140,
+        "medianComments": 9.5,
+        "relativeViews": -0.5466666666666666,
+        "relativeLikes": -0.5428571428571428,
+        "relativeSaves": -0.8785714285714286,
+        "relativeComments": 0.2631578947368421,
+        "comparable": true
+      },
+      "KEEP": [],
+      "WATCH": [],
+      "CHANGE": [
+        "下一篇「关系里允许片刻安静」同类内容，仅把标题改为问题型（疑问句），观察阅读量。"
+      ],
+      "NEXT_EXPERIMENT": {
+        "id": "d481cc2f-2d37-45c3-aebd-34cebd943ef8",
+        "hypothesis": "标题改成问题型可能提高阅读量（假设，尚未验证）",
+        "variable": "title_style",
+        "variant": "question",
+        "baseline": "同账号同窗口（24h）历史 4 篇，中位阅读 1500；本篇 680",
+        "targetMetric": "views",
+        "requiredSamples": 3,
+        "currentSamples": 0,
+        "status": "proposed",
+        "createdAt": "2026-09-13T12:49:07.969Z",
+        "completedAt": null,
+        "result": null,
+        "confidence": "LOW",
+        "instruction": "下一篇「关系里允许片刻安静」同类内容，仅把标题改为问题型（疑问句），观察阅读量。",
+        "keepConstant": "账号、题材、正文结构、封面样式和发布时段保持接近；用相同发布后时长录入指标。"
+      },
+      "rates": {
+        "likeRate": 0.07058823529411765,
+        "favoriteRate": 0.025,
+        "commentRate": 0.01764705882352941,
+        "engagementRate": 0.11323529411764706,
+        "followConversionRate": 0.010294117647058823
+      },
+      "comparisons": {
+        "recent3": {
+          "sampleCount": 3,
+          "rateSampleCount": 3,
+          "contentIds": [
+            "f17ed000-0000-4000-8000-000000000004",
+            "f17ed000-0000-4000-8000-000000000003",
+            "f17ed000-0000-4000-8000-000000000002"
+          ],
+          "avgViews": 1200,
+          "avgLikeRate": 0.07,
+          "avgFavoriteRate": 0.08333333333333333,
+          "avgCommentRate": 0.0075,
+          "avgFollowConversionRate": 0.0033333333333333335
+        },
+        "recent7": {
+          "sampleCount": 4,
+          "rateSampleCount": 4,
+          "contentIds": [
+            "f17ed000-0000-4000-8000-000000000004",
+            "f17ed000-0000-4000-8000-000000000003",
+            "f17ed000-0000-4000-8000-000000000002",
+            "f17ed000-0000-4000-8000-000000000001"
+          ],
+          "avgViews": 1500,
+          "avgLikeRate": 0.07,
+          "avgFavoriteRate": 0.09166666666666667,
+          "avgCommentRate": 0.0060227272727272725,
+          "avgFollowConversionRate": 0.002803030303030303
+        },
+        "sameAccount": {
+          "sampleCount": 0,
+          "rateSampleCount": 0,
+          "contentIds": [],
+          "avgViews": null,
+          "avgLikeRate": null,
+          "avgFavoriteRate": null,
+          "avgCommentRate": null,
+          "avgFollowConversionRate": null
+        },
+        "sameContentType": {
+          "sampleCount": 0,
+          "rateSampleCount": 0,
+          "contentIds": [],
+          "avgViews": null,
+          "avgLikeRate": null,
+          "avgFavoriteRate": null,
+          "avgCommentRate": null,
+          "avgFollowConversionRate": null
+        }
+      }
+    },
+    {
+      "id": "f17ed000-0000-4000-8000-000000000206",
+      "contentId": "f17ed000-0000-4000-8000-000000000006",
+      "metricsId": "f17ed000-0000-4000-8000-000000000106",
+      "createdAt": "2026-09-13T12:49:07.978Z",
+      "performanceSummary": "演示数据；当前 1600 次阅读。同账号历史 2 篇中位数 1075 次。样本不足，不判定赢家。结论：KEEP（HIGH）。",
+      "observation": "当前 1600 次阅读（24h 窗口）；同账号同窗口 5 篇中位数 1200 次，相对表现 +33%。",
+      "hypothesis": "可能的解释（假设，尚未验证）：开头改成具体使用场景可能提高收藏率（假设，尚未验证）",
+      "evidence": "样本 5 篇，窗口 24h；仅描述差异，未控制其他变量。相关不等于因果。",
+      "confidence": "HIGH",
+      "verdict": "KEEP",
+      "hoursSincePublish": 12,
+      "relative": {
+        "bucket": "24h",
+        "sampleCount": 5,
+        "medianViews": 1200,
+        "medianLikes": 84,
+        "medianFavorites": 100,
+        "medianComments": 10,
+        "relativeViews": 0.3333333333333333,
+        "relativeLikes": 0.3333333333333333,
+        "relativeSaves": 0.76,
+        "relativeComments": 0.3,
+        "comparable": true
+      },
+      "KEEP": [
+        "当前写法在本窗口表现高于同窗口中位数（+33%），在出现新的反证前继续沿用。"
+      ],
+      "WATCH": [],
+      "CHANGE": [],
+      "NEXT_EXPERIMENT": {
+        "id": "4c4c8e92-4b99-4b7e-9058-22b6aff1bc16",
+        "hypothesis": "开头改成具体使用场景可能提高收藏率（假设，尚未验证）",
+        "variable": "hook",
+        "variant": "scene_first",
+        "baseline": "同账号同窗口（24h）历史 5 篇，中位阅读 1200；本篇 1600",
+        "targetMetric": "favoriteRate",
+        "requiredSamples": 3,
+        "currentSamples": 0,
+        "status": "proposed",
+        "createdAt": "2026-09-13T12:49:07.977Z",
+        "completedAt": null,
+        "result": null,
+        "confidence": "LOW",
+        "instruction": "下一篇同类english内容，仅把开头改为一个具体使用场景；记录收藏率，暂不判断因果。",
+        "keepConstant": "标题风格、正文结构、篇幅和发布时段保持接近；用相同发布后时长录入指标。"
+      },
+      "rates": {
+        "likeRate": 0.07,
+        "favoriteRate": 0.11,
+        "commentRate": 0.008125,
+        "engagementRate": 0.188125,
+        "followConversionRate": 0.005
+      },
+      "comparisons": {
+        "recent3": {
+          "sampleCount": 3,
+          "rateSampleCount": 3,
+          "contentIds": [
+            "f17ed000-0000-4000-8000-000000000005",
+            "f17ed000-0000-4000-8000-000000000004",
+            "f17ed000-0000-4000-8000-000000000003"
+          ],
+          "avgViews": 950,
+          "avgLikeRate": 0.07052631578947369,
+          "avgFavoriteRate": 0.06947368421052631,
+          "avgCommentRate": 0.011578947368421053,
+          "avgFollowConversionRate": 0.00631578947368421
+        },
+        "recent7": {
+          "sampleCount": 5,
+          "rateSampleCount": 5,
+          "contentIds": [
+            "f17ed000-0000-4000-8000-000000000005",
+            "f17ed000-0000-4000-8000-000000000004",
+            "f17ed000-0000-4000-8000-000000000003",
+            "f17ed000-0000-4000-8000-000000000002",
+            "f17ed000-0000-4000-8000-000000000001"
+          ],
+          "avgViews": 1200,
+          "avgLikeRate": 0.07,
+          "avgFavoriteRate": 0.08333333333333333,
+          "avgCommentRate": 0.0075,
+          "avgFollowConversionRate": 0.0033333333333333335
+        },
+        "sameAccount": {
+          "sampleCount": 2,
+          "rateSampleCount": 2,
+          "contentIds": [
+            "f17ed000-0000-4000-8000-000000000004",
+            "f17ed000-0000-4000-8000-000000000002"
+          ],
+          "avgViews": 1075,
+          "avgLikeRate": 0.07026315789473685,
+          "avgFavoriteRate": 0.07640350877192982,
+          "avgCommentRate": 0.009539473684210526,
+          "avgFollowConversionRate": 0.004824561403508772
+        },
+        "sameContentType": {
+          "sampleCount": 2,
+          "rateSampleCount": 2,
+          "contentIds": [
+            "f17ed000-0000-4000-8000-000000000004",
+            "f17ed000-0000-4000-8000-000000000002"
+          ],
+          "avgViews": 1075,
+          "avgLikeRate": 0.07026315789473685,
+          "avgFavoriteRate": 0.07640350877192982,
+          "avgCommentRate": 0.009539473684210526,
+          "avgFollowConversionRate": 0.004824561403508772
+        }
+      }
+    },
+    {
+      "id": "f17ed000-0000-4000-8000-000000000207",
+      "contentId": "f17ed000-0000-4000-8000-000000000007",
+      "metricsId": "f17ed000-0000-4000-8000-000000000107",
+      "createdAt": "2026-09-13T12:49:07.985Z",
+      "performanceSummary": "演示数据；当前 430 次阅读。同账号历史 2 篇中位数 2000 次。样本不足，不判定赢家。结论：CHANGE（HIGH）。",
+      "observation": "当前 430 次阅读（24h 窗口）；同账号同窗口 6 篇中位数 1400 次，相对表现 -69%。",
+      "hypothesis": "可能的解释（假设，尚未验证）：标题改成问题型可能提高阅读量（假设，尚未验证）",
+      "evidence": "样本 6 篇，窗口 24h；仅描述差异，未控制其他变量。相关不等于因果。",
+      "confidence": "HIGH",
+      "verdict": "CHANGE",
+      "hoursSincePublish": 12,
+      "relative": {
+        "bucket": "24h",
+        "sampleCount": 6,
+        "medianViews": 1400,
+        "medianLikes": 98,
+        "medianFavorites": 138,
+        "medianComments": 10.5,
+        "relativeViews": -0.6928571428571428,
+        "relativeLikes": -0.6938775510204082,
+        "relativeSaves": -0.9347826086956522,
+        "relativeComments": 0.3333333333333333,
+        "comparable": true
+      },
+      "KEEP": [],
+      "WATCH": [],
+      "CHANGE": [
+        "下一篇「一天忙完却没完成重点」同类内容，仅把标题改为问题型（疑问句），观察阅读量。"
+      ],
+      "NEXT_EXPERIMENT": {
+        "id": "8f4c4355-b8e3-4542-a8b7-ae3c44e9512b",
+        "hypothesis": "标题改成问题型可能提高阅读量（假设，尚未验证）",
+        "variable": "title_style",
+        "variant": "question",
+        "baseline": "同账号同窗口（24h）历史 6 篇，中位阅读 1400；本篇 430",
+        "targetMetric": "views",
+        "requiredSamples": 3,
+        "currentSamples": 0,
+        "status": "proposed",
+        "createdAt": "2026-09-13T12:49:07.985Z",
+        "completedAt": null,
+        "result": null,
+        "confidence": "LOW",
+        "instruction": "下一篇「一天忙完却没完成重点」同类内容，仅把标题改为问题型（疑问句），观察阅读量。",
+        "keepConstant": "账号、题材、正文结构、封面样式和发布时段保持接近；用相同发布后时长录入指标。"
+      },
+      "rates": {
+        "likeRate": 0.06976744186046512,
+        "favoriteRate": 0.020930232558139535,
+        "commentRate": 0.03255813953488372,
+        "engagementRate": 0.12325581395348838,
+        "followConversionRate": 0.020930232558139535
+      },
+      "comparisons": {
+        "recent3": {
+          "sampleCount": 3,
+          "rateSampleCount": 3,
+          "contentIds": [
+            "f17ed000-0000-4000-8000-000000000006",
+            "f17ed000-0000-4000-8000-000000000005",
+            "f17ed000-0000-4000-8000-000000000004"
+          ],
+          "avgViews": 950,
+          "avgLikeRate": 0.07052631578947369,
+          "avgFavoriteRate": 0.06947368421052631,
+          "avgCommentRate": 0.011578947368421053,
+          "avgFollowConversionRate": 0.00631578947368421
+        },
+        "recent7": {
+          "sampleCount": 6,
+          "rateSampleCount": 6,
+          "contentIds": [
+            "f17ed000-0000-4000-8000-000000000006",
+            "f17ed000-0000-4000-8000-000000000005",
+            "f17ed000-0000-4000-8000-000000000004",
+            "f17ed000-0000-4000-8000-000000000003",
+            "f17ed000-0000-4000-8000-000000000002",
+            "f17ed000-0000-4000-8000-000000000001"
+          ],
+          "avgViews": 1400,
+          "avgLikeRate": 0.07,
+          "avgFavoriteRate": 0.09166666666666667,
+          "avgCommentRate": 0.0078125,
+          "avgFollowConversionRate": 0.004166666666666667
+        },
+        "sameAccount": {
+          "sampleCount": 2,
+          "rateSampleCount": 2,
+          "contentIds": [
+            "f17ed000-0000-4000-8000-000000000003",
+            "f17ed000-0000-4000-8000-000000000001"
+          ],
+          "avgViews": 2000,
+          "avgLikeRate": 0.07,
+          "avgFavoriteRate": 0.115,
+          "avgCommentRate": 0.004494949494949494,
+          "avgFollowConversionRate": 0.00196969696969697
+        },
+        "sameContentType": {
+          "sampleCount": 0,
+          "rateSampleCount": 0,
+          "contentIds": [],
+          "avgViews": null,
+          "avgLikeRate": null,
+          "avgFavoriteRate": null,
+          "avgCommentRate": null,
+          "avgFollowConversionRate": null
+        }
+      }
+    },
+    {
+      "id": "bb04f94b-b554-4c76-93ef-be902504f78f",
+      "contentId": "7f909508-ae0f-466f-a7c5-f0f89e47b415",
+      "metricsId": "1a78a39c-b2d5-44aa-89de-d04d8ed07d59",
+      "createdAt": "2026-09-13T12:49:12.376Z",
+      "performanceSummary": "手动录入；当前 100 次阅读。同账号历史 0 篇中位数 暂无 次。样本不足，不判定赢家。结论：INSUFFICIENT_EVIDENCE（LOW）。",
+      "observation": "当前 100 次阅读（24h 窗口）；同账号同窗口 0 篇中位数 暂无 次，相对表现 无法计算。",
+      "hypothesis": "可能的解释（假设，尚未验证）：开头改成具体使用场景可能提高收藏率（假设，尚未验证）",
+      "evidence": "样本 0 篇，窗口 24h（样本不足，基线不可比）；证据不足，不下结论。相关不等于因果。",
+      "confidence": "LOW",
+      "verdict": "INSUFFICIENT_EVIDENCE",
+      "hoursSincePublish": 2.503396388888889,
+      "relative": {
+        "bucket": "24h",
+        "sampleCount": 0,
+        "medianViews": null,
+        "medianLikes": null,
+        "medianFavorites": null,
+        "medianComments": null,
+        "relativeViews": null,
+        "relativeLikes": null,
+        "relativeSaves": null,
+        "relativeComments": null,
+        "comparable": false
+      },
+      "KEEP": [],
+      "WATCH": [
+        "观察到相对表现 无法计算，值得继续记录，但证据不足以升级为长期策略。"
+      ],
+      "CHANGE": [],
+      "NEXT_EXPERIMENT": {
+        "id": "c2b2fc4c-b86e-4722-949f-6e7aefe8dbc6",
+        "hypothesis": "开头改成具体使用场景可能提高收藏率（假设，尚未验证）",
+        "variable": "hook",
+        "variant": "scene_first",
+        "baseline": "同账号同窗口历史样本不足，尚无可用基线",
+        "targetMetric": "favoriteRate",
+        "requiredSamples": 3,
+        "currentSamples": 0,
+        "status": "proposed",
+        "createdAt": "2026-09-13T12:49:12.375Z",
+        "completedAt": null,
+        "result": null,
+        "confidence": "LOW",
+        "instruction": "下一篇同类growth内容，仅把开头改为一个具体使用场景；记录收藏率，暂不判断因果。",
+        "keepConstant": "标题风格、正文结构、篇幅和发布时段保持接近；用相同发布后时长录入指标。"
+      },
+      "rates": {
+        "likeRate": 0.05,
+        "favoriteRate": 0.03,
+        "commentRate": 0.01,
+        "engagementRate": 0.09,
+        "followConversionRate": 0.01
+      },
+      "comparisons": {
+        "recent3": {
+          "sampleCount": 0,
+          "rateSampleCount": 0,
+          "contentIds": [],
+          "avgViews": null,
+          "avgLikeRate": null,
+          "avgFavoriteRate": null,
+          "avgCommentRate": null,
+          "avgFollowConversionRate": null
+        },
+        "recent7": {
+          "sampleCount": 0,
+          "rateSampleCount": 0,
+          "contentIds": [],
+          "avgViews": null,
+          "avgLikeRate": null,
+          "avgFavoriteRate": null,
+          "avgCommentRate": null,
+          "avgFollowConversionRate": null
+        },
+        "sameAccount": {
+          "sampleCount": 0,
+          "rateSampleCount": 0,
+          "contentIds": [],
+          "avgViews": null,
+          "avgLikeRate": null,
+          "avgFavoriteRate": null,
+          "avgCommentRate": null,
+          "avgFollowConversionRate": null
+        },
+        "sameContentType": {
+          "sampleCount": 0,
+          "rateSampleCount": 0,
+          "contentIds": [],
+          "avgViews": null,
+          "avgLikeRate": null,
+          "avgFavoriteRate": null,
+          "avgCommentRate": null,
+          "avgFollowConversionRate": null
+        }
+      }
+    },
+    {
+      "id": "58e132fb-a592-4ff2-a801-b32978db89d4",
+      "contentId": "73dc359f-bedf-4569-8a4a-eac8f72d8287",
+      "metricsId": "6ebccc74-9ae6-41e0-9104-86e5d4a3d565",
+      "createdAt": "2026-09-13T12:49:14.410Z",
+      "performanceSummary": "手动录入；当前 100 次阅读。同账号历史 1 篇中位数 100 次。样本不足，不判定赢家。结论：INSUFFICIENT_EVIDENCE（LOW）。",
+      "observation": "当前 100 次阅读（24h 窗口）；同账号同窗口 1 篇中位数 100 次，相对表现 +0%。",
+      "hypothesis": "可能的解释（假设，尚未验证）：开头改成具体使用场景可能提高收藏率（假设，尚未验证）",
+      "evidence": "样本 1 篇，窗口 24h（样本不足，基线不可比）；证据不足，不下结论。相关不等于因果。",
+      "confidence": "LOW",
+      "verdict": "INSUFFICIENT_EVIDENCE",
+      "hoursSincePublish": 2.170626111111111,
+      "relative": {
+        "bucket": "24h",
+        "sampleCount": 1,
+        "medianViews": 100,
+        "medianLikes": 5,
+        "medianFavorites": 3,
+        "medianComments": 1,
+        "relativeViews": 0,
+        "relativeLikes": 0,
+        "relativeSaves": 0,
+        "relativeComments": 0,
+        "comparable": false
+      },
+      "KEEP": [],
+      "WATCH": [
+        "观察到相对表现 +0%，值得继续记录，但证据不足以升级为长期策略。"
+      ],
+      "CHANGE": [],
+      "NEXT_EXPERIMENT": {
+        "id": "9124af9e-031a-493f-b61a-3662d6c2c679",
+        "hypothesis": "开头改成具体使用场景可能提高收藏率（假设，尚未验证）",
+        "variable": "hook",
+        "variant": "scene_first",
+        "baseline": "同账号同窗口（24h）历史 1 篇，中位阅读 100；本篇 100",
+        "targetMetric": "favoriteRate",
+        "requiredSamples": 3,
+        "currentSamples": 0,
+        "status": "proposed",
+        "createdAt": "2026-09-13T12:49:14.410Z",
+        "completedAt": null,
+        "result": null,
+        "confidence": "LOW",
+        "instruction": "下一篇同类growth内容，仅把开头改为一个具体使用场景；记录收藏率，暂不判断因果。",
+        "keepConstant": "标题风格、正文结构、篇幅和发布时段保持接近；用相同发布后时长录入指标。"
+      },
+      "rates": {
+        "likeRate": 0.05,
+        "favoriteRate": 0.03,
+        "commentRate": 0.01,
+        "engagementRate": 0.09,
+        "followConversionRate": 0.01
+      },
+      "comparisons": {
+        "recent3": {
+          "sampleCount": 1,
+          "rateSampleCount": 1,
+          "contentIds": [
+            "7f909508-ae0f-466f-a7c5-f0f89e47b415"
+          ],
+          "avgViews": 100,
+          "avgLikeRate": 0.05,
+          "avgFavoriteRate": 0.03,
+          "avgCommentRate": 0.01,
+          "avgFollowConversionRate": 0.01
+        },
+        "recent7": {
+          "sampleCount": 1,
+          "rateSampleCount": 1,
+          "contentIds": [
+            "7f909508-ae0f-466f-a7c5-f0f89e47b415"
+          ],
+          "avgViews": 100,
+          "avgLikeRate": 0.05,
+          "avgFavoriteRate": 0.03,
+          "avgCommentRate": 0.01,
+          "avgFollowConversionRate": 0.01
+        },
+        "sameAccount": {
+          "sampleCount": 1,
+          "rateSampleCount": 1,
+          "contentIds": [
+            "7f909508-ae0f-466f-a7c5-f0f89e47b415"
+          ],
+          "avgViews": 100,
+          "avgLikeRate": 0.05,
+          "avgFavoriteRate": 0.03,
+          "avgCommentRate": 0.01,
+          "avgFollowConversionRate": 0.01
+        },
+        "sameContentType": {
+          "sampleCount": 1,
+          "rateSampleCount": 1,
+          "contentIds": [
+            "7f909508-ae0f-466f-a7c5-f0f89e47b415"
+          ],
+          "avgViews": 100,
+          "avgLikeRate": 0.05,
+          "avgFavoriteRate": 0.03,
+          "avgCommentRate": 0.01,
+          "avgFollowConversionRate": 0.01
+        }
+      }
+    },
+    {
+      "id": "3e8e53d2-a633-4d32-8d24-e1afa760ef00",
+      "contentId": "d3ad35d9-ed27-49b1-bfda-4dfe5bff00cd",
+      "metricsId": "ad4f3c05-c114-4e28-9bc2-6c16442b818e",
+      "createdAt": "2026-09-13T12:49:15.989Z",
+      "performanceSummary": "手动录入；当前 100 次阅读。同账号历史 2 篇中位数 100 次。样本不足，不判定赢家。结论：INSUFFICIENT_EVIDENCE（LOW）。",
+      "observation": "当前 100 次阅读（24h 窗口）；同账号同窗口 2 篇中位数 100 次，相对表现 +0%。",
+      "hypothesis": "可能的解释（假设，尚未验证）：开头改成具体使用场景可能提高收藏率（假设，尚未验证）",
+      "evidence": "样本 2 篇，窗口 24h（样本不足，基线不可比）；证据不足，不下结论。相关不等于因果。",
+      "confidence": "LOW",
+      "verdict": "INSUFFICIENT_EVIDENCE",
+      "hoursSincePublish": 2.0043980555555554,
+      "relative": {
+        "bucket": "24h",
+        "sampleCount": 2,
+        "medianViews": 100,
+        "medianLikes": 5,
+        "medianFavorites": 3,
+        "medianComments": 1,
+        "relativeViews": 0,
+        "relativeLikes": 0,
+        "relativeSaves": 0,
+        "relativeComments": 0,
+        "comparable": false
+      },
+      "KEEP": [],
+      "WATCH": [
+        "观察到相对表现 +0%，值得继续记录，但证据不足以升级为长期策略。"
+      ],
+      "CHANGE": [],
+      "NEXT_EXPERIMENT": {
+        "id": "53d9145e-f55e-44ce-bd8d-6d94cd6bc123",
+        "hypothesis": "开头改成具体使用场景可能提高收藏率（假设，尚未验证）",
+        "variable": "hook",
+        "variant": "scene_first",
+        "baseline": "同账号同窗口（24h）历史 2 篇，中位阅读 100；本篇 100",
+        "targetMetric": "favoriteRate",
+        "requiredSamples": 3,
+        "currentSamples": 0,
+        "status": "proposed",
+        "createdAt": "2026-09-13T12:49:15.988Z",
+        "completedAt": null,
+        "result": null,
+        "confidence": "LOW",
+        "instruction": "下一篇同类growth内容，仅把开头改为一个具体使用场景；记录收藏率，暂不判断因果。",
+        "keepConstant": "标题风格、正文结构、篇幅和发布时段保持接近；用相同发布后时长录入指标。"
+      },
+      "rates": {
+        "likeRate": 0.05,
+        "favoriteRate": 0.03,
+        "commentRate": 0.01,
+        "engagementRate": 0.09,
+        "followConversionRate": 0.01
+      },
+      "comparisons": {
+        "recent3": {
+          "sampleCount": 2,
+          "rateSampleCount": 2,
+          "contentIds": [
+            "73dc359f-bedf-4569-8a4a-eac8f72d8287",
+            "7f909508-ae0f-466f-a7c5-f0f89e47b415"
+          ],
+          "avgViews": 100,
+          "avgLikeRate": 0.05,
+          "avgFavoriteRate": 0.03,
+          "avgCommentRate": 0.01,
+          "avgFollowConversionRate": 0.01
+        },
+        "recent7": {
+          "sampleCount": 2,
+          "rateSampleCount": 2,
+          "contentIds": [
+            "73dc359f-bedf-4569-8a4a-eac8f72d8287",
+            "7f909508-ae0f-466f-a7c5-f0f89e47b415"
+          ],
+          "avgViews": 100,
+          "avgLikeRate": 0.05,
+          "avgFavoriteRate": 0.03,
+          "avgCommentRate": 0.01,
+          "avgFollowConversionRate": 0.01
+        },
+        "sameAccount": {
+          "sampleCount": 2,
+          "rateSampleCount": 2,
+          "contentIds": [
+            "73dc359f-bedf-4569-8a4a-eac8f72d8287",
+            "7f909508-ae0f-466f-a7c5-f0f89e47b415"
+          ],
+          "avgViews": 100,
+          "avgLikeRate": 0.05,
+          "avgFavoriteRate": 0.03,
+          "avgCommentRate": 0.01,
+          "avgFollowConversionRate": 0.01
+        },
+        "sameContentType": {
+          "sampleCount": 2,
+          "rateSampleCount": 2,
+          "contentIds": [
+            "73dc359f-bedf-4569-8a4a-eac8f72d8287",
+            "7f909508-ae0f-466f-a7c5-f0f89e47b415"
+          ],
+          "avgViews": 100,
+          "avgLikeRate": 0.05,
+          "avgFavoriteRate": 0.03,
+          "avgCommentRate": 0.01,
+          "avgFollowConversionRate": 0.01
+        }
+      }
+    },
+    {
+      "id": "431ca6f0-0411-4635-a5c3-7e3e17e89fb1",
+      "contentId": "d7558a97-5367-40b5-980d-41a83e253944",
+      "metricsId": "8392e8a6-26f8-4d31-85e9-135d929985fe",
+      "createdAt": "2026-09-13T12:49:17.451Z",
+      "performanceSummary": "手动录入；当前 100 次阅读。同账号历史 3 篇中位数 100 次。仅为描述性比较，不证明标题或内容导致变化。结论：NEXT_EXPERIMENT（MEDIUM）。",
+      "observation": "当前 100 次阅读（24h 窗口）；同账号同窗口 3 篇中位数 100 次，相对表现 +0%。",
+      "hypothesis": "可能的解释（假设，尚未验证）：开头改成具体使用场景可能提高收藏率（假设，尚未验证）",
+      "evidence": "样本 3 篇，窗口 24h；差异小于噪声阈值，不足以区分好坏。相关不等于因果。",
+      "confidence": "MEDIUM",
+      "verdict": "NEXT_EXPERIMENT",
+      "hoursSincePublish": 1.8381369444444444,
+      "relative": {
+        "bucket": "24h",
+        "sampleCount": 3,
+        "medianViews": 100,
+        "medianLikes": 5,
+        "medianFavorites": 3,
+        "medianComments": 1,
+        "relativeViews": 0,
+        "relativeLikes": 0,
+        "relativeSaves": 0,
+        "relativeComments": 0,
+        "comparable": true
+      },
+      "KEEP": [],
+      "WATCH": [
+        "观察到相对表现 +0%，值得继续记录，但证据不足以升级为长期策略。"
+      ],
+      "CHANGE": [],
+      "NEXT_EXPERIMENT": {
+        "id": "c079b909-a984-4d2f-b853-770f30fde85b",
+        "hypothesis": "开头改成具体使用场景可能提高收藏率（假设，尚未验证）",
+        "variable": "hook",
+        "variant": "scene_first",
+        "baseline": "同账号同窗口（24h）历史 3 篇，中位阅读 100；本篇 100",
+        "targetMetric": "favoriteRate",
+        "requiredSamples": 3,
+        "currentSamples": 0,
+        "status": "proposed",
+        "createdAt": "2026-09-13T12:49:17.451Z",
+        "completedAt": null,
+        "result": null,
+        "confidence": "LOW",
+        "instruction": "下一篇同类growth内容，仅把开头改为一个具体使用场景；记录收藏率，暂不判断因果。",
+        "keepConstant": "标题风格、正文结构、篇幅和发布时段保持接近；用相同发布后时长录入指标。"
+      },
+      "rates": {
+        "likeRate": 0.05,
+        "favoriteRate": 0.03,
+        "commentRate": 0.01,
+        "engagementRate": 0.09,
+        "followConversionRate": 0.01
+      },
+      "comparisons": {
+        "recent3": {
+          "sampleCount": 3,
+          "rateSampleCount": 3,
+          "contentIds": [
+            "d3ad35d9-ed27-49b1-bfda-4dfe5bff00cd",
+            "73dc359f-bedf-4569-8a4a-eac8f72d8287",
+            "7f909508-ae0f-466f-a7c5-f0f89e47b415"
+          ],
+          "avgViews": 100,
+          "avgLikeRate": 0.05,
+          "avgFavoriteRate": 0.03,
+          "avgCommentRate": 0.01,
+          "avgFollowConversionRate": 0.01
+        },
+        "recent7": {
+          "sampleCount": 3,
+          "rateSampleCount": 3,
+          "contentIds": [
+            "d3ad35d9-ed27-49b1-bfda-4dfe5bff00cd",
+            "73dc359f-bedf-4569-8a4a-eac8f72d8287",
+            "7f909508-ae0f-466f-a7c5-f0f89e47b415"
+          ],
+          "avgViews": 100,
+          "avgLikeRate": 0.05,
+          "avgFavoriteRate": 0.03,
+          "avgCommentRate": 0.01,
+          "avgFollowConversionRate": 0.01
+        },
+        "sameAccount": {
+          "sampleCount": 3,
+          "rateSampleCount": 3,
+          "contentIds": [
+            "d3ad35d9-ed27-49b1-bfda-4dfe5bff00cd",
+            "73dc359f-bedf-4569-8a4a-eac8f72d8287",
+            "7f909508-ae0f-466f-a7c5-f0f89e47b415"
+          ],
+          "avgViews": 100,
+          "avgLikeRate": 0.05,
+          "avgFavoriteRate": 0.03,
+          "avgCommentRate": 0.01,
+          "avgFollowConversionRate": 0.01
+        },
+        "sameContentType": {
+          "sampleCount": 3,
+          "rateSampleCount": 3,
+          "contentIds": [
+            "d3ad35d9-ed27-49b1-bfda-4dfe5bff00cd",
+            "73dc359f-bedf-4569-8a4a-eac8f72d8287",
+            "7f909508-ae0f-466f-a7c5-f0f89e47b415"
+          ],
+          "avgViews": 100,
+          "avgLikeRate": 0.05,
+          "avgFavoriteRate": 0.03,
+          "avgCommentRate": 0.01,
+          "avgFollowConversionRate": 0.01
+        }
+      }
+    },
+    {
+      "id": "a63d06f1-35b6-41af-be6c-6396dd5f475e",
+      "contentId": "3edf5d41-d4e8-476f-9afd-694796099622",
+      "metricsId": "28ba531d-be0b-4f80-a819-eb2952417570",
+      "createdAt": "2026-09-13T12:49:18.952Z",
+      "performanceSummary": "手动录入；当前 600 次阅读。同账号历史 4 篇中位数 100 次。仅为描述性比较，不证明标题或内容导致变化。结论：KEEP（MEDIUM）。",
+      "observation": "当前 600 次阅读（24h 窗口）；同账号同窗口 4 篇中位数 100 次，相对表现 +500%。",
+      "hypothesis": "可能的解释（假设，尚未验证）：开头改成具体使用场景可能提高收藏率（假设，尚未验证）",
+      "evidence": "样本 4 篇，窗口 24h；仅描述差异，未控制其他变量。相关不等于因果。",
+      "confidence": "MEDIUM",
+      "verdict": "KEEP",
+      "hoursSincePublish": 1.5052230555555555,
+      "relative": {
+        "bucket": "24h",
+        "sampleCount": 4,
+        "medianViews": 100,
+        "medianLikes": 5,
+        "medianFavorites": 3,
+        "medianComments": 1,
+        "relativeViews": 5,
+        "relativeLikes": 5,
+        "relativeSaves": 5,
+        "relativeComments": 0,
+        "comparable": true
+      },
+      "KEEP": [
+        "当前写法在本窗口表现高于同窗口中位数（+500%），在出现新的反证前继续沿用。"
+      ],
+      "WATCH": [],
+      "CHANGE": [],
+      "NEXT_EXPERIMENT": {
+        "id": "04912112-8078-4618-b72f-9b4da5c0683c",
+        "hypothesis": "开头改成具体使用场景可能提高收藏率（假设，尚未验证）",
+        "variable": "hook",
+        "variant": "scene_first",
+        "baseline": "同账号同窗口（24h）历史 4 篇，中位阅读 100；本篇 600",
+        "targetMetric": "favoriteRate",
+        "requiredSamples": 3,
+        "currentSamples": 0,
+        "status": "proposed",
+        "createdAt": "2026-09-13T12:49:18.952Z",
+        "completedAt": null,
+        "result": null,
+        "confidence": "LOW",
+        "instruction": "下一篇同类growth内容，仅把开头改为一个具体使用场景；记录收藏率，暂不判断因果。",
+        "keepConstant": "标题风格、正文结构、篇幅和发布时段保持接近；用相同发布后时长录入指标。"
+      },
+      "rates": {
+        "likeRate": 0.05,
+        "favoriteRate": 0.03,
+        "commentRate": 0.0016666666666666668,
+        "engagementRate": 0.08166666666666667,
+        "followConversionRate": 0.0016666666666666668
+      },
+      "comparisons": {
+        "recent3": {
+          "sampleCount": 3,
+          "rateSampleCount": 3,
+          "contentIds": [
+            "d7558a97-5367-40b5-980d-41a83e253944",
+            "d3ad35d9-ed27-49b1-bfda-4dfe5bff00cd",
+            "73dc359f-bedf-4569-8a4a-eac8f72d8287"
+          ],
+          "avgViews": 100,
+          "avgLikeRate": 0.05,
+          "avgFavoriteRate": 0.03,
+          "avgCommentRate": 0.01,
+          "avgFollowConversionRate": 0.01
+        },
+        "recent7": {
+          "sampleCount": 4,
+          "rateSampleCount": 4,
+          "contentIds": [
+            "d7558a97-5367-40b5-980d-41a83e253944",
+            "d3ad35d9-ed27-49b1-bfda-4dfe5bff00cd",
+            "73dc359f-bedf-4569-8a4a-eac8f72d8287",
+            "7f909508-ae0f-466f-a7c5-f0f89e47b415"
+          ],
+          "avgViews": 100,
+          "avgLikeRate": 0.05,
+          "avgFavoriteRate": 0.03,
+          "avgCommentRate": 0.01,
+          "avgFollowConversionRate": 0.01
+        },
+        "sameAccount": {
+          "sampleCount": 4,
+          "rateSampleCount": 4,
+          "contentIds": [
+            "d7558a97-5367-40b5-980d-41a83e253944",
+            "d3ad35d9-ed27-49b1-bfda-4dfe5bff00cd",
+            "73dc359f-bedf-4569-8a4a-eac8f72d8287",
+            "7f909508-ae0f-466f-a7c5-f0f89e47b415"
+          ],
+          "avgViews": 100,
+          "avgLikeRate": 0.05,
+          "avgFavoriteRate": 0.03,
+          "avgCommentRate": 0.01,
+          "avgFollowConversionRate": 0.01
+        },
+        "sameContentType": {
+          "sampleCount": 4,
+          "rateSampleCount": 4,
+          "contentIds": [
+            "d7558a97-5367-40b5-980d-41a83e253944",
+            "d3ad35d9-ed27-49b1-bfda-4dfe5bff00cd",
+            "73dc359f-bedf-4569-8a4a-eac8f72d8287",
+            "7f909508-ae0f-466f-a7c5-f0f89e47b415"
+          ],
+          "avgViews": 100,
+          "avgLikeRate": 0.05,
+          "avgFavoriteRate": 0.03,
+          "avgCommentRate": 0.01,
+          "avgFollowConversionRate": 0.01
+        }
+      }
+    },
+    {
+      "id": "5dbaed62-221f-495b-a20e-6ab1ac4cda5c",
+      "contentId": "18c16ece-80b6-43f4-ade5-7d171b1e4ccb",
+      "metricsId": "5398331b-880f-49ad-ae5b-4a45e9fef295",
+      "createdAt": "2026-09-13T12:49:21.216Z",
+      "performanceSummary": "手动录入；当前 10 次阅读。同账号历史 5 篇中位数 100 次。仅为描述性比较，不证明标题或内容导致变化。结论：CHANGE（HIGH）。",
+      "observation": "当前 10 次阅读（24h 窗口）；同账号同窗口 5 篇中位数 100 次，相对表现 -90%。",
+      "hypothesis": "可能的解释（假设，尚未验证）：标题改成问题型可能提高阅读量（假设，尚未验证）",
+      "evidence": "样本 5 篇，窗口 24h；仅描述差异，未控制其他变量。相关不等于因果。",
+      "confidence": "HIGH",
+      "verdict": "CHANGE",
+      "hoursSincePublish": 1.17251,
+      "relative": {
+        "bucket": "24h",
+        "sampleCount": 5,
+        "medianViews": 100,
+        "medianLikes": 5,
+        "medianFavorites": 3,
+        "medianComments": 1,
+        "relativeViews": -0.9,
+        "relativeLikes": -0.8,
+        "relativeSaves": -1,
+        "relativeComments": 0,
+        "comparable": true
+      },
+      "KEEP": [],
+      "WATCH": [],
+      "CHANGE": [
+        "下一篇「被临时消息打断的一天」同类内容，仅把标题改为问题型（疑问句），观察阅读量。"
+      ],
+      "NEXT_EXPERIMENT": {
+        "id": "e5d613af-c48f-47a0-adf4-b450c3a5adbf",
+        "hypothesis": "标题改成问题型可能提高阅读量（假设，尚未验证）",
+        "variable": "title_style",
+        "variant": "question",
+        "baseline": "同账号同窗口（24h）历史 5 篇，中位阅读 100；本篇 10",
+        "targetMetric": "views",
+        "requiredSamples": 3,
+        "currentSamples": 0,
+        "status": "proposed",
+        "createdAt": "2026-09-13T12:49:21.216Z",
+        "completedAt": null,
+        "result": null,
+        "confidence": "LOW",
+        "instruction": "下一篇「被临时消息打断的一天」同类内容，仅把标题改为问题型（疑问句），观察阅读量。",
+        "keepConstant": "账号、题材、正文结构、封面样式和发布时段保持接近；用相同发布后时长录入指标。"
+      },
+      "rates": {
+        "likeRate": 0.1,
+        "favoriteRate": 0,
+        "commentRate": 0.1,
+        "engagementRate": 0.2,
+        "followConversionRate": 0.1
+      },
+      "comparisons": {
+        "recent3": {
+          "sampleCount": 3,
+          "rateSampleCount": 3,
+          "contentIds": [
+            "3edf5d41-d4e8-476f-9afd-694796099622",
+            "d7558a97-5367-40b5-980d-41a83e253944",
+            "d3ad35d9-ed27-49b1-bfda-4dfe5bff00cd"
+          ],
+          "avgViews": 100,
+          "avgLikeRate": 0.05,
+          "avgFavoriteRate": 0.03,
+          "avgCommentRate": 0.01,
+          "avgFollowConversionRate": 0.01
+        },
+        "recent7": {
+          "sampleCount": 5,
+          "rateSampleCount": 5,
+          "contentIds": [
+            "3edf5d41-d4e8-476f-9afd-694796099622",
+            "d7558a97-5367-40b5-980d-41a83e253944",
+            "d3ad35d9-ed27-49b1-bfda-4dfe5bff00cd",
+            "73dc359f-bedf-4569-8a4a-eac8f72d8287",
+            "7f909508-ae0f-466f-a7c5-f0f89e47b415"
+          ],
+          "avgViews": 100,
+          "avgLikeRate": 0.05,
+          "avgFavoriteRate": 0.03,
+          "avgCommentRate": 0.01,
+          "avgFollowConversionRate": 0.01
+        },
+        "sameAccount": {
+          "sampleCount": 5,
+          "rateSampleCount": 5,
+          "contentIds": [
+            "3edf5d41-d4e8-476f-9afd-694796099622",
+            "d7558a97-5367-40b5-980d-41a83e253944",
+            "d3ad35d9-ed27-49b1-bfda-4dfe5bff00cd",
+            "73dc359f-bedf-4569-8a4a-eac8f72d8287",
+            "7f909508-ae0f-466f-a7c5-f0f89e47b415"
+          ],
+          "avgViews": 100,
+          "avgLikeRate": 0.05,
+          "avgFavoriteRate": 0.03,
+          "avgCommentRate": 0.01,
+          "avgFollowConversionRate": 0.01
+        },
+        "sameContentType": {
+          "sampleCount": 5,
+          "rateSampleCount": 5,
+          "contentIds": [
+            "3edf5d41-d4e8-476f-9afd-694796099622",
+            "d7558a97-5367-40b5-980d-41a83e253944",
+            "d3ad35d9-ed27-49b1-bfda-4dfe5bff00cd",
+            "73dc359f-bedf-4569-8a4a-eac8f72d8287",
+            "7f909508-ae0f-466f-a7c5-f0f89e47b415"
+          ],
+          "avgViews": 100,
+          "avgLikeRate": 0.05,
+          "avgFavoriteRate": 0.03,
+          "avgCommentRate": 0.01,
+          "avgFollowConversionRate": 0.01
+        }
+      }
+    },
+    {
+      "id": "937f9d79-23c2-4359-96e2-da69521cdb15",
+      "contentId": "6754a74c-77d8-42bf-9e11-ed9f7a7d14a2",
+      "metricsId": "6c16d5d4-b6ff-4704-a5ea-9875b8d6ce42",
+      "createdAt": "2026-09-13T12:49:22.829Z",
+      "performanceSummary": "手动录入；当前 100 次阅读。同账号历史 6 篇中位数 100 次。仅为描述性比较，不证明标题或内容导致变化。结论：NEXT_EXPERIMENT（MEDIUM）。",
+      "observation": "当前 100 次阅读（24h 窗口）；同账号同窗口 6 篇中位数 100 次，相对表现 +0%。",
+      "hypothesis": "可能的解释（假设，尚未验证）：开头改成具体使用场景可能提高收藏率（假设，尚未验证）",
+      "evidence": "样本 6 篇，窗口 24h；差异小于噪声阈值，不足以区分好坏。相关不等于因果。",
+      "confidence": "MEDIUM",
+      "verdict": "NEXT_EXPERIMENT",
+      "hoursSincePublish": 0.8396283333333333,
+      "relative": {
+        "bucket": "24h",
+        "sampleCount": 6,
+        "medianViews": 100,
+        "medianLikes": 5,
+        "medianFavorites": 3,
+        "medianComments": 1,
+        "relativeViews": 0,
+        "relativeLikes": 0,
+        "relativeSaves": 0,
+        "relativeComments": 0,
+        "comparable": true
+      },
+      "KEEP": [],
+      "WATCH": [
+        "观察到相对表现 +0%，值得继续记录，但证据不足以升级为长期策略。"
+      ],
+      "CHANGE": [],
+      "NEXT_EXPERIMENT": {
+        "id": "ba128a25-686c-4d07-98fc-6c638197c86c",
+        "hypothesis": "开头改成具体使用场景可能提高收藏率（假设，尚未验证）",
+        "variable": "hook",
+        "variant": "scene_first",
+        "baseline": "同账号同窗口（24h）历史 6 篇，中位阅读 100；本篇 100",
+        "targetMetric": "favoriteRate",
+        "requiredSamples": 3,
+        "currentSamples": 0,
+        "status": "proposed",
+        "createdAt": "2026-09-13T12:49:22.829Z",
+        "completedAt": null,
+        "result": null,
+        "confidence": "LOW",
+        "instruction": "下一篇同类growth内容，仅把开头改为一个具体使用场景；记录收藏率，暂不判断因果。",
+        "keepConstant": "标题风格、正文结构、篇幅和发布时段保持接近；用相同发布后时长录入指标。"
+      },
+      "rates": {
+        "likeRate": 0.05,
+        "favoriteRate": 0.03,
+        "commentRate": 0.01,
+        "engagementRate": 0.09,
+        "followConversionRate": 0.01
+      },
+      "comparisons": {
+        "recent3": {
+          "sampleCount": 3,
+          "rateSampleCount": 3,
+          "contentIds": [
+            "18c16ece-80b6-43f4-ade5-7d171b1e4ccb",
+            "3edf5d41-d4e8-476f-9afd-694796099622",
+            "d7558a97-5367-40b5-980d-41a83e253944"
+          ],
+          "avgViews": 100,
+          "avgLikeRate": 0.05,
+          "avgFavoriteRate": 0.03,
+          "avgCommentRate": 0.01,
+          "avgFollowConversionRate": 0.01
+        },
+        "recent7": {
+          "sampleCount": 6,
+          "rateSampleCount": 6,
+          "contentIds": [
+            "18c16ece-80b6-43f4-ade5-7d171b1e4ccb",
+            "3edf5d41-d4e8-476f-9afd-694796099622",
+            "d7558a97-5367-40b5-980d-41a83e253944",
+            "d3ad35d9-ed27-49b1-bfda-4dfe5bff00cd",
+            "73dc359f-bedf-4569-8a4a-eac8f72d8287",
+            "7f909508-ae0f-466f-a7c5-f0f89e47b415"
+          ],
+          "avgViews": 100,
+          "avgLikeRate": 0.05,
+          "avgFavoriteRate": 0.03,
+          "avgCommentRate": 0.01,
+          "avgFollowConversionRate": 0.01
+        },
+        "sameAccount": {
+          "sampleCount": 6,
+          "rateSampleCount": 6,
+          "contentIds": [
+            "18c16ece-80b6-43f4-ade5-7d171b1e4ccb",
+            "3edf5d41-d4e8-476f-9afd-694796099622",
+            "d7558a97-5367-40b5-980d-41a83e253944",
+            "d3ad35d9-ed27-49b1-bfda-4dfe5bff00cd",
+            "73dc359f-bedf-4569-8a4a-eac8f72d8287",
+            "7f909508-ae0f-466f-a7c5-f0f89e47b415"
+          ],
+          "avgViews": 100,
+          "avgLikeRate": 0.05,
+          "avgFavoriteRate": 0.03,
+          "avgCommentRate": 0.01,
+          "avgFollowConversionRate": 0.01
+        },
+        "sameContentType": {
+          "sampleCount": 6,
+          "rateSampleCount": 6,
+          "contentIds": [
+            "18c16ece-80b6-43f4-ade5-7d171b1e4ccb",
+            "3edf5d41-d4e8-476f-9afd-694796099622",
+            "d7558a97-5367-40b5-980d-41a83e253944",
+            "d3ad35d9-ed27-49b1-bfda-4dfe5bff00cd",
+            "73dc359f-bedf-4569-8a4a-eac8f72d8287",
+            "7f909508-ae0f-466f-a7c5-f0f89e47b415"
+          ],
+          "avgViews": 100,
+          "avgLikeRate": 0.05,
+          "avgFavoriteRate": 0.03,
+          "avgCommentRate": 0.01,
+          "avgFollowConversionRate": 0.01
+        }
+      }
+    }
+  ],
+  "strategies": []
+}

@@ -12,6 +12,9 @@
   ],
   "scripts": {
     "dev": "concurrently --kill-others -n API,WEB -c blue,magenta \"npm run dev -w @emotion-studio/api\" \"npm run dev -w @emotion-studio/web\"",
+    "mcp:dev": "npm run mcp:dev -w @emotion-studio/api",
+    "mcp:build": "npm run build -w @emotion-studio/api",
+    "mcp:start": "npm run mcp:start -w @emotion-studio/api",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "test": "npm run test --workspaces --if-present",
     "build": "npm run build --workspaces --if-present",

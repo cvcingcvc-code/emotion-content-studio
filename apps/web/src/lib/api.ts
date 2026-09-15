@@ -22,6 +22,12 @@ export class ApiError extends Error {
   }
 }
 
+/**
+ * 单次请求超时。之前 fetch 没有超时：API 挂起时调用方（如 GrowthLoopPage 的 busy）
+ * 会一直停在「处理中」，用户只能刷新页面。超时后按失败处理，busy 正常释放。
+ */
+export const REQUEST_TIMEOUT_MS = 30_000;
+
 export async function apiRequest<T>(
   path: string,
   mode: PreviewMode,
@@ -33,31 +39,60 @@ export async function apiRequest<T>(
   const method = (init?.method ?? 'GET').toUpperCase();
   const jsonBodyMethod = ['POST', 'PUT', 'PATCH'].includes(method);
   const hasBody = init?.body !== undefined && init.body !== null;
-  const response = await fetch(`${url.pathname}${url.search}`, {
-    ...init,
-    ...(jsonBodyMethod && !hasBody ? { body: '{}' } : {}),
-    headers: {
-      accept: 'application/json',
-      ...(hasBody || jsonBodyMethod
-        ? { 'content-type': 'application/json' }
-        : {}),
-      ...init?.headers,
-    },
-  });
-  const payload: unknown = await response.json().catch(() => null);
-  if (!response.ok) {
-    const failed = ApiErrorSchema.safeParse(payload);
-    throw new ApiError(
-      failed.success ? failed.data.error.message : '暂时无法读取内容，请稍后重试。',
-      response.status,
-      failed.success ? failed.data.requestId : undefined,
+  // 本地超时控制器；调用方（useRemote 卸载中断）传入的 signal 仍然优先生效。
+  const controller = new AbortController();
+  const upstream = init?.signal ?? null;
+  const forwardAbort = () => controller.abort(upstream?.reason);
+  const timer = setTimeout(() => controller.abort(new DOMException('timeout', 'TimeoutError')), REQUEST_TIMEOUT_MS);
+  if (upstream) {
+    if (upstream.aborted) forwardAbort();
+    else upstream.addEventListener('abort', forwardAbort, { once: true });
+  }
+  try {
+    const response = await fetch(`${url.pathname}${url.search}`, {
+      ...init,
+      signal: controller.signal,
+      ...(jsonBodyMethod && !hasBody ? { body: '{}' } : {}),
+      headers: {
+        accept: 'application/json',
+        ...(hasBody || jsonBodyMethod
+          ? { 'content-type': 'application/json' }
+          : {}),
+        ...init?.headers,
+      },
+    });
+    const payload: unknown = await response.json().catch((error: unknown) => {
+      if (controller.signal.aborted) throw error;
+      return null;
+    });
+    if (!response.ok) {
+      const failed = ApiErrorSchema.safeParse(payload);
+      throw new ApiError(
+        failed.success ? failed.data.error.message : '暂时无法读取内容，请稍后重试。',
+        response.status,
+        failed.success ? failed.data.requestId : undefined,
+      );
+    }
+    const parsed = createSuccessResponseSchema(schema).safeParse(payload);
+    if (!parsed.success) {
+      throw new ApiError('服务返回的数据格式无效，请稍后重试。', 502);
+    }
+    return parsed.data.data;
+  } catch (error) {
+    // 调用方主动中断（页面卸载）不属于错误，原样抛出由调用方忽略。
+    if (upstream?.aborted) throw error;
+    if (controller.signal.aborted) throw new ApiError(
+      ['GET', 'HEAD'].includes(method)
+        ? '请求超时，服务暂时没有回应。请稍后重试。'
+        : '请求超时，服务暂时没有回应。操作可能已保存，请先检查历史记录再重试。',
+      408,
     );
+    if (error instanceof TypeError) throw new ApiError('无法连接服务，请确认 API 已启动后重试。', 0);
+    throw error;
+  } finally {
+    clearTimeout(timer);
+    upstream?.removeEventListener('abort', forwardAbort);
   }
-  const parsed = createSuccessResponseSchema(schema).safeParse(payload);
-  if (!parsed.success) {
-    throw new ApiError('服务返回的数据格式无效，请稍后重试。', 502);
-  }
-  return parsed.data.data;
 }
 
 export function useRemote<T>(

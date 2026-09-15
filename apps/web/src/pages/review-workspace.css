@@ -1,5 +1,6 @@
 .review-workspace {
-  max-width: 1180px;
+  width: 100%;
+  max-width: 1500px;
   padding: 32px 0 60px;
 }
 
@@ -34,8 +35,8 @@
 
 .review-columns {
   display: grid;
-  grid-template-columns: 65fr 35fr;
-  gap: 60px;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);
+  gap: clamp(32px, 5vw, 72px);
   margin-top: 40px;
   align-items: start;
 }

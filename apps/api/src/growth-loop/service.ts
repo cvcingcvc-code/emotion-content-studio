@@ -50,14 +50,19 @@ export class GrowthLoopService {
     const now = new Date().toISOString();
     const state = await this.repository.snapshot();
     const previous = state.contents.find(x => x.id === input.sourceContentId), metric = previous ? latestMetrics(state).get(previous.id) : null;
+    if (previous?.isDemo) throw new AppError(409, "DEMO_SOURCE_NOT_ALLOWED", "演示内容不能作为真实内容的上一轮来源，请选择真实内容或从新的复盘开始。");
     const experiment = previous && metric ? recommendNextExperiment(previous, metric, state) : null;
-    const value = PublishedContentSchema.parse({ ...input, id: randomUUID(), revision: 0, title: input.topic.slice(0, 80), englishDraftId: null, createdAt: now, updatedAt: now, publishedAt: null, publishTime: null, status: "draft", writing: null, english: null, note: previous?.isDemo ? "策略来自合成 Demo，仅用于演示，不代表真实业绩证据。" : "", provider: this.agent.mode, isDemo: false, experiment });
+    const value = PublishedContentSchema.parse({ ...input, id: randomUUID(), revision: 0, title: input.topic.slice(0, 80), englishDraftId: null, createdAt: now, updatedAt: now, publishedAt: null, publishTime: null, status: "draft", writing: null, english: null, note: "", provider: this.agent.mode, isDemo: false, experiment });
     await this.repository.saveContent(value, null); return value;
   }
   async generate(id: string, revision: number) {
     const existing = await this.content(id);
     if (existing.revision !== revision) throw new AppError(409, "STALE_REVISION", "请刷新内容");
     if (existing.status !== "draft") return existing;
+    // 旧版本可能已创建指向 Demo 的真实草稿；保留原稿，但不能继续注入演示实验。
+    if (!existing.isDemo && existing.sourceContentId && (await this.content(existing.sourceContentId)).isDemo) {
+      throw new AppError(409, "DEMO_SOURCE_NOT_ALLOWED", "演示内容不能作为真实内容的上一轮来源，请选择真实内容或从新的复盘开始。");
+    }
     let value: PublishedContent = { ...existing, revision: revision + 1, status: "review", updatedAt: new Date().toISOString() };
     if (existing.account === "english") {
       const result = await this.english.generate({ topic: existing.topic, tone: "日常" });

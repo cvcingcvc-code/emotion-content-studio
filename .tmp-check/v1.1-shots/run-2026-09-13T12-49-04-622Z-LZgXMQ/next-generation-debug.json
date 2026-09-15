@@ -1,0 +1,55 @@
+{
+  "nextId": "4fb8d55e-f567-4b3e-a8ec-54a58cd33d27",
+  "debug": {
+    "promptVersion": "growth-loop.v3",
+    "provider": "mock",
+    "model": null,
+    "factsUsed": [
+      "今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工。当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚。我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始。"
+    ],
+    "interpretationsUsed": [
+      "行为模式（推断）：面对「今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下」时，记录里写的第一反应是「当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚」",
+      "改法空间（推断）：当时还存在其他可选行动，需要在下一个相似场景里验证",
+      "经验迁移（推断）：我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+      "内容价值（推断）：事件、困扰与处理建议较具体，适合分享；分数是离线规则评估，不预测流量"
+    ],
+    "strategyUsed": [],
+    "experimentUsed": "hook=scene_first",
+    "userPreferenceUsed": [],
+    "feedbackUsed": [
+      {
+        "feedbackId": "937f9d79-23c2-4359-96e2-da69521cdb15",
+        "contentId": "6754a74c-77d8-42bf-9e11-ed9f7a7d14a2",
+        "source": "feedback",
+        "verdict": "NEXT_EXPERIMENT",
+        "confidence": "MEDIUM",
+        "createdAt": "2026-09-13T12:49:22.829Z",
+        "experimentId": "ba128a25-686c-4d07-98fc-6c638197c86c",
+        "text": "《照常推进的一天》上一轮留有进行中的实验（置信度 MEDIUM）；上一轮提议的唯一变量 hook=scene_first（实验 ba128a25-686c-4d07-98fc-6c638197c86c，状态 proposed）"
+      },
+      {
+        "feedbackId": "5dbaed62-221f-495b-a20e-6ab1ac4cda5c",
+        "contentId": "18c16ece-80b6-43f4-ade5-7d171b1e4ccb",
+        "source": "feedback",
+        "verdict": "CHANGE",
+        "confidence": "HIGH",
+        "createdAt": "2026-09-13T12:49:21.216Z",
+        "experimentId": "e5d613af-c48f-47a0-adf4-b450c3a5adbf",
+        "text": "《被临时消息打断的一天》上一轮判定 CHANGE，本轮必须调整（置信度 HIGH）；调整：下一篇「被临时消息打断的一天」同类内容，仅把标题改为问题型（疑问句），观察阅读量。；上一轮提议的唯一变量 title_style=question（实验 e5d613af-c48f-47a0-adf4-b450c3a5adbf，状态 proposed）"
+      },
+      {
+        "feedbackId": "a63d06f1-35b6-41af-be6c-6396dd5f475e",
+        "contentId": "3edf5d41-d4e8-476f-9afd-694796099622",
+        "source": "feedback",
+        "verdict": "KEEP",
+        "confidence": "MEDIUM",
+        "createdAt": "2026-09-13T12:49:18.952Z",
+        "experimentId": "04912112-8078-4618-b72f-9b4da5c0683c",
+        "text": "《确认清单让返工消失了》上一轮判定 KEEP，可以继续沿用（置信度 MEDIUM）；继续：当前写法在本窗口表现高于同窗口中位数（+500%），在出现新的反证前继续沿用。；上一轮提议的唯一变量 hook=scene_first（实验 04912112-8078-4618-b72f-9b4da5c0683c，状态 proposed）"
+      }
+    ],
+    "constraintsApplied": [],
+    "finalGenerationContext": "account=growth | facts=1 | interpretations=4 | strategy={\"works\":[],\"avoid\":[],\"testing\":[],\"watch\":[],\"unknown\":[]} | userPreferences=[] | learnings=3 | experiment=hook=scene_first(proposed) | promptVersion=growth-loop.v3"
+  },
+  "panelText": "上一轮的学习 → 本轮生成的输入（3 条） 筛选规则：同账号 · 同性质（真实 / 演示不混用）· 30 天内 · 已发布且已录指标；同一篇只取最新一条，直接上一轮排最前，最多 3 条。只有 KEEP / CHANGE 会被当成结论。 NEXT_EXPERIMENT（置信度 MEDIUM）· 《照常推进的一天》上一轮留有进行中的实验（置信度 MEDIUM）；上一轮提议的唯一变量 hook=scene_first（实验 ba128a25-686c-4d07-98fc-6c638197c86c，状态 proposed） CHANGE（置信度 HIGH）· 《被临时消息打断的一天》上一轮判定 CHANGE，本轮必须调整（置信度 HIGH）；调整：下一篇「被临时消息打断的一天」同类内容，仅把标题改为问题型（疑问句），观察阅读量。；上一轮提议的唯一变量 title_style=question（实验 e5d613af-c48f-47a0-adf4-b450c3a5adbf，状态 proposed） KEEP（置信度 MEDIUM）· 《确认清单让返工消失了》上一轮判定 KEEP，可以继续沿用（置信度 MEDIUM）；继续：当前写法在本窗口表现高于同窗口中位数（+500%），在出现新的反证前继续沿用。；上一轮提议的唯一变量 hook=scene_first（实验 04912112-8078-4618-b72f-9b4da5c0683c，状态 proposed） 账号策略 0 条 · 本轮唯一实验 hook=scene_first · 生效约束 0 项 · 生成上下文版本 growth-loop.v3"
+}

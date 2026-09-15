@@ -3,6 +3,7 @@ import { join } from "node:path";
 import { tmpdir } from "node:os";
 import { afterEach, describe, expect, it } from "vitest";
 import { buildApp } from "../app.js";
+import { createContentRepository } from "../content/repository.js";
 import { createEnglishWriter } from "../english/provider.js";
 
 const base = "/api/v1/growth-loop";
@@ -11,9 +12,9 @@ const input = { date: "2026-09-10", whatHappened: "今天工作中没有确认�
 describe("growth loop API", { timeout: 15_000 }, () => {
   const cleanups: Array<() => Promise<unknown>> = [];
   afterEach(async () => { for (const cleanup of cleanups.splice(0)) await cleanup(); });
-  async function setup() {
+  async function setup(contentRepository = createContentRepository({ nodeEnv: "test" })) {
     const root = await mkdtemp(join(tmpdir(), "growth-api-test-"));
-    const app = await buildApp({ englishWorkflow: { root, writer: createEnglishWriter({}) } });
+    const app = await buildApp({ contentRepository, englishWorkflow: { root, writer: createEnglishWriter({}) } });
     cleanups.push(() => app.close(), () => rm(root, { recursive: true, force: true })); return app;
   }
   it("runs real-input retrospective → analysis → draft → review → ready → published → metrics", async () => {
@@ -62,5 +63,33 @@ describe("growth loop API", { timeout: 15_000 }, () => {
       if (account === "english") expect(value.english.sentences).toHaveLength(50); else expect(value.writing.body.length).toBeGreaterThan(0);
       expect(value.status).toBe("review");
     }
+  });
+
+  it("keeps demo experiments out of real drafts and first-generation debug evidence", async () => {
+    const repository = createContentRepository({ nodeEnv: "test" });
+    const app = await setup(repository);
+    const demo = (await app.inject({ method: "POST", url: base + "/demo" })).json().data.contents[0];
+    let retro = (await app.inject({ method: "POST", url: base + "/retrospectives", payload: input })).json().data;
+    retro = (await app.inject({ method: "POST", url: `${base}/retrospectives/${retro.id}/analyze`, payload: { revision: retro.revision } })).json().data;
+    const payload = { account: "growth", topic: "从新的真实复盘开始", contentType: "solution", sourceRetrospectiveId: retro.id, sourceContentId: demo.id };
+    const rejected = await app.inject({ method: "POST", url: base + "/contents", payload });
+    expect(rejected.statusCode).toBe(409);
+    expect(rejected.json()).toMatchObject({ ok: false, error: { code: "DEMO_SOURCE_NOT_ALLOWED" } });
+    expect((await app.inject(base)).json().data.contents).toHaveLength(7);
+
+    const created = (await app.inject({ method: "POST", url: base + "/contents", payload: { ...payload, sourceContentId: null } })).json().data;
+    // 模拟升级前留下的未生成草稿：拒绝注入，不能覆盖或删除原记录。
+    const legacy = { ...created, sourceContentId: demo.id, revision: created.revision + 1 };
+    await repository.growthLoop.saveContent(legacy, created.revision);
+    const blocked = await app.inject({ method: "POST", url: `${base}/contents/${legacy.id}/generate`, payload: { revision: legacy.revision } });
+    expect(blocked.statusCode).toBe(409);
+    expect(blocked.json().error.code).toBe("DEMO_SOURCE_NOT_ALLOWED");
+    expect((await repository.growthLoop.snapshot()).contents.find(x => x.id === legacy.id)).toEqual(legacy);
+
+    const fresh = (await app.inject({ method: "POST", url: base + "/contents", payload: { ...payload, sourceContentId: null } })).json().data;
+    const generated = await app.inject({ method: "POST", url: `${base}/contents/${fresh.id}/generate`, payload: { revision: fresh.revision } });
+    expect(generated.statusCode).toBe(200);
+    expect(generated.json().data).toMatchObject({ isDemo: false, sourceContentId: null, experiment: null, debug: { feedbackUsed: [], experimentUsed: null, promptVersion: "growth-loop.v3" } });
+    expect(generated.json().data.debug.finalGenerationContext).toContain("learnings=0");
   });
 });
