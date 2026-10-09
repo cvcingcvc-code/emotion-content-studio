@@ -39,7 +39,7 @@ export const EnglishWorkflowDraftSchema = z.object({
   generated_at: z.string().datetime(),
   updated_at: z.string().datetime(),
   status: z.enum(["needs_revision", "approved"]),
-  provider: z.enum(["demo", "deepseek"]),
+  provider: z.enum(["demo", "deepseek", "openai-compatible"]),
   model: z.string(),
   writing: EnglishWritingSchema,
   output_path: z.string().nullable(),

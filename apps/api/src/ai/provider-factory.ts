@@ -1,35 +1,20 @@
-import type { ServerConfig } from "../config.js";
 import { MockContentAnalyzer, type ContentAnalyzer } from "../content/analyzer.js";
 import { MockContentGenerator, type ContentGenerator } from "../content/generator.js";
 import { DeepSeekContentAnalyzer } from "./deepseek-analyzer.js";
-import { DeepSeekJsonClient } from "./deepseek-client.js";
 import { DeepSeekContentGenerator } from "./deepseek-generator.js";
 
-type AiConfig = Pick<
-  ServerConfig,
-  "AI_PROVIDER" | "DEEPSEEK_API_KEY" | "DEEPSEEK_MODEL" | "AI_TIMEOUT_MS" | "AI_MAX_ATTEMPTS"
->;
+import { createConfiguredJsonClient, fallbackOperation, type ProviderConfig, type ProviderDependencies } from "./provider-config.js";
 
-function createDeepSeekClient(config: AiConfig): DeepSeekJsonClient {
-  if (!config.DEEPSEEK_API_KEY) {
-    throw new Error("DEEPSEEK_API_KEY is required when AI_PROVIDER=deepseek");
-  }
-  return new DeepSeekJsonClient({
-    apiKey: config.DEEPSEEK_API_KEY,
-    model: config.DEEPSEEK_MODEL,
-    timeoutMs: config.AI_TIMEOUT_MS,
-    maxAttempts: config.AI_MAX_ATTEMPTS,
-  });
+export function createConfiguredContentGenerator(config: ProviderConfig, dependencies?: ProviderDependencies): ContentGenerator {
+  const mock = new MockContentGenerator();
+  if (config.AI_PROVIDER === "mock") return mock;
+  const real = new DeepSeekContentGenerator(createConfiguredJsonClient(config, dependencies));
+  return { generate: fallbackOperation(real.generate.bind(real), mock.generate.bind(mock), config.AI_FALLBACK !== "none") };
 }
 
-export function createConfiguredContentGenerator(config: AiConfig): ContentGenerator {
-  return config.AI_PROVIDER === "deepseek"
-    ? new DeepSeekContentGenerator(createDeepSeekClient(config))
-    : new MockContentGenerator();
-}
-
-export function createConfiguredContentAnalyzer(config: AiConfig): ContentAnalyzer {
-  return config.AI_PROVIDER === "deepseek"
-    ? new DeepSeekContentAnalyzer(createDeepSeekClient(config))
-    : new MockContentAnalyzer();
+export function createConfiguredContentAnalyzer(config: ProviderConfig, dependencies?: ProviderDependencies): ContentAnalyzer {
+  const mock = new MockContentAnalyzer();
+  if (config.AI_PROVIDER === "mock") return mock;
+  const real = new DeepSeekContentAnalyzer(createConfiguredJsonClient(config, dependencies));
+  return { analyze: fallbackOperation(real.analyze.bind(real), mock.analyze.bind(mock), config.AI_FALLBACK !== "none") };
 }

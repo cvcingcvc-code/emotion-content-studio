@@ -38,8 +38,8 @@ export class GrowthLoopService {
     const existing = await this.retrospective(id);
     if (existing.revision !== revision) throw new AppError(409, "STALE_REVISION", "请刷新复盘");
     if (existing.analysis) return existing;
-    const analysis = await this.agent.analyzeRetrospective(existing);
-    const value = { ...existing, analysis, analysisProvider: this.agent.mode, revision: revision + 1, updatedAt: new Date().toISOString() };
+    const { analysis, provider } = await this.agent.analyzeRetrospectiveResult(existing);
+    const value = { ...existing, analysis, analysisProvider: provider, revision: revision + 1, updatedAt: new Date().toISOString() };
     await this.repository.saveRetrospective(value, revision); return value;
   }
   async createContent(input: { account: ContentAccount; topic: string; contentType: ContentType; sourceRetrospectiveId: string | null; sourceContentId: string | null }) {
@@ -67,7 +67,7 @@ export class GrowthLoopService {
     if (existing.account === "english") {
       const result = await this.english.generate({ topic: existing.topic, tone: "日常" });
       if (!result.draft) throw new AppError(409, "TOPIC_EXISTS", "该主题已经生成过，请到英语工作流查看已有内容");
-      value = { ...value, englishDraftId: result.draft.id, english: result.draft.writing, title: result.draft.writing.title, provider: result.draft.provider === "demo" ? "mock" : "deepseek" };
+      value = { ...value, englishDraftId: result.draft.id, english: result.draft.writing, title: result.draft.writing.title, provider: result.draft.provider === "demo" ? "mock" : result.draft.provider };
     } else if (existing.account === "emotion") {
       const theme = await this.pipelines.emotionAnalyzer.analyze({ content: existing.topic });
       const result = await this.pipelines.emotionGenerator.generate({ themes: [theme.data] });
@@ -82,7 +82,7 @@ export class GrowthLoopService {
         sourceContentId: existing.sourceContentId, isDemo: existing.isDemo,
       });
       const { writing, debug } = await this.agent.generateContentOpportunity(context);
-      value = { ...value, writing, title: writing.title, debug };
+      value = { ...value, writing, title: writing.title, debug, provider: debug.provider };
     }
     if (value.experiment) {
       const samples = countExperimentSamples(await this.repository.snapshot(), value);

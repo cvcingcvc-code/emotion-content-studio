@@ -82,6 +82,7 @@ function isTemporaryNetworkError(error: unknown): boolean {
 }
 
 export class DeepSeekJsonClient {
+  readonly provider = "deepseek" as const;
   readonly model: string;
   readonly #apiKey: string;
   readonly #timeoutMs: number;

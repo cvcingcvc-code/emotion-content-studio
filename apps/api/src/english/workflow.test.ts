@@ -115,7 +115,7 @@ describe("English Account MVP", { timeout: 15_000 }, () => {
     const fetchImpl = vi.fn<typeof fetch>(async () => new Response(JSON.stringify({
       choices: [{ finish_reason: "stop", message: { content: JSON.stringify(content) } }],
     }), { status: 200 }));
-    const writer = createEnglishWriter({ ENGLISH_AI_MODE: "real", AI_API_KEY: "test-only-key", AI_MODEL: "test-model" }, fetchImpl);
+    const writer = createEnglishWriter({ ENGLISH_AI_MODE: "real", AI_API_KEY: "test-only-key", AI_MODEL: "test-model", AI_ALLOW_PAID_CALLS: "true", AI_FALLBACK: "none", AI_MAX_ATTEMPTS: "1" }, fetchImpl, { recordUsage: () => {} });
     const newInput = { topic: "朋友搬家帮忙英语50句", tone: "日常" as const };
     const result = await writer.generate(newInput);
     expect(result.provider).toBe("deepseek");

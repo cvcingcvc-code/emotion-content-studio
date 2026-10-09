@@ -1,5 +1,4 @@
-import type { AiProvider } from "@emotion-studio/contracts";
-import { DeepSeekJsonClient } from "../../ai/deepseek-client.js";
+import { createConfiguredJsonClient, fallbackOperation, type ProviderConfig, type ProviderDependencies } from "../../ai/provider-config.js";
 import {
   DeepSeekEmotionAnalyzer,
   DeepSeekEmotionGenerator,
@@ -10,31 +9,19 @@ import {
 import { createMockPipelines } from "./mock-pipelines.js";
 import type { PipelineRegistry } from "./types.js";
 
-export interface PipelineProviderConfig {
-  AI_PROVIDER: AiProvider;
-  DEEPSEEK_API_KEY?: string | undefined;
-  DEEPSEEK_MODEL: string;
-  AI_TIMEOUT_MS: number;
-  AI_MAX_ATTEMPTS: number;
-}
+export type PipelineProviderConfig = ProviderConfig;
 
-export function createConfiguredPipelines(config: PipelineProviderConfig): PipelineRegistry {
-  if (config.AI_PROVIDER === "mock") return createMockPipelines();
-  if (!config.DEEPSEEK_API_KEY?.trim()) {
-    throw new Error("DEEPSEEK_API_KEY is required when AI_PROVIDER=deepseek");
-  }
-
-  const client = new DeepSeekJsonClient({
-    apiKey: config.DEEPSEEK_API_KEY,
-    model: config.DEEPSEEK_MODEL,
-    timeoutMs: config.AI_TIMEOUT_MS,
-    maxAttempts: config.AI_MAX_ATTEMPTS,
-  });
+export function createConfiguredPipelines(config: PipelineProviderConfig, dependencies?: ProviderDependencies): PipelineRegistry {
+  const mock = createMockPipelines();
+  if (config.AI_PROVIDER === "mock") return mock;
+  const client = createConfiguredJsonClient(config, dependencies);
+  const enabled = config.AI_FALLBACK !== "none";
+  const growthAnalyzer = new DeepSeekGrowthAnalyzer(client), growthGenerator = new DeepSeekGrowthGenerator(client), englishGenerator = new DeepSeekEnglish50Generator(client), emotionAnalyzer = new DeepSeekEmotionAnalyzer(client), emotionGenerator = new DeepSeekEmotionGenerator(client);
   return {
-    growthAnalyzer: new DeepSeekGrowthAnalyzer(client),
-    growthGenerator: new DeepSeekGrowthGenerator(client),
-    englishGenerator: new DeepSeekEnglish50Generator(client),
-    emotionAnalyzer: new DeepSeekEmotionAnalyzer(client),
-    emotionGenerator: new DeepSeekEmotionGenerator(client),
+    growthAnalyzer: { analyze: fallbackOperation(growthAnalyzer.analyze.bind(growthAnalyzer), mock.growthAnalyzer.analyze.bind(mock.growthAnalyzer), enabled) },
+    growthGenerator: { generate: fallbackOperation(growthGenerator.generate.bind(growthGenerator), mock.growthGenerator.generate.bind(mock.growthGenerator), enabled) },
+    englishGenerator: { generate: fallbackOperation(englishGenerator.generate.bind(englishGenerator), mock.englishGenerator.generate.bind(mock.englishGenerator), enabled) },
+    emotionAnalyzer: { analyze: fallbackOperation(emotionAnalyzer.analyze.bind(emotionAnalyzer), mock.emotionAnalyzer.analyze.bind(mock.emotionAnalyzer), enabled) },
+    emotionGenerator: { generate: fallbackOperation(emotionGenerator.generate.bind(emotionGenerator), mock.emotionGenerator.generate.bind(mock.emotionGenerator), enabled) },
   };
 }

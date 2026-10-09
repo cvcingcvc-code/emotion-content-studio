@@ -1,0 +1,13 @@
+
+ RUN  v3.2.7 C:/Users/lin/Documents/ChatGPT/情绪灵感库/emotion-content-studio/apps/api
+
+ ✓ src/ai/openai-compatible.test.ts (18 tests) 391ms
+ ✓ src/english/workflow.test.ts (10 tests) 413ms
+ ✓ src/ai/deepseek.test.ts (11 tests) 46ms
+ ✓ src/growth-loop/provider.test.ts (12 tests) 29ms
+
+ Test Files  4 passed (4)
+      Tests  51 passed (51)
+   Start at  18:31:38
+   Duration  11.41s (transform 991ms, setup 0ms, collect 8.55s, tests 879ms, environment 1ms, prepare 731ms)
+

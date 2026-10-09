@@ -6,11 +6,11 @@ import type {
   ContentGenerator,
   GenerateContentInput,
 } from "../content/generator.js";
-import { DeepSeekJsonClient } from "./deepseek-client.js";
+import type { JsonClient } from "./types.js";
 import type { AiCallOptions, AiResult } from "./types.js";
 
 export class DeepSeekContentGenerator implements ContentGenerator {
-  constructor(private readonly client: DeepSeekJsonClient) {}
+  constructor(private readonly client: JsonClient) {}
 
   async generate(
     input: GenerateContentInput,
@@ -39,6 +39,6 @@ export class DeepSeekContentGenerator implements ContentGenerator {
       ],
       { ...options, maxTokens: 1_200 },
     );
-    return { data, provider: "deepseek", model: this.client.model };
+    return { data, provider: this.client.provider, model: this.client.model };
   }
 }

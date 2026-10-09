@@ -1,7 +1,9 @@
 import { z } from "zod";
 import { LoopWritingSchema, RetrospectiveAnalysisSchema, normalizePublishText, type RetrospectiveInput, type Retrospective, type GenerationDebug, type PublishedContent } from "@emotion-studio/contracts";
-import { DeepSeekJsonClient } from "../ai/deepseek-client.js";
-import type { ServerConfig } from "../config.js";
+import type { AiProvider } from "@emotion-studio/contracts";
+import type { JsonClient } from "../ai/types.js";
+import { canFallback } from "../ai/openai-compatible-client.js";
+import { createConfiguredJsonClient, type ProviderConfig, type ProviderDependencies } from "../ai/provider-config.js";
 import { analyzeRetrospective, derivedRetrospectiveFields, rawFacts, traceableFacts } from "./retrospective.js";
 import { buildDebug, STRATEGY_FILTERS, stripDrama, type GrowthGenerationContext } from "./generation-context.js";
 
@@ -88,8 +90,12 @@ function offlineDraft(retro: Retrospective, topic: string): LoopWriting {
 }
 
 export class GrowthLoopAgent {
-  readonly mode: "mock" | "deepseek";
-  constructor(private client?: DeepSeekJsonClient, readonly model: string | null = null) { this.mode = client ? "deepseek" : "mock"; }
+  readonly mode: AiProvider;
+  constructor(private client?: JsonClient, readonly model: string | null = null, private readonly fallback = false) { this.mode = client?.provider ?? "mock"; }
+  async analyzeRetrospectiveResult(input: RetrospectiveInput) {
+    try { return { analysis: await this.analyzeRetrospective(input), provider: this.mode }; }
+    catch (error) { if (this.fallback && canFallback(error)) return { analysis: analyzeRetrospective(input), provider: "mock" as const }; throw error; }
+  }
   async analyzeRetrospective(input: RetrospectiveInput) {
     if (!this.client) return analyzeRetrospective(input);
     const produced = await this.client.completeJson(RetrospectiveAnalysisSchema, [
@@ -116,21 +122,24 @@ export class GrowthLoopAgent {
       rule ? `本轮唯一变量是 ${experiment!.variable}=${experiment!.variant}：${experiment!.instruction}${rule}` : "本轮没有实验，不要自行发明实验，也不要声称在做对比。",
       `严格 JSON：${JSON.stringify(z.toJSONSchema(LoopWritingSchema))}`,
     ].filter(Boolean).join("\n");
-    const draft = this.client
+    let provider = this.mode;
+    let draft: LoopWriting;
+    try { draft = this.client
       ? await this.client.completeJson(LoopWritingSchema, [
         { role: "system", content: instructions },
         { role: "user", content: JSON.stringify({ retrospective: retro, topic: context.topic, contentType: context.contentType, experiment, accountStrategy: context.strategy, userPreferences: context.userPreferences, learnings: context.learnings }) },
       ], { maxTokens: 2200 })
-      : offlineDraft(retro, context.topic);
+      : offlineDraft(retro, context.topic); }
+    catch (error) { if (!this.fallback || !canFallback(error)) throw error; draft = offlineDraft(retro, context.topic); provider = "mock"; }
     const withExperiment = applyExperiment(normalizeWriting(LoopWritingSchema.parse(draft)), retro, experiment);
     const constrained = applyStrategyConstraints(withExperiment, context);
     return {
       writing: normalizeWriting(constrained.writing),
-      debug: buildDebug(context, this.mode, this.model, constrained.applied),
+      debug: buildDebug(context, provider, provider === "mock" ? null : this.model, constrained.applied),
     };
   }
 }
-export function createGrowthLoopAgent(config: ServerConfig) {
-  const client = config.AI_PROVIDER === "deepseek" ? new DeepSeekJsonClient({ apiKey: config.DEEPSEEK_API_KEY!, model: config.DEEPSEEK_MODEL, timeoutMs: config.AI_TIMEOUT_MS, maxAttempts: Math.min(2, config.AI_MAX_ATTEMPTS) }) : undefined;
-  return new GrowthLoopAgent(client, client ? config.DEEPSEEK_MODEL ?? null : null);
+export function createGrowthLoopAgent(config: ProviderConfig, dependencies?: ProviderDependencies) {
+  const client = config.AI_PROVIDER === "mock" ? undefined : createConfiguredJsonClient(config, dependencies);
+  return new GrowthLoopAgent(client, client?.model ?? null, config.AI_FALLBACK !== "none");
 }

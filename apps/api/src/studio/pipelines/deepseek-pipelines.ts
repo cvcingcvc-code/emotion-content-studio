@@ -4,9 +4,10 @@ import {
   English50PackageSchema,
   GrowthAnalysisSchema,
   GrowthPostPackageSchema,
+  type AiProvider,
 } from "@emotion-studio/contracts";
 import { z } from "zod";
-import { DeepSeekJsonClient } from "../../ai/deepseek-client.js";
+import type { JsonClient } from "../../ai/types.js";
 import { AiProviderError } from "../../ai/errors.js";
 import type { AiCallOptions } from "../../ai/types.js";
 import {
@@ -22,13 +23,13 @@ import type {
   GrowthGenerator,
 } from "./types.js";
 
-function invalidGuardResult(error: unknown): never {
+function invalidGuardResult(error: unknown, provider: AiProvider): never {
   if (error instanceof PipelineGuardError) {
     throw new AiProviderError({
       statusCode: 502,
       code: "AI_INVALID_RESPONSE",
       message: "AI 服务返回了无法验证的结果，请重试",
-      provider: "deepseek",
+      provider,
       attempts: 1,
     });
   }
@@ -36,7 +37,7 @@ function invalidGuardResult(error: unknown): never {
 }
 
 export class DeepSeekGrowthAnalyzer implements GrowthAnalyzer {
-  constructor(private readonly client: DeepSeekJsonClient) {}
+  constructor(private readonly client: JsonClient) {}
 
   async analyze(input: Parameters<GrowthAnalyzer["analyze"]>[0], options?: AiCallOptions) {
     const data = await this.client.completeJson(
@@ -68,17 +69,17 @@ export class DeepSeekGrowthAnalyzer implements GrowthAnalyzer {
     try {
       return {
         data: validateGrowthAnalysis(input, data),
-        provider: "deepseek" as const,
+        provider: this.client.provider,
         model: this.client.model,
       };
     } catch (error) {
-      return invalidGuardResult(error);
+      return invalidGuardResult(error, this.client.provider);
     }
   }
 }
 
 export class DeepSeekGrowthGenerator implements GrowthGenerator {
-  constructor(private readonly client: DeepSeekJsonClient) {}
+  constructor(private readonly client: JsonClient) {}
 
   async generate(input: Parameters<GrowthGenerator["generate"]>[0], options?: AiCallOptions) {
     const analysis = GrowthAnalysisSchema.parse(input.analysis);
@@ -105,17 +106,17 @@ export class DeepSeekGrowthGenerator implements GrowthGenerator {
     try {
       return {
         data: validateGrowthPost(analysis, data),
-        provider: "deepseek" as const,
+        provider: this.client.provider,
         model: this.client.model,
       };
     } catch (error) {
-      return invalidGuardResult(error);
+      return invalidGuardResult(error, this.client.provider);
     }
   }
 }
 
 export class DeepSeekEnglish50Generator implements EnglishGenerator {
-  constructor(private readonly client: DeepSeekJsonClient) {}
+  constructor(private readonly client: JsonClient) {}
 
   async generate(input: Parameters<EnglishGenerator["generate"]>[0], options?: AiCallOptions) {
     const topic = input.topic.trim();
@@ -145,12 +146,12 @@ export class DeepSeekEnglish50Generator implements EnglishGenerator {
       ],
       { ...options, maxTokens: 7_200 },
     );
-    return { data, provider: "deepseek" as const, model: this.client.model };
+    return { data, provider: this.client.provider, model: this.client.model };
   }
 }
 
 export class DeepSeekEmotionAnalyzer implements EmotionAnalyzer {
-  constructor(private readonly client: DeepSeekJsonClient) {}
+  constructor(private readonly client: JsonClient) {}
 
   async analyze(input: Parameters<EmotionAnalyzer["analyze"]>[0], options?: AiCallOptions) {
     const data = await this.client.completeJson(
@@ -171,12 +172,12 @@ export class DeepSeekEmotionAnalyzer implements EmotionAnalyzer {
       ],
       { ...options, maxTokens: 1_800 },
     );
-    return { data, provider: "deepseek" as const, model: this.client.model };
+    return { data, provider: this.client.provider, model: this.client.model };
   }
 }
 
 export class DeepSeekEmotionGenerator implements EmotionGenerator {
-  constructor(private readonly client: DeepSeekJsonClient) {}
+  constructor(private readonly client: JsonClient) {}
 
   async generate(input: Parameters<EmotionGenerator["generate"]>[0], options?: AiCallOptions) {
     if (input.themes.length < 1 || input.themes.length > 5) {
@@ -202,6 +203,6 @@ export class DeepSeekEmotionGenerator implements EmotionGenerator {
       ],
       { ...options, maxTokens: 2_400 },
     );
-    return { data, provider: "deepseek" as const, model: this.client.model };
+    return { data, provider: this.client.provider, model: this.client.model };
   }
 }

@@ -1,4 +1,5 @@
 import { createConfiguredContentGenerator } from "./ai/provider-factory.js";
+import { configuredUsagePath } from "./ai/provider-config.js";
 import { buildApp } from "./app.js";
 import { createGrowthLoopAgent } from "./growth-loop/provider.js";
 import { readServerConfig } from "./config.js";
@@ -22,6 +23,7 @@ const app = await buildApp({
   contentGenerator,
   contentAnalyzer: ingestionAnalyzer,
   aiProvider: config.AI_PROVIDER,
+  aiUsagePath: configuredUsagePath(config),
   pipelines: createConfiguredPipelines(config),
 });
 app.addHook("onClose", persistence.close);

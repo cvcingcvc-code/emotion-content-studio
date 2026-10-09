@@ -1,0 +1,96 @@
+
+ RUN  v3.2.7 C:/Users/lin/Documents/ChatGPT/情绪灵感库/emotion-content-studio/apps/api
+
+ ❯ src/ai/openai-compatible.test.ts (18 tests | 1 failed) 361ms
+   ✓ OpenAI compatible provider with simulated transport only > sends the configured endpoint and records tokens and user-supplied cost without secrets 16ms
+   ✓ OpenAI compatible provider with simulated transport only > defaults to closed paid-call gate even if credentials exist 4ms
+   ✓ OpenAI compatible provider with simulated transport only > bounds retries for 429, 5xx and network failures and records their count 2ms
+   ✓ OpenAI compatible provider with simulated transport only > does not retry or disclose upstream bodies for status 401 1ms
+   ✓ OpenAI compatible provider with simulated transport only > does not retry or disclose upstream bodies for status 403 1ms
+   ✓ OpenAI compatible provider with simulated transport only > does not retry or disclose upstream bodies for status 400 0ms
+   ✓ OpenAI compatible provider with simulated transport only > times out and retries a transport that respects abort signals 41ms
+   ✓ OpenAI compatible provider with simulated transport only > honors cancellation before transport and during retries without fallback 1ms
+   ✓ OpenAI compatible provider with simulated transport only > rejects invalid-envelope without retries and preserves known billing tokens 1ms
+   ✓ OpenAI compatible provider with simulated transport only > rejects invalid-content without retries and preserves known billing tokens 1ms
+   ✓ OpenAI compatible provider with simulated transport only > rejects length without retries and preserves known billing tokens 1ms
+   ✓ OpenAI compatible provider with simulated transport only > rejects wrong-schema without retries and preserves known billing tokens 1ms
+   ✓ OpenAI compatible provider with simulated transport only > keeps unknown token usage or unconfigured cost null 1ms
+   ✓ OpenAI compatible provider with simulated transport only > uses truthful Mock fallback for analyzers, pipelines and retrospective analysis 9ms
+   ✓ OpenAI compatible provider with simulated transport only > keeps English demo offline and its real path gated, with configured compatible fallback 6ms
+   ✓ OpenAI compatible provider with simulated transport only > fails closed if usage recording fails 1ms
+   × OpenAI compatible provider with simulated transport only > persists the minimal ledger across app restarts and wraps corrupted ledger errors 272ms
+     → [
+  {
+    "code": "invalid_value",
+    "values": [
+      false
+    ],
+    "path": [
+      "ok"
+    ],
+    "message": "Invalid input: expected false"
+  },
+  {
+    "expected": "object",
+    "code": "invalid_type",
+    "path": [
+      "error"
+    ],
+    "message": "Invalid input: expected object, received string"
+  },
+  {
+    "expected": "string",
+    "code": "invalid_type",
+    "path": [
+      "requestId"
+    ],
+    "message": "Invalid input: expected string, received undefined"
+  }
+]
+   ✓ OpenAI compatible provider with simulated transport only > rejects insecure and credential-bearing endpoints 2ms
+ ✓ src/english/workflow.test.ts (10 tests) 428ms
+ ✓ src/ai/deepseek.test.ts (11 tests) 51ms
+ ✓ src/growth-loop/provider.test.ts (12 tests) 27ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/ai/openai-compatible.test.ts > OpenAI compatible provider with simulated transport only > persists the minimal ledger across app restarts and wraps corrupted ledger errors
+ZodError: [
+  {
+    "code": "invalid_value",
+    "values": [
+      false
+    ],
+    "path": [
+      "ok"
+    ],
+    "message": "Invalid input: expected false"
+  },
+  {
+    "expected": "object",
+    "code": "invalid_type",
+    "path": [
+      "error"
+    ],
+    "message": "Invalid input: expected object, received string"
+  },
+  {
+    "expected": "string",
+    "code": "invalid_type",
+    "path": [
+      "requestId"
+    ],
+    "message": "Invalid input: expected string, received undefined"
+  }
+]
+ ❯ src/ai/openai-compatible.test.ts:117:248
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 3 passed (4)
+      Tests  1 failed | 50 passed (51)
+   Start at  18:31:02
+   Duration  10.66s (transform 801ms, setup 0ms, collect 7.80s, tests 867ms, environment 1ms, prepare 755ms)
+

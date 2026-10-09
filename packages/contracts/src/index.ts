@@ -1,4 +1,5 @@
 import { z } from "zod";
+export { AiUsageSchema, type AiUsage } from "./ai-usage.js";
 export { normalizePublishText, growthPublishText } from "./publish-text.js";
 export * from "./english-workflow.js";
 export * from "./growth-loop.js";
@@ -196,7 +197,7 @@ export const ContentCategorySchema = z.enum([
   "其他",
 ]);
 
-export const AiProviderSchema = z.enum(["mock", "deepseek"]);
+export const AiProviderSchema = z.enum(["mock", "deepseek", "openai-compatible"]);
 
 export const AccountIdSchema = z.enum([
   "personal_growth",

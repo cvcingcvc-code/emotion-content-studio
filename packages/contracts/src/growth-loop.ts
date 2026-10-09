@@ -83,7 +83,7 @@ export const RetrospectiveSchema = RetrospectiveInputSchema.extend({
   id: z.string().uuid(), revision: z.number().int().nonnegative(),
   createdAt: z.iso.datetime(), updatedAt: z.iso.datetime(),
   analysis: RetrospectiveAnalysisSchema.nullable(),
-  analysisProvider: z.enum(["mock", "deepseek"]).nullable(),
+  analysisProvider: z.enum(["mock", "deepseek", "openai-compatible"]).nullable(),
 });
 export const LoopWritingSchema = z.object({
   title: z.string().trim().min(1).max(80), body: z.string().trim().min(1).max(8_000),
@@ -117,7 +117,7 @@ export const FeedbackUsedSchema = z.object({
 }).strict();
 export const GenerationDebugSchema = z.object({
   promptVersion: z.string().trim().min(1).max(80),
-  provider: z.enum(["mock", "deepseek"]),
+  provider: z.enum(["mock", "deepseek", "openai-compatible"]),
   model: z.string().trim().max(80).nullable(),
   factsUsed: z.array(z.string().max(300)).max(8),
   interpretationsUsed: z.array(z.string().max(600)).max(8),
@@ -144,7 +144,7 @@ export const PublishedContentSchema = z.object({
   rejectReason: RejectReasonSchema.nullable().default(null),
   rejectedAt: z.iso.datetime().nullable().default(null),
   note: z.string().max(2_000),
-  provider: z.enum(["mock", "deepseek"]),
+  provider: z.enum(["mock", "deepseek", "openai-compatible"]),
   isDemo: z.boolean().default(false),
   experiment: ExperimentSchema.nullable().default(null),
   debug: GenerationDebugSchema.nullable().default(null),
@@ -217,7 +217,7 @@ export const GrowthLoopStateSchema = z.object({
   strategies: z.array(StrategyEntrySchema),
 });
 export const GrowthDashboardSchema = z.object({
-  today: z.iso.date(), mode: z.enum(["mock", "deepseek"]), repository: z.enum(["memory", "database", "sqlite"]),
+  today: z.iso.date(), mode: z.enum(["mock", "deepseek", "openai-compatible"]), repository: z.enum(["memory", "database", "sqlite"]),
   retrospectiveDone: z.boolean(), contentOpportunities: z.number(), readyToPublish: z.number(),
   yesterday: z.object({ count: z.number(), views: z.number(), metricsCount: z.number() }),
   focus: EffortDirectionSchema,

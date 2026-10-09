@@ -2,6 +2,7 @@ import cors from "@fastify/cors";
 import Fastify, { type FastifyInstance } from "fastify";
 import type { AiProvider } from "@emotion-studio/contracts";
 import { AiProviderError } from "./ai/errors.js";
+import { registerAiUsageRoutes } from "./ai/usage-routes.js";
 import { MockContentAnalyzer, type ContentAnalyzer } from "./content/analyzer.js";
 import { MockContentGenerator, type ContentGenerator } from "./content/generator.js";
 import {
@@ -50,6 +51,7 @@ export interface BuildAppOptions {
   contentAnalyzer?: ContentAnalyzer;
   contentGenerator?: ContentGenerator;
   aiProvider?: AiProvider;
+  aiUsagePath?: string;
   pipelines?: PipelineRegistry;
 }
 
@@ -167,6 +169,7 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
   );
   const pipelines = options.pipelines ?? createMockPipelines();
   await registerStudioRoutes(app, contentRepository, pipelines);
+  registerAiUsageRoutes(app, options.aiUsagePath);
   const english = await registerEnglishWorkflow(app, contentRepository, options.englishWorkflow);
   await registerGrowthLoopRoutes(app, new GrowthLoopService(contentRepository.growthLoop, options.growthLoopAgent ?? new GrowthLoopAgent(), english, pipelines));
   return app;

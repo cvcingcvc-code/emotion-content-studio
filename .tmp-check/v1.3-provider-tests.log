@@ -1,0 +1,73 @@
+
+ RUN  v3.2.7 C:/Users/lin/Documents/ChatGPT/情绪灵感库/emotion-content-studio/apps/api
+
+ ✓ src/ai/deepseek.test.ts (11 tests) 76ms
+ ✓ src/growth-loop/provider.test.ts (12 tests) 55ms
+ ❯ src/ai/openai-compatible.test.ts (18 tests | 3 failed) 157ms
+   × OpenAI compatible provider with simulated transport only > sends the configured endpoint and records tokens and user-supplied cost without secrets 32ms
+     → Cannot read properties of undefined (reading 'parse')
+   ✓ OpenAI compatible provider with simulated transport only > defaults to closed paid-call gate even if credentials exist 9ms
+   ✓ OpenAI compatible provider with simulated transport only > bounds retries for 429, 5xx and network failures and records their count 4ms
+   ✓ OpenAI compatible provider with simulated transport only > does not retry or disclose upstream bodies for status 401 2ms
+   ✓ OpenAI compatible provider with simulated transport only > does not retry or disclose upstream bodies for status 403 1ms
+   ✓ OpenAI compatible provider with simulated transport only > does not retry or disclose upstream bodies for status 400 1ms
+   ✓ OpenAI compatible provider with simulated transport only > times out and retries a transport that respects abort signals 56ms
+   ✓ OpenAI compatible provider with simulated transport only > honors cancellation before transport and during retries without fallback 3ms
+   ✓ OpenAI compatible provider with simulated transport only > rejects invalid-envelope without retries and preserves known billing tokens 2ms
+   ✓ OpenAI compatible provider with simulated transport only > rejects invalid-content without retries and preserves known billing tokens 2ms
+   ✓ OpenAI compatible provider with simulated transport only > rejects length without retries and preserves known billing tokens 2ms
+   ✓ OpenAI compatible provider with simulated transport only > rejects wrong-schema without retries and preserves known billing tokens 3ms
+   ✓ OpenAI compatible provider with simulated transport only > keeps unknown token usage or unconfigured cost null 2ms
+   ✓ OpenAI compatible provider with simulated transport only > uses truthful Mock fallback for analyzers, pipelines and retrospective analysis 21ms
+   × OpenAI compatible provider with simulated transport only > keeps English demo offline and its real path gated, with configured compatible fallback 4ms
+     → 离线 Demo 仅提供三个新主题；任意主题请配置服务端真实 AI。
+   ✓ OpenAI compatible provider with simulated transport only > fails closed if usage recording fails 1ms
+   × OpenAI compatible provider with simulated transport only > persists the minimal ledger across app restarts and wraps corrupted ledger errors 6ms
+     → 调用记录无法保存，请检查本地存储。
+   ✓ OpenAI compatible provider with simulated transport only > rejects insecure and credential-bearing endpoints 5ms
+ ✓ src/english/workflow.test.ts (10 tests) 995ms
+   ✓ English Account MVP > connects generate, preview, review and duplicate APIs without external requests  713ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/ai/openai-compatible.test.ts > OpenAI compatible provider with simulated transport only > sends the configured endpoint and records tokens and user-supplied cost without secrets
+TypeError: Cannot read properties of undefined (reading 'parse')
+ ❯ src/ai/openai-compatible.test.ts:34:26
+     32|     expect(String(options?.body)).not.toContain("thinking");
+     33|     expect(ledger).toHaveLength(1);
+     34|     expect(AiUsageSchema.parse(ledger[0])).toMatchObject({ outcome: "s…
+       |                          ^
+     35|     expect(JSON.stringify(ledger)).not.toMatch(/synthetic-test-key|syn…
+     36|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  src/ai/openai-compatible.test.ts > OpenAI compatible provider with simulated transport only > keeps English demo offline and its real path gated, with configured compatible fallback
+AppError: 离线 Demo 仅提供三个新主题；任意主题请配置服务端真实 AI。
+ ❯ demoEnglishWriting src/english/demo-content.ts:173:22
+    171| export function demoEnglishWriting(input: EnglishWorkflowInput) {
+    172|   const sample = examples[input.topic];
+    173|   if (!sample) throw new AppError(409, "REAL_AI_REQUIRED", "离线 Demo 仅提…
+       |                      ^
+    174|   const subject = input.topic.replace(/英语50句$/, "");
+    175|   const titles = [`${subject}时能直接用的50句英语`, `每天学10句｜${subject}英语合集`, `不…
+ ❯ Object.generate src/english/provider.ts:20:46
+ ❯ src/ai/openai-compatible.test.ts:99:54
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  src/ai/openai-compatible.test.ts > OpenAI compatible provider with simulated transport only > persists the minimal ledger across app restarts and wraps corrupted ledger errors
+AiProviderError: 调用记录无法保存，请检查本地存储。
+ ❯ OpenAiCompatibleJsonClient.error src/ai/openai-compatible-client.ts:28:12
+
+ ❯ OpenAiCompatibleJsonClient.completeJson src/ai/openai-compatible-client.ts:65:26
+ ❯ src/ai/openai-compatible.test.ts:112:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed | 3 passed (4)
+      Tests  3 failed | 48 passed (51)
+   Start at  18:17:28
+   Duration  10.73s (transform 2.79s, setup 0ms, collect 25.84s, tests 1.28s, environment 2ms, prepare 1.67s)
+

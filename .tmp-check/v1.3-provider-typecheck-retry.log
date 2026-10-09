@@ -1,0 +1,57 @@
+
+> emotion-content-studio@0.1.0 typecheck
+> npm run typecheck --workspaces --if-present
+
+
+> @emotion-studio/api@0.1.0 typecheck
+> tsc -p tsconfig.json --noEmit
+
+
+> @emotion-studio/web@0.1.0 typecheck
+> tsc -p tsconfig.json --noEmit
+
+src/pages/XiaohongshuWorkbench.test.tsx(34,60): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(role: ByRoleMatcher, options?: ByRoleOptions | undefined): HTMLElement', gave the following error.
+    Object literal may only specify known properties, and 'exact' does not exist in type 'ByRoleOptions'.
+  Overload 2 of 2, '(role: ByRoleMatcher, options?: ByRoleOptions | undefined): HTMLElement', gave the following error.
+    Object literal may only specify known properties, and 'exact' does not exist in type 'ByRoleOptions'.
+src/pages/XiaohongshuWorkbench.test.tsx(35,55): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(role: ByRoleMatcher, options?: ByRoleOptions | undefined): HTMLElement', gave the following error.
+    Object literal may only specify known properties, and 'exact' does not exist in type 'ByRoleOptions'.
+  Overload 2 of 2, '(role: ByRoleMatcher, options?: ByRoleOptions | undefined): HTMLElement', gave the following error.
+    Object literal may only specify known properties, and 'exact' does not exist in type 'ByRoleOptions'.
+src/pages/XiaohongshuWorkbench.test.tsx(38,64): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(role: ByRoleMatcher, options?: ByRoleOptions | undefined): HTMLElement', gave the following error.
+    Object literal may only specify known properties, and 'exact' does not exist in type 'ByRoleOptions'.
+  Overload 2 of 2, '(role: ByRoleMatcher, options?: ByRoleOptions | undefined): HTMLElement', gave the following error.
+    Object literal may only specify known properties, and 'exact' does not exist in type 'ByRoleOptions'.
+src/pages/XiaohongshuWorkbench.test.tsx(57,64): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(role: ByRoleMatcher, options?: ByRoleOptions | undefined): HTMLElement', gave the following error.
+    Object literal may only specify known properties, and 'exact' does not exist in type 'ByRoleOptions'.
+  Overload 2 of 2, '(role: ByRoleMatcher, options?: ByRoleOptions | undefined): HTMLElement', gave the following error.
+    Object literal may only specify known properties, and 'exact' does not exist in type 'ByRoleOptions'.
+src/pages/XiaohongshuWorkbench.test.tsx(60,63): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(role: ByRoleMatcher, options?: ByRoleOptions | undefined): HTMLElement', gave the following error.
+    Object literal may only specify known properties, and 'exact' does not exist in type 'ByRoleOptions'.
+  Overload 2 of 2, '(role: ByRoleMatcher, options?: ByRoleOptions | undefined): HTMLElement', gave the following error.
+    Object literal may only specify known properties, and 'exact' does not exist in type 'ByRoleOptions'.
+npm error Lifecycle script `typecheck` failed with error:
+
+> @emotion-studio/worker@0.1.0 typecheck
+> tsc -p tsconfig.json --noEmit
+
+npm error code 2
+npm error path C:\Users\lin\Documents\ChatGPT\情绪灵感库\emotion-content-studio\apps\web
+npm error workspace @emotion-studio/web@0.1.0
+npm error location C:\Users\lin\Documents\ChatGPT\情绪灵感库\emotion-content-studio\apps\web
+npm error command failed
+npm error command C:\WINDOWS\system32\cmd.exe /d /s /c tsc -p tsconfig.json --noEmit
+
+
+> @emotion-studio/contracts@0.1.0 typecheck
+> tsc -p tsconfig.json --noEmit
+
+
+> @emotion-studio/database@0.1.0 typecheck
+> tsc -p tsconfig.json --noEmit
+

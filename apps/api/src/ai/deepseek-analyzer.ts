@@ -6,11 +6,11 @@ import type {
   AnalyzeContentInput,
   ContentAnalyzer,
 } from "../content/analyzer.js";
-import { DeepSeekJsonClient } from "./deepseek-client.js";
+import type { JsonClient } from "./types.js";
 import type { AiCallOptions, AiResult } from "./types.js";
 
 export class DeepSeekContentAnalyzer implements ContentAnalyzer {
-  constructor(private readonly client: DeepSeekJsonClient) {}
+  constructor(private readonly client: JsonClient) {}
 
   async analyze(
     input: AnalyzeContentInput,
@@ -36,6 +36,6 @@ export class DeepSeekContentAnalyzer implements ContentAnalyzer {
       ],
       { ...options, maxTokens: 500 },
     );
-    return { data, provider: "deepseek", model: this.client.model };
+    return { data, provider: this.client.provider, model: this.client.model };
   }
 }
