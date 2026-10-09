@@ -1,0 +1,33 @@
+
+> @emotion-studio/api@0.1.0 pretest
+> npm run build:dependencies
+
+
+> @emotion-studio/api@0.1.0 build:dependencies
+> npm --prefix ../.. run build -w @emotion-studio/contracts && npm --prefix ../.. run build -w @emotion-studio/database
+
+
+> @emotion-studio/contracts@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @emotion-studio/database@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @emotion-studio/api@0.1.0 test
+> vitest run src/content/sqlite-persistence.test.ts src/content/repository.contract.test.ts src/content/repository-factory.test.ts
+
+
+ RUN  v3.2.7 C:/Users/lin/Documents/ChatGPT/情绪灵感库/emotion-content-studio/apps/api
+
+ ✓ src/content/sqlite-persistence.test.ts (4 tests) 782ms
+ ✓ src/content/repository.contract.test.ts (33 tests | 11 skipped) 333ms
+ ✓ src/content/repository-factory.test.ts (2 tests) 671ms
+   ✓ configured durable local repository > shares persisted records with a separately opened MCP context and a restarted API  664ms
+
+ Test Files  3 passed (3)
+      Tests  28 passed | 11 skipped (39)
+   Start at  17:53:41
+   Duration  9.91s (transform 2.03s, setup 0ms, collect 18.24s, tests 1.79s, environment 1ms, prepare 1.06s)
+

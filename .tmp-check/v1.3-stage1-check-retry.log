@@ -1,0 +1,248 @@
+
+> emotion-content-studio@0.1.0 check
+> npm run typecheck && npm test && npm run build
+
+
+> emotion-content-studio@0.1.0 typecheck
+> npm run typecheck --workspaces --if-present
+
+
+> @emotion-studio/api@0.1.0 typecheck
+> tsc -p tsconfig.json --noEmit
+
+
+> @emotion-studio/web@0.1.0 typecheck
+> tsc -p tsconfig.json --noEmit
+
+
+> @emotion-studio/worker@0.1.0 typecheck
+> tsc -p tsconfig.json --noEmit
+
+
+> @emotion-studio/contracts@0.1.0 typecheck
+> tsc -p tsconfig.json --noEmit
+
+
+> @emotion-studio/database@0.1.0 typecheck
+> tsc -p tsconfig.json --noEmit
+
+
+> emotion-content-studio@0.1.0 test
+> npm run test --workspaces --if-present
+
+
+> @emotion-studio/api@0.1.0 pretest
+> npm run build:dependencies
+
+
+> @emotion-studio/api@0.1.0 build:dependencies
+> npm --prefix ../.. run build -w @emotion-studio/contracts && npm --prefix ../.. run build -w @emotion-studio/database
+
+
+> @emotion-studio/contracts@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @emotion-studio/database@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @emotion-studio/api@0.1.0 test
+> vitest run
+
+
+ RUN  v3.2.7 C:/Users/lin/Documents/ChatGPT/情绪灵感库/emotion-content-studio/apps/api
+
+ ✓ src/growth-loop/demo.test.ts (5 tests) 952ms
+   ✓ offline growth loop demo > loads 3 growth, 3 English and 1 emotion with feedback, idempotently  725ms
+ ✓ src/content/sqlite-persistence.test.ts (4 tests) 697ms
+ ✓ src/growth-loop/preference.test.ts (5 tests) 1698ms
+   ✓ human edit and reject learning signal wiring > keeps the AI draft and turns a human edit into a weak human_edit strategy  1447ms
+ ✓ src/studio/pipelines/pipelines.test.ts (5 tests) 195ms
+ ✓ src/studio/studio.test.ts (5 tests) 2155ms
+   ✓ three-account product workflow > completes all pipelines, manual confirmation, publication and nullable performance  1778ms
+ ✓ src/growth-loop/experiment-decision.test.ts (1 test) 2226ms
+   ✓ decideExperiment：continue_testing 必须让实验保持开放 > 连续 continue_testing 不会结题，也不会被 EXPERIMENT_COMPLETED 拦住；promote / reject 仍正常结题  2222ms
+ ✓ src/growth-loop/routes.test.ts (3 tests) 2291ms
+   ✓ growth loop API > runs real-input retrospective → analysis → draft → review → ready → published → metrics  1681ms
+   ✓ growth loop API > keeps demo experiments out of real drafts and first-generation debug evidence  333ms
+ ✓ src/app.test.ts (19 tests) 2613ms
+   ✓ mock API > returns a request id and mock health state  1347ms
+ ✓ src/growth-loop/learning.test.ts (8 tests) 2629ms
+   ✓ feedback really flows into the next generation > case 1+2+3+5: carries KEEP / CHANGE / experiment into the next generation, deduped and capped  1789ms
+   ✓ feedback really flows into the next generation > case 4: a rejected draft contributes no positive learning but keeps its negative signal  600ms
+ ✓ src/english/workflow.test.ts (10 tests) 2973ms
+   ✓ English Account MVP > requires review, saves edits, exports exactly seven files, and does not render unchanged exports twice  723ms
+   ✓ English Account MVP > connects generate, preview, review and duplicate APIs without external requests  1711ms
+stderr | src/mcp/mcp.test.ts > growth loop MCP server > does not silently fall back to demo data: empty memory stays empty, database failure is a clean error
+[mcp] tool call failed: Error
+
+ ✓ src/content/repository.contract.test.ts (33 tests | 11 skipped) 431ms
+ ✓ src/growth-loop/feedback.test.ts (3 tests) 105ms
+ ✓ src/growth-loop/provider.test.ts (12 tests) 66ms
+ ✓ src/mcp/mcp.test.ts (9 tests) 2495ms
+   ✓ growth loop MCP server > initializes and exposes exactly the four read-only tools via tools/list  385ms
+   ✓ growth loop MCP server > serves the same tools over Streamable HTTP at the /mcp endpoint  1007ms
+ ✓ src/growth-loop/facts.test.ts (5 tests) 36ms
+ ✓ src/growth-loop/strategy.test.ts (6 tests) 31ms
+ ✓ src/ai/deepseek.test.ts (11 tests) 79ms
+ ✓ src/growth-loop/domain.test.ts (4 tests) 27ms
+ ✓ src/content/repository-factory.test.ts (2 tests) 1006ms
+   ✓ configured durable local repository > shares persisted records with a separately opened MCP context and a restarted API  990ms
+ ✓ src/growth-loop/repository.test.ts (6 tests | 2 skipped) 58ms
+ ↓ src/content/persistence.integration.test.ts (1 test | 1 skipped)
+
+ Test Files  20 passed | 1 skipped (21)
+      Tests  143 passed | 14 skipped (157)
+   Start at  17:56:48
+   Duration  17.42s (transform 9.36s, setup 0ms, collect 106.31s, tests 22.76s, environment 12ms, prepare 8.88s)
+
+
+> @emotion-studio/web@0.1.0 pretest
+> npm run build:contracts
+
+
+> @emotion-studio/web@0.1.0 build:contracts
+> npm --prefix ../.. run build -w @emotion-studio/contracts
+
+
+> @emotion-studio/contracts@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @emotion-studio/web@0.1.0 test
+> vitest run
+
+
+ RUN  v3.2.7 C:/Users/lin/Documents/ChatGPT/情绪灵感库/emotion-content-studio/apps/web
+
+ ✓ src/lib/api.test.ts (8 tests) 73ms
+ ✓ src/pages/GrowthContentReview.test.tsx (5 tests) 2359ms
+   ✓ growth content Review > previews and copies plain publishing text from old drafts and current unsaved edits  1173ms
+   ✓ growth content Review > uses unsaved edits in Preview and requires approval again before marking published  609ms
+ ✓ src/pages/GrowthLoopPage.test.tsx (14 tests) 3146ms
+   ✓ direct generation from an analyzed retrospective > creates and generates once, then opens review without an intermediate creation page  776ms
+   ✓ direct generation from an analyzed retrospective > reuses the saved draft after a failed response (server already generated=false)  378ms
+   ✓ direct generation from an analyzed retrospective > reuses the saved draft after a failed response (server already generated=true)  373ms
+   ✓ Growth Loop submission hardening > blocks repeated metric submits until refresh, and permits a later snapshot (isDemo=false)  348ms
+ ✓ src/App.test.tsx (26 tests) 6863ms
+   ✓ emotion content studio demo > loads the dashboard through HTTP and exposes the four workflow destinations  1060ms
+   ✓ emotion content studio demo > retries a real dashboard request failure even when preview mode is already normal  360ms
+   ✓ emotion content studio demo > shows material totals without inventing single-post results when totalCount is 0  400ms
+   ✓ emotion content studio demo > shows material totals without inventing single-post results when totalCount is 4  312ms
+   ✓ emotion content studio demo > renders the demo route /materials/content-0001  1355ms
+   ✓ emotion content studio demo > restores demo loading after failure without inferring success from the message: 正在维护，暂时无法载入  307ms
+   ✓ emotion content studio demo > combines emotion, high-resonance and score sorting filters  386ms
+   ✓ emotion content studio demo > renders the empty and recoverable error states  370ms
+
+ Test Files  4 passed (4)
+      Tests  53 passed (53)
+   Start at  17:57:15
+   Duration  14.27s (transform 2.02s, setup 2.80s, collect 7.20s, tests 12.44s, environment 9.67s, prepare 1.46s)
+
+
+> @emotion-studio/worker@0.1.0 test
+> vitest run
+
+
+ RUN  v3.2.7 C:/Users/lin/Documents/ChatGPT/情绪灵感库/emotion-content-studio/apps/worker
+
+ ✓ src/index.test.ts (1 test) 7ms
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  17:57:30
+   Duration  1.11s (transform 175ms, setup 0ms, collect 185ms, tests 7ms, environment 1ms, prepare 412ms)
+
+
+> @emotion-studio/contracts@0.1.0 test
+> vitest run
+
+
+ RUN  v3.2.7 C:/Users/lin/Documents/ChatGPT/情绪灵感库/emotion-content-studio/packages/contracts
+
+ ✓ src/publish-text.test.ts (5 tests) 28ms
+ ✓ src/index.test.ts (9 tests) 31ms
+ ✓ src/studio.test.ts (3 tests) 26ms
+
+ Test Files  3 passed (3)
+      Tests  17 passed (17)
+   Start at  17:57:33
+   Duration  2.13s (transform 547ms, setup 0ms, collect 2.32s, tests 85ms, environment 2ms, prepare 1.35s)
+
+
+> @emotion-studio/database@0.1.0 test
+> vitest run
+
+
+ RUN  v3.2.7 C:/Users/lin/Documents/ChatGPT/情绪灵感库/emotion-content-studio/packages/database
+
+ ✓ src/schema.test.ts (4 tests) 13ms
+ ↓ src/migrations.test.ts (2 tests | 2 skipped)
+
+ Test Files  1 passed | 1 skipped (2)
+      Tests  4 passed | 2 skipped (6)
+   Start at  17:57:36
+   Duration  2.62s (transform 581ms, setup 0ms, collect 2.43s, tests 13ms, environment 0ms, prepare 1.53s)
+
+
+> emotion-content-studio@0.1.0 build
+> npm run build --workspaces --if-present
+
+
+> @emotion-studio/api@0.1.0 prebuild
+> npm run build:dependencies
+
+
+> @emotion-studio/api@0.1.0 build:dependencies
+> npm --prefix ../.. run build -w @emotion-studio/contracts && npm --prefix ../.. run build -w @emotion-studio/database
+
+
+> @emotion-studio/contracts@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @emotion-studio/database@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @emotion-studio/api@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @emotion-studio/web@0.1.0 prebuild
+> npm run build:contracts
+
+
+> @emotion-studio/web@0.1.0 build:contracts
+> npm --prefix ../.. run build -w @emotion-studio/contracts
+
+
+> @emotion-studio/contracts@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @emotion-studio/web@0.1.0 build
+> tsc -p tsconfig.json --noEmit && vite build
+
+vite v6.4.3 building for production...
+transforming...
+✓ 1701 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.58 kB │ gzip:   0.41 kB
+dist/assets/index-CWOMvL_b.css   92.18 kB │ gzip:  17.79 kB
+dist/assets/index-MrHdhXxR.js   440.54 kB │ gzip: 131.98 kB
+✓ built in 12.74s
+
+> @emotion-studio/worker@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @emotion-studio/contracts@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @emotion-studio/database@0.1.0 build
+> tsc -p tsconfig.json
+

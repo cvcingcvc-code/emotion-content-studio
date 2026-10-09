@@ -1,0 +1,237 @@
+
+> @emotion-studio/api@0.1.0 pretest
+> npm run build:dependencies
+
+
+> @emotion-studio/api@0.1.0 build:dependencies
+> npm --prefix ../.. run build -w @emotion-studio/contracts && npm --prefix ../.. run build -w @emotion-studio/database
+
+
+> @emotion-studio/contracts@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @emotion-studio/database@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @emotion-studio/api@0.1.0 test
+> vitest run src/content/sqlite-persistence.test.ts src/content/repository.contract.test.ts src/content/repository-factory.test.ts
+
+
+ RUN  v3.2.7 C:/Users/lin/Documents/ChatGPT/情绪灵感库/emotion-content-studio/apps/api
+
+ ❯ src/content/sqlite-persistence.test.ts (4 tests | 4 failed) 158ms
+   × SQLite persistence and recovery > preserves sources, favorites, retrospective edits and revisions across reopen 120ms
+     → object name reserved for internal use: sqlite_migrations
+   × SQLite persistence and recovery > imports validated snapshots idempotently, refuses tampering and rolls back collisions 2ms
+     → object name reserved for internal use: sqlite_migrations
+   × SQLite persistence and recovery > backs up online to new files only, restores independently and preserves source data 12ms
+     → object name reserved for internal use: sqlite_migrations
+   × SQLite persistence and recovery > checks migration checksums, rejects newer schemas and rolls back failed upgrades 20ms
+     → object name reserved for internal use: sqlite_migrations
+ ❯ src/content/repository.contract.test.ts (33 tests | 11 failed | 11 skipped) 162ms
+   ✓ InMemoryContentRepository contract > isolates accounts, keeps unanalysed inputs nullable, and deduplicates only inside an account 20ms
+   ✓ InMemoryContentRepository contract > round-trips analysis, typed packages, publication snapshots and nullable metrics 46ms
+   ✓ InMemoryContentRepository contract > filters emotion research projections without changing sources 5ms
+   ✓ InMemoryContentRepository contract > creates, lists, and reads content without overwriting the original 37ms
+   ✓ InMemoryContentRepository contract > searches content, author, source, and tags 2ms
+   ✓ InMemoryContentRepository contract > filters by emotion, category, and high resonance 1ms
+   ✓ InMemoryContentRepository contract > sorts by resonance, likes, and newest with the same tie behavior 2ms
+   ✓ InMemoryContentRepository contract > favorites and unfavorites content 2ms
+   ✓ InMemoryContentRepository contract > reports duplicates within a batch and across writes 2ms
+   ✓ InMemoryContentRepository contract > saves, reads, and replaces generated content 2ms
+   ✓ InMemoryContentRepository contract > returns undefined for unknown or malformed identifiers 1ms
+   × SQLiteContentRepository contract > isolates accounts, keeps unanalysed inputs nullable, and deduplicates only inside an account 15ms
+     → object name reserved for internal use: sqlite_migrations
+     → Cannot read properties of undefined (reading 'close')
+   × SQLiteContentRepository contract > round-trips analysis, typed packages, publication snapshots and nullable metrics 2ms
+     → object name reserved for internal use: sqlite_migrations
+     → Cannot read properties of undefined (reading 'close')
+   × SQLiteContentRepository contract > filters emotion research projections without changing sources 1ms
+     → object name reserved for internal use: sqlite_migrations
+     → Cannot read properties of undefined (reading 'close')
+   × SQLiteContentRepository contract > creates, lists, and reads content without overwriting the original 2ms
+     → object name reserved for internal use: sqlite_migrations
+     → Cannot read properties of undefined (reading 'close')
+   × SQLiteContentRepository contract > searches content, author, source, and tags 2ms
+     → object name reserved for internal use: sqlite_migrations
+     → Cannot read properties of undefined (reading 'close')
+   × SQLiteContentRepository contract > filters by emotion, category, and high resonance 2ms
+     → object name reserved for internal use: sqlite_migrations
+     → Cannot read properties of undefined (reading 'close')
+   × SQLiteContentRepository contract > sorts by resonance, likes, and newest with the same tie behavior 2ms
+     → object name reserved for internal use: sqlite_migrations
+     → Cannot read properties of undefined (reading 'close')
+   × SQLiteContentRepository contract > favorites and unfavorites content 1ms
+     → object name reserved for internal use: sqlite_migrations
+     → Cannot read properties of undefined (reading 'close')
+   × SQLiteContentRepository contract > reports duplicates within a batch and across writes 3ms
+     → object name reserved for internal use: sqlite_migrations
+     → Cannot read properties of undefined (reading 'close')
+   × SQLiteContentRepository contract > saves, reads, and replaces generated content 3ms
+     → object name reserved for internal use: sqlite_migrations
+     → Cannot read properties of undefined (reading 'close')
+   × SQLiteContentRepository contract > returns undefined for unknown or malformed identifiers 3ms
+     → object name reserved for internal use: sqlite_migrations
+     → Cannot read properties of undefined (reading 'close')
+   ↓ DatabaseContentRepository contract > isolates accounts, keeps unanalysed inputs nullable, and deduplicates only inside an account
+   ↓ DatabaseContentRepository contract > round-trips analysis, typed packages, publication snapshots and nullable metrics
+   ↓ DatabaseContentRepository contract > filters emotion research projections without changing sources
+   ↓ DatabaseContentRepository contract > creates, lists, and reads content without overwriting the original
+   ↓ DatabaseContentRepository contract > searches content, author, source, and tags
+   ↓ DatabaseContentRepository contract > filters by emotion, category, and high resonance
+   ↓ DatabaseContentRepository contract > sorts by resonance, likes, and newest with the same tie behavior
+   ↓ DatabaseContentRepository contract > favorites and unfavorites content
+   ↓ DatabaseContentRepository contract > reports duplicates within a batch and across writes
+   ↓ DatabaseContentRepository contract > saves, reads, and replaces generated content
+   ↓ DatabaseContentRepository contract > returns undefined for unknown or malformed identifiers
+ ❯ src/content/repository-factory.test.ts (2 tests | 1 failed) 51ms
+   × configured durable local repository > shares persisted records with a separately opened MCP context and a restarted API 42ms
+     → object name reserved for internal use: sqlite_migrations
+   ✓ configured durable local repository > keeps explicit memory mode ephemeral and rejects production memory 6ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 16 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/content/repository-factory.test.ts > configured durable local repository > shares persisted records with a separately opened MCP context and a restarted API
+Error: object name reserved for internal use: sqlite_migrations
+ ❯ ../../packages/database/src/sqlite.ts:17:17
+ ❯ SQLiteDatabaseContext.transaction ../../packages/database/src/sqlite.ts:34:25
+ ❯ new SQLiteDatabaseContext ../../packages/database/src/sqlite.ts:16:12
+ ❯ createSqliteDatabase ../../packages/database/src/sqlite.ts:54:91
+ ❯ createConfiguredRepository src/content/repository-factory.ts:16:22
+     14|   }
+     15|   if (config.CONTENT_REPOSITORY === "sqlite") {
+     16|     const database = createSqliteDatabase(resolve(projectRoot, config.…
+       |                      ^
+     17|     return { repository: new SQLiteContentRepository(database), close:…
+     18|   }
+ ❯ src/content/repository-factory.test.ts:14:25
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/27]⎯
+
+ FAIL  src/content/repository.contract.test.ts > SQLiteContentRepository contract > isolates accounts, keeps unanalysed inputs nullable, and deduplicates only inside an account
+ FAIL  src/content/repository.contract.test.ts > SQLiteContentRepository contract > round-trips analysis, typed packages, publication snapshots and nullable metrics
+ FAIL  src/content/repository.contract.test.ts > SQLiteContentRepository contract > filters emotion research projections without changing sources
+ FAIL  src/content/repository.contract.test.ts > SQLiteContentRepository contract > creates, lists, and reads content without overwriting the original
+ FAIL  src/content/repository.contract.test.ts > SQLiteContentRepository contract > searches content, author, source, and tags
+ FAIL  src/content/repository.contract.test.ts > SQLiteContentRepository contract > filters by emotion, category, and high resonance
+ FAIL  src/content/repository.contract.test.ts > SQLiteContentRepository contract > sorts by resonance, likes, and newest with the same tie behavior
+ FAIL  src/content/repository.contract.test.ts > SQLiteContentRepository contract > favorites and unfavorites content
+ FAIL  src/content/repository.contract.test.ts > SQLiteContentRepository contract > reports duplicates within a batch and across writes
+ FAIL  src/content/repository.contract.test.ts > SQLiteContentRepository contract > saves, reads, and replaces generated content
+ FAIL  src/content/repository.contract.test.ts > SQLiteContentRepository contract > returns undefined for unknown or malformed identifiers
+Error: object name reserved for internal use: sqlite_migrations
+ ❯ ../../packages/database/src/sqlite.ts:17:17
+ ❯ SQLiteDatabaseContext.transaction ../../packages/database/src/sqlite.ts:34:25
+ ❯ new SQLiteDatabaseContext ../../packages/database/src/sqlite.ts:16:12
+ ❯ createSqliteDatabase ../../packages/database/src/sqlite.ts:54:91
+ ❯ src/content/repository.contract.test.ts:275:33
+    273|   let database: SQLiteDatabaseContext;
+    274|   let repository: ContentRepository;
+    275|   beforeEach(() => { database = createSqliteDatabase(":memory:"); repo…
+       |                                 ^
+    276|   afterEach(() => database.close());
+    277|   repositoryContract(() => repository);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/27]⎯
+
+ FAIL  src/content/repository.contract.test.ts > SQLiteContentRepository contract > isolates accounts, keeps unanalysed inputs nullable, and deduplicates only inside an account
+ FAIL  src/content/repository.contract.test.ts > SQLiteContentRepository contract > round-trips analysis, typed packages, publication snapshots and nullable metrics
+ FAIL  src/content/repository.contract.test.ts > SQLiteContentRepository contract > filters emotion research projections without changing sources
+ FAIL  src/content/repository.contract.test.ts > SQLiteContentRepository contract > creates, lists, and reads content without overwriting the original
+ FAIL  src/content/repository.contract.test.ts > SQLiteContentRepository contract > searches content, author, source, and tags
+ FAIL  src/content/repository.contract.test.ts > SQLiteContentRepository contract > filters by emotion, category, and high resonance
+ FAIL  src/content/repository.contract.test.ts > SQLiteContentRepository contract > sorts by resonance, likes, and newest with the same tie behavior
+ FAIL  src/content/repository.contract.test.ts > SQLiteContentRepository contract > favorites and unfavorites content
+ FAIL  src/content/repository.contract.test.ts > SQLiteContentRepository contract > reports duplicates within a batch and across writes
+ FAIL  src/content/repository.contract.test.ts > SQLiteContentRepository contract > saves, reads, and replaces generated content
+ FAIL  src/content/repository.contract.test.ts > SQLiteContentRepository contract > returns undefined for unknown or malformed identifiers
+TypeError: Cannot read properties of undefined (reading 'close')
+ ❯ src/content/repository.contract.test.ts:276:28
+    274|   let repository: ContentRepository;
+    275|   beforeEach(() => { database = createSqliteDatabase(":memory:"); repo…
+    276|   afterEach(() => database.close());
+       |                            ^
+    277|   repositoryContract(() => repository);
+    278| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/27]⎯
+
+ FAIL  src/content/sqlite-persistence.test.ts > SQLite persistence and recovery > preserves sources, favorites, retrospective edits and revisions across reopen
+Error: object name reserved for internal use: sqlite_migrations
+ ❯ ../../packages/database/src/sqlite.ts:17:17
+ ❯ SQLiteDatabaseContext.transaction ../../packages/database/src/sqlite.ts:34:25
+ ❯ new SQLiteDatabaseContext ../../packages/database/src/sqlite.ts:16:12
+ ❯ createSqliteDatabase ../../packages/database/src/sqlite.ts:54:91
+ ❯ src/content/sqlite-persistence.test.ts:14:16
+     12|   it("preserves sources, favorites, retrospective edits and revisions …
+     13|     const path = join(mkdtempSync(join(tmpdir(), "sqlite-restart-")), …
+     14|     const db = createSqliteDatabase(path), repo = new SQLiteContentRep…
+       |                ^
+     15|     const [item] = (await repo.addMany(createDemoContentItems("2026-10…
+     16|     await repo.setFavorite(item!.id, true);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/27]⎯
+
+ FAIL  src/content/sqlite-persistence.test.ts > SQLite persistence and recovery > imports validated snapshots idempotently, refuses tampering and rolls back collisions
+Error: object name reserved for internal use: sqlite_migrations
+ ❯ ../../packages/database/src/sqlite.ts:17:17
+ ❯ SQLiteDatabaseContext.transaction ../../packages/database/src/sqlite.ts:34:25
+ ❯ new SQLiteDatabaseContext ../../packages/database/src/sqlite.ts:16:12
+ ❯ createSqliteDatabase ../../packages/database/src/sqlite.ts:54:91
+ ❯ src/content/sqlite-persistence.test.ts:28:20
+     26|   });
+     27|   it("imports validated snapshots idempotently, refuses tampering and …
+     28|     const source = createSqliteDatabase(":memory:"), target = createSq…
+       |                    ^
+     29|     try {
+     30|       const repo = new SQLiteContentRepository(source);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/27]⎯
+
+ FAIL  src/content/sqlite-persistence.test.ts > SQLite persistence and recovery > backs up online to new files only, restores independently and preserves source data
+Error: object name reserved for internal use: sqlite_migrations
+ ❯ ../../packages/database/src/sqlite.ts:17:17
+ ❯ SQLiteDatabaseContext.transaction ../../packages/database/src/sqlite.ts:34:25
+ ❯ new SQLiteDatabaseContext ../../packages/database/src/sqlite.ts:16:12
+ ❯ createSqliteDatabase ../../packages/database/src/sqlite.ts:54:91
+ ❯ src/content/sqlite-persistence.test.ts:45:74
+     43|   });
+     44|   it("backs up online to new files only, restores independently and pr…
+     45|     const root = mkdtempSync(join(tmpdir(), "sqlite-backup-")), source…
+       |                                                                          ^
+     46|     try {
+     47|       const repo = new SQLiteContentRepository(source);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/27]⎯
+
+ FAIL  src/content/sqlite-persistence.test.ts > SQLite persistence and recovery > checks migration checksums, rejects newer schemas and rolls back failed upgrades
+Error: object name reserved for internal use: sqlite_migrations
+ ❯ ../../packages/database/src/sqlite.ts:17:17
+ ❯ SQLiteDatabaseContext.transaction ../../packages/database/src/sqlite.ts:34:25
+ ❯ new SQLiteDatabaseContext ../../packages/database/src/sqlite.ts:16:12
+ ❯ createSqliteDatabase ../../packages/database/src/sqlite.ts:54:91
+ ❯ src/content/sqlite-persistence.test.ts:61:52
+     59|     const migration = "0001_local_persistence.sql";
+     60|     copyFileSync(join(sqliteMigrationsDirectory, migration), join(dire…
+     61|     const path = join(root, "studio.sqlite"), db = createSqliteDatabas…
+       |                                                    ^
+     62|     appendFileSync(join(directory, migration), "\n-- modified history\…
+     63|     expect(() => createSqliteDatabase(path, directory)).toThrow("check…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/27]⎯
+
+
+ Test Files  3 failed (3)
+      Tests  16 failed | 12 passed | 11 skipped (39)
+   Start at  17:51:55
+   Duration  22.73s (transform 2.58s, setup 0ms, collect 41.19s, tests 372ms, environment 1ms, prepare 4.68s)
+
+npm error Lifecycle script `test` failed with error:
+npm error code 1
+npm error path C:\Users\lin\Documents\ChatGPT\情绪灵感库\emotion-content-studio\apps\api
+npm error workspace @emotion-studio/api@0.1.0
+npm error location C:\Users\lin\Documents\ChatGPT\情绪灵感库\emotion-content-studio\apps\api
+npm error command failed
+npm error command C:\WINDOWS\system32\cmd.exe /d /s /c vitest run src/content/sqlite-persistence.test.ts src/content/repository.contract.test.ts src/content/repository-factory.test.ts
