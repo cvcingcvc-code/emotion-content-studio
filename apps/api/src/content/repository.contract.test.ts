@@ -2,11 +2,14 @@ import { randomUUID } from "node:crypto";
 import { ContentItemSchema, GeneratedContentSchema, type GeneratedContent, type PostRecord } from "@emotion-studio/contracts";
 import {
   createDatabase,
+  createSqliteDatabase,
+  type SQLiteDatabaseContext,
   runMigrations,
   type DatabaseContext,
 } from "@emotion-studio/database";
 import { Pool } from "pg";
-import { afterAll, beforeAll, beforeEach, describe, expect, it } from "vitest";
+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
+import { SQLiteContentRepository } from "./sqlite-repository.js";
 import { DatabaseContentRepository } from "./database-repository.js";
 import {
   InMemoryContentRepository,
@@ -266,6 +269,13 @@ describe("InMemoryContentRepository contract", () => {
 });
 
 const testDatabaseUrl = process.env.TEST_DATABASE_URL;
+describe("SQLiteContentRepository contract", () => {
+  let database: SQLiteDatabaseContext;
+  let repository: ContentRepository;
+  beforeEach(() => { database = createSqliteDatabase(":memory:"); repository = new SQLiteContentRepository(database); });
+  afterEach(() => database.close());
+  repositoryContract(() => repository);
+});
 const databaseDescribe = testDatabaseUrl ? describe : describe.skip;
 
 databaseDescribe("DatabaseContentRepository contract", () => {

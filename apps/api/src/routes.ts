@@ -56,7 +56,7 @@ export async function registerRoutes(
   contentRepository: ContentRepository,
   contentAnalyzer: ContentAnalyzer,
   contentGenerator: ContentGenerator,
-  contentRepositoryMode: "database" | "memory" | "custom",
+  contentRepositoryMode: "database" | "memory" | "sqlite" | "custom",
   aiProvider: AiProvider,
 ): Promise<void> {
   await registerContentRoutes(app, contentRepository, contentAnalyzer, contentGenerator);

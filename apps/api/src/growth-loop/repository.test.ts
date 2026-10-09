@@ -1,8 +1,9 @@
 import { randomUUID } from "node:crypto";
 import { Pool } from "pg";
-import { createDatabase, runMigrations, type DatabaseContext } from "@emotion-studio/database";
+import { createDatabase, createSqliteDatabase, runMigrations, type DatabaseContext, type SQLiteDatabaseContext } from "@emotion-studio/database";
 import { RetrospectiveSchema, PublishedContentSchema } from "@emotion-studio/contracts";
-import { beforeAll, afterAll, describe, it, expect } from "vitest";
+import { beforeAll, afterAll, afterEach, describe, it, expect } from "vitest";
+import { SQLiteGrowthLoopRepository } from "./sqlite-repository.js";
 import { InMemoryGrowthLoopRepository, type GrowthLoopRepository } from "./repository.js";
 import { DatabaseGrowthLoopRepository } from "./database-repository.js";
 
@@ -31,6 +32,11 @@ function contract(factory: () => GrowthLoopRepository) {
   });
 }
 describe("growth loop memory repository", () => contract(() => new InMemoryGrowthLoopRepository()));
+describe("growth loop SQLite repository", () => {
+  const contexts: SQLiteDatabaseContext[] = [];
+  afterEach(() => { contexts.splice(0).forEach(context => context.close()); });
+  contract(() => { const database = createSqliteDatabase(":memory:"); contexts.push(database); return new SQLiteGrowthLoopRepository(database); });
+});
 const url = process.env.TEST_DATABASE_URL;
 (url ? describe : describe.skip)("growth loop database repository", () => {
   const schema = `growth_loop_test_${randomUUID().replaceAll("-", "")}`;

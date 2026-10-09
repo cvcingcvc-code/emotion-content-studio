@@ -19,7 +19,8 @@
     "test": "npm run test --workspaces --if-present",
     "build": "npm run build --workspaces --if-present",
     "test:contracts": "npm run test -w @emotion-studio/contracts",
-    "check": "npm run typecheck && npm test && npm run build"
+    "check": "npm run typecheck && npm test && npm run build",
+    "persistence": "npm run persistence -w @emotion-studio/api --"
   },
   "devDependencies": {
     "concurrently": "^9.2.1",

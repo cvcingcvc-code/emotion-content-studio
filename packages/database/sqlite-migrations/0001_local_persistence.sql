@@ -1,0 +1,10 @@
+CREATE TABLE content_items (id TEXT PRIMARY KEY, account_id TEXT NOT NULL, content TEXT NOT NULL, payload TEXT NOT NULL CHECK(json_valid(payload)), UNIQUE(account_id, content));
+CREATE TABLE generated_contents (id TEXT PRIMARY KEY, payload TEXT NOT NULL CHECK(json_valid(payload)));
+CREATE TABLE posts (id TEXT PRIMARY KEY, generated_id TEXT NOT NULL UNIQUE REFERENCES generated_contents(id), payload TEXT NOT NULL CHECK(json_valid(payload)));
+CREATE TABLE retrospectives (id TEXT PRIMARY KEY, revision INTEGER NOT NULL, payload TEXT NOT NULL CHECK(json_valid(payload)));
+CREATE TABLE loop_contents (id TEXT PRIMARY KEY, revision INTEGER NOT NULL, retrospective_id TEXT REFERENCES retrospectives(id), source_content_id TEXT REFERENCES loop_contents(id), payload TEXT NOT NULL CHECK(json_valid(payload)));
+CREATE TABLE metrics (id TEXT PRIMARY KEY, content_id TEXT NOT NULL REFERENCES loop_contents(id), payload TEXT NOT NULL CHECK(json_valid(payload)));
+CREATE TABLE feedback (id TEXT PRIMARY KEY, metrics_id TEXT NOT NULL REFERENCES metrics(id), content_id TEXT NOT NULL REFERENCES loop_contents(id), payload TEXT NOT NULL CHECK(json_valid(payload)));
+CREATE TABLE strategies (id TEXT PRIMARY KEY, payload TEXT NOT NULL CHECK(json_valid(payload)));
+CREATE INDEX loop_contents_source ON loop_contents(retrospective_id);
+CREATE INDEX metrics_content ON metrics(content_id);

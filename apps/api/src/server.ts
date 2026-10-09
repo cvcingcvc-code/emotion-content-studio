@@ -1,28 +1,19 @@
-import { createDatabase, type DatabaseContext } from "@emotion-studio/database";
 import { createConfiguredContentGenerator } from "./ai/provider-factory.js";
 import { buildApp } from "./app.js";
 import { createGrowthLoopAgent } from "./growth-loop/provider.js";
 import { readServerConfig } from "./config.js";
 import { MockContentAnalyzer } from "./content/analyzer.js";
-import { DatabaseContentRepository } from "./content/database-repository.js";
-import { createContentRepository } from "./content/repository.js";
+import { createConfiguredRepository, projectRoot } from "./content/repository-factory.js";
+import { resolve } from "node:path";
 import { createConfiguredPipelines } from "./studio/pipelines/index.js";
 
 const config = readServerConfig();
-let database: DatabaseContext | undefined;
-const contentRepository = config.CONTENT_REPOSITORY === "database"
-  ? (() => {
-      if (!config.DATABASE_URL) {
-        throw new Error("DATABASE_URL is required for the database repository");
-      }
-      const databaseContext = createDatabase(config.DATABASE_URL);
-      database = databaseContext;
-      return new DatabaseContentRepository(databaseContext.db);
-    })()
-  : createContentRepository({ nodeEnv: config.NODE_ENV });
+const persistence = createConfiguredRepository(config);
+const contentRepository = persistence.repository;
 const contentGenerator = createConfiguredContentGenerator(config);
 const ingestionAnalyzer = new MockContentAnalyzer();
 const app = await buildApp({
+  englishWorkflow: { root: config.ENGLISH_ROOT ? resolve(projectRoot, config.ENGLISH_ROOT) : projectRoot },
   growthLoopAgent: createGrowthLoopAgent(config),
   logger: true,
   webOrigin: config.WEB_ORIGIN,
@@ -33,9 +24,7 @@ const app = await buildApp({
   aiProvider: config.AI_PROVIDER,
   pipelines: createConfiguredPipelines(config),
 });
-if (database) {
-  app.addHook("onClose", async () => database?.close());
-}
+app.addHook("onClose", persistence.close);
 
 const shutdown = async (): Promise<void> => {
   await app.close();

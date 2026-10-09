@@ -5,3 +5,4 @@ export {
   type AppliedMigration,
 } from "./migrations.js";
 export * from "./schema.js";
+export { createSqliteDatabase, restoreSqliteDatabase, SQLiteDatabaseContext, sqliteMigrationsDirectory, type SQLiteTable } from "./sqlite.js";

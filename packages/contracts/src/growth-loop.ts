@@ -217,7 +217,7 @@ export const GrowthLoopStateSchema = z.object({
   strategies: z.array(StrategyEntrySchema),
 });
 export const GrowthDashboardSchema = z.object({
-  today: z.iso.date(), mode: z.enum(["mock", "deepseek"]), repository: z.enum(["memory", "database"]),
+  today: z.iso.date(), mode: z.enum(["mock", "deepseek"]), repository: z.enum(["memory", "database", "sqlite"]),
   retrospectiveDone: z.boolean(), contentOpportunities: z.number(), readyToPublish: z.number(),
   yesterday: z.object({ count: z.number(), views: z.number(), metricsCount: z.number() }),
   focus: EffortDirectionSchema,

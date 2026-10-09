@@ -2,7 +2,7 @@ import { GrowthLoopStateSchema, RetrospectiveSchema, PublishedContentSchema, Con
 import { AppError } from "../errors.js";
 
 export interface GrowthLoopRepository {
-  readonly mode: "memory" | "database";
+  readonly mode: "memory" | "database" | "sqlite";
   snapshot(): Promise<GrowthLoopState>;
   saveRetrospective(value: Retrospective, expectedRevision: number | null): Promise<void>;
   saveContent(value: PublishedContent, expectedRevision: number | null): Promise<void>;

@@ -11,7 +11,8 @@
   },
   "files": [
     "dist",
-    "migrations"
+    "migrations",
+    "sqlite-migrations"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",

@@ -29,6 +29,9 @@ const DATABASE_UNAVAILABLE_CODES = new Set([
   "57P01",
   "57P02",
   "57P03",
+  "SQLITE_BUSY",
+  "SQLITE_LOCKED",
+  "ERR_SQLITE_ERROR",
 ]);
 
 function getErrorCode(error: unknown): string | undefined {
@@ -43,7 +46,7 @@ export interface BuildAppOptions {
   webOrigin?: string;
   store?: MockStore;
   contentRepository?: ContentRepository;
-  contentRepositoryMode?: "database" | "memory" | "custom";
+  contentRepositoryMode?: "database" | "memory" | "sqlite" | "custom";
   contentAnalyzer?: ContentAnalyzer;
   contentGenerator?: ContentGenerator;
   aiProvider?: AiProvider;

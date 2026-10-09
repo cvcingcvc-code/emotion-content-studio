@@ -13,7 +13,9 @@ const ServerConfigSchema = z
     MCP_PORT: z.coerce.number().int().min(1).max(65_535).default(8790),
     WEB_ORIGIN: z.string().url().default("http://localhost:5173"),
     NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
-    CONTENT_REPOSITORY: z.enum(["database", "memory"]).default("memory"),
+    CONTENT_REPOSITORY: z.enum(["database", "memory", "sqlite"]).default("sqlite"),
+    SQLITE_PATH: z.string().trim().min(1).default("data/emotion-studio.sqlite"),
+    ENGLISH_ROOT: z.string().trim().min(1).optional(),
     AI_PROVIDER: z.enum(["mock", "deepseek"]).default("mock"),
     DEEPSEEK_API_KEY: OptionalSecretSchema,
     DEEPSEEK_MODEL: z.string().trim().min(1).max(100).default("deepseek-v4-flash"),
@@ -39,7 +41,7 @@ const ServerConfigSchema = z
       context.addIssue({
         code: "custom",
         path: ["CONTENT_REPOSITORY"],
-        message: "Production requires CONTENT_REPOSITORY=database",
+        message: "Production requires a persistent repository (database or sqlite)",
       });
     }
     if (config.AI_PROVIDER === "deepseek" && !config.DEEPSEEK_API_KEY) {

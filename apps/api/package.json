@@ -16,7 +16,8 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "pretest": "npm run build:dependencies",
     "test": "vitest run",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "persistence": "tsx src/content/persistence-cli.ts"
   },
   "dependencies": {
     "@emotion-studio/contracts": "0.1.0",

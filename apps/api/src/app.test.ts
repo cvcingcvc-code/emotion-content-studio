@@ -41,7 +41,7 @@ describe("mock API", { timeout: 15_000 }, () => {
     expect(readServerConfig({})).toMatchObject({
       HOST: "127.0.0.1",
       PORT: 8787,
-      CONTENT_REPOSITORY: "memory",
+      CONTENT_REPOSITORY: "sqlite",
     });
     expect(() => createContentRepository({ nodeEnv: "production" })).toThrow(
       "InMemoryContentRepository is not allowed in production",
