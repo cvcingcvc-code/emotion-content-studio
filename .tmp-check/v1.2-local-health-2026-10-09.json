@@ -1,0 +1,26 @@
+{
+  "webProxy": {
+    "ok": true,
+    "data": {
+      "status": "ok",
+      "service": "emotion-studio-api",
+      "mode": "mock",
+      "repository": "memory",
+      "aiProvider": "mock",
+      "analysisProvider": "mock"
+    },
+    "requestId": "req-2"
+  },
+  "api": {
+    "ok": true,
+    "data": {
+      "status": "ok",
+      "service": "emotion-studio-api",
+      "mode": "mock",
+      "repository": "memory",
+      "aiProvider": "mock",
+      "analysisProvider": "mock"
+    },
+    "requestId": "req-1"
+  }
+}

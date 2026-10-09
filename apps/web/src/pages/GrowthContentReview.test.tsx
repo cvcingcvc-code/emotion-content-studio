@@ -2,11 +2,40 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
-import { PublishedContentSchema, growthCardPages } from '@emotion-studio/contracts';
+import { PublishedContentSchema, growthCardPages, growthPublishText } from '@emotion-studio/contracts';
 import { GrowthContentReview } from './GrowthContentReview';
 
 const content = PublishedContentSchema.parse({ id: '00000000-0000-4000-8000-000000000010', revision: 1, account: 'growth', topic: '先确认范围', title: '先确认范围', contentType: 'solution', sourceRetrospectiveId: null, sourceContentId: null, englishDraftId: null, createdAt: '2026-09-10T00:00:00.000Z', updatedAt: '2026-09-10T00:00:00.000Z', publishedAt: null, publishTime: null, status: 'ready', provider: 'mock', note: '', english: null, isDemo: false, writing: { title: '先确认范围', body: '开始前确认三项标准。', corePoint: '确认后行动', solution: '列出标准', endingQuestion: '你会先问什么？', tags: ['#成长'] } });
 describe('growth content Review', () => {
+  it('previews and copies plain publishing text from old drafts and current unsaved edits', async () => {
+    const user = userEvent.setup();
+    const clipboard = vi.spyOn(navigator.clipboard, 'writeText').mockResolvedValue();
+    const draft = { ...content, writing: { ...content.writing!, body: '| 场景 | **先确认范围** |\n\n  > **不要急着动手。**' } };
+    render(<MemoryRouter><GrowthContentReview content={draft} busy={false} act={vi.fn()} /></MemoryRouter>);
+    const preview = screen.getByLabelText('可复制的发布文案');
+    expect(preview).toHaveValue(growthPublishText(draft));
+    expect(preview).not.toBeDisabled();
+    expect(screen.getByLabelText('内容正文')).toHaveValue(draft.writing.body);
+    await user.click(screen.getByRole('button', { name: '复制发布文案' }));
+    expect(clipboard).toHaveBeenLastCalledWith('· 场景：先确认范围\n\n不要急着动手。\n\n你会先问什么？\n\n#成长');
+    await user.clear(screen.getByLabelText('内容正文'));
+    await user.type(screen.getByLabelText('内容正文'), '审核后改成这一句。');
+    expect(preview).toHaveValue('审核后改成这一句。\n\n你会先问什么？\n\n#成长');
+    await user.click(screen.getByRole('button', { name: '复制发布文案' }));
+    expect(clipboard).toHaveBeenLastCalledWith('审核后改成这一句。\n\n你会先问什么？\n\n#成长');
+    expect(screen.getByRole('button', { name: '标记为已发布' })).toBeDisabled();
+    clipboard.mockRestore();
+  });
+
+  it('keeps publishing text available for manual copy when clipboard access fails', async () => {
+    const user = userEvent.setup();
+    const clipboard = vi.spyOn(navigator.clipboard, 'writeText').mockRejectedValue(new Error('denied'));
+    render(<MemoryRouter><GrowthContentReview content={content} busy={false} act={vi.fn()} /></MemoryRouter>);
+    await user.click(screen.getByRole('button', { name: '复制发布文案' }));
+    expect(screen.getByRole('status')).toHaveTextContent('手动复制');
+    expect(screen.getByLabelText('可复制的发布文案')).toHaveValue(growthPublishText(content));
+    clipboard.mockRestore();
+  });
   it('uses unsaved edits in Preview and requires approval again before marking published', async () => {
     const user = userEvent.setup(); render(<MemoryRouter><GrowthContentReview content={content} busy={false} act={vi.fn()} /></MemoryRouter>);
     await user.click(screen.getByRole('button', { name: /^预览发布效果/ }));

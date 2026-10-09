@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { LoopWritingSchema, RetrospectiveAnalysisSchema, type RetrospectiveInput, type Retrospective, type GenerationDebug, type PublishedContent } from "@emotion-studio/contracts";
+import { LoopWritingSchema, RetrospectiveAnalysisSchema, normalizePublishText, type RetrospectiveInput, type Retrospective, type GenerationDebug, type PublishedContent } from "@emotion-studio/contracts";
 import { DeepSeekJsonClient } from "../ai/deepseek-client.js";
 import type { ServerConfig } from "../config.js";
 import { analyzeRetrospective, derivedRetrospectiveFields, rawFacts, traceableFacts } from "./retrospective.js";
@@ -7,18 +7,7 @@ import { buildDebug, STRATEGY_FILTERS, stripDrama, type GrowthGenerationContext 
 
 type LoopWriting = NonNullable<PublishedContent["writing"]>;
 
-/** 将模型偶尔返回的 Markdown 排版整理成可直接复制发布的纯文本。 */
-export function normalizePublishText(value: string): string {
-  return value.split(/\r?\n/).map(line => {
-    const trimmed = line.trim();
-    if (!trimmed || /^\|?\s*:?-{3,}/.test(trimmed)) return "";
-    if (trimmed.includes("|") && trimmed.startsWith("|")) {
-      const cells = trimmed.split("|").map(cell => cell.trim()).filter(Boolean);
-      return cells.length ? `· ${cells.join("：")}` : "";
-    }
-    return line.replace(/^#{1,6}\s*/, "").replace(/^>\s*/, "").replace(/\*\*(.*?)\*\*/g, "$1").replace(/\*([^*]+)\*/g, "$1").replace(/^[-*]\s+/, "· ");
-  }).join("\n").replace(/\n{3,}/g, "\n\n").trim();
-}
+export { normalizePublishText } from "@emotion-studio/contracts";
 
 function normalizeWriting(writing: LoopWriting): LoopWriting {
   return LoopWritingSchema.parse(Object.fromEntries(Object.entries(writing).map(([key, value]) => [key, Array.isArray(value) ? value : normalizePublishText(String(value))])));
@@ -71,15 +60,29 @@ export function applyStrategyConstraints(writing: LoopWriting, context: GrowthGe
   return { writing: applied.length ? stripDrama(writing) : writing, applied };
 }
 
+function excerpt(value: string, limit: number): string {
+  const text = normalizePublishText(value);
+  if (text.length <= limit) return text;
+  const prefix = text.slice(0, limit);
+  const boundary = Math.max(prefix.lastIndexOf("。"), prefix.lastIndexOf("！"), prefix.lastIndexOf("？"), prefix.lastIndexOf("；"));
+  return boundary >= limit / 2 ? prefix.slice(0, boundary + 1) : prefix.trimEnd() + "…";
+}
+
 function offlineDraft(retro: Retrospective, topic: string): LoopWriting {
   const analysis = retro.analysis ?? analyzeRetrospective(retro);
-  // 新版复盘只有一个正文框：反应与困扰要从正文里取，否则草稿会写出「尚未补充」，
-  // 而用户其实已经把当时的反应写在正文里了。
-  const derived = derivedRetrospectiveFields(retro);
+  // Extractive offline draft: never paste the whole chat/table or invent a new event.
+  const source = normalizePublishText(retro.whatHappened).split("\n").filter(line => {
+    return line.trim() && !/^(?:可以[，,]|好的[，,]|以下是|这可以作为|· 复盘项|.*复盘表$|今天最重要的\s*\d+\s*个认知$)/.test(line);
+  }).flatMap(line => line.startsWith("· ") && line.includes("：") ? line.slice(2).split("：").slice(1) : [line]).join("\n");
+  const derived = derivedRetrospectiveFields({ ...retro, whatHappened: source });
+  const lines = source.split(/(?<=[。！？；])|\n/).map(line => line.trim()).filter(line => line.length > 12);
+  const scene = excerpt(lines.find(line => /我|今天|当时|这次/.test(line)) ?? lines[0] ?? source, 120);
+  const lesson = excerpt(retro.lessonLearned || derived.lesson || analysis.lesson, 70);
+  const plan = excerpt(retro.nextAction || source.split(/[。！？；\n]+/).find(line => /下次|下一次|以后|我会/.test(line)) || analysis.nextAction, 80);
   return LoopWritingSchema.parse({
     title: topic.slice(0, 80),
-    body: `${retro.whatHappened}\n\n我当时的处理：${derived.reaction || "尚未补充"}\n让我在意的是：${derived.problem || "尚未明确"}\n\n复盘后，我想尝试：${analysis.betterApproach}\n下一次的具体行动：${analysis.nextAction}\n\n这些是下一步计划，还需要用真实结果验证。`,
-    corePoint: analysis.lesson, solution: analysis.betterApproach,
+    body: [scene, lesson === plan ? "" : `这次给我的提醒：${lesson}`, /^(?:下次|下一次|以后|我会)/.test(plan) ? plan : `下次我想尝试：${plan}`, "这是下一次的计划，还需要在真实场景里验证。"].filter(Boolean).join("\n\n"),
+    corePoint: lesson, solution: plan,
     endingQuestion: "遇到类似情况，你会先确认哪件事？", tags: ["#真实复盘", "#工作成长", "#行动记录"],
   });
 }
@@ -106,6 +109,7 @@ export class GrowthLoopAgent {
     const rule = experiment ? VARIANT_RULES[experiment.variant] : undefined;
     const instructions = [
       "为真实成长账号写可审核的小红书稿件。围绕 topic 按 contentType 写作。正文 200-350 中文字，具体克制，不鸡汤。",
+      "body 是可直接粘贴发布的完整正文：只选一个核心角度，短段落，包含具体经历、复盘判断与下一次计划。不要照抄整段复盘或聊天回答，不要‘可以，以下是’等回复用户的开场/结语，不要 Markdown 表格、标题符号、加粗或引用标记。corePoint 和 solution 是审核辅助，不要依赖用户拼接字段才能得到正文。",
       context.strategyText,
       context.learningText,
       context.generationRules.join(" "),
@@ -121,7 +125,7 @@ export class GrowthLoopAgent {
     const withExperiment = applyExperiment(normalizeWriting(LoopWritingSchema.parse(draft)), retro, experiment);
     const constrained = applyStrategyConstraints(withExperiment, context);
     return {
-      writing: LoopWritingSchema.parse(constrained.writing),
+      writing: normalizeWriting(constrained.writing),
       debug: buildDebug(context, this.mode, this.model, constrained.applied),
     };
   }

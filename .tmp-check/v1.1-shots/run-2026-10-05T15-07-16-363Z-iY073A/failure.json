@@ -1,0 +1,19 @@
+{
+  "message": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '今天我没有问清材料用途，我当时直接动手，花了一下午返工\\r\\n' +\n+   '\\r\\n' +\n+   '下次我想尝试：下次先确认材料尺寸与使用场景\\r\\n' +\n+   '\\r\\n' +\n+   '这是下一次的计划，还需要在真实场景里验证。\\r\\n' +\n+   '\\r\\n' +\n+   '遇到类似情况，你会先确认哪件事？\\r\\n' +\n+   '\\r\\n' +\n- '今天我没有问清材料用途，我当时直接动手，花了一下午返工\\n' +\n-   '\\n' +\n-   '下次我想尝试：下次先确认材料尺寸与使用场景\\n' +\n-   '\\n' +\n-   '这是下一次的计划，还需要在真实场景里验证。\\n' +\n-   '\\n' +\n-   '遇到类似情况，你会先确认哪件事？\\n' +\n-   '\\n' +\n    '#真实复盘 #工作成长 #行动记录'\n",
+  "steps": [
+    "Demo 数据已加载；真实首页 Focus / NEXT 3 POSTS 无 Demo topic 或 sourceContentId",
+    "Retrospective 已记录并分析（潜力 8/10）",
+    "首次真实流程生成：feedbackUsed=0，UI 明确无学习且保留完整 debug evidence",
+    "内容已发布并分析：100 views → INSUFFICIENT_EVIDENCE（LOW）",
+    "内容已发布并分析：100 views → INSUFFICIENT_EVIDENCE（LOW）",
+    "内容已发布并分析：100 views → INSUFFICIENT_EVIDENCE（LOW）",
+    "内容已发布并分析：100 views → NEXT_EXPERIMENT（MEDIUM）",
+    "内容已发布并分析：600 views → KEEP（MEDIUM）",
+    "内容已发布并分析：10 views → CHANGE（HIGH）",
+    "内容已发布并分析：100 views → NEXT_EXPERIMENT（MEDIUM）",
+    "下一篇学习链：KEEP / CHANGE / NEXT_EXPERIMENT，直接上游优先，全部 ID 追溯到非 Demo 内容与指标",
+    "已分析复盘直接生成：一篇真实草稿、推荐配置、完整正文与 debug，直接进入待审核"
+  ],
+  "pageErrors": [],
+  "consoleErrors": []
+}

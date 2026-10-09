@@ -1,0 +1,24 @@
+{
+  "id": "1d18047a-73f3-4320-90c7-4d65728e12ff",
+  "debug": {
+    "promptVersion": "growth-loop.v3",
+    "provider": "mock",
+    "model": null,
+    "factsUsed": [
+      "今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下午都在返工。当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚。我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始。"
+    ],
+    "interpretationsUsed": [
+      "行为模式（推断）：面对「今天下午接到一份活动物料修改任务，我没有先确认使用对象和交付格式就开始改版，结果对方要的是竖版海报，我交的是横版，一个下」时，记录里写的第一反应是「当时我的反应是立刻动手，现在回头看，问题出在没有先把验收标准问清楚」",
+      "改法空间（推断）：当时还存在其他可选行动，需要在下一个相似场景里验证",
+      "经验迁移（推断）：我学到的是先确认范围再投入时间，下次接到类似任务，我会先把使用场景、交付格式、截止时间这三件事发给对方确认后再开始",
+      "内容价值（推断）：事件、困扰与处理建议较具体，适合分享；分数是离线规则评估，不预测流量"
+    ],
+    "strategyUsed": [],
+    "experimentUsed": null,
+    "userPreferenceUsed": [],
+    "feedbackUsed": [],
+    "constraintsApplied": [],
+    "finalGenerationContext": "account=growth | facts=1 | interpretations=4 | strategy={\"works\":[],\"avoid\":[],\"testing\":[],\"watch\":[],\"unknown\":[]} | userPreferences=[] | learnings=0 | experiment=none | promptVersion=growth-loop.v3"
+  },
+  "panelText": "上一轮的学习 → 本轮生成的输入（0 条）\n\n筛选规则：同账号 · 同性质（真实 / 演示不混用）· 30 天内 · 已发布且已录指标；同一篇只取最新一条，直接上一轮排最前，最多 3 条。只有 KEEP / CHANGE 会被当成结论。\n\n没有可用的上一轮学习：上一轮没有「已发布且已录指标」的同类内容。演示数据不会与真实数据混用。\n\n账号策略 0 条 · 本轮唯一实验 无 · 生效约束 0 项 · 生成上下文版本 growth-loop.v3"
+}

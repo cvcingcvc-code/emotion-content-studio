@@ -12,3 +12,5 @@
 - **PostgreSQL 测试迁移清单**：`apps/api/src/content/persistence.integration.test.ts` 仍只预期迁移到 `0003`，而 `packages/database/src/migrations.test.ts` 已列 `0004_growth_loop.sql`。两者目前条件 skipped，后续数据库验收前需与实际迁移文件核对清单；本次未修改或执行迁移。
 - **已有 MCP 改动**：接管时已存在的 SDK 依赖、配置、文档和适配器原样保留；本轮不增加 MCP 功能，其独立进程内存仓储与 API 数据共享方式需另案验收。
 - **审核拒绝区排版**：2026-09-14 对照 `.tmp-check/shots/05-next-generation-learning.png` 与 V1.1 对应截图，底部拒绝理由 / 标记拒绝控件均存在窄列逐字换行。属于原有布局问题；后续局部调整，不纳入本轮四态加固。
+  - 2026-10-05：随用户实际反馈的审核页面布局问题局部修复；四种视口的选择框宽度、换行及无横向溢出已验证。历史记录保留。
+- **依赖安全更新评估**：2026-10-05 恢复项目后 `npm ci` 报告 5 项（3 moderate / 2 high）；`npm audit --omit=dev --json` 报告生产依赖 3 项（2 high / 1 moderate），涉及 fastify、fast-uri、ip-address。尚未升级依赖或验收修复；后续单独评估兼容性与回归，本轮未执行 audit fix 或修改 lockfile。

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { growthCardHtml, growthCardPages, PublishedContentSchema, type PublishedContent, type RejectReason, type Retrospective } from '@emotion-studio/contracts';
+import { growthCardHtml, growthCardPages, growthPublishText, normalizePublishText, PublishedContentSchema, type PublishedContent, type RejectReason, type Retrospective } from '@emotion-studio/contracts';
 import { apiRequest } from '../lib/api';
 import './review-workspace.css';
 
@@ -53,13 +53,14 @@ export function GrowthContentReview({ content, sourceRetro, busy, act }: { conte
     finally { setExporting(false); }
   }
   async function copy(text: string) { try { await navigator.clipboard.writeText(text); setMessage('已复制'); } catch { setMessage('复制不可用，请在输入框中手动复制。'); } }
-  if (content.status === 'draft') return <section className="review-workspace">
+  if (content.status === 'draft') return <section className="growth-review-workspace">
     <header className="review-header"><h1>内容审核</h1><p className="review-subtitle">把 AI 生成的初稿，变成真正属于你的内容。</p></header>
     <section className="review-draft-pending"><h2>待生成 · {content.topic}</h2><p>内容来源与账号已保存，生成后进入人工审核。</p><button className="em-primary" disabled={busy} onClick={() => act(() => apiRequest(base + '/generate', 'normal', PublishedContentSchema, { method: 'POST', body: JSON.stringify({ revision: content.revision }) }))}>生成内容</button></section>
   </section>;
   const bodyValue = english?.body ?? writing?.body ?? '';
+  const publishText = growthPublishText(snapshot);
   const sourceSummary = sourceRetro ? sourceRetro.analysis?.summary ?? sourceRetro.whatHappened : content.isDemo ? '这是合成演示内容，用于展示完整创作流程，不代表真实经历。' : `来自${accountLabels[content.account] ?? content.account}账号的内容记录。`;
-  return <section className="review-workspace">
+  return <section className="growth-review-workspace">
     <header className="review-header">
       <h1>内容审核</h1>
       <p className="review-subtitle">把 AI 生成的初稿，变成真正属于你的内容。</p>
@@ -76,6 +77,12 @@ export function GrowthContentReview({ content, sourceRetro, busy, act }: { conte
           <span className={`edit-state ${dirty ? 'is-dirty' : ''}`}>{dirty ? '已修改' : '未修改'}</span>
           <span>{published ? '已发布内容为只读快照。' : dirty ? '预览与导出使用当前编辑，发布前须重新保存。' : '当前已保存。'}</span>
         </div>
+        <section className="review-publish-copy" aria-labelledby="publish-copy-heading">
+          <h2 id="publish-copy-heading">发布文案</h2>
+          <p id="publish-copy-hint">正文、结尾问题和标签已整理为纯文本。核对后复制到发布页，标题单独复制。</p>
+          <textarea aria-label="可复制的发布文案" aria-describedby="publish-copy-hint" readOnly rows={8} value={publishText} />
+          <div className="review-copy-row"><button className="em-primary" onClick={() => void copy(publishText)}>复制发布文案</button><button onClick={() => void copy(normalizePublishText(title))}>复制标题</button><button onClick={() => void copy(normalizePublishText(bodyValue))}>复制正文</button><button onClick={() => void copy((english?.tags ?? writing?.tags ?? []).join(' '))}>复制标签</button></div>
+        </section>
         <fieldset disabled={locked || busy} className="manuscript">
           <label className="manuscript-title"><span>标题</span><input aria-label="内容标题" maxLength={80} value={title} onChange={event => english ? setEnglish({ ...english, title: event.target.value, titles: english.titles.includes(event.target.value) ? english.titles : [event.target.value, ...english.titles.slice(1)] }) : writing && setWriting({ ...writing, title: event.target.value })} /></label>
           <label className="manuscript-body"><span>正文</span><textarea rows={14} aria-label="内容正文" value={bodyValue} onChange={event => english ? setEnglish({ ...english, body: event.target.value }) : writing && setWriting({ ...writing, body: event.target.value })} /></label>
@@ -84,7 +91,6 @@ export function GrowthContentReview({ content, sourceRetro, busy, act }: { conte
           {english ? <div className="english-lines"><h3>中英文 · 第 {currentPage} / 5 页</h3>{english.sentences.slice((currentPage - 1) * 10, currentPage * 10).map(line => <div className="english-edit-line" key={line.number}><span>{line.number}</span>{(['english', 'chinese'] as const).map(key => <label key={key}>{key === 'english' ? '英文' : '中文'}<input aria-label={`${key === 'english' ? '英文' : '中文'} ${line.number}`} value={line[key]} onChange={event => setEnglish({ ...english, sentences: english.sentences.map(item => item.number === line.number ? { ...item, [key]: event.target.value } : item) })} /></label>)}</div>)}</div> : null}
           <label className="manuscript-note"><span>审核备注</span><textarea rows={2} value={note} onChange={event => setNote(event.target.value)} /></label>
         </fieldset>
-        <div className="review-copy-row"><button onClick={() => void copy(title)}>复制标题</button><button onClick={() => void copy(bodyValue)}>复制正文</button><button onClick={() => void copy((english?.tags ?? writing?.tags ?? []).join(' '))}>复制标签</button></div>
       </div>
 
       <aside className="review-judgment">
@@ -115,7 +121,7 @@ export function GrowthContentReview({ content, sourceRetro, busy, act }: { conte
           <Link to="/create">返回内容创作</Link>
           <button onClick={() => setPreview(!preview)} aria-pressed={preview}>预览发布效果 →</button>
         </div>
-        <div className="review-secondary-actions">
+        <div className="review-secondary-actions review-reject-actions">
           <label htmlFor="review-reject-reason">拒绝理由</label>
           <select id="review-reject-reason" value={rejectReason} onChange={event => setRejectReason(event.target.value as RejectReason)}>{Object.entries(rejectReasonLabels).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select>
           <button disabled={busy || dirty} onClick={reject}>标记为已拒绝</button>

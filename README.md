@@ -1,6 +1,6 @@
 # Emotion Content Studio
 
-Latest development handoff (2026-09-15): [GitHub handoff, current status, known gaps, and recovery steps](docs/GITHUB_HANDOFF_2026-09-15.md). Current development is on `feature/content-growth-loop`.
+Latest development handoff (2026-10-09): [V1.2 usability acceptance, current status, and recovery steps](docs/V1.2_HANDOFF_2026-10-09.md). Current development is on `feature/content-growth-loop`. The [September GitHub handoff](docs/GITHUB_HANDOFF_2026-09-15.md) records the previous synchronized baseline.
 
 ## English Demo: live preview and PNG export
 

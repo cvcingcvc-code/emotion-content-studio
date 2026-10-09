@@ -1,0 +1,105 @@
+{
+  "demoContentIds": [
+    "f17ed000-0000-4000-8000-000000000001",
+    "f17ed000-0000-4000-8000-000000000002",
+    "f17ed000-0000-4000-8000-000000000003",
+    "f17ed000-0000-4000-8000-000000000004",
+    "f17ed000-0000-4000-8000-000000000005",
+    "f17ed000-0000-4000-8000-000000000006",
+    "f17ed000-0000-4000-8000-000000000007"
+  ],
+  "dashboard": {
+    "today": "2026-10-05",
+    "mode": "mock",
+    "repository": "memory",
+    "retrospectiveDone": false,
+    "contentOpportunities": 0,
+    "readyToPublish": 0,
+    "yesterday": {
+      "count": 0,
+      "views": 0,
+      "metricsCount": 0
+    },
+    "focus": {
+      "FOCUS_NOW": "先记录今天一个真实事件，生产并人工审核第一篇内容，再记录实际表现。",
+      "STOP_DOING": [
+        "暂停同时更改标题、开头与正文；也不要把合成演示数据当作真实增长证据。"
+      ],
+      "KEEP_DOING": [
+        "保持每篇有明确场景，保留来源；固定发布后观察窗口，持续记录真实数据。"
+      ],
+      "NEXT_3_POSTS": [
+        {
+          "topic": "真实工作复盘｜一个新的具体场景",
+          "account": "growth",
+          "contentType": "solution",
+          "experiment": {
+            "id": "3c1c7727-2ef3-4bfa-808b-5c15e1aff160",
+            "hypothesis": "第一篇从真实事件开始，开头只写一个具体场景，可能更容易被收藏（假设，尚未验证）",
+            "variable": "hook",
+            "variant": "scene_first",
+            "baseline": "还没有任何已发布指标，没有可比基线",
+            "targetMetric": "favoriteRate",
+            "requiredSamples": 3,
+            "currentSamples": 0,
+            "status": "proposed",
+            "createdAt": "2026-10-05T15:17:53.558Z",
+            "completedAt": null,
+            "result": null,
+            "confidence": "LOW",
+            "instruction": "第一篇从真实事件开始，开头只写一个具体场景，记录收藏率。",
+            "keepConstant": "确定账号和内容类型，后续用相同发布后时长录入数据。"
+          },
+          "sourceContentId": null
+        },
+        {
+          "topic": "真实工作复盘｜同类场景的第二次验证",
+          "account": "growth",
+          "contentType": "solution",
+          "experiment": {
+            "id": "3c1c7727-2ef3-4bfa-808b-5c15e1aff160",
+            "hypothesis": "第一篇从真实事件开始，开头只写一个具体场景，可能更容易被收藏（假设，尚未验证）",
+            "variable": "hook",
+            "variant": "scene_first",
+            "baseline": "还没有任何已发布指标，没有可比基线",
+            "targetMetric": "favoriteRate",
+            "requiredSamples": 3,
+            "currentSamples": 0,
+            "status": "proposed",
+            "createdAt": "2026-10-05T15:17:53.558Z",
+            "completedAt": null,
+            "result": null,
+            "confidence": "LOW",
+            "instruction": "第一篇从真实事件开始，开头只写一个具体场景，记录收藏率。",
+            "keepConstant": "确定账号和内容类型，后续用相同发布后时长录入数据。"
+          },
+          "sourceContentId": null
+        },
+        {
+          "topic": "真实工作复盘｜同类场景的第三次验证",
+          "account": "growth",
+          "contentType": "solution",
+          "experiment": {
+            "id": "3c1c7727-2ef3-4bfa-808b-5c15e1aff160",
+            "hypothesis": "第一篇从真实事件开始，开头只写一个具体场景，可能更容易被收藏（假设，尚未验证）",
+            "variable": "hook",
+            "variant": "scene_first",
+            "baseline": "还没有任何已发布指标，没有可比基线",
+            "targetMetric": "favoriteRate",
+            "requiredSamples": 3,
+            "currentSamples": 0,
+            "status": "proposed",
+            "createdAt": "2026-10-05T15:17:53.558Z",
+            "completedAt": null,
+            "result": null,
+            "confidence": "LOW",
+            "instruction": "第一篇从真实事件开始，开头只写一个具体场景，记录收藏率。",
+            "keepConstant": "确定账号和内容类型，后续用相同发布后时长录入数据。"
+          },
+          "sourceContentId": null
+        }
+      ],
+      "evidence": "还没有指标：最近0篇。各方向样本不足，不宣称最优方向。这是下一轮试验方向，不是因果结论。"
+    }
+  }
+}

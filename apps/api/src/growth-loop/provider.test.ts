@@ -28,6 +28,46 @@ const makeExperiment = (variable: ExperimentVariable, variant: ExperimentVariant
 const context = (state: GrowthLoopState = empty(), experiment = null) =>
   buildGenerationContext({ state, account: "growth", retro, experiment, topic: "反复返工的半天", contentType: "solution" });
 
+describe("offline publishable draft", () => {
+  it("extracts a bounded draft from a long Markdown retrospective without changing its source", async () => {
+    // Synthetic fixture; never store the user's private retrospective in tests.
+    const source = [
+      "可以，今天的核心是：**先核对范围，再动手。**", "### 今日复盘表",
+      "| 复盘项 | 今天的发现 | 以后怎么做 |", "| --- | --- | --- |",
+      "| 交付范围 | 今天我没有问清材料用途，花了一下午返工 | 下次先确认材料尺寸与使用场景 |",
+      ...Array.from({ length: 30 }, (_, n) => `### ${n + 1}. 其他提醒\n> **这里是另一个需要以后验证的想法。**`),
+      "这可以作为你今天的复盘结论。",
+    ].join("\n");
+    const longRetro = RetrospectiveSchema.parse({ ...retro, whatHappened: source, myReaction: "", whatBotheredMe: "", lessonLearned: "", nextAction: "" });
+    const result = await new GrowthLoopAgent().generateContentOpportunity({ ...context(), retro: longRetro });
+    expect(result.writing.body.length).toBeLessThanOrEqual(350);
+    expect(result.writing.body).toContain("今天我没有问清材料用途");
+    expect(result.writing.body).not.toMatch(/可以，|今日复盘表|其他提醒|复盘项|\*\*|\|/);
+    expect(result.writing.body).toContain("下一次的计划");
+    expect(longRetro.whatHappened).toBe(source);
+    expect(result.debug.provider).toBe("mock");
+  });
+
+  it("keeps a short actual event intact and never invents missing facts", async () => {
+    const result = await new GrowthLoopAgent().generateContentOpportunity(context());
+    expect(result.writing.body).toContain(retro.whatHappened);
+    expect(result.writing.body).toContain(retro.lessonLearned);
+    expect(result.writing.body).toContain(retro.nextAction);
+    expect(result.writing.body).not.toMatch(/尚未补充|赚到了|已经成功/);
+  });
+
+  it("does not repeat a future action inside the opening scene or add a second next-time prefix", async () => {
+    const source = "今天我整理活动资料时没有核对页数，送出后才发现少了一页。我学到的是交付前先核对清单。下次我会核对页数，并请接收人确认。";
+    const paragraph = RetrospectiveSchema.parse({ ...retro, whatHappened: source, myReaction: "", whatBotheredMe: "", lessonLearned: "", nextAction: "" });
+    const result = await new GrowthLoopAgent().generateContentOpportunity({ ...context(), retro: paragraph });
+    expect(result.writing.body.split("\n\n")[0]).toBe("今天我整理活动资料时没有核对页数，送出后才发现少了一页。");
+    expect(result.writing.body.match(/下次我会核对页数/g)).toHaveLength(1);
+    expect(result.writing.body).not.toContain("下次我想尝试：下次");
+    expect(result.writing.body).toContain("我学到的是交付前先核对清单");
+    expect(paragraph.whatHappened).toBe(source);
+  });
+});
+
 describe("experiment application is provider independent", () => {
   it("leaves the draft untouched when there is no experiment", () => {
     expect(applyExperiment(writing(), retro, null)).toEqual(writing());

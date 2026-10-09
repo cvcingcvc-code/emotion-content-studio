@@ -1,0 +1,19 @@
+EVIDENCE C:\Users\lin\Documents\ChatGPT\情绪灵感库\emotion-content-studio\.tmp-check\v1.1-shots\run-2026-10-09T05-09-10-916Z-whcv8D
+  · Demo 数据已加载；真实首页 Focus / NEXT 3 POSTS 无 Demo topic 或 sourceContentId
+  · Retrospective 已记录并分析（潜力 8/10）
+  · 首次真实流程生成：feedbackUsed=0，UI 明确无学习且保留完整 debug evidence
+  · 内容已发布并分析：100 views → INSUFFICIENT_EVIDENCE（LOW）
+  · 内容已发布并分析：100 views → INSUFFICIENT_EVIDENCE（LOW）
+  · 内容已发布并分析：100 views → INSUFFICIENT_EVIDENCE（LOW）
+  · 内容已发布并分析：100 views → NEXT_EXPERIMENT（MEDIUM）
+  · 内容已发布并分析：600 views → KEEP（MEDIUM）
+  · 内容已发布并分析：10 views → CHANGE（HIGH）
+  · 内容已发布并分析：100 views → NEXT_EXPERIMENT（MEDIUM）
+  · 下一篇学习链：KEEP / CHANGE / NEXT_EXPERIMENT，直接上游优先，全部 ID 追溯到非 Demo 内容与指标
+  · 已分析复盘直接生成：一篇真实草稿、推荐配置、完整正文与 debug，直接进入待审核
+  · 长 Markdown 复盘 → 短段落纯文本 → 实际剪贴板与预览一致；1920/1280/768/375px 布局无横向溢出，人工审核仍必需
+  · 未保存编辑可复制且不自动保存；完整标签正确去重；审核后再编辑须重新审核，发布后只读且文案一致
+  · Performance / History 路由通过
+  · PNG 导出通过：有效 PNG 签名，900 × 1200，文件已保存
+  · English 现有页面 smoke：离线 Demo 已连接，主题与 Generate 控件可用
+RESULT {"result":"PASS","isolatedApi":true,"steps":["Demo 数据已加载；真实首页 Focus / NEXT 3 POSTS 无 Demo topic 或 sourceContentId","Retrospective 已记录并分析（潜力 8/10）","首次真实流程生成：feedbackUsed=0，UI 明确无学习且保留完整 debug evidence","内容已发布并分析：100 views → INSUFFICIENT_EVIDENCE（LOW）","内容已发布并分析：100 views → INSUFFICIENT_EVIDENCE（LOW）","内容已发布并分析：100 views → INSUFFICIENT_EVIDENCE（LOW）","内容已发布并分析：100 views → NEXT_EXPERIMENT（MEDIUM）","内容已发布并分析：600 views → KEEP（MEDIUM）","内容已发布并分析：10 views → CHANGE（HIGH）","内容已发布并分析：100 views → NEXT_EXPERIMENT（MEDIUM）","下一篇学习链：KEEP / CHANGE / NEXT_EXPERIMENT，直接上游优先，全部 ID 追溯到非 Demo 内容与指标","已分析复盘直接生成：一篇真实草稿、推荐配置、完整正文与 debug，直接进入待审核","长 Markdown 复盘 → 短段落纯文本 → 实际剪贴板与预览一致；1920/1280/768/375px 布局无横向溢出，人工审核仍必需","未保存编辑可复制且不自动保存；完整标签正确去重；审核后再编辑须重新审核，发布后只读且文案一致","Performance / History 路由通过","PNG 导出通过：有效 PNG 签名，900 × 1200，文件已保存","English 现有页面 smoke：离线 Demo 已连接，主题与 Generate 控件可用"],"firstVerdict":"INSUFFICIENT_EVIDENCE","keep":"KEEP","change":"CHANGE","neutral":"NEXT_EXPERIMENT","usedVerdicts":["NEXT_EXPERIMENT","CHANGE","KEEP"],"png":{"width":900,"height":1200,"bytes":150195},"pageErrors":[],"consoleErrors":[],"evidence":"C:\\Users\\lin\\Documents\\ChatGPT\\情绪灵感库\\emotion-content-studio\\.tmp-check\\v1.1-shots\\run-2026-10-09T05-09-10-916Z-whcv8D"}

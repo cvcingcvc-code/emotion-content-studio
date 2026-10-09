@@ -1,4 +1,5 @@
 import { z } from "zod";
+export { normalizePublishText, growthPublishText } from "./publish-text.js";
 export * from "./english-workflow.js";
 export * from "./growth-loop.js";
 export * from "./growth-card.js";

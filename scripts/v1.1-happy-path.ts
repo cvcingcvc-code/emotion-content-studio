@@ -14,7 +14,7 @@ import assert from "node:assert/strict";
 import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { chromium, type Browser, type Locator, type Page } from "playwright";
-import { GrowthDashboardSchema, GrowthLoopStateSchema, type GrowthLoopState } from "@emotion-studio/contracts";
+import { GrowthDashboardSchema, GrowthLoopStateSchema, growthPublishText, type GrowthLoopState } from "@emotion-studio/contracts";
 import { buildApp } from "../apps/api/src/app.js";
 import { createContentRepository } from "../apps/api/src/content/repository.js";
 import { createEnglishWriter } from "../apps/api/src/english/provider.js";
@@ -160,6 +160,7 @@ async function publishPiece(opts: { retroId: string; topic: string; views: numbe
 try {
   browser = await chromium.launch({ headless: true, ...(process.platform === "win32" ? { channel: "msedge" } : {}) });
   page = await browser.newPage({ viewport: { width: 1500, height: 1100 }, acceptDownloads: true });
+  await page.context().grantPermissions(["clipboard-read", "clipboard-write"], { origin: web });
   page.setDefaultTimeout(25_000);
   page.on("pageerror", error => pageErrors.push(error.message));
   page.on("console", message => { if (message.type() === "error") consoleErrors.push(message.text()); });
@@ -254,6 +255,88 @@ try {
   evidence("direct-generation-debug.json", { id: direct.id, debug: direct.debug });
   await shot("06c-direct-generation-review");
   record("已分析复盘直接生成：一篇真实草稿、推荐配置、完整正文与 debug，直接进入待审核");
+
+  // V1.2: long synthetic Markdown input, actual clipboard text and browser layout.
+  const longMarkdown = [
+    "可以，今天的核心是：**先核对范围，再动手。**", "### 今日复盘表",
+    "| 复盘项 | 今天的发现 | 以后怎么做 |", "| --- | --- | --- |",
+    "| 交付范围 | 今天我没有问清材料用途，我当时直接动手，花了一下午返工 | 下次先确认材料尺寸与使用场景 |",
+    ...Array.from({ length: 20 }, (_, n) => `### ${n + 1}. 其他提醒\n> **这里是另一个需要以后验证的想法。**`),
+  ].join("\n");
+  let longRetro = (await app.inject({ method: "POST", url: "/api/v1/growth-loop/retrospectives", payload: { date: "2026-10-05", whatHappened: longMarkdown } })).json().data;
+  longRetro = (await app.inject({ method: "POST", url: `/api/v1/growth-loop/retrospectives/${longRetro.id}/analyze`, payload: { revision: longRetro.revision } })).json().data;
+  await page.goto(`${web}/retrospectives/${longRetro.id}`, { waitUntil: "domcontentloaded" });
+  await page.getByRole("button", { name: "直接生成内容", exact: true }).click();
+  await page.waitForURL(/\/growth-content\//);
+  await page.getByLabel("可复制的发布文案").waitFor();
+  const longState = await appState();
+  const longContent = longState.contents.find(item => item.id === page.url().split("/").pop())!;
+  assert.ok(longContent.writing && longContent.writing.body.length <= 350);
+  assert.doesNotMatch(longContent.writing.body, /可以，|其他提醒|复盘项|\*\*|\|/);
+  assert.equal(longState.retrospectives.find(item => item.id === longRetro.id)!.whatHappened, longMarkdown);
+  const copy = page.getByLabel("可复制的发布文案");
+  assert.equal(await copy.inputValue(), growthPublishText(longContent));
+  await page.getByRole("button", { name: "复制发布文案", exact: true }).click();
+  const clipboard = await page.evaluate(() => navigator.clipboard.readText());
+  // Windows' system clipboard uses CRLF; compare content and paragraph breaks.
+  assert.equal(clipboard.replace(/\r\n/g, "\n"), await copy.inputValue());
+  assert.match(clipboard, /#真实复盘/);
+  assert.equal(longContent.status, "review");
+  assert.equal(await page.getByRole("button", { name: "标记为已发布", exact: true }).isDisabled(), true);
+
+  const layouts = [];
+  for (const width of [1920, 1280, 768, 375]) {
+    await page.setViewportSize({ width, height: 1000 });
+    await page.evaluate(() => window.scrollTo(0, 0));
+    const layout = await page.evaluate(() => {
+      // Keep browser callbacks free of named nested functions (tsx keepNames helpers).
+      const header = document.querySelector('.review-header')!.getBoundingClientRect().toJSON();
+      const editor = document.querySelector('.review-editor')!.getBoundingClientRect().toJSON();
+      const body = document.querySelector('.manuscript-body textarea')!.getBoundingClientRect().toJSON();
+      const judgment = document.querySelector('.review-judgment')!.getBoundingClientRect().toJSON();
+      const rejection = document.querySelector('#review-reject-reason')!.getBoundingClientRect().toJSON();
+      return { viewport: window.innerWidth, pageWidth: document.documentElement.scrollWidth, header, editor, body, judgment, rejection, bodyFontSize: getComputedStyle(document.querySelector('.manuscript-body textarea')!).fontSize };
+    });
+    assert.ok(layout.header.bottom <= layout.editor.y, "Review header must be above editor");
+    assert.ok(layout.pageWidth <= width + 1, "Review page must not scroll horizontally");
+    assert.ok(layout.body.width >= (width > 960 ? 350 : 230), "Body editor must remain readable");
+    assert.ok(layout.rejection.width >= 100, "Rejection select must not collapse to a vertical strip");
+    assert.ok(parseFloat(layout.bodyFontSize) >= 16, "Body type must remain readable");
+    layouts.push(layout);
+    await shot(`06d-publish-review-${width}`);
+  }
+  evidence("publish-copy-layout.json", { contentId: longContent.id, clipboard, body: longContent.writing.body, layouts });
+  await page.setViewportSize({ width: 1500, height: 1100 });
+  record("长 Markdown 复盘 → 短段落纯文本 → 实际剪贴板与预览一致；1920/1280/768/375px 布局无横向溢出，人工审核仍必需");
+
+  // Copy follows edits immediately; approval must follow the final saved version.
+  await page.getByLabel("内容正文").fill("**我先核对了交付清单。**\n\n#成长记录");
+  await page.getByLabel("标签", { exact: true }).fill("#成长 #成长记录 #成长");
+  const editedCopy = await copy.inputValue();
+  assert.doesNotMatch(editedCopy, /\*\*/);
+  assert.equal(editedCopy.match(/#成长(?=\s|$)/g)?.length, 1);
+  assert.equal(editedCopy.match(/#成长记录/g)?.length, 1);
+  await page.getByRole("button", { name: "复制发布文案", exact: true }).click();
+  assert.equal((await page.evaluate(() => navigator.clipboard.readText())).replace(/\r\n/g, "\n"), editedCopy);
+  assert.equal((await appState()).contents.find(item => item.id === longContent.id)!.writing!.body, longContent.writing.body, "Copying must not save unreviewed edits");
+  await page.getByRole("button", { name: "通过审核 →", exact: true }).click();
+  await waitEnabled(page.getByRole("button", { name: "标记为已发布", exact: true }));
+  await page.getByLabel("内容正文").fill("我先核对了交付清单，再确认材料页数。\n\n#成长记录");
+  assert.equal(await page.getByRole("button", { name: "标记为已发布", exact: true }).isDisabled(), true);
+  await page.getByRole("button", { name: "保存修改", exact: true }).click();
+  await page.locator(".judgment-status", { hasText: "待审核" }).waitFor();
+  assert.equal(await page.getByRole("button", { name: "标记为已发布", exact: true }).isDisabled(), true);
+  await page.getByRole("button", { name: "通过审核 →", exact: true }).click();
+  await waitEnabled(page.getByRole("button", { name: "标记为已发布", exact: true }));
+  const approvedCopy = await copy.inputValue();
+  await page.getByRole("button", { name: "标记为已发布", exact: true }).click();
+  await page.getByRole("heading", { name: /Daily Content Feedback/ }).waitFor();
+  await page.goto(`${web}/growth-content/${longContent.id}`, { waitUntil: "domcontentloaded" });
+  assert.equal(await page.getByLabel("内容正文").isDisabled(), true);
+  assert.equal(await copy.inputValue(), approvedCopy);
+  evidence("publish-edit-approval.json", { contentId: longContent.id, editedCopy, approvedCopy, saved: (await appState()).contents.find(item => item.id === longContent.id) });
+  await shot("06e-published-copy");
+  record("未保存编辑可复制且不自动保存；完整标签正确去重；审核后再编辑须重新审核，发布后只读且文案一致");
 
   await page.goto(web + "/performance", { waitUntil: "domcontentloaded" });
   await page.getByRole("heading", { name: "Daily Feedback", exact: true }).waitFor();

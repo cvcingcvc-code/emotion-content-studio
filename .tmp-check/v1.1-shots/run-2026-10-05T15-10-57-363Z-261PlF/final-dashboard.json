@@ -1,0 +1,94 @@
+{
+  "today": "2026-10-05",
+  "mode": "mock",
+  "repository": "memory",
+  "retrospectiveDone": true,
+  "contentOpportunities": 2,
+  "readyToPublish": 0,
+  "yesterday": {
+    "count": 0,
+    "views": 0,
+    "metricsCount": 0
+  },
+  "focus": {
+    "FOCUS_NOW": "growth / solution：下一篇同类growth内容，仅把开头改为一个具体使用场景；记录收藏率，暂不判断因果。",
+    "STOP_DOING": [
+      "暂停同时更改标题、开头与正文；也不要把合成演示数据当作真实增长证据。"
+    ],
+    "KEEP_DOING": [
+      "保持每篇有明确场景，保留来源；固定发布后观察窗口，持续记录真实数据。"
+    ],
+    "NEXT_3_POSTS": [
+      {
+        "topic": "照常推进的一天｜一个新的具体场景",
+        "account": "growth",
+        "contentType": "solution",
+        "experiment": {
+          "id": "c0427fc8-d3e7-4518-a29a-938e9c6d53dc",
+          "hypothesis": "开头改成具体使用场景可能提高收藏率（假设，尚未验证）",
+          "variable": "hook",
+          "variant": "scene_first",
+          "baseline": "同账号同窗口（24h）历史 6 篇，中位阅读 100；本篇 100",
+          "targetMetric": "favoriteRate",
+          "requiredSamples": 3,
+          "currentSamples": 0,
+          "status": "proposed",
+          "createdAt": "2026-10-05T15:11:22.775Z",
+          "completedAt": null,
+          "result": null,
+          "confidence": "LOW",
+          "instruction": "下一篇同类growth内容，仅把开头改为一个具体使用场景；记录收藏率，暂不判断因果。",
+          "keepConstant": "标题风格、正文结构、篇幅和发布时段保持接近；用相同发布后时长录入指标。"
+        },
+        "sourceContentId": "7991d145-5c59-45ff-ac42-a570cf5a525f"
+      },
+      {
+        "topic": "照常推进的一天｜同类场景的第二次验证",
+        "account": "growth",
+        "contentType": "solution",
+        "experiment": {
+          "id": "c0427fc8-d3e7-4518-a29a-938e9c6d53dc",
+          "hypothesis": "开头改成具体使用场景可能提高收藏率（假设，尚未验证）",
+          "variable": "hook",
+          "variant": "scene_first",
+          "baseline": "同账号同窗口（24h）历史 6 篇，中位阅读 100；本篇 100",
+          "targetMetric": "favoriteRate",
+          "requiredSamples": 3,
+          "currentSamples": 0,
+          "status": "proposed",
+          "createdAt": "2026-10-05T15:11:22.775Z",
+          "completedAt": null,
+          "result": null,
+          "confidence": "LOW",
+          "instruction": "下一篇同类growth内容，仅把开头改为一个具体使用场景；记录收藏率，暂不判断因果。",
+          "keepConstant": "标题风格、正文结构、篇幅和发布时段保持接近；用相同发布后时长录入指标。"
+        },
+        "sourceContentId": "7991d145-5c59-45ff-ac42-a570cf5a525f"
+      },
+      {
+        "topic": "照常推进的一天｜同类场景的第三次验证",
+        "account": "growth",
+        "contentType": "solution",
+        "experiment": {
+          "id": "c0427fc8-d3e7-4518-a29a-938e9c6d53dc",
+          "hypothesis": "开头改成具体使用场景可能提高收藏率（假设，尚未验证）",
+          "variable": "hook",
+          "variant": "scene_first",
+          "baseline": "同账号同窗口（24h）历史 6 篇，中位阅读 100；本篇 100",
+          "targetMetric": "favoriteRate",
+          "requiredSamples": 3,
+          "currentSamples": 0,
+          "status": "proposed",
+          "createdAt": "2026-10-05T15:11:22.775Z",
+          "completedAt": null,
+          "result": null,
+          "confidence": "LOW",
+          "instruction": "下一篇同类growth内容，仅把开头改为一个具体使用场景；记录收藏率，暂不判断因果。",
+          "keepConstant": "标题风格、正文结构、篇幅和发布时段保持接近；用相同发布后时长录入指标。"
+        },
+        "sourceContentId": "7991d145-5c59-45ff-ac42-a570cf5a525f"
+      }
+    ],
+    "evidence": "仅使用真实内容：最近7篇。候选方向有7个有效比例样本，平均收藏率2.57%。这是下一轮试验方向，不是因果结论。"
+  }
+}

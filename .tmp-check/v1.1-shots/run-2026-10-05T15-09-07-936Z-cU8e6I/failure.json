@@ -1,0 +1,19 @@
+{
+  "message": "page.evaluate: ReferenceError: __name is not defined\n    at eval (eval at evaluate (:311:30), <anonymous>:1:17)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+  "steps": [
+    "Demo 数据已加载；真实首页 Focus / NEXT 3 POSTS 无 Demo topic 或 sourceContentId",
+    "Retrospective 已记录并分析（潜力 8/10）",
+    "首次真实流程生成：feedbackUsed=0，UI 明确无学习且保留完整 debug evidence",
+    "内容已发布并分析：100 views → INSUFFICIENT_EVIDENCE（LOW）",
+    "内容已发布并分析：100 views → INSUFFICIENT_EVIDENCE（LOW）",
+    "内容已发布并分析：100 views → INSUFFICIENT_EVIDENCE（LOW）",
+    "内容已发布并分析：100 views → NEXT_EXPERIMENT（MEDIUM）",
+    "内容已发布并分析：600 views → KEEP（MEDIUM）",
+    "内容已发布并分析：10 views → CHANGE（HIGH）",
+    "内容已发布并分析：100 views → NEXT_EXPERIMENT（MEDIUM）",
+    "下一篇学习链：KEEP / CHANGE / NEXT_EXPERIMENT，直接上游优先，全部 ID 追溯到非 Demo 内容与指标",
+    "已分析复盘直接生成：一篇真实草稿、推荐配置、完整正文与 debug，直接进入待审核"
+  ],
+  "pageErrors": [],
+  "consoleErrors": []
+}
