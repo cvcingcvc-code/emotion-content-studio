@@ -1,0 +1,13 @@
+{
+  "checks": [
+    "UI batch generated two drafts and reused duplicate without automatic approval",
+    "Growth batch uses a real analyzed retrospective source",
+    "Bulk export remains disabled for unreviewed selection",
+    "Review copy uses current edits without silently saving or approving",
+    "Manual edits and two explicit approvals persisted while AI originals remain intact",
+    "Browser clipboard and actual TXT/JSON downloads match the approved saved revisions",
+    "Workbench fits desktop and 375px viewport without horizontal overflow"
+  ],
+  "browserErrors": [],
+  "error": "locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('iframe[title=\"Preview Page 1\"]').contentFrame().locator('li').first() to be visible\u001b[22m\n\u001b[2m    62 × locator resolved to hidden <li>…</li>\u001b[22m\n"
+}

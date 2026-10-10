@@ -1,0 +1,272 @@
+{
+  "state": {
+    "retrospectives": [
+      {
+        "date": "2026-10-09",
+        "whatHappened": "今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做。对方需要竖版，我却交了横版，花了一下午返工。我当时立刻动手，问题是没有把验收标准问清楚。我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认。",
+        "myReaction": "",
+        "whatBotheredMe": "",
+        "whatCouldBeHandledBetter": "",
+        "lessonLearned": "",
+        "nextAction": "",
+        "optionalNote": "合成回归记录，不来自用户。",
+        "id": "2d2f39e3-e2b4-48f3-be43-fb50383fb6be",
+        "revision": 1,
+        "createdAt": "2026-10-09T15:26:54.342Z",
+        "updatedAt": "2026-10-09T15:26:54.432Z",
+        "analysis": {
+          "summary": "今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做。对方需要竖版，我却交了横版，花了一下午返工。我当时立刻动手，问题是没有把验收标准问清楚。我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认。",
+          "coreProblem": "今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做",
+          "decisionPattern": "可供核对的行为线索：我当时立刻动手，问题是没有把验收标准问清楚",
+          "betterApproach": "补充当时有哪些可选行动，再比较各自的代价",
+          "lesson": "我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认",
+          "nextAction": "记录下一次出现相似情境时可以先做的一个具体动作",
+          "contentPotential": 7,
+          "contentReason": "事件、困扰与处理建议足够具体，可尝试分享；分数是离线规则评估，不预测流量",
+          "recommendedAccount": "growth",
+          "recommendedContentType": "solution",
+          "contentAngle": "从一个真实场景解释：今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做",
+          "recommendedTitleIdeas": [
+            "这件事，下次我会换个处理方式",
+            "一次真实经历留下的提醒",
+            "我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方"
+          ],
+          "facts": [
+            "今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做。对方需要竖版，我却交了横版，花了一下午返工。我当时立刻动手，问题是没有把验收标准问清楚。我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认。",
+            "合成回归记录，不来自用户。"
+          ],
+          "interpretations": [
+            "行为模式（推断）：面对「今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做」时，记录里写的第一反应是「我当时立刻动手，问题是没有把验收标准问清楚」",
+            "改法空间（推断）：当时还存在其他可选行动，需要在下一个相似场景里验证",
+            "经验迁移（推断）：我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认",
+            "内容价值（推断）：事件、困扰与处理建议较具体，适合分享；分数是离线规则评估，不预测流量"
+          ]
+        },
+        "analysisProvider": "mock"
+      }
+    ],
+    "contents": [
+      {
+        "id": "24db72be-3343-4acd-8127-09b00c00ec38",
+        "revision": 2,
+        "account": "emotion",
+        "title": "给慢慢恢复的自己一点时间",
+        "topic": "一个人也能认真过周末",
+        "contentType": "solution",
+        "sourceRetrospectiveId": null,
+        "sourceContentId": null,
+        "englishDraftId": null,
+        "createdAt": "2026-10-09T15:26:56.354Z",
+        "updatedAt": "2026-10-09T15:26:58.463Z",
+        "publishedAt": null,
+        "publishTime": null,
+        "status": "ready",
+        "writing": {
+          "title": "给慢慢恢复的自己一点时间",
+          "body": "有些孤独并不会在热闹结束后立刻消失。它更像一种提醒：眼前的感受还没有被认真看见，内心真正需要的也尚未被说清。\n\n与其急着把情绪压下去，不如先辨认它发生在什么场景，又牵动了怎样的心理冲突。克制表达与内心需要之间的落差，是许多人在日常关系中会遇到的体验。理解这一点，不是为了停留在感受里，而是为了把注意力带回自己能够选择的部分。\n\n可以先写下一句此刻最真实的需要，再做一件足够小的照顾自己的事。等情绪不再占据全部视线，我们才更容易决定要沟通、离开，还是给关系新的边界。真正的治愈不是忘记，而是不再让同一种疼痛替自己做所有决定。\n\n合成验收手工补充：今晚先完成一件小事。",
+          "corePoint": "孤独时如何看见自己的真实需要",
+          "solution": "表达感受，不替读者作判断。",
+          "endingQuestion": "你最近有没有一种情绪，其实是在提醒你重新照顾自己？",
+          "tags": [
+            "#情绪共鸣",
+            "#孤独",
+            "#自我理解",
+            "#成年人情绪"
+          ]
+        },
+        "english": null,
+        "aiDraft": {
+          "title": "孤独不是软弱，是感受在提醒你",
+          "body": "有些孤独并不会在热闹结束后立刻消失。它更像一种提醒：眼前的感受还没有被认真看见，内心真正需要的也尚未被说清。\n\n与其急着把情绪压下去，不如先辨认它发生在什么场景，又牵动了怎样的心理冲突。克制表达与内心需要之间的落差，是许多人在日常关系中会遇到的体验。理解这一点，不是为了停留在感受里，而是为了把注意力带回自己能够选择的部分。\n\n可以先写下一句此刻最真实的需要，再做一件足够小的照顾自己的事。等情绪不再占据全部视线，我们才更容易决定要沟通、离开，还是给关系新的边界。真正的治愈不是忘记，而是不再让同一种疼痛替自己做所有决定。",
+          "corePoint": "孤独时如何看见自己的真实需要",
+          "solution": "表达感受，不替读者作判断。",
+          "endingQuestion": "你最近有没有一种情绪，其实是在提醒你重新照顾自己？",
+          "tags": [
+            "#情绪共鸣",
+            "#孤独",
+            "#自我理解",
+            "#成年人情绪"
+          ]
+        },
+        "preferenceSignal": {
+          "titleRewritten": true,
+          "removedPhrases": [
+            "孤独不是软弱，是感受在提醒你"
+          ],
+          "addedPhrases": [
+            "给慢慢恢复的自己一点时间",
+            "合成验收手工补充：今晚先完成一件小事"
+          ],
+          "lowerIntensity": false,
+          "removedDrama": false,
+          "perspectiveShift": false,
+          "summary": "人工修改信号：重写了标题；删掉 1 句原稿；补写 2 句。"
+        },
+        "rejectReason": null,
+        "rejectedAt": null,
+        "note": "",
+        "provider": "mock",
+        "isDemo": false,
+        "experiment": null,
+        "debug": null
+      },
+      {
+        "id": "ad5b0a95-d21b-4d98-8166-62228592c59f",
+        "revision": 2,
+        "account": "emotion",
+        "title": "治愈不是软弱，是感受在提醒你",
+        "topic": "允许自己慢慢恢复",
+        "contentType": "solution",
+        "sourceRetrospectiveId": null,
+        "sourceContentId": null,
+        "englishDraftId": null,
+        "createdAt": "2026-10-09T15:26:56.396Z",
+        "updatedAt": "2026-10-09T15:26:59.534Z",
+        "publishedAt": null,
+        "publishTime": null,
+        "status": "ready",
+        "writing": {
+          "title": "治愈不是软弱，是感受在提醒你",
+          "body": "有些治愈并不会在热闹结束后立刻消失。它更像一种提醒：眼前的感受还没有被认真看见，内心真正需要的也尚未被说清。\n\n与其急着把情绪压下去，不如先辨认它发生在什么场景，又牵动了怎样的心理冲突。克制表达与内心需要之间的落差，是许多人在日常关系中会遇到的体验。理解这一点，不是为了停留在感受里，而是为了把注意力带回自己能够选择的部分。\n\n可以先写下一句此刻最真实的需要，再做一件足够小的照顾自己的事。等情绪不再占据全部视线，我们才更容易决定要沟通、离开，还是给关系新的边界。真正的治愈不是忘记，而是不再让同一种疼痛替自己做所有决定。",
+          "corePoint": "治愈时如何看见自己的真实需要",
+          "solution": "表达感受，不替读者作判断。",
+          "endingQuestion": "你最近有没有一种情绪，其实是在提醒你重新照顾自己？",
+          "tags": [
+            "#情绪共鸣",
+            "#治愈",
+            "#自我理解",
+            "#成年人情绪"
+          ]
+        },
+        "english": null,
+        "aiDraft": {
+          "title": "治愈不是软弱，是感受在提醒你",
+          "body": "有些治愈并不会在热闹结束后立刻消失。它更像一种提醒：眼前的感受还没有被认真看见，内心真正需要的也尚未被说清。\n\n与其急着把情绪压下去，不如先辨认它发生在什么场景，又牵动了怎样的心理冲突。克制表达与内心需要之间的落差，是许多人在日常关系中会遇到的体验。理解这一点，不是为了停留在感受里，而是为了把注意力带回自己能够选择的部分。\n\n可以先写下一句此刻最真实的需要，再做一件足够小的照顾自己的事。等情绪不再占据全部视线，我们才更容易决定要沟通、离开，还是给关系新的边界。真正的治愈不是忘记，而是不再让同一种疼痛替自己做所有决定。",
+          "corePoint": "治愈时如何看见自己的真实需要",
+          "solution": "表达感受，不替读者作判断。",
+          "endingQuestion": "你最近有没有一种情绪，其实是在提醒你重新照顾自己？",
+          "tags": [
+            "#情绪共鸣",
+            "#治愈",
+            "#自我理解",
+            "#成年人情绪"
+          ]
+        },
+        "preferenceSignal": {
+          "titleRewritten": false,
+          "removedPhrases": [],
+          "addedPhrases": [],
+          "lowerIntensity": false,
+          "removedDrama": false,
+          "perspectiveShift": false,
+          "summary": "人工修改信号：本次未检测到明确改写。"
+        },
+        "rejectReason": null,
+        "rejectedAt": null,
+        "note": "",
+        "provider": "mock",
+        "isDemo": false,
+        "experiment": null,
+        "debug": null
+      },
+      {
+        "id": "a2593cf6-61f7-4ddb-8d99-476107c7ec8a",
+        "revision": 1,
+        "account": "growth",
+        "title": "动手之前确认尺寸",
+        "topic": "动手之前确认尺寸",
+        "contentType": "solution",
+        "sourceRetrospectiveId": "2d2f39e3-e2b4-48f3-be43-fb50383fb6be",
+        "sourceContentId": null,
+        "englishDraftId": null,
+        "createdAt": "2026-10-09T15:26:56.758Z",
+        "updatedAt": "2026-10-09T15:26:56.763Z",
+        "publishedAt": null,
+        "publishTime": null,
+        "status": "review",
+        "writing": {
+          "title": "动手之前确认尺寸",
+          "body": "今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做。\n\n下次我想尝试：我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认\n\n这是下一次的计划，还需要在真实场景里验证。",
+          "corePoint": "我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认",
+          "solution": "我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认",
+          "endingQuestion": "遇到类似情况，你会先确认哪件事？",
+          "tags": [
+            "#真实复盘",
+            "#工作成长",
+            "#行动记录"
+          ]
+        },
+        "english": null,
+        "aiDraft": {
+          "title": "动手之前确认尺寸",
+          "body": "今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做。\n\n下次我想尝试：我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认\n\n这是下一次的计划，还需要在真实场景里验证。",
+          "corePoint": "我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认",
+          "solution": "我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认",
+          "endingQuestion": "遇到类似情况，你会先确认哪件事？",
+          "tags": [
+            "#真实复盘",
+            "#工作成长",
+            "#行动记录"
+          ]
+        },
+        "preferenceSignal": null,
+        "rejectReason": null,
+        "rejectedAt": null,
+        "note": "",
+        "provider": "mock",
+        "isDemo": false,
+        "experiment": null,
+        "debug": {
+          "promptVersion": "growth-loop.v3",
+          "provider": "mock",
+          "model": null,
+          "factsUsed": [
+            "今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做。对方需要竖版，我却交了横版，花了一下午返工。我当时立刻动手，问题是没有把验收标准问清楚。我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认。",
+            "合成回归记录，不来自用户。"
+          ],
+          "interpretationsUsed": [
+            "行为模式（推断）：面对「今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做」时，记录里写的第一反应是「我当时立刻动手，问题是没有把验收标准问清楚」",
+            "改法空间（推断）：当时还存在其他可选行动，需要在下一个相似场景里验证",
+            "经验迁移（推断）：我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认",
+            "内容价值（推断）：事件、困扰与处理建议较具体，适合分享；分数是离线规则评估，不预测流量"
+          ],
+          "strategyUsed": [],
+          "experimentUsed": null,
+          "userPreferenceUsed": [],
+          "feedbackUsed": [],
+          "constraintsApplied": [],
+          "finalGenerationContext": "account=growth | facts=2 | interpretations=4 | strategy={\"works\":[],\"avoid\":[],\"testing\":[],\"watch\":[],\"unknown\":[]} | userPreferences=[] | learnings=0 | experiment=none | promptVersion=growth-loop.v3"
+        }
+      }
+    ],
+    "metrics": [],
+    "feedback": [],
+    "strategies": [
+      {
+        "id": "6bef310d-3529-4bd2-9cee-7dfcfa7d8adf",
+        "account": "emotion",
+        "key": "title_preference",
+        "value": "标题更接近自己会写的说法",
+        "category": "watch",
+        "source": "human_edit",
+        "evidenceCount": 1,
+        "confidence": "LOW",
+        "status": "active",
+        "lastConfirmedAt": "2026-10-09T15:26:58.469Z",
+        "createdAt": "2026-10-09T15:26:58.469Z"
+      }
+    ]
+  },
+  "english": {
+    "mode": "demo",
+    "history": [
+      {
+        "topic": "尴尬时刻英语50句",
+        "generated_at": "2026-10-09T15:27:03.160Z",
+        "status": "exported",
+        "output_path": "output/尴尬时刻英语50句-25769a-r1",
+        "draft_id": "25769a8da3e65a411a7a7da9"
+      }
+    ]
+  }
+}

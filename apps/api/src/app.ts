@@ -13,6 +13,7 @@ import { AppError } from "./errors.js";
 import { GrowthLoopAgent } from "./growth-loop/provider.js";
 import { GrowthLoopService } from "./growth-loop/service.js";
 import { registerGrowthLoopRoutes } from "./growth-loop/routes.js";
+import { registerBatchContentRoutes } from "./growth-loop/batch-routes.js";
 import { registerEnglishWorkflow, type EnglishWorkflowOptions } from "./english/workflow.js";
 import { createMockStore, type MockStore } from "./mock/store.js";
 import { registerRoutes } from "./routes.js";
@@ -171,6 +172,8 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
   await registerStudioRoutes(app, contentRepository, pipelines);
   registerAiUsageRoutes(app, options.aiUsagePath);
   const english = await registerEnglishWorkflow(app, contentRepository, options.englishWorkflow);
-  await registerGrowthLoopRoutes(app, new GrowthLoopService(contentRepository.growthLoop, options.growthLoopAgent ?? new GrowthLoopAgent(), english, pipelines));
+  const growthLoop = new GrowthLoopService(contentRepository.growthLoop, options.growthLoopAgent ?? new GrowthLoopAgent(), english, pipelines);
+  await registerGrowthLoopRoutes(app, growthLoop);
+  await registerBatchContentRoutes(app, growthLoop);
   return app;
 }

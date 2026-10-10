@@ -1,0 +1,14 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+locator.selectOption: Timeout 30000ms exceeded.
+Call log:
+  - waiting for getByLabel('内容账号', { exact: true })
+
+    at <anonymous> (C:\Users\lin\Documents\ChatGPT\情绪灵感库\emotion-content-studio\scripts\v1.3-workbench-e2e.ts:43:50) {
+  log: [ "  - waiting for getByLabel('内容账号', { exact: true })" ],
+  name: 'TimeoutError'
+}
+
+Node.js v24.15.0

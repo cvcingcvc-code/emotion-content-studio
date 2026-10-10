@@ -1,5 +1,6 @@
 import { z } from "zod";
 export { AiUsageSchema, type AiUsage } from "./ai-usage.js";
+export * from "./xiaohongshu.js";
 export { normalizePublishText, growthPublishText } from "./publish-text.js";
 export * from "./english-workflow.js";
 export * from "./growth-loop.js";

@@ -36,6 +36,7 @@ const pageMeta = [
   { match: /^\/inspirations/, eyebrow: '灵感 / 收藏', title: '灵感库' },
   { match: /^\/generated/, eyebrow: '生成 / 草稿', title: '文案生成结果' },
   { match: /^\/posts/, eyebrow: '发布 / 表现', title: '发布与数据' },
+  { match: /^\/xiaohongshu/, eyebrow: '创作 / 批量审核', title: '小红书工作台' },
 ];
 
 const previewOptions: Array<{ value: PreviewMode; label: string }> = [
@@ -60,6 +61,7 @@ export function AppShell({ children }: { children: ReactNode }) {
     { to: '/', label: '内容总览', icon: LayoutDashboard },
     { to: '/retrospectives', label: '复盘记录', icon: BookOpenText },
     { to: '/create', label: '内容创作', icon: Sparkles },
+    { to: '/xiaohongshu', label: '小红书工作台', icon: Sparkles },
     { to: '/performance', label: '数据表现', icon: Send },
     { to: '/history', label: '历史记录', icon: BookOpenText },
     { to: '/english', label: '趣味英语', icon: Sparkles },

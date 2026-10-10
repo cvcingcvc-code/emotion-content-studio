@@ -1,0 +1,16 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+locator.selectOption: Error: strict mode violation: getByLabel(/内容账号/) resolved to 2 elements:
+    1) <select aria-label="切换内容账号">…</select> aka getByLabel('切换内容账号')
+    2) <select>…</select> aka getByLabel('内容账号个人成长情绪灵感库')
+
+Call log:
+  - waiting for getByLabel(/内容账号/)
+
+    at <anonymous> (C:\Users\lin\Documents\ChatGPT\情绪灵感库\emotion-content-studio\scripts\v1.3-workbench-e2e.ts:45:33) {
+  log: [ '  - waiting for getByLabel(/内容账号/)' ]
+}
+
+Node.js v24.15.0

@@ -1,0 +1,16 @@
+
+> emotion-content-studio@0.1.0 test:e2e:restart
+> tsx scripts/v1.3-restart-e2e.ts
+
+  · API child 1 is ready in SQLite/mock mode
+  · Fresh SQLite has no seeded or personal Growth Loop records
+  · Retrospective creation, saved edit and offline analysis succeed
+  · Saved human edits retain the AI original; publication requires approval
+  · Approved local publication snapshot, metrics and feedback are saved
+  · Generation history includes separate review, ready and rejected states
+  · Studio generation history is also stored in SQLite
+  · First API process exits; durable SQLite file exists
+  · API child 2 is ready in SQLite/mock mode
+  · Fresh API process restores exact retrospectives, edits, history, review states, metrics, feedback and strategies
+  · Restarted API rejects stale revisions with standard envelopes and preserves cached feedback
+{"result":"PASS","checks":11,"paidApiCalls":0,"evidence":"C:\\Users\\lin\\Documents\\ChatGPT\\情绪灵感库\\emotion-content-studio\\.tmp-check\\v1.3-restart-e2e\\run-2026-10-09T15-44-32-061Z-yfyYy8"}

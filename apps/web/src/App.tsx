@@ -10,6 +10,7 @@ import MaterialDetailPage from './pages/MaterialDetailPage';
 import AccountWorkspacePage from './pages/AccountWorkspacePage';
 import PublishingPage from './pages/PublishingPage';
 import GrowthLoopPage from './pages/GrowthLoopPage';
+import XiaohongshuWorkbench from './pages/XiaohongshuWorkbench';
 
 export default function App() {
   const { pathname } = useLocation();
@@ -21,6 +22,7 @@ export default function App() {
       <Routes>
         {['/', '/create', '/retrospectives', '/retrospectives/:id', '/growth-content/:id', '/performance', '/history', '/settings'].map(path => <Route key={path} path={path} element={<GrowthLoopPage />} />)}
         <Route path="/studio" element={<DashboardPage />} />
+        <Route path="/xiaohongshu" element={<XiaohongshuWorkbench />} />
         <Route path="/accounts/:accountId" element={<AccountWorkspacePage />} />
         <Route path="/import" element={<ImportPage />} />
         <Route path="/library" element={<LibraryPage />} />

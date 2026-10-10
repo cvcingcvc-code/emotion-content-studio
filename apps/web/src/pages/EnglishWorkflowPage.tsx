@@ -84,6 +84,7 @@ function EnglishReview({ id }: { id: string }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
+  const [previewVersion, setPreviewVersion] = useState(0);
   const [output, setOutput] = useState<{ output_path: string; files: { name: string; url: string }[] } | null>(null);
   const operation = useRef(false);
   useEffect(() => {
@@ -100,6 +101,8 @@ function EnglishReview({ id }: { id: string }) {
   }, [dirty]);
   function change(update: Partial<EnglishWriting>) {
     setWriting((current) => current ? { ...current, ...update } : current);
+    // Each editing snapshot gets a fresh sandboxed preview document.
+    setPreviewVersion(value => value + 1);
     setDirty(true); setOutput(null); setNotice('');
   }
   async function save(status: 'approved' | 'needs_revision') {
@@ -159,7 +162,7 @@ function EnglishReview({ id }: { id: string }) {
     <details><summary>主题分析与分组方向</summary><p>{writing.analysis}</p><p>{writing.groupNames.join(' / ')}</p></details>
     <div className="english-section-head"><h2>Preview · 3:4</h2><span>实时同步 Review · PNG 900 × 1200</span></div>
     <nav aria-label="预览页码" className="english-review-actions">{[1, 2, 3, 4, 5].map((n) => <button key={n} aria-pressed={page === n} onClick={() => setPage(n)}>{n}</button>)}<button disabled={busy} onClick={() => void exportPage()}>Export Current Page</button></nav>
-    <div className="english-card-grid english-current-preview"><figure><div className="english-card-frame"><iframe title={'Preview Page ' + page} sandbox="" srcDoc={englishCardHtml(writing, page)} /></div><figcaption>Page {page} / 5 · {page * 10 - 9}–{page * 10}</figcaption></figure></div>
+    <div className="english-card-grid english-current-preview"><figure><div className="english-card-frame"><iframe key={`${page}-${previewVersion}`} title={'Preview Page ' + page} sandbox="" srcDoc={englishCardHtml(writing, page)} /></div><figcaption>Page {page} / 5 · {page * 10 - 9}–{page * 10}</figcaption></figure></div>
     <section className="english-lines"><div className="english-section-head"><h2>逐句核对</h2><span>英文为主，中文自然好懂</span></div><nav aria-label="编辑页码">{[1, 2, 3, 4, 5].map((n) => <button key={n} aria-pressed={page === n} onClick={() => setPage(n)}>Page {n}</button>)}</nav>
       {writing.sentences.slice((page - 1) * 10, page * 10).map((line) => <div className="english-edit-line" key={line.number}><span>{String(line.number).padStart(2, '0')}</span><label>英文<input aria-label={'英文 ' + line.number} value={line.english} maxLength={110} disabled={busy} onChange={(event) => change({ sentences: writing.sentences.map((value) => value.number === line.number ? { ...value, english: event.target.value } : value) })} /></label><label>中文<input aria-label={'中文 ' + line.number} value={line.chinese} maxLength={55} disabled={busy} onChange={(event) => change({ sentences: writing.sentences.map((value) => value.number === line.number ? { ...value, chinese: event.target.value } : value) })} /></label></div>)}
     </section>

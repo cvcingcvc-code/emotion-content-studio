@@ -1,0 +1,7 @@
+{
+  "checks": [
+    "UI batch generated two drafts and reused duplicate without automatic approval"
+  ],
+  "browserErrors": [],
+  "error": "locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('主题列表（每行一个，最多10个）', { exact: true })\u001b[22m\n"
+}

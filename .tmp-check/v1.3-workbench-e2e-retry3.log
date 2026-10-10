@@ -1,0 +1,15 @@
+  · UI batch generated two drafts and reused duplicate without automatic approval
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+locator.fill: Timeout 30000ms exceeded.
+Call log:
+  - waiting for getByLabel('主题列表（每行一个，最多10个）', { exact: true })
+
+    at <anonymous> (C:\Users\lin\Documents\ChatGPT\情绪灵感库\emotion-content-studio\scripts\v1.3-workbench-e2e.ts:56:62) {
+  log: [ "  - waiting for getByLabel('主题列表（每行一个，最多10个）', { exact: true })" ],
+  name: 'TimeoutError'
+}
+
+Node.js v24.15.0

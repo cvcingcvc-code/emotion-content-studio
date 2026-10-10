@@ -19,6 +19,8 @@
     "test": "npm run test --workspaces --if-present",
     "build": "npm run build --workspaces --if-present",
     "test:contracts": "npm run test -w @emotion-studio/contracts",
+    "test:e2e:restart": "tsx scripts/v1.3-restart-e2e.ts",
+    "test:e2e:workbench": "tsx scripts/v1.3-workbench-e2e.ts",
     "check": "npm run typecheck && npm test && npm run build",
     "persistence": "npm run persistence -w @emotion-studio/api --"
   },

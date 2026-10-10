@@ -1,0 +1,583 @@
+{
+  "id": "25769a8da3e65a411a7a7da9",
+  "revision": 1,
+  "generated_at": "2026-10-09T15:27:03.160Z",
+  "updated_at": "2026-10-09T15:27:04.114Z",
+  "status": "approved",
+  "provider": "demo",
+  "model": "original-english-demo-v1",
+  "writing": {
+    "topic": "尴尬时刻英语50句",
+    "tone": "日常",
+    "analysis": "认错人、叫错名字、笑点没跟上，尴尬现场也能用一句简单英语接住。 按五个生活场景分组，短句为主，适合 A2–B1 学习者。离线样稿不随语气选项改写。",
+    "groupNames": [
+      "认错人了",
+      "嘴比脑子快",
+      "小失误现场",
+      "聊天突然冷场",
+      "轻松翻篇"
+    ],
+    "sentences": [
+      {
+        "number": 1,
+        "english": "Sorry, I thought you were my friend.",
+        "chinese": "不好意思，我还以为你是我朋友。"
+      },
+      {
+        "number": 2,
+        "english": "Have we met before?",
+        "chinese": "我们以前见过吗？"
+      },
+      {
+        "number": 3,
+        "english": "You look really familiar.",
+        "chinese": "你看着好眼熟。"
+      },
+      {
+        "number": 4,
+        "english": "Oh, wrong person!",
+        "chinese": "啊，认错人了！"
+      },
+      {
+        "number": 5,
+        "english": "I was waving at my friend.",
+        "chinese": "我刚才是在跟朋友招手。"
+      },
+      {
+        "number": 6,
+        "english": "I forgot your name. Sorry!",
+        "chinese": "抱歉，我忘记你的名字了！"
+      },
+      {
+        "number": 7,
+        "english": "Could you remind me of your name?",
+        "chinese": "能再告诉我一下你的名字吗？"
+      },
+      {
+        "number": 8,
+        "english": "I mixed up your names.",
+        "chinese": "我把你们的名字搞混了。"
+      },
+      {
+        "number": 9,
+        "english": "I didn't recognize you at first.",
+        "chinese": "我一开始没认出你。"
+      },
+      {
+        "number": 10,
+        "english": "Let's start over. I'm Alex.",
+        "chinese": "重新认识一下吧，我叫Alex。"
+      },
+      {
+        "number": 11,
+        "english": "That came out wrong.",
+        "chinese": "我刚才没表达好。"
+      },
+      {
+        "number": 12,
+        "english": "That's not what I meant.",
+        "chinese": "我不是那个意思。"
+      },
+      {
+        "number": 13,
+        "english": "Let me try that again.",
+        "chinese": "让我重新说一遍。"
+      },
+      {
+        "number": 14,
+        "english": "I spoke too soon.",
+        "chinese": "我话说早了。"
+      },
+      {
+        "number": 15,
+        "english": "Did I just say that out loud?",
+        "chinese": "我刚才把心里话说出来了？"
+      },
+      {
+        "number": 16,
+        "english": "Sorry, I lost my train of thought.",
+        "chinese": "不好意思，我突然忘记说到哪儿了。"
+      },
+      {
+        "number": 17,
+        "english": "I can't find the right word.",
+        "chinese": "我一下子想不到该用什么词。"
+      },
+      {
+        "number": 18,
+        "english": "My brain isn't working today.",
+        "chinese": "我今天脑子不太在线。"
+      },
+      {
+        "number": 19,
+        "english": "I meant Tuesday, not Thursday.",
+        "chinese": "我说的是周二，不是周四。"
+      },
+      {
+        "number": 20,
+        "english": "Can we pretend I didn't say that?",
+        "chinese": "能当我刚才没说过吗？"
+      },
+      {
+        "number": 21,
+        "english": "Oops, that was me.",
+        "chinese": "哎呀，是我弄的。"
+      },
+      {
+        "number": 22,
+        "english": "I pushed instead of pulled.",
+        "chinese": "我把拉门当成推门了。"
+      },
+      {
+        "number": 23,
+        "english": "Is this seat taken?",
+        "chinese": "这个座位有人吗？"
+      },
+      {
+        "number": 24,
+        "english": "I think I'm in the wrong room.",
+        "chinese": "我好像走错房间了。"
+      },
+      {
+        "number": 25,
+        "english": "Sorry, my phone wasn't on silent.",
+        "chinese": "抱歉，我手机没调静音。"
+      },
+      {
+        "number": 26,
+        "english": "I spilled a little water.",
+        "chinese": "我不小心洒了点水。"
+      },
+      {
+        "number": 27,
+        "english": "Do you have a tissue?",
+        "chinese": "你有纸巾吗？"
+      },
+      {
+        "number": 28,
+        "english": "There's something on my face, isn't there?",
+        "chinese": "我脸上是不是沾东西了？"
+      },
+      {
+        "number": 29,
+        "english": "My camera was on the whole time?",
+        "chinese": "我的摄像头一直开着？"
+      },
+      {
+        "number": 30,
+        "english": "I forgot to unmute myself.",
+        "chinese": "我忘了开麦。"
+      },
+      {
+        "number": 31,
+        "english": "Sorry, I missed the joke.",
+        "chinese": "不好意思，我没听懂那个笑话。"
+      },
+      {
+        "number": 32,
+        "english": "Was that a joke?",
+        "chinese": "你刚才是在开玩笑吗？"
+      },
+      {
+        "number": 33,
+        "english": "I laughed at the wrong moment.",
+        "chinese": "我笑得有点不是时候。"
+      },
+      {
+        "number": 34,
+        "english": "Well, this is awkward.",
+        "chinese": "嗯，这就有点尴尬了。"
+      },
+      {
+        "number": 35,
+        "english": "I wasn't sure how to respond.",
+        "chinese": "我刚才不知道怎么接话。"
+      },
+      {
+        "number": 36,
+        "english": "What were we talking about?",
+        "chinese": "我们刚才聊到哪儿了？"
+      },
+      {
+        "number": 37,
+        "english": "Did you say something?",
+        "chinese": "你刚才说话了吗？"
+      },
+      {
+        "number": 38,
+        "english": "Sorry, go ahead.",
+        "chinese": "不好意思，你先说。"
+      },
+      {
+        "number": 39,
+        "english": "We both started talking at once.",
+        "chinese": "我们俩同时开口了。"
+      },
+      {
+        "number": 40,
+        "english": "So, how's your day going?",
+        "chinese": "对了，你今天过得怎么样？"
+      },
+      {
+        "number": 41,
+        "english": "No worries. It happens.",
+        "chinese": "没事，谁都会遇到。"
+      },
+      {
+        "number": 42,
+        "english": "I've done that too.",
+        "chinese": "我也干过这事。"
+      },
+      {
+        "number": 43,
+        "english": "Let's just move on.",
+        "chinese": "咱们翻篇吧。"
+      },
+      {
+        "number": 44,
+        "english": "Nobody noticed. You're fine.",
+        "chinese": "没人注意到，没事的。"
+      },
+      {
+        "number": 45,
+        "english": "That could have been worse.",
+        "chinese": "还好，没尴尬到最坏的地步。"
+      },
+      {
+        "number": 46,
+        "english": "I'll laugh about this later.",
+        "chinese": "过阵子想起来我肯定会笑。"
+      },
+      {
+        "number": 47,
+        "english": "Thanks for being cool about it.",
+        "chinese": "谢谢你没放在心上。"
+      },
+      {
+        "number": 48,
+        "english": "At least we have a funny story now.",
+        "chinese": "至少现在有个好笑的故事了。"
+      },
+      {
+        "number": 49,
+        "english": "Let's keep this between us.",
+        "chinese": "这事就咱们知道就好。"
+      },
+      {
+        "number": 50,
+        "english": "Okay, take two!",
+        "chinese": "好，重来一遍！"
+      }
+    ],
+    "titles": [
+      "尴尬时刻时能直接用的50句英语",
+      "每天学10句｜尴尬时刻英语合集",
+      "一句就能接住场面｜尴尬时刻英语",
+      "收藏慢慢学：尴尬时刻英语50句",
+      "五个生活场景，学会用英语聊尴尬时刻"
+    ],
+    "title": "尴尬时刻时能直接用的50句英语",
+    "body": "认错人、叫错名字、笑点没跟上，尴尬现场也能用一句简单英语接住。\n\n这次整理了50句尴尬时刻时用得上的英语，分成5页，每天挑10句读一读。中文用日常说话的方式理解，不用逐字背。\n\n你最想先用哪一句？",
+    "tags": [
+      "#英语学习",
+      "#实用英语",
+      "#英语口语",
+      "#碎片化学习",
+      "#每天学英语",
+      "#生活英语"
+    ]
+  },
+  "output_path": "output/尴尬时刻英语50句-25769a-r1",
+  "pages": [
+    {
+      "page": 1,
+      "group": "认错人了",
+      "width": 900,
+      "height": 1200,
+      "sentences": [
+        {
+          "number": 1,
+          "english": "Sorry, I thought you were my friend.",
+          "chinese": "不好意思，我还以为你是我朋友。"
+        },
+        {
+          "number": 2,
+          "english": "Have we met before?",
+          "chinese": "我们以前见过吗？"
+        },
+        {
+          "number": 3,
+          "english": "You look really familiar.",
+          "chinese": "你看着好眼熟。"
+        },
+        {
+          "number": 4,
+          "english": "Oh, wrong person!",
+          "chinese": "啊，认错人了！"
+        },
+        {
+          "number": 5,
+          "english": "I was waving at my friend.",
+          "chinese": "我刚才是在跟朋友招手。"
+        },
+        {
+          "number": 6,
+          "english": "I forgot your name. Sorry!",
+          "chinese": "抱歉，我忘记你的名字了！"
+        },
+        {
+          "number": 7,
+          "english": "Could you remind me of your name?",
+          "chinese": "能再告诉我一下你的名字吗？"
+        },
+        {
+          "number": 8,
+          "english": "I mixed up your names.",
+          "chinese": "我把你们的名字搞混了。"
+        },
+        {
+          "number": 9,
+          "english": "I didn't recognize you at first.",
+          "chinese": "我一开始没认出你。"
+        },
+        {
+          "number": 10,
+          "english": "Let's start over. I'm Alex.",
+          "chinese": "重新认识一下吧，我叫Alex。"
+        }
+      ]
+    },
+    {
+      "page": 2,
+      "group": "嘴比脑子快",
+      "width": 900,
+      "height": 1200,
+      "sentences": [
+        {
+          "number": 11,
+          "english": "That came out wrong.",
+          "chinese": "我刚才没表达好。"
+        },
+        {
+          "number": 12,
+          "english": "That's not what I meant.",
+          "chinese": "我不是那个意思。"
+        },
+        {
+          "number": 13,
+          "english": "Let me try that again.",
+          "chinese": "让我重新说一遍。"
+        },
+        {
+          "number": 14,
+          "english": "I spoke too soon.",
+          "chinese": "我话说早了。"
+        },
+        {
+          "number": 15,
+          "english": "Did I just say that out loud?",
+          "chinese": "我刚才把心里话说出来了？"
+        },
+        {
+          "number": 16,
+          "english": "Sorry, I lost my train of thought.",
+          "chinese": "不好意思，我突然忘记说到哪儿了。"
+        },
+        {
+          "number": 17,
+          "english": "I can't find the right word.",
+          "chinese": "我一下子想不到该用什么词。"
+        },
+        {
+          "number": 18,
+          "english": "My brain isn't working today.",
+          "chinese": "我今天脑子不太在线。"
+        },
+        {
+          "number": 19,
+          "english": "I meant Tuesday, not Thursday.",
+          "chinese": "我说的是周二，不是周四。"
+        },
+        {
+          "number": 20,
+          "english": "Can we pretend I didn't say that?",
+          "chinese": "能当我刚才没说过吗？"
+        }
+      ]
+    },
+    {
+      "page": 3,
+      "group": "小失误现场",
+      "width": 900,
+      "height": 1200,
+      "sentences": [
+        {
+          "number": 21,
+          "english": "Oops, that was me.",
+          "chinese": "哎呀，是我弄的。"
+        },
+        {
+          "number": 22,
+          "english": "I pushed instead of pulled.",
+          "chinese": "我把拉门当成推门了。"
+        },
+        {
+          "number": 23,
+          "english": "Is this seat taken?",
+          "chinese": "这个座位有人吗？"
+        },
+        {
+          "number": 24,
+          "english": "I think I'm in the wrong room.",
+          "chinese": "我好像走错房间了。"
+        },
+        {
+          "number": 25,
+          "english": "Sorry, my phone wasn't on silent.",
+          "chinese": "抱歉，我手机没调静音。"
+        },
+        {
+          "number": 26,
+          "english": "I spilled a little water.",
+          "chinese": "我不小心洒了点水。"
+        },
+        {
+          "number": 27,
+          "english": "Do you have a tissue?",
+          "chinese": "你有纸巾吗？"
+        },
+        {
+          "number": 28,
+          "english": "There's something on my face, isn't there?",
+          "chinese": "我脸上是不是沾东西了？"
+        },
+        {
+          "number": 29,
+          "english": "My camera was on the whole time?",
+          "chinese": "我的摄像头一直开着？"
+        },
+        {
+          "number": 30,
+          "english": "I forgot to unmute myself.",
+          "chinese": "我忘了开麦。"
+        }
+      ]
+    },
+    {
+      "page": 4,
+      "group": "聊天突然冷场",
+      "width": 900,
+      "height": 1200,
+      "sentences": [
+        {
+          "number": 31,
+          "english": "Sorry, I missed the joke.",
+          "chinese": "不好意思，我没听懂那个笑话。"
+        },
+        {
+          "number": 32,
+          "english": "Was that a joke?",
+          "chinese": "你刚才是在开玩笑吗？"
+        },
+        {
+          "number": 33,
+          "english": "I laughed at the wrong moment.",
+          "chinese": "我笑得有点不是时候。"
+        },
+        {
+          "number": 34,
+          "english": "Well, this is awkward.",
+          "chinese": "嗯，这就有点尴尬了。"
+        },
+        {
+          "number": 35,
+          "english": "I wasn't sure how to respond.",
+          "chinese": "我刚才不知道怎么接话。"
+        },
+        {
+          "number": 36,
+          "english": "What were we talking about?",
+          "chinese": "我们刚才聊到哪儿了？"
+        },
+        {
+          "number": 37,
+          "english": "Did you say something?",
+          "chinese": "你刚才说话了吗？"
+        },
+        {
+          "number": 38,
+          "english": "Sorry, go ahead.",
+          "chinese": "不好意思，你先说。"
+        },
+        {
+          "number": 39,
+          "english": "We both started talking at once.",
+          "chinese": "我们俩同时开口了。"
+        },
+        {
+          "number": 40,
+          "english": "So, how's your day going?",
+          "chinese": "对了，你今天过得怎么样？"
+        }
+      ]
+    },
+    {
+      "page": 5,
+      "group": "轻松翻篇",
+      "width": 900,
+      "height": 1200,
+      "sentences": [
+        {
+          "number": 41,
+          "english": "No worries. It happens.",
+          "chinese": "没事，谁都会遇到。"
+        },
+        {
+          "number": 42,
+          "english": "I've done that too.",
+          "chinese": "我也干过这事。"
+        },
+        {
+          "number": 43,
+          "english": "Let's just move on.",
+          "chinese": "咱们翻篇吧。"
+        },
+        {
+          "number": 44,
+          "english": "Nobody noticed. You're fine.",
+          "chinese": "没人注意到，没事的。"
+        },
+        {
+          "number": 45,
+          "english": "That could have been worse.",
+          "chinese": "还好，没尴尬到最坏的地步。"
+        },
+        {
+          "number": 46,
+          "english": "I'll laugh about this later.",
+          "chinese": "过阵子想起来我肯定会笑。"
+        },
+        {
+          "number": 47,
+          "english": "Thanks for being cool about it.",
+          "chinese": "谢谢你没放在心上。"
+        },
+        {
+          "number": 48,
+          "english": "At least we have a funny story now.",
+          "chinese": "至少现在有个好笑的故事了。"
+        },
+        {
+          "number": 49,
+          "english": "Let's keep this between us.",
+          "chinese": "这事就咱们知道就好。"
+        },
+        {
+          "number": 50,
+          "english": "Okay, take two!",
+          "chinese": "好，重来一遍！"
+        }
+      ]
+    }
+  ]
+}

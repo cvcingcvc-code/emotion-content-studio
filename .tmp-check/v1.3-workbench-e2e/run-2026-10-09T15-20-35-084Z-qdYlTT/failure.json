@@ -1,0 +1,5 @@
+{
+  "checks": [],
+  "browserErrors": [],
+  "error": "locator.selectOption: Error: strict mode violation: getByLabel(/内容账号/) resolved to 2 elements:\n    1) <select aria-label=\"切换内容账号\">…</select> aka getByLabel('切换内容账号')\n    2) <select>…</select> aka getByLabel('内容账号个人成长情绪灵感库')\n\nCall log:\n\u001b[2m  - waiting for getByLabel(/内容账号/)\u001b[22m\n"
+}
