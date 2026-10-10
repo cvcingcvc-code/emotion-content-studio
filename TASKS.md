@@ -7,4 +7,4 @@
 - [x] Configurable compatible provider, paid gate, isolated credentials, retry/fallback/cost tests; 22 new simulated cases and full working-tree check PASS.
 - [x] Batch content workbench and export/duplicate behavior; stage3 check 256 passed / 16 skipped, browser E2E 10 checkpoints PASS.
 - [x] Document 16 PostgreSQL skips, update stale assertions, process restart E2E 11 checkpoints PASS and English five-page smoke PASS.
-- [ ] Final checks, phase commits and V1.3 handoff.
+- [x] Final check 256 passed / 16 skipped, recovery CLI round-trips and non-overwrite proof, phase commits and V1.3 handoff dated 2026-10-10. Ordinary GitHub push authorized; keep its local receipt.

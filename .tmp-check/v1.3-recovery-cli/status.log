@@ -1,0 +1,9 @@
+
+> emotion-content-studio@0.1.0 persistence
+> npm run persistence -w @emotion-studio/api -- status --database C:\Users\lin\Documents\ChatGPT\情绪灵感库\emotion-content-studio\.tmp-check\v1.3-restart-e2e\run-2026-10-09T15-44-32-061Z-yfyYy8\studio.sqlite
+
+
+> @emotion-studio/api@0.1.0 persistence
+> tsx src/content/persistence-cli.ts status --database C:\Users\lin\Documents\ChatGPT\情绪灵感库\emotion-content-studio\.tmp-check\v1.3-restart-e2e\run-2026-10-09T15-44-32-061Z-yfyYy8\studio.sqlite
+
+{"repository":"sqlite","migrations":[{"name":"0001_local_persistence.sql"}],"integrity":{"integrity_check":"ok"}}

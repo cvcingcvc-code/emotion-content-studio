@@ -1,0 +1,16 @@
+
+> emotion-content-studio@0.1.0 persistence
+> npm run persistence -w @emotion-studio/api -- backup --database C:\Users\lin\Documents\ChatGPT\情绪灵感库\emotion-content-studio\.tmp-check\v1.3-restart-e2e\run-2026-10-09T15-44-32-061Z-yfyYy8\studio.sqlite --out C:\Users\lin\Documents\ChatGPT\情绪灵感库\emotion-content-studio\.tmp-check\v1.3-recovery-cli\backup.sqlite
+
+
+> @emotion-studio/api@0.1.0 persistence
+> tsx src/content/persistence-cli.ts backup --database C:\Users\lin\Documents\ChatGPT\情绪灵感库\emotion-content-studio\.tmp-check\v1.3-restart-e2e\run-2026-10-09T15-44-32-061Z-yfyYy8\studio.sqlite --out C:\Users\lin\Documents\ChatGPT\情绪灵感库\emotion-content-studio\.tmp-check\v1.3-recovery-cli\backup.sqlite
+
+EEXIST: file already exists, open 'C:\Users\lin\Documents\ChatGPT\情绪灵感库\emotion-content-studio\.tmp-check\v1.3-recovery-cli\backup.sqlite'
+npm error Lifecycle script `persistence` failed with error:
+npm error code 1
+npm error path C:\Users\lin\Documents\ChatGPT\情绪灵感库\emotion-content-studio\apps\api
+npm error workspace @emotion-studio/api@0.1.0
+npm error location C:\Users\lin\Documents\ChatGPT\情绪灵感库\emotion-content-studio\apps\api
+npm error command failed
+npm error command C:\WINDOWS\system32\cmd.exe /d /s /c tsx src/content/persistence-cli.ts backup --database C:\Users\lin\Documents\ChatGPT\情绪灵感库\emotion-content-studio\.tmp-check\v1.3-restart-e2e\run-2026-10-09T15-44-32-061Z-yfyYy8\studio.sqlite --out C:\Users\lin\Documents\ChatGPT\情绪灵感库\emotion-content-studio\.tmp-check\v1.3-recovery-cli\backup.sqlite

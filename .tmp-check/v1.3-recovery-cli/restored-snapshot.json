@@ -1,0 +1,741 @@
+{
+  "format": "emotion-studio.persistence.v1",
+  "exportedAt": "2026-10-09T15:47:25.923Z",
+  "checksum": "ebc8c5725e6f6a56163bbc8e7ad63df75f4d1dda227ee8d7da57e4b3dc8503b6",
+  "data": {
+    "items": [
+      {
+        "id": "22724f8b-4851-4042-bf2c-37224bfa56c3",
+        "accountId": "personal_growth",
+        "sourceType": "daily_review",
+        "contentLane": "growth_review",
+        "originalContent": "今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做。对方需要竖版，我却交了横版，花了一下午返工。我当时立刻动手，问题是没有把验收标准问清楚。我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认。",
+        "content": "今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做。对方需要竖版，我却交了横版，花了一下午返工。我当时立刻动手，问题是没有把验收标准问清楚。我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认。",
+        "author": null,
+        "likes": 0,
+        "source": "本人手动输入",
+        "sourcePlatform": null,
+        "sourceUrl": null,
+        "licenseStatus": "original",
+        "emotion": null,
+        "emotionScore": null,
+        "resonanceScore": null,
+        "category": null,
+        "tags": [],
+        "scene": null,
+        "relationshipType": null,
+        "theme": null,
+        "analysisKind": "growth.v1",
+        "analysis": {
+          "kind": "growth.v1",
+          "truthAnchors": [
+            {
+              "id": "anchor-1",
+              "kind": "time",
+              "quote": "今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做。"
+            },
+            {
+              "id": "anchor-2",
+              "kind": "event",
+              "quote": "对方需要竖版，我却交了横版，花了一下午返工。"
+            },
+            {
+              "id": "anchor-3",
+              "kind": "event",
+              "quote": "我当时立刻动手，问题是没有把验收标准问清楚。"
+            },
+            {
+              "id": "anchor-4",
+              "kind": "event",
+              "quote": "我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认。"
+            }
+          ],
+          "coreEvent": {
+            "text": "今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做。",
+            "anchorIds": [
+              "anchor-1"
+            ]
+          },
+          "coreConflict": {
+            "text": "眼前的现实压力与下一步选择之间存在冲突。",
+            "anchorIds": [
+              "anchor-1"
+            ]
+          },
+          "emotions": [
+            {
+              "label": "复杂",
+              "intensity": 68,
+              "evidenceAnchorIds": [
+                "anchor-1"
+              ]
+            }
+          ],
+          "rootProblem": {
+            "text": "信息不足时，人容易把不确定性理解成对自己的否定。",
+            "anchorIds": [
+              "anchor-1"
+            ]
+          },
+          "audiencePain": [
+            "不知道如何拆解眼前的问题",
+            "在不确定中容易反复自我怀疑"
+          ],
+          "universalResonance": "很多普通人面对选择时，都需要先区分事实、感受与尚未验证的判断。",
+          "turningPoint": null,
+          "solution": null,
+          "actionableAdvice": [
+            "接下来可以先写下已经确认的事实，再列出仍需补充的信息。",
+            "把下一步缩小成一个今天能够完成的行动，并在行动后重新复盘。",
+            "如果涉及重要决定，可以先向可信任的人核对盲点，而不是急着得出结论。"
+          ],
+          "titleAngles": [
+            "当选择没有标准答案时",
+            "先把事实和焦虑分开",
+            "普通人如何走出反复内耗"
+          ],
+          "riskFlags": [],
+          "forbiddenInventions": [
+            "person",
+            "dialogue",
+            "amount",
+            "time",
+            "result",
+            "experience"
+          ],
+          "missingInformation": [
+            "用户未提供明确转折点",
+            "用户未提供已经采取的处理方式",
+            "最终结果需本人补充确认"
+          ]
+        },
+        "analysisProvider": "mock",
+        "analysisModel": "mock-growth-analyzer-v1",
+        "analyzedAt": "2026-10-09T15:44:40.626Z",
+        "isFavorite": false,
+        "isPublished": false,
+        "collectedAt": "2026-10-09T15:44:40.592Z",
+        "importedAt": "2026-10-09T15:44:40.592Z"
+      }
+    ],
+    "generated": [
+      {
+        "id": "generated-b7f35f8d-c010-4b57-bd4d-011ab5af6cb6",
+        "accountId": "personal_growth",
+        "contentLane": "growth_review",
+        "outputKind": "growth_post.v1",
+        "output": {
+          "kind": "growth_post.v1",
+          "titles": [
+            "当选择没有标准答案时",
+            "先把事实和焦虑分开",
+            "普通人如何走出反复内耗"
+          ],
+          "recommendedTitle": "当选择没有标准答案时",
+          "body": "进入新环境时，最容易误读的不是工作量，而是沉默本身。一次看似普通的记录，常常会让人开始猜测团队、关系和自己的位置。\n\n更稳妥的做法，是把已经发生的事实、当下的感受和还没有证据的判断分开。样本还少的时候，不急着替一个环境下结论，也不急着把未知理解成对自己的否定。\n\n下一次可以先记录可重复观察的信号，再给判断加上置信度；在更多信息出现前，只保留一个能被验证的问题。这样既不会忽略直觉，也不会让一次经历替你决定全部答案。\n\n你会用什么信号判断一个新环境值得继续观察？",
+          "hashtags": [
+            "#成长复盘",
+            "#停止内耗",
+            "#行动方法"
+          ],
+          "hook": "进入新环境时，最容易误读的不是工作量，而是沉默本身。",
+          "endingQuestion": "你会用什么信号判断一个新环境值得继续观察？",
+          "usedTruthAnchorIds": [
+            "anchor-1",
+            "anchor-2",
+            "anchor-3",
+            "anchor-4"
+          ],
+          "factClaims": [
+            {
+              "claim": "今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做。",
+              "truthAnchorIds": [
+                "anchor-1"
+              ]
+            },
+            {
+              "claim": "对方需要竖版，我却交了横版，花了一下午返工。",
+              "truthAnchorIds": [
+                "anchor-2"
+              ]
+            },
+            {
+              "claim": "我当时立刻动手，问题是没有把验收标准问清楚。",
+              "truthAnchorIds": [
+                "anchor-3"
+              ]
+            },
+            {
+              "claim": "我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认。",
+              "truthAnchorIds": [
+                "anchor-4"
+              ]
+            }
+          ],
+          "story": "把一次具体经历还原成更普遍的场景：刚进入团队时，表面节奏、临时安排和成员互动会给人不同信号。",
+          "problemBreakdown": "当样本还很少时，把一次观察直接当成团队结论，容易把未知当成答案。",
+          "solution": "先记录可重复观察的事实，再给判断加上置信度；在更多样本出现前，只保留可验证的问题。",
+          "visualSuggestions": [
+            {
+              "kind": "real_photo",
+              "count": 1,
+              "description": "不带公司标识的通勤、桌面或笔记照片，保留真实记录感。"
+            },
+            {
+              "kind": "text_card",
+              "count": 2,
+              "description": "把‘事实 / 感受 / 判断’做成两张低饱和文字卡片。"
+            }
+          ]
+        },
+        "title": "当选择没有标准答案时",
+        "body": "进入新环境时，最容易误读的不是工作量，而是沉默本身。一次看似普通的记录，常常会让人开始猜测团队、关系和自己的位置。\n\n更稳妥的做法，是把已经发生的事实、当下的感受和还没有证据的判断分开。样本还少的时候，不急着替一个环境下结论，也不急着把未知理解成对自己的否定。\n\n下一次可以先记录可重复观察的信号，再给判断加上置信度；在更多信息出现前，只保留一个能被验证的问题。这样既不会忽略直觉，也不会让一次经历替你决定全部答案。\n\n你会用什么信号判断一个新环境值得继续观察？",
+        "hashtags": [
+          "#成长复盘",
+          "#停止内耗",
+          "#行动方法"
+        ],
+        "status": "draft",
+        "confirmedAt": null,
+        "publishability": "eligible",
+        "reviewIssues": [
+          "请逐条核对事实锚点；问题拆解属于建议，不代表已验证的事实。"
+        ],
+        "generatorLabel": "DEMO AI 生成结果",
+        "provider": "mock",
+        "model": "mock-growth-generator-v1",
+        "contentIds": [
+          "22724f8b-4851-4042-bf2c-37224bfa56c3"
+        ],
+        "promptVersion": "personal_growth.demo.v1",
+        "reviewDecision": null,
+        "humanEditedOutput": null,
+        "createdAt": "2026-10-09T15:44:40.639Z"
+      }
+    ],
+    "posts": [],
+    "growthLoop": {
+      "retrospectives": [
+        {
+          "date": "2026-10-09",
+          "whatHappened": "今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做。对方需要竖版，我却交了横版，花了一下午返工。我当时立刻动手，问题是没有把验收标准问清楚。我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认。",
+          "myReaction": "",
+          "whatBotheredMe": "",
+          "whatCouldBeHandledBetter": "",
+          "lessonLearned": "",
+          "nextAction": "",
+          "optionalNote": "合成输入已经核对。",
+          "id": "c6221901-8f99-42c5-8a73-cbde7aa580fe",
+          "revision": 2,
+          "createdAt": "2026-10-09T15:44:40.207Z",
+          "updatedAt": "2026-10-09T15:44:40.237Z",
+          "analysis": {
+            "summary": "今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做。对方需要竖版，我却交了横版，花了一下午返工。我当时立刻动手，问题是没有把验收标准问清楚。我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认。",
+            "coreProblem": "今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做",
+            "decisionPattern": "可供核对的行为线索：我当时立刻动手，问题是没有把验收标准问清楚",
+            "betterApproach": "补充当时有哪些可选行动，再比较各自的代价",
+            "lesson": "我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认",
+            "nextAction": "记录下一次出现相似情境时可以先做的一个具体动作",
+            "contentPotential": 7,
+            "contentReason": "事件、困扰与处理建议足够具体，可尝试分享；分数是离线规则评估，不预测流量",
+            "recommendedAccount": "growth",
+            "recommendedContentType": "solution",
+            "contentAngle": "从一个真实场景解释：今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做",
+            "recommendedTitleIdeas": [
+              "这件事，下次我会换个处理方式",
+              "一次真实经历留下的提醒",
+              "我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方"
+            ],
+            "facts": [
+              "今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做。对方需要竖版，我却交了横版，花了一下午返工。我当时立刻动手，问题是没有把验收标准问清楚。我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认。",
+              "合成输入已经核对。"
+            ],
+            "interpretations": [
+              "行为模式（推断）：面对「今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做」时，记录里写的第一反应是「我当时立刻动手，问题是没有把验收标准问清楚」",
+              "改法空间（推断）：当时还存在其他可选行动，需要在下一个相似场景里验证",
+              "经验迁移（推断）：我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认",
+              "内容价值（推断）：事件、困扰与处理建议较具体，适合分享；分数是离线规则评估，不预测流量"
+            ]
+          },
+          "analysisProvider": "mock"
+        }
+      ],
+      "contents": [
+        {
+          "id": "535ab12c-a4bc-436a-9f75-64fc3d45b22b",
+          "revision": 4,
+          "account": "growth",
+          "title": "我先确认三项交付标准",
+          "topic": "返工前先确认交付标准",
+          "contentType": "solution",
+          "sourceRetrospectiveId": "c6221901-8f99-42c5-8a73-cbde7aa580fe",
+          "sourceContentId": null,
+          "englishDraftId": null,
+          "createdAt": "2026-10-09T15:44:40.250Z",
+          "updatedAt": "2026-10-09T15:44:40.369Z",
+          "publishedAt": "2026-10-09T15:43:40.359Z",
+          "publishTime": "2026-10-09T15:43:40.359Z",
+          "status": "published",
+          "writing": {
+            "title": "我先确认三项交付标准",
+            "body": "人工核对后的合成正文：我把使用场景、交付格式和截止时间写成清单，发给对方确认后再开始。下次继续验证这一步是否减少返工。",
+            "corePoint": "我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认",
+            "solution": "我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认",
+            "endingQuestion": "遇到类似情况，你会先确认哪件事？",
+            "tags": [
+              "#真实复盘",
+              "#工作成长",
+              "#行动记录"
+            ]
+          },
+          "english": null,
+          "aiDraft": {
+            "title": "返工前先确认交付标准",
+            "body": "今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做。\n\n下次我想尝试：我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认\n\n这是下一次的计划，还需要在真实场景里验证。",
+            "corePoint": "我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认",
+            "solution": "我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认",
+            "endingQuestion": "遇到类似情况，你会先确认哪件事？",
+            "tags": [
+              "#真实复盘",
+              "#工作成长",
+              "#行动记录"
+            ]
+          },
+          "preferenceSignal": {
+            "titleRewritten": true,
+            "removedPhrases": [
+              "返工前先确认交付标准",
+              "今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做",
+              "下次我想尝试：我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认",
+              "这是下一次的计划，还需要在真实场景里验证"
+            ],
+            "addedPhrases": [
+              "我先确认三项交付标准",
+              "人工核对后的合成正文：我把使用场景、交付格式和截止时间写成清单，发给对方确认后再开始",
+              "下次继续验证这一步是否减少返工"
+            ],
+            "lowerIntensity": false,
+            "removedDrama": false,
+            "perspectiveShift": false,
+            "summary": "人工修改信号：重写了标题；删掉 4 句原稿；补写 3 句。"
+          },
+          "rejectReason": null,
+          "rejectedAt": null,
+          "note": "已人工核对合成事实。",
+          "provider": "mock",
+          "isDemo": false,
+          "experiment": null,
+          "debug": {
+            "promptVersion": "growth-loop.v3",
+            "provider": "mock",
+            "model": null,
+            "factsUsed": [
+              "今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做。对方需要竖版，我却交了横版，花了一下午返工。我当时立刻动手，问题是没有把验收标准问清楚。我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认。",
+              "合成输入已经核对。"
+            ],
+            "interpretationsUsed": [
+              "行为模式（推断）：面对「今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做」时，记录里写的第一反应是「我当时立刻动手，问题是没有把验收标准问清楚」",
+              "改法空间（推断）：当时还存在其他可选行动，需要在下一个相似场景里验证",
+              "经验迁移（推断）：我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认",
+              "内容价值（推断）：事件、困扰与处理建议较具体，适合分享；分数是离线规则评估，不预测流量"
+            ],
+            "strategyUsed": [],
+            "experimentUsed": null,
+            "userPreferenceUsed": [],
+            "feedbackUsed": [],
+            "constraintsApplied": [],
+            "finalGenerationContext": "account=growth | facts=2 | interpretations=4 | strategy={\"works\":[],\"avoid\":[],\"testing\":[],\"watch\":[],\"unknown\":[]} | userPreferences=[] | learnings=0 | experiment=none | promptVersion=growth-loop.v3"
+          }
+        },
+        {
+          "id": "ad4ab487-5f5e-4c03-877d-f8b96baec8a2",
+          "revision": 1,
+          "account": "growth",
+          "title": "保留待审核的生成历史",
+          "topic": "保留待审核的生成历史",
+          "contentType": "solution",
+          "sourceRetrospectiveId": "c6221901-8f99-42c5-8a73-cbde7aa580fe",
+          "sourceContentId": null,
+          "englishDraftId": null,
+          "createdAt": "2026-10-09T15:44:40.442Z",
+          "updatedAt": "2026-10-09T15:44:40.452Z",
+          "publishedAt": null,
+          "publishTime": null,
+          "status": "review",
+          "writing": {
+            "title": "保留待审核的生成历史",
+            "body": "今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做。\n\n下次我想尝试：我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认\n\n这是下一次的计划，还需要在真实场景里验证。",
+            "corePoint": "我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认",
+            "solution": "我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认",
+            "endingQuestion": "遇到类似情况，你会先确认哪件事？",
+            "tags": [
+              "#真实复盘",
+              "#工作成长",
+              "#行动记录"
+            ]
+          },
+          "english": null,
+          "aiDraft": {
+            "title": "保留待审核的生成历史",
+            "body": "今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做。\n\n下次我想尝试：我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认\n\n这是下一次的计划，还需要在真实场景里验证。",
+            "corePoint": "我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认",
+            "solution": "我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认",
+            "endingQuestion": "遇到类似情况，你会先确认哪件事？",
+            "tags": [
+              "#真实复盘",
+              "#工作成长",
+              "#行动记录"
+            ]
+          },
+          "preferenceSignal": null,
+          "rejectReason": null,
+          "rejectedAt": null,
+          "note": "",
+          "provider": "mock",
+          "isDemo": false,
+          "experiment": null,
+          "debug": {
+            "promptVersion": "growth-loop.v3",
+            "provider": "mock",
+            "model": null,
+            "factsUsed": [
+              "今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做。对方需要竖版，我却交了横版，花了一下午返工。我当时立刻动手，问题是没有把验收标准问清楚。我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认。",
+              "合成输入已经核对。"
+            ],
+            "interpretationsUsed": [
+              "行为模式（推断）：面对「今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做」时，记录里写的第一反应是「我当时立刻动手，问题是没有把验收标准问清楚」",
+              "改法空间（推断）：当时还存在其他可选行动，需要在下一个相似场景里验证",
+              "经验迁移（推断）：我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认",
+              "内容价值（推断）：事件、困扰与处理建议较具体，适合分享；分数是离线规则评估，不预测流量"
+            ],
+            "strategyUsed": [
+              "标题更接近自己会写的说法"
+            ],
+            "experimentUsed": null,
+            "userPreferenceUsed": [
+              "标题更接近自己会写的说法"
+            ],
+            "feedbackUsed": [
+              {
+                "feedbackId": "a71dc5c6-5900-4d2c-9334-50c05a58ec55",
+                "contentId": "535ab12c-a4bc-436a-9f75-64fc3d45b22b",
+                "source": "feedback",
+                "verdict": "INSUFFICIENT_EVIDENCE",
+                "confidence": "LOW",
+                "createdAt": "2026-10-09T15:44:40.411Z",
+                "experimentId": "da2b91bb-bfc1-4f1b-b7ea-72f0f3174075",
+                "text": "《返工前先确认交付标准》上一轮证据不足（置信度 LOW）；本轮不要据此改动写法，只把它当作待验证信号；上一轮提议的唯一变量 hook=scene_first（实验 da2b91bb-bfc1-4f1b-b7ea-72f0f3174075，状态 proposed）"
+              }
+            ],
+            "constraintsApplied": [],
+            "finalGenerationContext": "account=growth | facts=2 | interpretations=4 | strategy={\"works\":[],\"avoid\":[],\"testing\":[],\"watch\":[\"标题更接近自己会写的说法\"],\"unknown\":[]} | userPreferences=[\"标题更接近自己会写的说法\"] | learnings=1 | experiment=none | promptVersion=growth-loop.v3"
+          }
+        },
+        {
+          "id": "13405711-6cac-4be7-89d1-e57f1ad3f202",
+          "revision": 2,
+          "account": "growth",
+          "title": "保留已通过审核的草稿",
+          "topic": "保留已通过审核的草稿",
+          "contentType": "solution",
+          "sourceRetrospectiveId": "c6221901-8f99-42c5-8a73-cbde7aa580fe",
+          "sourceContentId": null,
+          "englishDraftId": null,
+          "createdAt": "2026-10-09T15:44:40.470Z",
+          "updatedAt": "2026-10-09T15:44:40.501Z",
+          "publishedAt": null,
+          "publishTime": null,
+          "status": "ready",
+          "writing": {
+            "title": "保留已通过审核的草稿",
+            "body": "今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做。\n\n下次我想尝试：我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认\n\n这是下一次的计划，还需要在真实场景里验证。",
+            "corePoint": "我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认",
+            "solution": "我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认",
+            "endingQuestion": "遇到类似情况，你会先确认哪件事？",
+            "tags": [
+              "#真实复盘",
+              "#工作成长",
+              "#行动记录"
+            ]
+          },
+          "english": null,
+          "aiDraft": {
+            "title": "保留已通过审核的草稿",
+            "body": "今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做。\n\n下次我想尝试：我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认\n\n这是下一次的计划，还需要在真实场景里验证。",
+            "corePoint": "我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认",
+            "solution": "我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认",
+            "endingQuestion": "遇到类似情况，你会先确认哪件事？",
+            "tags": [
+              "#真实复盘",
+              "#工作成长",
+              "#行动记录"
+            ]
+          },
+          "preferenceSignal": {
+            "titleRewritten": false,
+            "removedPhrases": [],
+            "addedPhrases": [],
+            "lowerIntensity": false,
+            "removedDrama": false,
+            "perspectiveShift": false,
+            "summary": "人工修改信号：本次未检测到明确改写。"
+          },
+          "rejectReason": null,
+          "rejectedAt": null,
+          "note": "已审核，尚未记录发布。",
+          "provider": "mock",
+          "isDemo": false,
+          "experiment": null,
+          "debug": {
+            "promptVersion": "growth-loop.v3",
+            "provider": "mock",
+            "model": null,
+            "factsUsed": [
+              "今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做。对方需要竖版，我却交了横版，花了一下午返工。我当时立刻动手，问题是没有把验收标准问清楚。我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认。",
+              "合成输入已经核对。"
+            ],
+            "interpretationsUsed": [
+              "行为模式（推断）：面对「今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做」时，记录里写的第一反应是「我当时立刻动手，问题是没有把验收标准问清楚」",
+              "改法空间（推断）：当时还存在其他可选行动，需要在下一个相似场景里验证",
+              "经验迁移（推断）：我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认",
+              "内容价值（推断）：事件、困扰与处理建议较具体，适合分享；分数是离线规则评估，不预测流量"
+            ],
+            "strategyUsed": [
+              "标题更接近自己会写的说法"
+            ],
+            "experimentUsed": null,
+            "userPreferenceUsed": [
+              "标题更接近自己会写的说法"
+            ],
+            "feedbackUsed": [
+              {
+                "feedbackId": "a71dc5c6-5900-4d2c-9334-50c05a58ec55",
+                "contentId": "535ab12c-a4bc-436a-9f75-64fc3d45b22b",
+                "source": "feedback",
+                "verdict": "INSUFFICIENT_EVIDENCE",
+                "confidence": "LOW",
+                "createdAt": "2026-10-09T15:44:40.411Z",
+                "experimentId": "da2b91bb-bfc1-4f1b-b7ea-72f0f3174075",
+                "text": "《返工前先确认交付标准》上一轮证据不足（置信度 LOW）；本轮不要据此改动写法，只把它当作待验证信号；上一轮提议的唯一变量 hook=scene_first（实验 da2b91bb-bfc1-4f1b-b7ea-72f0f3174075，状态 proposed）"
+              }
+            ],
+            "constraintsApplied": [],
+            "finalGenerationContext": "account=growth | facts=2 | interpretations=4 | strategy={\"works\":[],\"avoid\":[],\"testing\":[],\"watch\":[\"标题更接近自己会写的说法\"],\"unknown\":[]} | userPreferences=[\"标题更接近自己会写的说法\"] | learnings=1 | experiment=none | promptVersion=growth-loop.v3"
+          }
+        },
+        {
+          "id": "71adbd93-a2f7-48b0-a676-0202c43d1895",
+          "revision": 2,
+          "account": "growth",
+          "title": "保留人工拒绝记录",
+          "topic": "保留人工拒绝记录",
+          "contentType": "solution",
+          "sourceRetrospectiveId": "c6221901-8f99-42c5-8a73-cbde7aa580fe",
+          "sourceContentId": null,
+          "englishDraftId": null,
+          "createdAt": "2026-10-09T15:44:40.519Z",
+          "updatedAt": "2026-10-09T15:44:40.566Z",
+          "publishedAt": null,
+          "publishTime": null,
+          "status": "rejected",
+          "writing": {
+            "title": "保留人工拒绝记录",
+            "body": "今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做。\n\n下次我想尝试：我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认\n\n这是下一次的计划，还需要在真实场景里验证。",
+            "corePoint": "我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认",
+            "solution": "我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认",
+            "endingQuestion": "遇到类似情况，你会先确认哪件事？",
+            "tags": [
+              "#真实复盘",
+              "#工作成长",
+              "#行动记录"
+            ]
+          },
+          "english": null,
+          "aiDraft": {
+            "title": "保留人工拒绝记录",
+            "body": "今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做。\n\n下次我想尝试：我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认\n\n这是下一次的计划，还需要在真实场景里验证。",
+            "corePoint": "我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认",
+            "solution": "我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认",
+            "endingQuestion": "遇到类似情况，你会先确认哪件事？",
+            "tags": [
+              "#真实复盘",
+              "#工作成长",
+              "#行动记录"
+            ]
+          },
+          "preferenceSignal": null,
+          "rejectReason": "bad_title",
+          "rejectedAt": "2026-10-09T15:44:40.566Z",
+          "note": "",
+          "provider": "mock",
+          "isDemo": false,
+          "experiment": null,
+          "debug": {
+            "promptVersion": "growth-loop.v3",
+            "provider": "mock",
+            "model": null,
+            "factsUsed": [
+              "今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做。对方需要竖版，我却交了横版，花了一下午返工。我当时立刻动手，问题是没有把验收标准问清楚。我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认。",
+              "合成输入已经核对。"
+            ],
+            "interpretationsUsed": [
+              "行为模式（推断）：面对「今天下午我接到活动物料修改任务，没有先确认使用对象和交付格式就开始做」时，记录里写的第一反应是「我当时立刻动手，问题是没有把验收标准问清楚」",
+              "改法空间（推断）：当时还存在其他可选行动，需要在下一个相似场景里验证",
+              "经验迁移（推断）：我学到的是先确认范围，下次我会先把使用场景、交付格式和截止时间发给对方确认",
+              "内容价值（推断）：事件、困扰与处理建议较具体，适合分享；分数是离线规则评估，不预测流量"
+            ],
+            "strategyUsed": [
+              "标题更接近自己会写的说法"
+            ],
+            "experimentUsed": null,
+            "userPreferenceUsed": [
+              "标题更接近自己会写的说法"
+            ],
+            "feedbackUsed": [
+              {
+                "feedbackId": "a71dc5c6-5900-4d2c-9334-50c05a58ec55",
+                "contentId": "535ab12c-a4bc-436a-9f75-64fc3d45b22b",
+                "source": "feedback",
+                "verdict": "INSUFFICIENT_EVIDENCE",
+                "confidence": "LOW",
+                "createdAt": "2026-10-09T15:44:40.411Z",
+                "experimentId": "da2b91bb-bfc1-4f1b-b7ea-72f0f3174075",
+                "text": "《返工前先确认交付标准》上一轮证据不足（置信度 LOW）；本轮不要据此改动写法，只把它当作待验证信号；上一轮提议的唯一变量 hook=scene_first（实验 da2b91bb-bfc1-4f1b-b7ea-72f0f3174075，状态 proposed）"
+              }
+            ],
+            "constraintsApplied": [],
+            "finalGenerationContext": "account=growth | facts=2 | interpretations=4 | strategy={\"works\":[],\"avoid\":[],\"testing\":[],\"watch\":[\"标题更接近自己会写的说法\"],\"unknown\":[]} | userPreferences=[\"标题更接近自己会写的说法\"] | learnings=1 | experiment=none | promptVersion=growth-loop.v3"
+          }
+        }
+      ],
+      "metrics": [
+        {
+          "views": 123,
+          "likes": 8,
+          "favorites": 4,
+          "comments": 2,
+          "followersGained": 1,
+          "note": "合成指标，未在外部平台发布。",
+          "id": "d625eed4-e845-4185-9380-1a16156dd682",
+          "contentId": "535ab12c-a4bc-436a-9f75-64fc3d45b22b",
+          "capturedAt": "2026-10-09T15:44:40.384Z",
+          "hoursSincePublish": 0.01667361111111111
+        }
+      ],
+      "feedback": [
+        {
+          "id": "a71dc5c6-5900-4d2c-9334-50c05a58ec55",
+          "contentId": "535ab12c-a4bc-436a-9f75-64fc3d45b22b",
+          "metricsId": "d625eed4-e845-4185-9380-1a16156dd682",
+          "createdAt": "2026-10-09T15:44:40.411Z",
+          "performanceSummary": "手动录入；当前 123 次阅读。同账号历史 0 篇中位数 暂无 次。样本不足，不判定赢家。结论：INSUFFICIENT_EVIDENCE（LOW）。",
+          "observation": "当前 123 次阅读（24h 窗口）；同账号同窗口 0 篇中位数 暂无 次，相对表现 无法计算。",
+          "hypothesis": "可能的解释（假设，尚未验证）：开头改成具体使用场景可能提高收藏率（假设，尚未验证）",
+          "evidence": "样本 0 篇，窗口 24h（样本不足，基线不可比）；证据不足，不下结论。相关不等于因果。",
+          "confidence": "LOW",
+          "verdict": "INSUFFICIENT_EVIDENCE",
+          "hoursSincePublish": 0.01667361111111111,
+          "relative": {
+            "bucket": "24h",
+            "sampleCount": 0,
+            "medianViews": null,
+            "medianLikes": null,
+            "medianFavorites": null,
+            "medianComments": null,
+            "relativeViews": null,
+            "relativeLikes": null,
+            "relativeSaves": null,
+            "relativeComments": null,
+            "comparable": false
+          },
+          "KEEP": [],
+          "WATCH": [
+            "观察到相对表现 无法计算，值得继续记录，但证据不足以升级为长期策略。"
+          ],
+          "CHANGE": [],
+          "NEXT_EXPERIMENT": {
+            "id": "da2b91bb-bfc1-4f1b-b7ea-72f0f3174075",
+            "hypothesis": "开头改成具体使用场景可能提高收藏率（假设，尚未验证）",
+            "variable": "hook",
+            "variant": "scene_first",
+            "baseline": "同账号同窗口历史样本不足，尚无可用基线",
+            "targetMetric": "favoriteRate",
+            "requiredSamples": 3,
+            "currentSamples": 0,
+            "status": "proposed",
+            "createdAt": "2026-10-09T15:44:40.409Z",
+            "completedAt": null,
+            "result": null,
+            "confidence": "LOW",
+            "instruction": "下一篇同类growth内容，仅把开头改为一个具体使用场景；记录收藏率，暂不判断因果。",
+            "keepConstant": "标题风格、正文结构、篇幅和发布时段保持接近；用相同发布后时长录入指标。"
+          },
+          "rates": {
+            "likeRate": 0.06504065040650407,
+            "favoriteRate": 0.032520325203252036,
+            "commentRate": 0.016260162601626018,
+            "engagementRate": 0.11382113821138211,
+            "followConversionRate": 0.008130081300813009
+          },
+          "comparisons": {
+            "recent3": {
+              "sampleCount": 0,
+              "rateSampleCount": 0,
+              "contentIds": [],
+              "avgViews": null,
+              "avgLikeRate": null,
+              "avgFavoriteRate": null,
+              "avgCommentRate": null,
+              "avgFollowConversionRate": null
+            },
+            "recent7": {
+              "sampleCount": 0,
+              "rateSampleCount": 0,
+              "contentIds": [],
+              "avgViews": null,
+              "avgLikeRate": null,
+              "avgFavoriteRate": null,
+              "avgCommentRate": null,
+              "avgFollowConversionRate": null
+            },
+            "sameAccount": {
+              "sampleCount": 0,
+              "rateSampleCount": 0,
+              "contentIds": [],
+              "avgViews": null,
+              "avgLikeRate": null,
+              "avgFavoriteRate": null,
+              "avgCommentRate": null,
+              "avgFollowConversionRate": null
+            },
+            "sameContentType": {
+              "sampleCount": 0,
+              "rateSampleCount": 0,
+              "contentIds": [],
+              "avgViews": null,
+              "avgLikeRate": null,
+              "avgFavoriteRate": null,
+              "avgCommentRate": null,
+              "avgFollowConversionRate": null
+            }
+          }
+        }
+      ],
+      "strategies": [
+        {
+          "id": "327d094a-f4f5-4c56-a6df-c7aab1b2b744",
+          "account": "growth",
+          "key": "title_preference",
+          "value": "标题更接近自己会写的说法",
+          "category": "avoid",
+          "source": "human_edit",
+          "evidenceCount": 3,
+          "confidence": "MEDIUM",
+          "status": "active",
+          "lastConfirmedAt": "2026-10-09T15:44:40.566Z",
+          "createdAt": "2026-10-09T15:44:40.305Z"
+        }
+      ]
+    }
+  }
+}

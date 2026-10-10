@@ -1,0 +1,36 @@
+{
+  "passed": 256.0,
+  "log": ".tmp-check/v1.3-final-check.log",
+  "skippedReason": "Dedicated TEST_DATABASE_URL not configured",
+  "checkExitCode": 0,
+  "result": "PASS",
+  "workspaces": [
+    {
+      "passed": 172,
+      "workspace": "api",
+      "skipped": 14
+    },
+    {
+      "passed": 60,
+      "workspace": "web",
+      "skipped": 0
+    },
+    {
+      "passed": 1,
+      "workspace": "worker",
+      "skipped": 0
+    },
+    {
+      "passed": 19,
+      "workspace": "contracts",
+      "skipped": 0
+    },
+    {
+      "passed": 4,
+      "workspace": "database",
+      "skipped": 2
+    }
+  ],
+  "paidProviderAcceptance": "Not performed",
+  "skipped": 16.0
+}

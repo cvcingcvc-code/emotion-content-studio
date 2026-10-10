@@ -1,6 +1,8 @@
 # Emotion Content Studio
 
-Latest development handoff (2026-10-09): [V1.2 usability acceptance, current status, and recovery steps](docs/V1.2_HANDOFF_2026-10-09.md). Current development is on `feature/content-growth-loop`. The [September GitHub handoff](docs/GITHUB_HANDOFF_2026-09-15.md) records the previous synchronized baseline.
+Latest development handoff (2026-10-10): [V1.3 implementation, verification, startup and recovery](docs/V1.3_HANDOFF_2026-10-10.md). Current development is on `feature/content-growth-loop`. The [V1.2 handoff](docs/V1.2_HANDOFF_2026-10-09.md) and [September GitHub handoff](docs/GITHUB_HANDOFF_2026-09-15.md) preserve the earlier baselines.
+
+V1.3 defaults to local SQLite persistence and offline Mock/Demo AI. Open `/xiaohongshu` for batch generation, deduplication, review and approved TXT/JSON export; `/english` retains 50 sentences and five real PNG pages. See [storage/backup/migration](docs/V1.3_STORAGE.md), [Provider configuration and acceptance boundary](docs/V1.3_PROVIDERS.md), [workbench use](docs/V1.3_WORKBENCH.md), and [all 16 PostgreSQL skipped tests](docs/V1.3_SKIPPED_TESTS.md).
 
 ## English Demo: live preview and PNG export
 
@@ -29,11 +31,11 @@ An independently authored, single-user prototype for turning authorized emotiona
 - HTTP-only Web-to-API boundary
 - Safe shared DTO contracts
 - Mock API and original synthetic data
-- PostgreSQL/Drizzle persistent repository with explicit migrations
+- Local SQLite persistence and PostgreSQL/Drizzle compatibility with versioned migrations
 - Worker placeholder without a queue
-- Real local CSV parsing with bounded Mock analysis and a replaceable Mock/DeepSeek generation adapter
+- Real local CSV parsing with bounded Mock analysis and gated Mock/DeepSeek/OpenAI-compatible generation adapters
 - Strict Zod validation for provider output and the Web's core HTTP DTOs
-- No rendering, scraping, queue, or publishing integration
+- Local HTML/PNG rendering, including English five-page packages; no scraping, queue or platform publishing integration
 
 ## Local development
 
@@ -44,22 +46,30 @@ npm ci
 npm run dev
 ```
 
-The direct development command keeps the bounded in-memory repository for quick UI work. For
-restart-persistent data, use the checked-in PostgreSQL stack:
+The direct development command now uses SQLite at `data/emotion-studio.sqlite`, preserving
+saved edits, generation history and review state across API restarts. Node 24 is required.
+For temporary legacy tests explicitly set `CONTENT_REPOSITORY=memory`; exited memory cannot
+be recovered. The root `.env` is not automatically loaded by this command. For an existing
+authorized environment file, the compiled API can be started explicitly with
+`node --env-file=.env apps/api/dist/server.js` after `npm run build`.
+
+The optional checked-in PostgreSQL stack remains available:
 
 ```bash
 docker compose up --build
 ```
 
 Compose runs `npm run migrate -w @emotion-studio/database` as an explicit one-shot service before
-the API starts. Application startup never changes the schema implicitly. A non-Compose database
+the API starts. PostgreSQL startup never changes its schema implicitly; local SQLite applies its
+checked-in migration transactionally on open. A non-Compose PostgreSQL database
 can use the same migration command with `DATABASE_URL` and `CONTENT_REPOSITORY=database` configured
 in the server environment.
 
-AI generation defaults to `AI_PROVIDER=mock`, so normal development and tests never create external
-costs. To opt in to DeepSeek, set `AI_PROVIDER=deepseek` and provide `DEEPSEEK_API_KEY` only in the
-API process environment; model, timeout, and the maximum of three attempts are configurable through
-the variables documented in `.env.example`. Provider failures never silently fall back to Mock.
+AI generation defaults to `AI_PROVIDER=mock`, with the independent network-call gate
+`AI_ALLOW_PAID_CALLS=false`. Normal development/tests are offline. Gated DeepSeek and
+OpenAI-compatible configuration, timeout, up to three attempts, truthful Mock fallback and durable
+usage/cost records are documented in [V1.3 Providers](docs/V1.3_PROVIDERS.md). This task has not
+enabled or accepted a paid API. Authentication/disabled/cancelled/ledger failures remain explicit.
 
 CSV imports and the 40-item demo load intentionally continue to use the bounded Mock analyzer even
 when DeepSeek generation is enabled. This prevents a large import from producing unbounded external
@@ -85,7 +95,7 @@ ChatGPT / MCP Client
         ↓
 Emotion Content Studio MCP Server (read-only)
         ↓
-Existing Growth Loop Repository (memory or PostgreSQL)
+Existing Growth Loop Repository (SQLite, explicit memory or PostgreSQL)
 ```
 
 ### Tools (phase 1, read-only)
