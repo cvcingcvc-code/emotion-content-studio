@@ -4,6 +4,8 @@ Latest development handoff (2026-10-12): [V1.4 PostgreSQL acceptance](docs/V1.4_
 
 V1.3 defaults to local SQLite persistence and offline Mock/Demo AI. Open `/xiaohongshu` for batch generation, deduplication, review and approved TXT/JSON export; `/english` retains 50 sentences and five real PNG pages. See [storage/backup/migration](docs/V1.3_STORAGE.md), [Provider configuration and acceptance boundary](docs/V1.3_PROVIDERS.md), [workbench use](docs/V1.3_WORKBENCH.md), and [all 16 PostgreSQL skipped tests](docs/V1.3_SKIPPED_TESTS.md).
 
+V1.4 runs quality and isolated PostgreSQL checks automatically on `codex/**` pushes. See the [PostgreSQL acceptance handoff](docs/V1.4_POSTGRESQL_ACCEPTANCE_2026-10-12.md) for the hosted run and current CI pins.
+
 ## English Demo: live preview and PNG export
 
 Start with `npm run dev`, then open http://127.0.0.1:5173.
