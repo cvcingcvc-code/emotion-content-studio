@@ -8,4 +8,8 @@ User authorization: preserve current work/evidence, verify and push V1.2, then a
 4. Xiaohongshu workbench: complete, including the English rapid-edit preview repair. Full check 256 passed / 16 skipped, real browser E2E 10 checkpoints PASS, process restart 11 checkpoints PASS, original English smoke PASS. Commit independently.
 5. Verification/handoff: complete; 16 PostgreSQL skip conditions documented and stale migration assertions fixed without changing historical SQL. Final check 256 passed / 16 skipped (exit 0). Handoff dated 2026-10-10 includes local use, evidence and recovery. Synchronize completed commits to GitHub via ordinary push under the user's same-day instruction; no deployment.
 
+## V1.4 follow-up
+
+Run all former PostgreSQL skips with the existing PostgreSQL 17 CI service, wire `codex/**` pushes into CI, pin Node 24 actions and Ubuntu runner, verify quality/Compose jobs, and publish a dated handoff. Complete: all 16 execute and pass, 272/272 overall tests pass, Compose smoke passes, branch `codex/v1.4-postgresql-acceptance` pushed unmerged.
+
 Preserve historical handoffs, evidence, user database and secrets. Never reset dirty files or overwrite backups. Each implementation phase is verified before its own commit.

@@ -13,4 +13,6 @@ V1.3 final check PASS on 2026-10-10: 256 passed / 16 PostgreSQL skipped, all wor
 
 Read-only capture of the earlier memory API failed with ECONNREFUSED at 127.0.0.1:8787; this task did not stop that process and cannot recover memory after it has exited. No capture or recovery success is claimed. SQLite migration tooling supports future live-memory captures.
 
-No paid API enabled, real model key read, deployment or external publication performed. PostgreSQL's 16 conditional tests and real-model acceptance remain outstanding with explicit retest requirements in the handoff.
+No paid API enabled, real model key read, deployment or external publication performed. At the V1.3 local baseline, PostgreSQL's 16 conditional tests and real-model acceptance remained outstanding.
+
+V1.4 follow-up is active on `codex/v1.4-postgresql-acceptance`, branched from pushed V1.3 HEAD `b92f8dd`. CI now runs on codex branches using pinned Node 24 actions and Ubuntu 24.04. GitHub PostgreSQL 17 suite executed all former 16 skips; full check passed 272/272, and Compose smoke passed. See `docs/V1.4_POSTGRESQL_ACCEPTANCE_2026-10-12.md`. V1.4 is pushed; branch is not merged. Windows Docker service could not be opened from this terminal; hosted CI supplied the isolated database.
