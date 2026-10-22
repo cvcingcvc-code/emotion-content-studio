@@ -69,3 +69,7 @@ persists source material and records analysis status.
 - API: `http://localhost:8787`
 
 See `docs/architecture.md` for boundaries, `docs/prototype-states.md` for the UI state matrix, and `docs/ui-design-system.md` for visual tokens and responsive rules.
+
+## License
+
+Released under the [MIT License](LICENSE). Demo content and third-party assets remain with their respective owners.
